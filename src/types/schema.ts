@@ -24,7 +24,7 @@ export interface TextArea {
 }
 
 export interface Radio {
-  type: 'Radio'
+  type: 'radio'
   schema: string
   label: string
   options: Array<string>

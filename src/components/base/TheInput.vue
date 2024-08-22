@@ -8,5 +8,12 @@ const value = ref('')
 </script>
 
 <template>
-  <input type="text" v-model="value" class="border border-black" />
+  <label :for="element.label">{{ element.label }}</label>
+  <input
+    :id="element.label"
+    :name="element.label"
+    type="text"
+    v-model="value"
+    class="border border-black"
+  />
 </template>

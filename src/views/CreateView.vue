@@ -15,6 +15,12 @@ const ui: FormType = {
           type: 'input',
           label: 'This is input',
           schema: 'sdflkj'
+        },
+        {
+          type: 'radio',
+          label: 'radio label',
+          schema: 'radioschema',
+          options: ['riyad', 'srouav']
         }
       ]
     },
@@ -28,6 +34,11 @@ const ui: FormType = {
           label: 'This is select',
           schema: 'sdflkj',
           options: [1, 2, 3, 4]
+        },
+        {
+          type: 'textarea',
+          label: 'This is textarea',
+          schema: 'textarea'
         }
       ]
     }
