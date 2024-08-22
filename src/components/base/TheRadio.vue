@@ -1,7 +1,15 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import type { Radio } from '@/types/schema'
+
+defineProps<{
+  element: Radio
+}>()
+</script>
 
 <template>
-  <div>
-    <h1>The Radio</h1>
-  </div>
+  <p>{{ element.label }}</p>
+  <template v-for="op in element.options" :key="op">
+    <input type="radio" :id="op" :name="element.label" :value="op" />
+    <label :for="op">{{ op }}</label>
+  </template>
 </template>

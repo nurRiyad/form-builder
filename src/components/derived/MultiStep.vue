@@ -17,7 +17,7 @@ const activeSingleStep = computed(() => {
 
 <template>
   <div>
-    <SingleStep :elements="activeSingleStep.elements" />
+    <SingleStep :elements="activeSingleStep.elements" :show-submit="false" />
     <div class="flex space-x-4 items-center p-2 mt-5">
       <button
         class="bg-sky-500 py-2 px-3 rounded-sm disabled:bg-gray-400"

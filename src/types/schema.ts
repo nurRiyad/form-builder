@@ -17,6 +17,19 @@ export interface Input {
   label: string
 }
 
+export interface TextArea {
+  type: 'textarea'
+  schema: string
+  label: string
+}
+
+export interface Radio {
+  type: 'Radio'
+  schema: string
+  label: string
+  options: Array<string>
+}
+
 export interface Select {
   type: 'select'
   options: Array<string | boolean | number>
@@ -24,6 +37,6 @@ export interface Select {
   label: string
 }
 
-export type BaseElement = Input | Select
+export type BaseElement = Input | Select | TextArea | Radio
 
 export type FormType = SingleStepForm | MultiStepForm

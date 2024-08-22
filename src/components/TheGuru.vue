@@ -10,6 +10,6 @@ withDefaults(defineProps<{ ui: FormType; isLoading?: boolean }>(), {
 
 <template>
   <MultiStep v-if="ui.type === 'multi'" :elements="ui.step" />
-  <SingleStep v-else-if="ui.type === 'single'" :elements="ui.elements" />
+  <SingleStep v-else-if="ui.type === 'single'" :elements="ui.elements" :show-submit="true" />
   <h1 v-else>No Proper Form type found</h1>
 </template>
