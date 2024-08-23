@@ -1,10 +1,34 @@
 <script lang="ts" setup>
 import type { Input } from '@/types/schema'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
+import lodash from 'lodash'
 
-defineProps<{ element: Input }>()
+const props = defineProps<{
+  element: Input
+  initialValue: any
+  setValue: (path: string, val: any) => void
+}>()
 
-const value = ref('')
+const init = lodash.get(props.initialValue, props.element.schema)
+
+const value = ref(init)
+
+/**
+ 1. Initial Value
+    a. It can be hard coded
+    b. It can be from init value
+    c. It can be from a function call
+  2. Update Value
+    b. Send data to it's parent properly
+ **/
+
+watch(
+  value,
+  (n) => {
+    props.setValue(props.element.schema, n)
+  },
+  { immediate: true }
+)
 </script>
 
 <template>

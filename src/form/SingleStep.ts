@@ -8,13 +8,22 @@ export const ui: FormType = {
     {
       type: 'input',
       label: 'This is input',
-      schema: 'sdflkj'
+      schema: 'name'
     },
     {
       type: 'radio',
       label: 'radio label',
-      schema: 'radioschema',
+      schema: 'family.man.age',
       options: ['riyad', 'srouav']
     }
   ]
+}
+
+export const model = {
+  name: 'riyad',
+  family: {
+    man: {
+      age: 'riyad'
+    }
+  }
 }
