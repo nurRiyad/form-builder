@@ -7,9 +7,11 @@ defineProps<{
 </script>
 
 <template>
-  <p>{{ element.label }}</p>
-  <template v-for="op in element.options" :key="op">
-    <input type="radio" :id="op" :name="element.label" :value="op" />
-    <label :for="op">{{ op }}</label>
-  </template>
+  <div class="flex flex-col space-y-2">
+    <p>{{ element.label }}</p>
+    <div v-for="op in element.options" :key="op" class="space-x-2">
+      <input type="radio" :id="op" :name="element.label" :value="op" />
+      <label :for="op">{{ op }}</label>
+    </div>
+  </div>
 </template>

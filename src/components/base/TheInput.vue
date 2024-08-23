@@ -8,12 +8,14 @@ const value = ref('')
 </script>
 
 <template>
-  <label :for="element.label">{{ element.label }}</label>
-  <input
-    :id="element.label"
-    :name="element.label"
-    type="text"
-    v-model="value"
-    class="border border-black"
-  />
+  <div class="flex flex-col space-y-2">
+    <label :for="element.label">{{ element.label }}</label>
+    <input
+      :id="element.label"
+      :name="element.label"
+      type="text"
+      v-model="value"
+      class="border border-black"
+    />
+  </div>
 </template>
