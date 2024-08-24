@@ -4,6 +4,7 @@ export const ui: FormType = {
   type: 'single',
   label: 'This is one step of form',
   schema: 'this is schema',
+  fetchFn: 'fetchData',
   elements: [
     {
       type: 'input',
@@ -26,4 +27,8 @@ export const model = {
       age: 'riyad'
     }
   }
+}
+
+export const language = {
+  name: 'language'
 }

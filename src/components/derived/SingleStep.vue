@@ -1,15 +1,17 @@
 <script lang="ts" setup>
-import type { BaseElement } from '@/types/schema'
+import type { SingleStepForm } from '@/types/schema'
 import TheInput from '../base/TheInput.vue'
 import SelectSingle from '../base/SelectSingle.vue'
 import TheRadio from '../base/TheRadio.vue'
 import TextArea from '../base/TextArea.vue'
-import { reactive, toRaw } from 'vue'
+import { reactive, ref, toRaw } from 'vue'
 import lodash from 'lodash'
 
-defineProps<{
-  elements: Array<BaseElement>
+const props = defineProps<{
+  ui: SingleStepForm
   initialValue: any
+  logic: any
+  language: any
   showSubmit: boolean
 }>()
 
@@ -18,6 +20,9 @@ const model = reactive<Record<string, unknown>>({})
 const setValue = (key: string, val: any) => {
   model[key] = val
 }
+
+// generate function
+const fn = props.logic(model)
 
 // generate submitted form form
 const generateFinalForm = () => {
@@ -33,16 +38,35 @@ const handleSubmit = () => {
   const value = generateFinalForm()
   console.log(value)
 }
+
+//run fetch function
+const isSSFetching = ref(false)
+const fetchData = async () => {
+  console.log(props.ui)
+  if (!props.ui.fetchFn) return
+  try {
+    isSSFetching.value = true
+    await fn[props.ui.fetchFn]()
+  } catch (error) {
+    console.error(error)
+  }
+  isSSFetching.value = false
+}
+fetchData()
 </script>
 
 <template>
-  <div class="flex flex-col max-w-3xl mx-auto space-y-10">
-    <template v-for="el in elements" :key="el.label">
+  <div v-if="isSSFetching">
+    <h1>Single Step Form Loading</h1>
+  </div>
+  <div v-else class="flex flex-col max-w-3xl mx-auto space-y-10">
+    <template v-for="el in ui.elements" :key="el.label">
       <TheInput
         v-if="el.type === 'input'"
         :element="el"
         :set-value="setValue"
         :initial-value="initialValue"
+        :func="fn"
       />
       <SelectSingle v-else-if="el.type === 'select'" :element="el" />
       <TheRadio

@@ -7,20 +7,11 @@ const props = defineProps<{
   element: Input
   initialValue: any
   setValue: (path: string, val: any) => void
+  func: any
 }>()
 
 const init = lodash.get(props.initialValue, props.element.schema)
-
 const value = ref(init)
-
-/**
- 1. Initial Value
-    a. It can be hard coded
-    b. It can be from init value
-    c. It can be from a function call
-  2. Update Value
-    b. Send data to it's parent properly
- **/
 
 watch(
   value,

@@ -9,12 +9,19 @@ export interface SingleStepForm {
   schema: string
   label: string
   elements: Array<BaseElement>
+  fetchFn?: string
 }
 
 export interface Input {
   type: 'input'
-  schema: string
   label: string
+  schema: string
+  computed?: {
+    val: string
+    func: string
+  }
+  if?: string
+  disable?: boolean
 }
 
 export interface TextArea {
@@ -32,9 +39,21 @@ export interface Radio {
 
 export interface Select {
   type: 'select'
+  label: string
   options: Array<string | boolean | number>
   schema: string
+}
+
+export interface FinalInput {
+  type: 'input'
   label: string
+  schema: string
+  computed?: {
+    val: string
+    func: string
+  }
+  if?: string
+  disable?: boolean
 }
 
 export type BaseElement = Input | Select | TextArea | Radio
