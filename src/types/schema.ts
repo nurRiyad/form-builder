@@ -12,48 +12,34 @@ export interface SingleStepForm {
   fetchFn?: string
 }
 
-export interface Input {
-  type: 'input'
+interface BaseCommon {
   label: string
   schema: string
+  if?: string
+  fetch?: string
+  disable?: boolean
+}
+
+export interface Input extends BaseCommon {
+  type: 'input'
   computed?: {
     val: string
     func: string
   }
-  if?: string
-  disable?: boolean
 }
 
-export interface TextArea {
+export interface TextArea extends BaseCommon {
   type: 'textarea'
-  schema: string
-  label: string
 }
 
-export interface Radio {
+export interface Radio extends BaseCommon {
   type: 'radio'
-  schema: string
-  label: string
   options: Array<string>
 }
 
-export interface Select {
+export interface Select extends BaseCommon {
   type: 'select'
-  label: string
   options: Array<string | boolean | number>
-  schema: string
-}
-
-export interface FinalInput {
-  type: 'input'
-  label: string
-  schema: string
-  computed?: {
-    val: string
-    func: string
-  }
-  if?: string
-  disable?: boolean
 }
 
 export type BaseElement = Input | Select | TextArea | Radio

@@ -6,8 +6,8 @@ import lodash from 'lodash'
 const props = defineProps<{
   element: Input
   initialValue: any
+  func?: any
   setValue: (path: string, val: any) => void
-  func: any
 }>()
 
 const init = lodash.get(props.initialValue, props.element.schema)
@@ -20,9 +20,26 @@ watch(
   },
   { immediate: true }
 )
+
+//element level data fetching
+const inInputFetching = ref(false)
+const fetchData = async () => {
+  if (!props?.element?.fetch) return
+  try {
+    inInputFetching.value = true
+    await props.func[props.element.fetch]()
+  } catch (error) {
+    console.error(error)
+  }
+  inInputFetching.value = false
+}
+fetchData()
 </script>
 
 <template>
+  <div v-if="inInputFetching">
+    <h1>This input element is loading...</h1>
+  </div>
   <div class="flex flex-col space-y-2">
     <label :for="element.label">{{ element.label }}</label>
     <input

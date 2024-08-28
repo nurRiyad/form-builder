@@ -1,8 +1,8 @@
-import { computed, type Reactive } from 'vue'
+import { computed, type Ref } from 'vue'
 
-export const useCheck = (model: Reactive<Record<string, unknown>>) => {
+export const useCheck = (model: Ref<Record<string, unknown>>) => {
   const showInput = computed(() => {
-    const val = model['family.man.age']
+    const val = model.value['family.man.age']
     console.log(val)
     return val == 'riyad'
   })

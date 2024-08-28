@@ -4,21 +4,20 @@ import TheInput from '../base/TheInput.vue'
 import SelectSingle from '../base/SelectSingle.vue'
 import TheRadio from '../base/TheRadio.vue'
 import TextArea from '../base/TextArea.vue'
-import { reactive, ref, toRaw } from 'vue'
+import { ref, unref } from 'vue'
 import lodash from 'lodash'
 
 const props = defineProps<{
   ui: SingleStepForm
   initialValue: any
   logic: any
-  language: any
   showSubmit: boolean
 }>()
 
 // generate model value
-const model = reactive<Record<string, unknown>>({})
+const model = ref<Record<string, unknown>>({})
 const setValue = (key: string, val: any) => {
-  model[key] = val
+  model.value[key] = val
 }
 
 // generate function
@@ -26,7 +25,7 @@ const fn = props.logic(model)
 
 // generate submitted form form
 const generateFinalForm = () => {
-  const raw = toRaw(model)
+  const raw = unref(model)
   const generatedObj = {}
   Object.keys(raw).forEach((key) => {
     lodash.set(generatedObj, key, raw[key])
@@ -34,15 +33,16 @@ const generateFinalForm = () => {
 
   return generatedObj
 }
+
+// form submit
 const handleSubmit = () => {
   const value = generateFinalForm()
   console.log(value)
 }
 
-//run fetch function
+//single step form level data fetching
 const isSSFetching = ref(false)
 const fetchData = async () => {
-  console.log(props.ui)
   if (!props.ui.fetchFn) return
   try {
     isSSFetching.value = true
@@ -62,20 +62,26 @@ fetchData()
   <div v-else class="flex flex-col max-w-3xl mx-auto space-y-10">
     <template v-for="el in ui.elements" :key="el.label">
       <TheInput
-        v-if="el.type === 'input'"
+        v-if="el.type === 'input' && (el.if ? fn[el.if].value : true)"
         :element="el"
         :set-value="setValue"
         :initial-value="initialValue"
         :func="fn"
       />
-      <SelectSingle v-else-if="el.type === 'select'" :element="el" />
+      <SelectSingle
+        v-else-if="el.type === 'select' && (el.if ? fn[el.if].value : true)"
+        :element="el"
+      />
       <TheRadio
-        v-else-if="el.type === 'radio'"
+        v-else-if="el.type === 'radio' && (el.if ? fn[el.if].value : true)"
         :element="el"
         :set-value="setValue"
         :initial-value="initialValue"
       />
-      <TextArea v-else-if="el.type === 'textarea'" :element="el" />
+      <TextArea
+        v-else-if="el.type === 'textarea' && (el.if ? fn[el.if].value : true)"
+        :element="el"
+      />
     </template>
     <button
       @click="handleSubmit"

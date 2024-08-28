@@ -7,15 +7,16 @@ export const ui: FormType = {
   fetchFn: 'fetchData',
   elements: [
     {
-      type: 'input',
-      label: 'This is input',
-      schema: 'name'
-    },
-    {
       type: 'radio',
       label: 'radio label',
       schema: 'family.man.age',
       options: ['riyad', 'srouav']
+    },
+    {
+      type: 'input',
+      label: 'This is input',
+      schema: 'name',
+      if: 'showInput'
     }
   ]
 }
