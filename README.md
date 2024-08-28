@@ -1,11 +1,21 @@
-# Form-Builder
+#  Form-Builder 🏗️(under rapid contruction)
 
 Generate from in form in a minutes
 
 ## Todo
-
-1. Component level fetch
-2. From Level fetch
+- [x] Initiate a basic vue project with vitest cypress vue pinia and router
+- [x] Create some base element like input, select,radio
+- [x] Some derived from like single-step form & multi-step-form
+- [x] Add proper if conditon for base element that read if logic from fun and apply proper reactivity
+- [ ] Check if create-ui, initial-value and fun can load from api call
+- [ ] Component level fetch
+  - [x] Extract the function and call properly
+  - [ ] Save the value somewhere to properly use this
+  - [ ] After fetching complete need to re-render the component
+- [ ] From Level fetch
+  - [x] Extract the function and call properly
+  - [ ] Save the value somewhere to properly use this
+  - [ ] After fetching the component need to be re-rendered
 
 ## Recommended IDE Setup
 
