@@ -19,6 +19,9 @@ const model = ref<Record<string, unknown>>({})
 const setValue = (key: string, val: any) => {
   model.value[key] = val
 }
+const deleteValue = (key: string) => {
+  delete model.value[key]
+}
 
 // generate function
 const fn = props.logic(model)
@@ -65,6 +68,7 @@ fetchData()
         v-if="el.type === 'input' && (el.if ? fn[el.if].value : true)"
         :element="el"
         :set-value="setValue"
+        :delete-value="deleteValue"
         :initial-value="initialValue"
         :func="fn"
       />

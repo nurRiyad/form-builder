@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { Input } from '@/types/schema'
-import { ref, watch } from 'vue'
+import { onUnmounted, ref, watch } from 'vue'
 import lodash from 'lodash'
 
 const props = defineProps<{
@@ -8,6 +8,7 @@ const props = defineProps<{
   initialValue: any
   func?: any
   setValue: (path: string, val: any) => void
+  deleteValue: (key: string) => void
 }>()
 
 const init = lodash.get(props.initialValue, props.element.schema)
@@ -34,6 +35,10 @@ const fetchData = async () => {
   inInputFetching.value = false
 }
 fetchData()
+
+onUnmounted(() => {
+  props.deleteValue(props.element.schema)
+})
 </script>
 
 <template>

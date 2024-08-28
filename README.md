@@ -7,7 +7,13 @@ Generate from in form in a minutes
 - [x] Initiate a basic vue project with vitest cypress vue pinia and router
 - [x] Create some base element like input, select,radio
 - [x] Some derived from like single-step form & multi-step-form
-- [x] Add proper if conditon for base element that read if logic from fun and apply proper reactivity
+- [x] Add proper if condition for base element that read if logic from fun and apply proper reactivity
+- [x] Remove key from form when element is unmounted
+- [ ] Merge model value with the generated value
+- [ ] Add other other basic property in select radio checkbox text area
+- [ ] Add editor element
+- [ ] Create Platform UI Credential create form
+- [ ] Create Platform UI Credential Edit form
 - [ ] Check if create-ui, initial-value and fun can load from api call
 - [ ] Component level fetch
   - [x] Extract the function and call properly

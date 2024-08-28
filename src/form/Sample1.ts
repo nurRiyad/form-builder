@@ -4,7 +4,6 @@ export const ui: FormType = {
   type: 'single',
   label: 'This is one step of form',
   schema: 'this is schema',
-  fetchFn: 'fetchData',
   elements: [
     {
       type: 'radio',
