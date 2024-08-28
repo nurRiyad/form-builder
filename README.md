@@ -1,8 +1,9 @@
-#  Form-Builder 🏗️(under rapid contruction)
+# Form-Builder 🏗️(under rapid construction)
 
 Generate from in form in a minutes
 
 ## Todo
+
 - [x] Initiate a basic vue project with vitest cypress vue pinia and router
 - [x] Create some base element like input, select,radio
 - [x] Some derived from like single-step form & multi-step-form
