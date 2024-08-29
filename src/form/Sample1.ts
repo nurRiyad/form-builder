@@ -9,13 +9,29 @@ export const ui: FormType = {
       type: 'radio',
       label: 'radio label',
       schema: 'family.man.age',
-      options: ['riyad', 'srouav']
+      options: ['riyad', 'srouav', 'athoy', 'roza']
     },
     {
-      type: 'input',
+      type: 'input-text',
       label: 'This is input',
       schema: 'name',
       if: 'showInput'
+    },
+    {
+      type: 'check-box',
+      label: 'Checkbox Test',
+      schema: 'ch.a.b.c'
+    },
+    {
+      type: 'textarea',
+      label: 'Text Area Check',
+      schema: 'text.a.f'
+    },
+    {
+      type: 'simple-select',
+      label: 'Simple Select Box',
+      schema: 'select.a.ff.ss',
+      options: ['apple', 'guava']
     }
   ]
 }

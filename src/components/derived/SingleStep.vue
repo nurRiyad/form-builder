@@ -1,11 +1,12 @@
 <script lang="ts" setup>
 import type { SingleStepForm } from '@/types/schema'
-import TheInput from '../base/TheInput.vue'
+import InputText from '../base/InputText.vue'
 import SelectSingle from '../base/SelectSingle.vue'
 import TheRadio from '../base/TheRadio.vue'
 import TextArea from '../base/TextArea.vue'
 import { ref, unref } from 'vue'
 import lodash from 'lodash'
+import CheckBox from '../base/CheckBox.vue'
 
 const props = defineProps<{
   ui: SingleStepForm
@@ -64,8 +65,8 @@ fetchData()
   </div>
   <div v-else class="flex flex-col max-w-3xl mx-auto space-y-10">
     <template v-for="el in ui.elements" :key="el.label">
-      <TheInput
-        v-if="el.type === 'input' && (el.if ? fn[el.if].value : true)"
+      <InputText
+        v-if="el.type === 'input-text' && (el.if ? fn[el.if].value : true)"
         :element="el"
         :set-value="setValue"
         :delete-value="deleteValue"
@@ -73,18 +74,32 @@ fetchData()
         :func="fn"
       />
       <SelectSingle
-        v-else-if="el.type === 'select' && (el.if ? fn[el.if].value : true)"
+        v-else-if="el.type === 'simple-select' && (el.if ? fn[el.if].value : true)"
         :element="el"
+        :set-value="setValue"
+        :delete-value="deleteValue"
+        :initial-value="initialValue"
       />
       <TheRadio
         v-else-if="el.type === 'radio' && (el.if ? fn[el.if].value : true)"
         :element="el"
         :set-value="setValue"
+        :delete-value="deleteValue"
+        :initial-value="initialValue"
+      />
+      <CheckBox
+        v-else-if="el.type === 'check-box' && (el.if ? fn[el.if].value : true)"
+        :element="el"
+        :set-value="setValue"
+        :delete-value="deleteValue"
         :initial-value="initialValue"
       />
       <TextArea
         v-else-if="el.type === 'textarea' && (el.if ? fn[el.if].value : true)"
         :element="el"
+        :set-value="setValue"
+        :delete-value="deleteValue"
+        :initial-value="initialValue"
       />
     </template>
     <button

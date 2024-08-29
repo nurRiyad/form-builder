@@ -20,8 +20,8 @@ interface BaseCommon {
   disable?: boolean
 }
 
-export interface Input extends BaseCommon {
-  type: 'input'
+export interface InputText extends BaseCommon {
+  type: 'input-text'
   computed?: {
     val: string
     func: string
@@ -37,11 +37,15 @@ export interface Radio extends BaseCommon {
   options: Array<string>
 }
 
+export interface CheckBox extends BaseCommon {
+  type: 'check-box'
+}
+
 export interface Select extends BaseCommon {
-  type: 'select'
+  type: 'simple-select'
   options: Array<string | boolean | number>
 }
 
-export type BaseElement = Input | Select | TextArea | Radio
+export type BaseElement = InputText | Select | TextArea | Radio | CheckBox
 
 export type FormType = SingleStepForm | MultiStepForm

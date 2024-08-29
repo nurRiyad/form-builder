@@ -1,12 +1,13 @@
 <script lang="ts" setup>
 import type { Radio } from '@/types/schema'
-import { ref, watch } from 'vue'
+import { onUnmounted, ref, watch } from 'vue'
 import lodash from 'lodash'
 
 const props = defineProps<{
   element: Radio
   initialValue: any
   setValue: (path: string, val: any) => void
+  deleteValue: (key: string) => void
 }>()
 
 const init = lodash.get(props.initialValue, props.element.schema)
@@ -19,6 +20,10 @@ watch(
   },
   { immediate: true }
 )
+
+onUnmounted(() => {
+  props.deleteValue(props.element.schema)
+})
 </script>
 
 <template>
