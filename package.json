@@ -3,6 +3,17 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/form-builder.umd.cjs",
+  "module": "./dist/form-builder.js",
+  "exports": {
+    ".": {
+      "import": "./dist/form-builder.js",
+      "require": "./dist/form-builder.umd.cjs"
+    }
+  },
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
