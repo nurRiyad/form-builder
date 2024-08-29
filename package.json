@@ -1,7 +1,7 @@
 {
-  "name": "form-builder",
-  "version": "0.0.0",
-  "private": true,
+  "name": "@nurriyad/form-builder",
+  "version": "0.0.1",
+  "private": false,
   "type": "module",
   "files": [
     "dist"
