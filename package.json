@@ -4,15 +4,18 @@
   "private": false,
   "type": "module",
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "main": "./dist/form-builder.umd.cjs",
   "module": "./dist/form-builder.js",
   "exports": {
     ".": {
       "import": "./dist/form-builder.js",
-      "require": "./dist/form-builder.umd.cjs"
-    }
+      "require": "./dist/form-builder.umd.cjs",
+      "types": "./dist/form-builder.d.ts"
+    },
+    "./css": "./dist/style.css"
   },
   "scripts": {
     "dev": "vite",
@@ -31,6 +34,9 @@
     "pinia": "^2.1.7",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3"
+  },
+  "peerDependencies": {
+    "vue": "^3.4.29"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.8.0",
