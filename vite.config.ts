@@ -2,11 +2,12 @@ import { fileURLToPath, resolve, URL } from 'node:url'
 
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import dts from 'vite-plugin-dts'
 import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue(), vueDevTools()],
+  plugins: [vue(), dts({ tsconfigPath: './tsconfig.app.json' }), vueDevTools()],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
@@ -15,7 +16,7 @@ export default defineConfig({
   build: {
     lib: {
       // Could also be a dictionary or array of multiple entry points
-      entry: resolve(__dirname, '/lib/main.js'),
+      entry: resolve(__dirname, '/src/lib.ts'),
       name: 'FormBuilder',
       // the proper extensions will be added
       fileName: 'form-builder'
