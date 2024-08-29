@@ -7,7 +7,7 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue(), dts({ tsconfigPath: './tsconfig.app.json', rollupTypes: true }), vueDevTools()],
+  plugins: [vue(), dts({ tsconfigPath: './tsconfig.app.json' }), vueDevTools()],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
@@ -16,7 +16,7 @@ export default defineConfig({
   build: {
     lib: {
       // Could also be a dictionary or array of multiple entry points
-      entry: resolve(__dirname, '/src/lib.ts'),
+      entry: resolve(__dirname, '/src/index.ts'),
       name: 'FormBuilder',
       // the proper extensions will be added
       fileName: 'form-builder'

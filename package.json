@@ -13,7 +13,7 @@
     ".": {
       "import": "./dist/form-builder.js",
       "require": "./dist/form-builder.umd.cjs",
-      "types": "./dist/form-builder.d.ts"
+      "types": "./dist/src/index.d.ts"
     },
     "./css": "./dist/style.css"
   },
