@@ -10,8 +10,9 @@ import CheckBox from '../base/CheckBox.vue'
 
 const props = defineProps<{
   ui: SingleStepForm
+  schema: any
   initialValue: any
-  logic: any
+  logic?: any
   showSubmit: boolean
 }>()
 
@@ -25,7 +26,7 @@ const deleteValue = (key: string) => {
 }
 
 // generate function
-const fn = props.logic(model)
+const fn = props?.logic ? props.logic(model) : null
 
 // generate submitted form form
 const generateFinalForm = () => {
@@ -63,7 +64,8 @@ fetchData()
   <div v-if="isSSFetching">
     <h1>Single Step Form Loading</h1>
   </div>
-  <div v-else class="flex flex-col max-w-3xl mx-auto space-y-10">
+  <div v-else class="flex flex-col max-w-3xl mx-auto space-y-4">
+    <p class="font-semibold text-xl pb-5">{{ ui.label }}</p>
     <template v-for="el in ui.elements" :key="el.label">
       <InputText
         v-if="el.type === 'input-text' && (el.if ? fn[el.if].value : true)"

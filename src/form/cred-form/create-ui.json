@@ -1,6 +1,13 @@
 {
   "type": "single",
-  "label": "Credential Create",
-  "schema": "a",
-  "elements": []
+  "label": "Credential Create From",
+  "schema": "schema/",
+  "elements": [
+    {
+      "type": "simple-select",
+      "label": "Type",
+      "schema": "schema/properties/type",
+      "options": ["Aws", "Azure", "Swift"]
+    }
+  ]
 }

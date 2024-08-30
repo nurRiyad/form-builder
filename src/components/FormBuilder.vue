@@ -5,16 +5,16 @@ import SingleStep from './derived/SingleStep.vue'
 withDefaults(
   defineProps<{
     ui: FormType
+    schema: any
     initialValue: any
-    logic: any
-    language: any
+    logic?: any
     isLoading?: boolean
   }>(),
   {
-    isLoading: false,
+    schema: {},
     initialValue: {},
-    logic: {},
-    language: {}
+    logic: null,
+    isLoading: false
   }
 )
 </script>
@@ -27,9 +27,9 @@ withDefaults(
     <SingleStep
       v-if="ui.type === 'single'"
       :ui="ui"
+      :schema="schema"
       :initial-value="initialValue"
       :logic="logic"
-      :language="language"
       :show-submit="true"
     />
     <h1 v-else>No Proper Form type found</h1>

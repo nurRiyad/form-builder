@@ -1,9 +1,13 @@
 <script lang="ts" setup>
-import TheGuru from '@/components/FormBuilder.vue'
-import { ui, model, language } from '@/form/Sample1'
-import { useCheck } from '@/composables/check'
+import FormBuilder from '@/components/FormBuilder.vue'
+import ui from '../form/cred-form/create-ui.json'
+import values from '../form/cred-form/values.json'
+import schema from '../form/cred-form/schema.json'
+import type { FormType } from '@/types'
+
+const uiData = ui as FormType
 </script>
 
 <template>
-  <TheGuru :ui="ui" :initial-value="model" :logic="useCheck" :language="language" />
+  <FormBuilder :ui="uiData" :initial-value="values" :schema="schema" />
 </template>
