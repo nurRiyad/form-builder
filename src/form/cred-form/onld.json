@@ -1,0 +1,399 @@
+{
+  "elements": [
+    {
+      "disabled": "isUpdateForm",
+      "schema": {
+        "$ref": "schema#/properties/type"
+      },
+      "label": {
+        "text": "labels.credential_type"
+      },
+      "options": [
+        {
+          "text": "AWS",
+          "value": "Aws"
+        },
+        {
+          "text": "Azure",
+          "value": "Azure"
+        },
+        {
+          "value": "AzureStorage",
+          "text": "Azure Storage"
+        },
+        {
+          "text": "Digital Ocean",
+          "value": "DigitalOcean"
+        },
+        {
+          "text": "Google Cloud",
+          "value": "GoogleCloud"
+        },
+        {
+          "value": "GoogleOAuth",
+          "text": "Google OAuth"
+        },
+        {
+          "text": "Linode",
+          "value": "Linode"
+        },
+        {
+          "text": "Packet",
+          "value": "Packet"
+        },
+        {
+          "value": "Rancher",
+          "text": "Rancher"
+        },
+        {
+          "text": "Scaleway",
+          "value": "Scaleway"
+        },
+        {
+          "text": "Swift",
+          "value": "Swift"
+        },
+        {
+          "value": "Vultr",
+          "text": "Vultr"
+        }
+      ],
+      "computed": "setCredentialType",
+      "type": "select"
+    },
+    {
+      "disabled": "isUpdateForm",
+      "label": {
+        "text": "labels.credential_name"
+      },
+      "type": "input",
+      "schema": {
+        "$ref": "schema#/properties/name"
+      }
+    },
+
+    {
+      "elements": [
+        {
+          "schema": {
+            "$ref": "schema#/properties/aws/properties/accessKeyID"
+          },
+          "type": "input",
+          "label": {
+            "text": "labels.access_key_id"
+          }
+        },
+        {
+          "label": {
+            "text": "labels.secret_access_key"
+          },
+          "schema": {
+            "$ref": "schema#/properties/aws/properties/secretAccessKey"
+          },
+          "type": "input"
+        }
+      ],
+      "type": "single-step-form",
+      "if": "isCredentialTypeEqualTo|Aws"
+    },
+    {
+      "type": "single-step-form",
+      "elements": [
+        {
+          "schema": {
+            "$ref": "schema#/properties/azure/properties/subscriptionID"
+          },
+          "label": {
+            "text": "labels.subscription_id"
+          },
+          "type": "input"
+        },
+        {
+          "label": {
+            "text": "labels.tennat_id"
+          },
+          "type": "input",
+          "schema": {
+            "$ref": "schema#/properties/azure/properties/tenantID"
+          }
+        },
+        {
+          "type": "input",
+          "label": {
+            "text": "labels.client_id"
+          },
+          "schema": {
+            "$ref": "schema#/properties/azure/properties/clientID"
+          }
+        },
+        {
+          "label": {
+            "text": "labels.client_secret"
+          },
+          "type": "input",
+          "schema": {
+            "$ref": "schema#/properties/azure/properties/clientSecret"
+          }
+        }
+      ],
+      "if": "isCredentialTypeEqualTo|Azure"
+    },
+    {
+      "if": "isCredentialTypeEqualTo|AzureStorage",
+      "type": "single-step-form",
+      "elements": [
+        {
+          "label": {
+            "text": "labels.account"
+          },
+          "type": "input",
+          "schema": {
+            "$ref": "schema#/properties/azureStorage/properties/account"
+          }
+        },
+        {
+          "type": "input",
+          "schema": {
+            "$ref": "schema#/properties/azureStorage/properties/key"
+          },
+          "label": {
+            "text": "labels.key"
+          }
+        }
+      ]
+    },
+    {
+      "elements": [
+        {
+          "schema": {
+            "$ref": "schema#/properties/digitalocean/properties/token"
+          },
+          "label": {
+            "text": "labels.token"
+          },
+          "type": "input"
+        }
+      ],
+      "type": "single-step-form",
+      "if": "isCredentialTypeEqualTo|DigitalOcean"
+    },
+    {
+      "type": "single-step-form",
+      "elements": [
+        {
+          "schema": {
+            "$ref": "schema#/properties/googleCloud/properties/projectID"
+          },
+          "type": "input",
+          "label": {
+            "text": "labels.project_id"
+          }
+        },
+        {
+          "label": {
+            "text": "labels.service_account"
+          },
+          "schema": {
+            "$ref": "schema#/properties/googleCloud/properties/serviceAccount"
+          },
+          "type": "editor"
+        }
+      ],
+      "if": "isCredentialTypeEqualTo|GoogleCloud"
+    },
+    {
+      "elements": [
+        {
+          "disabled": "isUpdateForm",
+          "type": "input",
+          "validationRuleObject": {
+            "regex": "^https://"
+          },
+          "label": {
+            "text": "labels.end_point"
+          },
+          "schema": {
+            "$ref": "schema#/properties/rancher/properties/endpoint"
+          }
+        },
+        {
+          "schema": {
+            "$ref": "schema#/properties/rancher/properties/accessKeyID"
+          },
+          "type": "input",
+          "label": {
+            "text": "labels.access_key_id"
+          }
+        },
+        {
+          "label": {
+            "text": "labels.secret_access_key"
+          },
+          "schema": {
+            "$ref": "schema#/properties/rancher/properties/secretAccessKey"
+          },
+          "type": "input"
+        }
+      ],
+      "type": "single-step-form",
+      "if": "isCredentialTypeEqualTo|Rancher"
+    },
+    {
+      "elements": [
+        {
+          "schema": {
+            "$ref": "schema#/properties/linode/properties/token"
+          },
+          "type": "input",
+          "label": {
+            "text": "labels.token"
+          }
+        }
+      ],
+      "if": "isCredentialTypeEqualTo|Linode",
+      "type": "single-step-form"
+    },
+    {
+      "if": "isCredentialTypeEqualTo|Packet",
+      "elements": [
+        {
+          "label": {
+            "text": "labels.project_id"
+          },
+          "schema": {
+            "$ref": "schema#/properties/packet/properties/projectID"
+          },
+          "type": "input"
+        },
+        {
+          "type": "input",
+          "label": {
+            "text": "labels.api_key"
+          },
+          "schema": {
+            "$ref": "schema#/properties/packet/properties/apiKey"
+          }
+        }
+      ],
+      "type": "single-step-form"
+    },
+    {
+      "type": "single-step-form",
+      "if": "isCredentialTypeEqualTo|Scaleway",
+      "elements": [
+        {
+          "label": {
+            "text": "labels.organization"
+          },
+          "schema": {
+            "$ref": "schema#/properties/scaleway/properties/organization"
+          },
+          "type": "input"
+        },
+        {
+          "type": "input",
+          "label": {
+            "text": "labels.token"
+          },
+          "schema": {
+            "$ref": "schema#/properties/scaleway/properties/token"
+          }
+        }
+      ]
+    },
+    {
+      "elements": [
+        {
+          "schema": {
+            "$ref": "schema#/properties/swift/properties/username"
+          },
+          "label": {
+            "text": "labels.username"
+          },
+          "type": "input"
+        },
+        {
+          "type": "input",
+          "label": {
+            "text": "labels.password"
+          },
+          "schema": {
+            "$ref": "schema#/properties/swift/properties/password"
+          }
+        },
+        {
+          "label": {
+            "text": "labels.tanent_name"
+          },
+          "schema": {
+            "$ref": "schema#/properties/swift/properties/tenantName"
+          },
+          "type": "input"
+        },
+        {
+          "schema": {
+            "$ref": "schema#/properties/swift/properties/domain"
+          },
+          "type": "input",
+          "label": {
+            "text": "labels.domain"
+          }
+        },
+        {
+          "label": {
+            "text": "labels.tenant_id"
+          },
+          "schema": {
+            "$ref": "schema#/properties/swift/properties/tenantID"
+          },
+          "type": "input"
+        },
+        {
+          "label": {
+            "text": "labels.region"
+          },
+          "schema": {
+            "$ref": "schema#/properties/swift/properties/region"
+          },
+          "type": "input"
+        },
+        {
+          "schema": {
+            "$ref": "schema#/properties/swift/properties/tenantAuthURL"
+          },
+          "type": "input",
+          "label": {
+            "text": "labels.tenant_auth_url"
+          }
+        },
+        {
+          "label": {
+            "text": "labels.tenant_domain"
+          },
+          "schema": {
+            "$ref": "schema#/properties/swift/properties/tenantDomain"
+          },
+          "type": "input"
+        }
+      ],
+      "type": "single-step-form",
+      "if": "isCredentialTypeEqualTo|Swift"
+    },
+    {
+      "if": "isCredentialTypeEqualTo|Vultr",
+      "elements": [
+        {
+          "label": {
+            "text": "labels.token"
+          },
+          "type": "input",
+          "schema": {
+            "$ref": "schema#/properties/vultr/properties/token"
+          }
+        }
+      ],
+      "type": "single-step-form"
+    }
+  ],
+  "type": "single-step-form"
+}

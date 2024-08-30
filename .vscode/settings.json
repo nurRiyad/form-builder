@@ -4,5 +4,12 @@
   },
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "vue.autoInsert.dotValue": true
+  "vue.autoInsert.dotValue": true,
+
+  "json.schemas": [
+    {
+      "fileMatch": ["/*-ui.json"],
+      "url": "./src/schema/index.json"
+    }
+  ]
 }

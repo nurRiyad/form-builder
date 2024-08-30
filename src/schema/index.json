@@ -1,0 +1,274 @@
+{
+  "$ref": "#/definitions/FormType",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "BaseElement": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/InputText"
+        },
+        {
+          "$ref": "#/definitions/Select"
+        },
+        {
+          "$ref": "#/definitions/TextArea"
+        },
+        {
+          "$ref": "#/definitions/Radio"
+        },
+        {
+          "$ref": "#/definitions/CheckBox"
+        }
+      ]
+    },
+    "CheckBox": {
+      "additionalProperties": false,
+      "properties": {
+        "disable": {
+          "type": "boolean"
+        },
+        "fetch": {
+          "type": "string"
+        },
+        "if": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "schema": {
+          "type": "string"
+        },
+        "type": {
+          "const": "check-box",
+          "type": "string"
+        }
+      },
+      "required": [
+        "label",
+        "schema",
+        "type"
+      ],
+      "type": "object"
+    },
+    "FormType": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/SingleStepForm"
+        },
+        {
+          "$ref": "#/definitions/MultiStepForm"
+        }
+      ]
+    },
+    "InputText": {
+      "additionalProperties": false,
+      "properties": {
+        "computed": {
+          "additionalProperties": false,
+          "properties": {
+            "func": {
+              "type": "string"
+            },
+            "val": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "val",
+            "func"
+          ],
+          "type": "object"
+        },
+        "disable": {
+          "type": "boolean"
+        },
+        "fetch": {
+          "type": "string"
+        },
+        "if": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "schema": {
+          "type": "string"
+        },
+        "type": {
+          "const": "input-text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "label",
+        "schema",
+        "type"
+      ],
+      "type": "object"
+    },
+    "MultiStepForm": {
+      "additionalProperties": false,
+      "properties": {
+        "labe": {
+          "type": "string"
+        },
+        "step": {
+          "items": {
+            "$ref": "#/definitions/SingleStepForm"
+          },
+          "type": "array"
+        },
+        "type": {
+          "const": "multi",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "step",
+        "labe"
+      ],
+      "type": "object"
+    },
+    "Radio": {
+      "additionalProperties": false,
+      "properties": {
+        "disable": {
+          "type": "boolean"
+        },
+        "fetch": {
+          "type": "string"
+        },
+        "if": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "options": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "schema": {
+          "type": "string"
+        },
+        "type": {
+          "const": "radio",
+          "type": "string"
+        }
+      },
+      "required": [
+        "label",
+        "options",
+        "schema",
+        "type"
+      ],
+      "type": "object"
+    },
+    "Select": {
+      "additionalProperties": false,
+      "properties": {
+        "disable": {
+          "type": "boolean"
+        },
+        "fetch": {
+          "type": "string"
+        },
+        "if": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "options": {
+          "items": {
+            "type": [
+              "string",
+              "boolean",
+              "number"
+            ]
+          },
+          "type": "array"
+        },
+        "schema": {
+          "type": "string"
+        },
+        "type": {
+          "const": "simple-select",
+          "type": "string"
+        }
+      },
+      "required": [
+        "label",
+        "options",
+        "schema",
+        "type"
+      ],
+      "type": "object"
+    },
+    "SingleStepForm": {
+      "additionalProperties": false,
+      "properties": {
+        "elements": {
+          "items": {
+            "$ref": "#/definitions/BaseElement"
+          },
+          "type": "array"
+        },
+        "fetchFn": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "schema": {
+          "type": "string"
+        },
+        "type": {
+          "const": "single",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "schema",
+        "label",
+        "elements"
+      ],
+      "type": "object"
+    },
+    "TextArea": {
+      "additionalProperties": false,
+      "properties": {
+        "disable": {
+          "type": "boolean"
+        },
+        "fetch": {
+          "type": "string"
+        },
+        "if": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "schema": {
+          "type": "string"
+        },
+        "type": {
+          "const": "textarea",
+          "type": "string"
+        }
+      },
+      "required": [
+        "label",
+        "schema",
+        "type"
+      ],
+      "type": "object"
+    }
+  }
+}
