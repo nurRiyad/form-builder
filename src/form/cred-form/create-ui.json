@@ -28,6 +28,11 @@
       "schema": "schema/properties/name"
     },
     {
+      "type": "input",
+      "label": "Owner ID",
+      "schema": "schema/properties/ownerID"
+    },
+    {
       "if": "isCredAws",
       "type": "input",
       "schema": "schema/properties/aws/properties/accessKeyID",

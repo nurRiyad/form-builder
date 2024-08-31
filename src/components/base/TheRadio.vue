@@ -6,6 +6,8 @@ import lodash from 'lodash'
 const props = defineProps<{
   element: Radio
   initialValue: any
+  wholeSchema: any
+  func?: any
   setValue: (path: string, val: any) => void
   deleteValue: (key: string) => void
 }>()

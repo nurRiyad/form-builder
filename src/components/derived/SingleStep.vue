@@ -75,38 +75,47 @@ fetchData()
       <InputText
         v-if="el.type === 'input' && (el.if ? fn[el.if].value : true)"
         :element="el"
+        :initial-value="initialValue"
+        :whole-schema="schema"
+        :func="fn"
         :set-value="setValue"
         :delete-value="deleteValue"
-        :initial-value="initialValue"
-        :func="fn"
       />
       <SelectSingle
         v-else-if="el.type === 'simple-select' && (el.if ? fn[el.if].value : true)"
         :element="el"
+        :initial-value="initialValue"
+        :whole-schema="schema"
+        :func="fn"
         :set-value="setValue"
         :delete-value="deleteValue"
-        :initial-value="initialValue"
       />
       <TheRadio
         v-else-if="el.type === 'radio' && (el.if ? fn[el.if].value : true)"
         :element="el"
+        :initial-value="initialValue"
+        :whole-schema="schema"
+        :func="fn"
         :set-value="setValue"
         :delete-value="deleteValue"
-        :initial-value="initialValue"
       />
       <CheckBox
         v-else-if="el.type === 'check-box' && (el.if ? fn[el.if].value : true)"
         :element="el"
+        :initial-value="initialValue"
+        :whole-schema="schema"
+        :func="fn"
         :set-value="setValue"
         :delete-value="deleteValue"
-        :initial-value="initialValue"
       />
       <TextArea
         v-else-if="el.type === 'textarea' && (el.if ? fn[el.if].value : true)"
         :element="el"
+        :initial-value="initialValue"
+        :whole-schema="schema"
+        :func="fn"
         :set-value="setValue"
         :delete-value="deleteValue"
-        :initial-value="initialValue"
       />
     </template>
     <button
