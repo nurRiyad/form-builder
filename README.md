@@ -10,12 +10,14 @@ Generate from in form in a minutes
 - [x] Add proper if condition for base element that read if logic from fun and apply proper reactivity
 - [x] Remove key from form when element is unmounted
 - [ ] Merge model value with the generated value
-- [ ] Add other other basic property in select radio checkbox text area
+- [ ] Multi step from process
+- [ ] Basic Validation
+- [x] Add other other basic property in select radio checkbox text area
 - [ ] Add editor element
 - [ ] Create Platform UI Credential create form
 - [ ] Create Platform UI Credential Edit form
-- [ ] Check if create-ui, initial-value and fun can load from api call
-- [ ] Component level fetch
+- [x] Check if create-ui, initial-value and fun can load from api call
+- [x] Component level fetch
   - [x] Extract the function and call properly
   - [ ] Save the value somewhere to properly use this
   - [ ] After fetching complete need to re-render the component
