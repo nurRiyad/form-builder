@@ -12,8 +12,15 @@ const props = defineProps<{
   deleteValue: (key: string) => void
 }>()
 
-const init = lodash.get(props.initialValue, props.element.schema)
-const value = ref(init)
+const calculateInitValue = () => {
+  let path = props.element.schema
+  path = path.replaceAll('/properties/', '.')
+  path = path.replace('schema.', '')
+  const value = lodash.get(props.initialValue, path)
+  return value
+}
+
+const value = ref(calculateInitValue())
 
 watch(
   value,
@@ -49,7 +56,6 @@ const calculateInputType = computed(() => {
   const formatPath = `${path}.format`
   const type = lodash.get(props.wholeSchema, typePath)
   const format = lodash.get(props.wholeSchema, formatPath)
-  console.log(format, type)
   if (type === 'integer') return 'number'
   else if (type === 'string' && format === 'password') return 'password'
   return 'text'
@@ -60,7 +66,6 @@ const calculateInputType = computed(() => {
   <div v-if="inInputFetching">
     <h1>This input element is loading...</h1>
   </div>
-  <p>Types-> {{ calculateInputType }}</p>
   <div class="flex flex-col space-y-2">
     <label :for="element.label">{{ element.label }}</label>
     <input

@@ -21,14 +21,15 @@
     "projectID": "",
     "serviceAccount": ""
   },
-  "type": "",
+  "type": "Aws",
   "digitalocean": {
     "token": ""
   },
-  "name": "",
+  "name": "Gadha",
   "vultr": {
     "token": ""
   },
+  "ownerID": 1234,
   "swift": {
     "username": "",
     "tenantID": "",

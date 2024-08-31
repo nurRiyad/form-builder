@@ -12,8 +12,14 @@ const props = defineProps<{
   deleteValue: (key: string) => void
 }>()
 
-const init = lodash.get(props.initialValue, props.element.schema)
-const value = ref(init)
+const calculateInitValue = () => {
+  let path = props.element.schema
+  path = path.replaceAll('/properties/', '.')
+  path = path.replace('schema.', '')
+  const value = lodash.get(props.initialValue, path)
+  return value
+}
+const value = ref(calculateInitValue())
 
 watch(
   value,

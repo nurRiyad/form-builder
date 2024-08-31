@@ -30,8 +30,6 @@ const setValue = (key: string, val: any) => {
 }
 const deleteValue = (key: string) => {
   const fKey = key.replaceAll('/properties', '')
-  console.log(fKey)
-  console.log(key)
   delete model.value[fKey]
 }
 
@@ -72,8 +70,6 @@ const handleSubmit = () => {
       :delete-value="deleteValue"
     />
     <h1 v-else>No Proper Form type found</h1>
-    <button @click="handleSubmit" class="bg-sky-500 mt-5 py-2 px-3 rounded-sm disabled:bg-gray-400">
-      Submit
-    </button>
+    <button @click="handleSubmit" class="bg-sky-500 mt-5 py-2 px-3 rounded-sm">Submit</button>
   </div>
 </template>
