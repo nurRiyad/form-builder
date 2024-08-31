@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { Select } from '@/types/schema'
-import { onUnmounted, ref, watch } from 'vue'
+import { computed, onUnmounted, ref, watch } from 'vue'
 import lodash from 'lodash'
 
 const props = defineProps<{
@@ -25,11 +25,22 @@ watch(
 onUnmounted(() => {
   props.deleteValue(props.element.schema)
 })
+
+const fOptions = computed(() => {
+  const ops = props.element.options || []
+  return ops.map((op) => {
+    if (typeof op === 'string') {
+      return { name: op, value: op }
+    } else return op
+  })
+})
 </script>
 
 <template>
   <label :for="element.label">{{ element.label }}</label>
   <select :name="element.label" :id="element.label" v-model="value">
-    <option v-for="val in element.options" :key="String(val)" :value="val">{{ val }}</option>
+    <option v-for="val in fOptions" :key="val.value" :value="val.value">
+      {{ val.name }}
+    </option>
   </select>
 </template>

@@ -20,6 +20,8 @@ interface BaseCommon {
   disable?: boolean
 }
 
+type Options = Array<string> | Array<{ name: string; value: string }>
+
 export interface Input extends BaseCommon {
   type: 'input'
   computed?: {
@@ -30,7 +32,7 @@ export interface Input extends BaseCommon {
 
 export interface Select extends BaseCommon {
   type: 'simple-select'
-  options: Array<string | boolean | number>
+  options: Options
 }
 
 export interface TextArea extends BaseCommon {
@@ -39,7 +41,7 @@ export interface TextArea extends BaseCommon {
 
 export interface Radio extends BaseCommon {
   type: 'radio'
-  options: Array<string>
+  options: Options
 }
 
 export interface CheckBox extends BaseCommon {

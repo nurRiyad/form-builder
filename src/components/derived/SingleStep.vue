@@ -23,7 +23,9 @@ const setValue = (key: string, val: any) => {
   model.value[fKey] = val
 }
 const deleteValue = (key: string) => {
-  const fKey = key.replaceAll('/properties', '.')
+  const fKey = key.replaceAll('/properties', '')
+  console.log(fKey)
+  console.log(key)
   delete model.value[fKey]
 }
 
@@ -68,7 +70,7 @@ fetchData()
     <h1>Single Step Form Loading</h1>
   </div>
   <div v-else class="flex flex-col max-w-3xl mx-auto space-y-4">
-    <p class="font-semibold text-xl pb-5">{{ ui.label }}</p>
+    <p class="font-semibold text-xl text-center">{{ ui.label }}</p>
     <template v-for="el in ui.elements" :key="el.label">
       <InputText
         v-if="el.type === 'input' && (el.if ? fn[el.if].value : true)"

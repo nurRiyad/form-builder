@@ -5,9 +5,22 @@
   "elements": [
     {
       "type": "simple-select",
-      "label": "Type",
+      "label": "Credential Type",
       "schema": "schema/properties/type",
-      "options": ["Aws", "Azure", "Swift"]
+      "options": [
+        {
+          "name": "AWS",
+          "value": "Aws"
+        },
+        {
+          "name": "AZURE",
+          "value": "Azure"
+        },
+        {
+          "name": "SWIFT",
+          "value": "Swift"
+        }
+      ]
     },
     {
       "type": "input",
