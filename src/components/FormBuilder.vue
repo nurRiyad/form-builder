@@ -3,6 +3,7 @@ import type { FormType } from '@/types/schema'
 import SingleStep from './derived/SingleStep.vue'
 import { ref, unref } from 'vue'
 import lodash from 'lodash'
+import MultiStep from './derived/MultiStep.vue'
 
 const props = withDefaults(
   defineProps<{
@@ -53,6 +54,19 @@ const handleSubmit = () => {
   const value = generateFinalForm()
   emits('onSubmit', value)
 }
+
+// step handle
+const activeStep = ref(0)
+const handleStep = (type: 'Next' | 'Prev') => {
+  if (props.ui.type === 'single') return
+  if (type === 'Next') {
+    if (activeStep.value + 1 >= props.ui.step.length) return
+    else activeStep.value += 1
+  } else {
+    if (activeStep.value <= 0) return
+    else activeStep.value -= 1
+  }
+}
 </script>
 
 <template>
@@ -69,7 +83,28 @@ const handleSubmit = () => {
       :set-value="setValue"
       :delete-value="deleteValue"
     />
+    <MultiStep
+      v-else-if="ui.type === 'multi'"
+      :active-step="activeStep"
+      :ui="ui"
+      :schema="schema"
+      :initial-value="initialValue"
+      :fn="fn"
+      :set-value="setValue"
+      :delete-value="deleteValue"
+    />
     <h1 v-else>No Proper Form type found</h1>
-    <button @click="handleSubmit" class="bg-sky-500 mt-5 py-2 px-3 rounded-sm">Submit</button>
+    <div class="flex justify-between" v-if="ui.type === 'single'">
+      <button @click="handleSubmit" class="bg-sky-500 mt-5 py-2 px-3 rounded-sm">Cancel</button>
+      <button @click="handleSubmit" class="bg-sky-500 mt-5 py-2 px-3 rounded-sm">Submit</button>
+    </div>
+    <div class="flex justify-between" v-else>
+      <button @click="handleStep('Prev')" class="bg-sky-500 mt-5 py-2 px-3 rounded-sm">
+        Previous
+      </button>
+      <button @click="handleStep('Next')" class="bg-sky-500 mt-5 py-2 px-3 rounded-sm">Next</button>
+    </div>
+
+    <pre class="p-4 bg-gray-300 mt-4">{{ model }}</pre>
   </div>
 </template>
