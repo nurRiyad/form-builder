@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import type { InputText } from '@/types/schema'
+import type { Input } from '@/types/schema'
 import { onUnmounted, ref, watch } from 'vue'
 import lodash from 'lodash'
 
 const props = defineProps<{
-  element: InputText
+  element: Input
   initialValue: any
   func?: any
   setValue: (path: string, val: any) => void

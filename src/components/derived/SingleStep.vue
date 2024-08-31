@@ -71,7 +71,7 @@ fetchData()
     <p class="font-semibold text-xl pb-5">{{ ui.label }}</p>
     <template v-for="el in ui.elements" :key="el.label">
       <InputText
-        v-if="el.type === 'input-text' && (el.if ? fn[el.if].value : true)"
+        v-if="el.type === 'input' && (el.if ? fn[el.if].value : true)"
         :element="el"
         :set-value="setValue"
         :delete-value="deleteValue"

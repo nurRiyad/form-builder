@@ -12,7 +12,7 @@ export const ui: FormType = {
       options: ['riyad', 'srouav', 'athoy', 'roza']
     },
     {
-      type: 'input-text',
+      type: 'input',
       label: 'This is input',
       schema: 'name',
       if: 'showInput'

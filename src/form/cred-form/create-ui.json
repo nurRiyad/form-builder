@@ -10,43 +10,43 @@
       "options": ["Aws", "Azure", "Swift"]
     },
     {
-      "type": "input-text",
+      "type": "input",
       "label": "Credential Name",
       "schema": "schema/properties/name"
     },
     {
       "if": "isCredAws",
-      "type": "input-text",
+      "type": "input",
       "schema": "schema/properties/aws/properties/accessKeyID",
       "label": "Access Key Id"
     },
     {
       "if": "isCredAws",
-      "type": "input-text",
+      "type": "input",
       "label": "Secret Access Key",
       "schema": "schema/properties/aws/properties/secretAccessKey"
     },
     {
       "if": "isCredAzure",
-      "type": "input-text",
+      "type": "input",
       "label": "Subscription Id",
       "schema": "schema/properties/azure/properties/subscriptionID"
     },
     {
       "if": "isCredAzure",
-      "type": "input-text",
+      "type": "input",
       "label": "Tenant ID",
       "schema": "schema/properties/azure/properties/tenantID"
     },
     {
       "if": "isCredAzure",
-      "type": "input-text",
+      "type": "input",
       "label": "Client Id",
       "schema": "schema/properties/azure/properties/clientID"
     },
     {
       "if": "isCredAzure",
-      "type": "input-text",
+      "type": "input",
       "label": "Client Secret",
       "schema": "schema/properties/azure/properties/clientSecret"
     }

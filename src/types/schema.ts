@@ -20,12 +20,17 @@ interface BaseCommon {
   disable?: boolean
 }
 
-export interface InputText extends BaseCommon {
-  type: 'input-text'
+export interface Input extends BaseCommon {
+  type: 'input'
   computed?: {
     val: string
     func: string
   }
+}
+
+export interface Select extends BaseCommon {
+  type: 'simple-select'
+  options: Array<string | boolean | number>
 }
 
 export interface TextArea extends BaseCommon {
@@ -41,11 +46,6 @@ export interface CheckBox extends BaseCommon {
   type: 'check-box'
 }
 
-export interface Select extends BaseCommon {
-  type: 'simple-select'
-  options: Array<string | boolean | number>
-}
-
-export type BaseElement = InputText | Select | TextArea | Radio | CheckBox
+export type BaseElement = Input | Select | TextArea | Radio | CheckBox
 
 export type FormType = SingleStepForm | MultiStepForm

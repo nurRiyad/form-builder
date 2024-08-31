@@ -5,7 +5,7 @@
     "BaseElement": {
       "anyOf": [
         {
-          "$ref": "#/definitions/InputText"
+          "$ref": "#/definitions/Input"
         },
         {
           "$ref": "#/definitions/Select"
@@ -61,7 +61,7 @@
         }
       ]
     },
-    "InputText": {
+    "Input": {
       "additionalProperties": false,
       "properties": {
         "computed": {
@@ -96,7 +96,7 @@
           "type": "string"
         },
         "type": {
-          "const": "input-text",
+          "const": "input",
           "type": "string"
         }
       },
