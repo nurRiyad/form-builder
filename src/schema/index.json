@@ -245,7 +245,6 @@
       },
       "required": [
         "label",
-        "options",
         "schema",
         "type"
       ],

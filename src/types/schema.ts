@@ -32,7 +32,7 @@ export interface Input extends BaseCommon {
 
 export interface Select extends BaseCommon {
   type: 'simple-select'
-  options: Options
+  options?: Options
 }
 
 export interface TextArea extends BaseCommon {

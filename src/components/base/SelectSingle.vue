@@ -28,7 +28,16 @@ onUnmounted(() => {
 })
 
 const fOptions = computed(() => {
-  const ops = props.element.options || []
+  let ops = []
+  if (props.element.options) {
+    ops = props.element.options
+  } else {
+    let path = props.element.schema
+    path = `${path.replace('schema/', '')}`
+    path = path.replaceAll('/', '.')
+    const enumPath = `${path}.enum`
+    ops = (lodash.get(props.wholeSchema, enumPath) || []) as Array<string>
+  }
   return ops.map((op) => {
     if (typeof op === 'string') {
       return { name: op, value: op }
