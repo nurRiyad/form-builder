@@ -4,51 +4,17 @@ import InputText from '../base/InputText.vue'
 import SelectSingle from '../base/SelectSingle.vue'
 import TheRadio from '../base/TheRadio.vue'
 import TextArea from '../base/TextArea.vue'
-import { ref, unref } from 'vue'
-import lodash from 'lodash'
+import { ref } from 'vue'
 import CheckBox from '../base/CheckBox.vue'
 
 const props = defineProps<{
   ui: SingleStepForm
   schema: any
   initialValue: any
-  logic?: any
-  showSubmit: boolean
+  fn?: any
+  setValue: (path: string, val: any) => void
+  deleteValue: (key: string) => void
 }>()
-
-// generate model value
-const model = ref<Record<string, unknown>>({})
-const setValue = (key: string, val: any) => {
-  const fKey = key.replaceAll('/properties', '')
-  model.value[fKey] = val
-}
-const deleteValue = (key: string) => {
-  const fKey = key.replaceAll('/properties', '')
-  console.log(fKey)
-  console.log(key)
-  delete model.value[fKey]
-}
-
-// generate function
-const fn = props?.logic ? props.logic(model) : null
-
-// generate submitted form form
-const generateFinalForm = () => {
-  const raw = unref(model)
-  const generatedObj = {}
-  Object.keys(raw).forEach((key) => {
-    const fKey = key.replaceAll('/', '.')
-    lodash.set(generatedObj, fKey, raw[key])
-  })
-
-  return generatedObj
-}
-
-// form submit
-const handleSubmit = () => {
-  const value = generateFinalForm()
-  console.log(value)
-}
 
 //single step form level data fetching
 const isSSFetching = ref(false)
@@ -56,7 +22,7 @@ const fetchData = async () => {
   if (!props.ui.fetchFn) return
   try {
     isSSFetching.value = true
-    await fn[props.ui.fetchFn]()
+    await props.fn[props.ui.fetchFn]()
   } catch (error) {
     console.error(error)
   }
@@ -69,7 +35,7 @@ fetchData()
   <div v-if="isSSFetching">
     <h1>Single Step Form Loading</h1>
   </div>
-  <div v-else class="flex flex-col max-w-3xl mx-auto space-y-4">
+  <div v-else class="flex flex-col space-y-4">
     <p class="font-semibold text-xl text-center">{{ ui.label }}</p>
     <template v-for="el in ui.elements" :key="el.label">
       <InputText
@@ -118,14 +84,5 @@ fetchData()
         :delete-value="deleteValue"
       />
     </template>
-    <button
-      @click="handleSubmit"
-      v-if="showSubmit"
-      class="bg-sky-500 mt-5 py-2 px-3 rounded-sm disabled:bg-gray-400"
-    >
-      Submit
-    </button>
-
-    <pre>{{ model }}</pre>
   </div>
 </template>

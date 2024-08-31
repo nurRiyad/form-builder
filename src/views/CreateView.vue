@@ -7,8 +7,18 @@ import type { FormType } from '@/types'
 import { useFunc } from '../form/cred-form/function.js'
 
 const uiData = ui as FormType
+
+const handleSubmit = (val: any) => {
+  console.log(val)
+}
 </script>
 
 <template>
-  <FormBuilder :ui="uiData" :initial-value="values" :schema="schema" :logic="useFunc" />
+  <FormBuilder
+    :ui="uiData"
+    :initial-value="values"
+    :schema="schema"
+    :logic="useFunc"
+    @on-submit="handleSubmit"
+  />
 </template>
