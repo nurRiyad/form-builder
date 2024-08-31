@@ -11,5 +11,6 @@
       "fileMatch": ["/*-ui.json"],
       "url": "./src/schema/index.json"
     }
-  ]
+  ],
+  "cSpell.words": ["unref"]
 }

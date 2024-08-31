@@ -19,10 +19,12 @@ const props = defineProps<{
 // generate model value
 const model = ref<Record<string, unknown>>({})
 const setValue = (key: string, val: any) => {
-  model.value[key] = val
+  const fKey = key.replaceAll('/properties', '')
+  model.value[fKey] = val
 }
 const deleteValue = (key: string) => {
-  delete model.value[key]
+  const fKey = key.replaceAll('/properties', '.')
+  delete model.value[fKey]
 }
 
 // generate function
@@ -33,7 +35,8 @@ const generateFinalForm = () => {
   const raw = unref(model)
   const generatedObj = {}
   Object.keys(raw).forEach((key) => {
-    lodash.set(generatedObj, key, raw[key])
+    const fKey = key.replaceAll('/', '.')
+    lodash.set(generatedObj, fKey, raw[key])
   })
 
   return generatedObj
