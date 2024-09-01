@@ -1,9 +1,8 @@
 <script lang="ts" setup>
 import type { MultiStepForm } from '@/types/schema'
 import SingleStep from './SingleStep.vue'
-import { computed } from 'vue'
 
-const props = defineProps<{
+defineProps<{
   activeStep: number
   ui: MultiStepForm
   schema: any
@@ -12,21 +11,13 @@ const props = defineProps<{
   setValue: (path: string, val: any) => void
   deleteValue: (key: string) => void
 }>()
-
-const activeSingleStep = computed(() => {
-  const atv = props.ui.step.find((st, idx) => {
-    if (idx === props.activeStep) return st
-  })
-
-  if (atv) return atv
-  else return props.ui.step.at(0)
-})
 </script>
 
 <template>
-  <template v-if="activeSingleStep">
+  <template v-for="(item, idx) in ui.step" :key="idx + item.label">
     <SingleStep
-      :ui="activeSingleStep"
+      v-show="idx === activeStep"
+      :ui="item"
       :schema="schema"
       :initial-value="initialValue"
       :fn="fn"
@@ -34,7 +25,4 @@ const activeSingleStep = computed(() => {
       :delete-value="deleteValue"
     />
   </template>
-  <div v-else>
-    <h1>No Proper Single Step found</h1>
-  </div>
 </template>

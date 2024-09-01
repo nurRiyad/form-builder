@@ -29,12 +29,6 @@
           "label": "Access Key Id"
         },
         {
-          "if": "isCredAws",
-          "type": "input",
-          "label": "Secret Access Key",
-          "schema": "schema/properties/aws/properties/secretAccessKey"
-        },
-        {
           "if": "isCredAzure",
           "type": "input",
           "label": "Subscription Id",
@@ -66,32 +60,14 @@
       "schema": "schema/",
       "elements": [
         {
-          "type": "simple-select",
-          "label": "Credential Type",
-          "schema": "schema/properties/type"
+          "type": "input",
+          "label": "Father Name",
+          "schema": "schema/properties/aws/properties/fatherName"
         },
         {
           "type": "input",
-          "label": "Owner ID",
-          "schema": "schema/properties/ownerID"
-        },
-        {
-          "if": "isCredAws",
-          "type": "input",
-          "schema": "schema/properties/aws/properties/accessKeyID",
-          "label": "Access Key Id"
-        },
-        {
-          "if": "isCredAws",
-          "type": "input",
-          "label": "Secret Access Key",
-          "schema": "schema/properties/aws/properties/secretAccessKey"
-        },
-        {
-          "if": "isCredAzure",
-          "type": "input",
-          "label": "Subscription Id",
-          "schema": "schema/properties/azure/properties/subscriptionID"
+          "label": "Mother Name",
+          "schema": "schema/properties/azure/properties/motherName"
         }
       ]
     }

@@ -32,57 +32,59 @@ fetchData()
 </script>
 
 <template>
-  <div v-if="isSSFetching">
-    <h1>Single Step Form Loading</h1>
-  </div>
-  <div v-else class="flex flex-col space-y-4">
-    <p class="font-semibold text-xl text-center">{{ ui.label }}</p>
-    <template v-for="el in ui.elements" :key="el.label">
-      <InputText
-        v-if="el.type === 'input' && (el.if ? fn[el.if].value : true)"
-        :element="el"
-        :initial-value="initialValue"
-        :whole-schema="schema"
-        :func="fn"
-        :set-value="setValue"
-        :delete-value="deleteValue"
-      />
-      <SelectSingle
-        v-else-if="el.type === 'simple-select' && (el.if ? fn[el.if].value : true)"
-        :element="el"
-        :initial-value="initialValue"
-        :whole-schema="schema"
-        :func="fn"
-        :set-value="setValue"
-        :delete-value="deleteValue"
-      />
-      <TheRadio
-        v-else-if="el.type === 'radio' && (el.if ? fn[el.if].value : true)"
-        :element="el"
-        :initial-value="initialValue"
-        :whole-schema="schema"
-        :func="fn"
-        :set-value="setValue"
-        :delete-value="deleteValue"
-      />
-      <CheckBox
-        v-else-if="el.type === 'check-box' && (el.if ? fn[el.if].value : true)"
-        :element="el"
-        :initial-value="initialValue"
-        :whole-schema="schema"
-        :func="fn"
-        :set-value="setValue"
-        :delete-value="deleteValue"
-      />
-      <TextArea
-        v-else-if="el.type === 'textarea' && (el.if ? fn[el.if].value : true)"
-        :element="el"
-        :initial-value="initialValue"
-        :whole-schema="schema"
-        :func="fn"
-        :set-value="setValue"
-        :delete-value="deleteValue"
-      />
-    </template>
+  <div>
+    <div v-if="isSSFetching">
+      <h1>Single Step Form Loading</h1>
+    </div>
+    <div v-else class="flex flex-col space-y-4">
+      <p class="font-semibold text-xl text-center">{{ ui.label }}</p>
+      <template v-for="el in ui.elements" :key="el.label">
+        <InputText
+          v-if="el.type === 'input' && (el.if ? fn[el.if].value : true)"
+          :element="el"
+          :initial-value="initialValue"
+          :whole-schema="schema"
+          :func="fn"
+          :set-value="setValue"
+          :delete-value="deleteValue"
+        />
+        <SelectSingle
+          v-else-if="el.type === 'simple-select' && (el.if ? fn[el.if].value : true)"
+          :element="el"
+          :initial-value="initialValue"
+          :whole-schema="schema"
+          :func="fn"
+          :set-value="setValue"
+          :delete-value="deleteValue"
+        />
+        <TheRadio
+          v-else-if="el.type === 'radio' && (el.if ? fn[el.if].value : true)"
+          :element="el"
+          :initial-value="initialValue"
+          :whole-schema="schema"
+          :func="fn"
+          :set-value="setValue"
+          :delete-value="deleteValue"
+        />
+        <CheckBox
+          v-else-if="el.type === 'check-box' && (el.if ? fn[el.if].value : true)"
+          :element="el"
+          :initial-value="initialValue"
+          :whole-schema="schema"
+          :func="fn"
+          :set-value="setValue"
+          :delete-value="deleteValue"
+        />
+        <TextArea
+          v-else-if="el.type === 'textarea' && (el.if ? fn[el.if].value : true)"
+          :element="el"
+          :initial-value="initialValue"
+          :whole-schema="schema"
+          :func="fn"
+          :set-value="setValue"
+          :delete-value="deleteValue"
+        />
+      </template>
+    </div>
   </div>
 </template>

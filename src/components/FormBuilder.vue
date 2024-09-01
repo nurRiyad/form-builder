@@ -55,16 +55,28 @@ const handleSubmit = () => {
   emits('onSubmit', value)
 }
 
+// form cancel
+const handleCancel = () => {
+  console.log('Form cancel clicked')
+}
+
 // step handle
 const activeStep = ref(0)
+const totalStep = props.ui.type === 'single' ? 0 : props.ui.step.length
 const handleStep = (type: 'Next' | 'Prev') => {
   if (props.ui.type === 'single') return
   if (type === 'Next') {
-    if (activeStep.value + 1 >= props.ui.step.length) return
-    else activeStep.value += 1
+    if (activeStep.value + 1 >= totalStep) {
+      handleSubmit()
+    } else {
+      activeStep.value += 1
+    }
   } else {
-    if (activeStep.value <= 0) return
-    else activeStep.value -= 1
+    if (activeStep.value <= 0) {
+      handleCancel()
+    } else {
+      activeStep.value -= 1
+    }
   }
 }
 </script>
@@ -95,14 +107,16 @@ const handleStep = (type: 'Next' | 'Prev') => {
     />
     <h1 v-else>No Proper Form type found</h1>
     <div class="flex justify-between" v-if="ui.type === 'single'">
-      <button @click="handleSubmit" class="bg-sky-500 mt-5 py-2 px-3 rounded-sm">Cancel</button>
+      <button @click="handleCancel" class="bg-sky-500 mt-5 py-2 px-3 rounded-sm">Cancel</button>
       <button @click="handleSubmit" class="bg-sky-500 mt-5 py-2 px-3 rounded-sm">Submit</button>
     </div>
     <div class="flex justify-between" v-else>
       <button @click="handleStep('Prev')" class="bg-sky-500 mt-5 py-2 px-3 rounded-sm">
-        Previous
+        {{ activeStep <= 0 ? 'Cancel' : 'Previous' }}
       </button>
-      <button @click="handleStep('Next')" class="bg-sky-500 mt-5 py-2 px-3 rounded-sm">Next</button>
+      <button @click="handleStep('Next')" class="bg-sky-500 mt-5 py-2 px-3 rounded-sm">
+        {{ activeStep + 1 >= totalStep ? 'Submit' : 'Next' }}
+      </button>
     </div>
 
     <pre class="p-4 bg-gray-300 mt-4">{{ model }}</pre>
