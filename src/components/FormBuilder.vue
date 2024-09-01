@@ -1,9 +1,10 @@
 <script lang="ts" setup>
 import type { FormType } from '@/types/schema'
-import SingleStep from './derived/SingleStep.vue'
-import { ref, unref } from 'vue'
+import { defineAsyncComponent, ref, unref } from 'vue'
 import lodash from 'lodash'
-import MultiStep from './derived/MultiStep.vue'
+
+const SingleStep = defineAsyncComponent(() => import('./derived/SingleStep.vue'))
+const MultiStep = defineAsyncComponent(() => import('./derived/MultiStep.vue'))
 
 const props = withDefaults(
   defineProps<{
