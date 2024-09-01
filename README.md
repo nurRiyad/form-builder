@@ -1,6 +1,6 @@
 # Form-Builder 🏗️(under rapid construction)
 
-Generate from in form in a minutes
+Generate from in a minutes
 
 ## Todo
 
@@ -9,9 +9,13 @@ Generate from in form in a minutes
 - [x] Some derived from like single-step form & multi-step-form
 - [x] Add proper if condition for base element that read if logic from fun and apply proper reactivity
 - [x] Remove key from form when element is unmounted
-- [ ] Merge model value with the generated value
-- [ ] Multi step from process
+- [x] Merge model value with the generated value
+- [x] Multi step from process
 - [ ] Basic Validation
+- [ ] Add function and computed both feature for if conditions
+- [ ] Add slots for form actions
+- [ ] Remove lodash from dependency
+- [ ] Remove same type of code from base components
 - [x] Add other other basic property in select radio checkbox text area
 - [ ] Add editor element
 - [ ] Create Platform UI Credential create form

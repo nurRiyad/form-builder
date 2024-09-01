@@ -3,5 +3,5 @@ import HelloWorld from '@/components/HelloWorld.vue'
 </script>
 
 <template>
-  <HelloWorld msg="Hello from Riyad" />
+  <HelloWorld msg="Generate form in a minutes" />
 </template>
