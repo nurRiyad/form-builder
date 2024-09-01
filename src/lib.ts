@@ -1,0 +1,12 @@
+// import type { App } from 'vue'
+// import { FormBuilder, HelloWorld } from './components'
+
+// function install(app: App) {
+//   app.component('FormBuilder', FormBuilder)
+//   app.component('HelloWorld', HelloWorld)
+// }
+
+import './assets/main.css'
+
+export * from './components'
+export * from './utils'

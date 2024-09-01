@@ -1,13 +1,11 @@
 <script lang="ts" setup>
 import FormBuilder from '@/components/FormBuilder.vue'
-import ui from '../form/cred-form/create-ui.json'
-import mui from '../form/cred-form/edit-ui.json'
-import values from '../form/cred-form/values.json'
-import schema from '../form/cred-form/schema.json'
+import mui from '../assets/form/cred-form/edit-ui.json'
+import values from '../assets/form/cred-form/values.json'
+import schema from '../assets/form/cred-form/schema.json'
 import type { FormType } from '@/types'
-import { useFunc } from '../form/cred-form/function.js'
+import { useFunc } from '../assets/form/cred-form/function.js'
 
-const uiData = ui as FormType
 const muiData = mui as FormType
 
 const handleSubmit = (val: any) => {

@@ -13,18 +13,20 @@
     ".": {
       "import": "./dist/form-builder.js",
       "require": "./dist/form-builder.umd.cjs",
-      "types": "./dist/src/index.d.ts"
+      "types": "./dist/src/lib.d.ts"
     },
     "./css": "./dist/style.css"
   },
   "scripts": {
     "dev": "vite",
-    "build": "run-p type-check \"build-only {@}\" --",
+    "build": "rimraf dist-app && run-p type-check \"build-only {@}\" --",
+    "build:lib": "rimraf dist && MODE=lib run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "test:unit": "vitest",
     "test:e2e": "start-server-and-test preview http://localhost:4173 'cypress run --e2e'",
     "test:e2e:dev": "start-server-and-test 'vite dev --port 4173' http://localhost:4173 'cypress open --e2e'",
-    "build-only": "vite build",
+    "build-only": "rimraf dist-app && vite build",
+    "build-only:lib": "rimraf dist && MODE=lib  vite build",
     "type-check": "vue-tsc --build --force",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write src/",
@@ -60,6 +62,7 @@
     "npm-run-all2": "^6.2.0",
     "postcss": "^8.4.41",
     "prettier": "^3.2.5",
+    "rimraf": "^6.0.1",
     "start-server-and-test": "^2.0.4",
     "tailwindcss": "^3.4.10",
     "ts-json-schema-generator": "^2.3.0",
