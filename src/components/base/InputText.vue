@@ -66,14 +66,26 @@ const calculateInputType = computed(() => {
   <div v-if="inInputFetching">
     <h1>This input element is loading...</h1>
   </div>
-  <div class="flex flex-col space-y-2">
-    <label :for="element.label">{{ element.label }}</label>
+  <div class="single-input relative mt-4">
+    <label
+      :for="element.label"
+      class="absolute top-2 left-3 pointer-events-none text-sm text-gray-500 transition ease-in-out duration-300 px-1 text-grey-darker"
+      :class="[value ? ' -translate-y-4 text-xs bg-white' : '']"
+      >{{ element.label }}</label
+    >
     <input
       :id="element.label"
       :name="element.label"
       :type="calculateInputType"
       v-model="value"
-      class="border border-black"
+      class="block w-full bg-white border h-9 border-gray-300 rounded py-2 px-4 appearance-none leading-none focus:outline-none focus:shadow-outline focus:border-none focus:shadow-none"
     />
   </div>
 </template>
+
+<style>
+.single-input:focus-within label,
+.single-input input:not(:placeholder-shown) + label {
+  @apply -translate-y-4 text-xs bg-white;
+}
+</style>

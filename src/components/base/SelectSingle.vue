@@ -54,7 +54,12 @@ const fOptions = computed(() => {
 
 <template>
   <label :for="element.label">{{ element.label }}</label>
-  <select :name="element.label" :id="element.label" v-model="value">
+  <select
+    :name="element.label"
+    :id="element.label"
+    v-model="value"
+    class="block w-full bg-white border h-9 border-gray-300 rounded py-2 px-4 appearance-none leading-none focus:outline-none focus:shadow-outline focus:border-none focus:shadow-none"
+  >
     <option v-for="val in fOptions" :key="val.value" :value="val.value">
       {{ val.name }}
     </option>

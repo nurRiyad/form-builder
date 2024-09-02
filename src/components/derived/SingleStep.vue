@@ -48,7 +48,7 @@ const checkIf = (el: IfType | undefined) => {
     <div v-if="isSSFetching">
       <h1>Single Step Form Loading</h1>
     </div>
-    <div v-else class="flex flex-col space-y-4">
+    <div v-else class="flex flex-col">
       <p class="font-semibold text-xl text-center">{{ ui.label }}</p>
       <template v-for="el in ui.elements" :key="el.label">
         <InputText
