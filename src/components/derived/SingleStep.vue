@@ -1,11 +1,12 @@
 <script lang="ts" setup>
 import type { SingleStepForm } from '@/types/schema'
-import InputText from '../base/InputText.vue'
-import SelectSingle from '../base/SelectSingle.vue'
-import TheRadio from '../base/TheRadio.vue'
-import TextArea from '../base/TextArea.vue'
-import { ref } from 'vue'
-import CheckBox from '../base/CheckBox.vue'
+import { defineAsyncComponent, ref } from 'vue'
+
+const InputText = defineAsyncComponent(() => import('../base/InputText.vue'))
+const SelectSingle = defineAsyncComponent(() => import('../base/SelectSingle.vue'))
+const TextArea = defineAsyncComponent(() => import('../base/TextArea.vue'))
+const CheckBox = defineAsyncComponent(() => import('../base/CheckBox.vue'))
+const TheRadio = defineAsyncComponent(() => import('../base/TheRadio.vue'))
 
 const props = defineProps<{
   ui: SingleStepForm

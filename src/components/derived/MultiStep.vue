@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import type { MultiStepForm } from '@/types/schema'
-import SingleStep from './SingleStep.vue'
+import { defineAsyncComponent } from 'vue'
+
+const SingleStep = defineAsyncComponent(() => import('./SingleStep.vue'))
 
 defineProps<{
   activeStep: number
