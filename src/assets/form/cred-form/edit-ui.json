@@ -23,31 +23,46 @@
           "schema": "schema/properties/ownerID"
         },
         {
-          "if": "isCredAws",
+          "if": {
+            "type": "function",
+            "name": "isCredAws"
+          },
           "type": "input",
           "schema": "schema/properties/aws/properties/accessKeyID",
           "label": "Access Key Id"
         },
         {
-          "if": "isCredAzure",
+          "if": {
+            "type": "function",
+            "name": "isCredAws"
+          },
           "type": "input",
           "label": "Subscription Id",
           "schema": "schema/properties/azure/properties/subscriptionID"
         },
         {
-          "if": "isCredAzure",
+          "if": {
+            "type": "function",
+            "name": "isCredAws"
+          },
           "type": "input",
           "label": "Tenant ID",
           "schema": "schema/properties/azure/properties/tenantID"
         },
         {
-          "if": "isCredAzure",
+          "if": {
+            "type": "function",
+            "name": "isCredAws"
+          },
           "type": "input",
           "label": "Client Id",
           "schema": "schema/properties/azure/properties/clientID"
         },
         {
-          "if": "isCredAzure",
+          "if": {
+            "type": "function",
+            "name": "isCredAws"
+          },
           "type": "input",
           "label": "Client Secret",
           "schema": "schema/properties/azure/properties/clientSecret"

@@ -119,7 +119,6 @@ const handleStep = (type: 'Next' | 'Prev') => {
         {{ activeStep + 1 >= totalStep ? 'Submit' : 'Next' }}
       </button>
     </div>
-
     <pre class="p-4 bg-gray-300 mt-4">{{ model }}</pre>
   </div>
 </template>

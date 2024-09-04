@@ -19,37 +19,55 @@
       "schema": "schema/properties/ownerID"
     },
     {
-      "if": "isCredAws",
+      "if": {
+        "type": "computed",
+        "name": "checkIf"
+      },
       "type": "input",
       "schema": "schema/properties/aws/properties/accessKeyID",
       "label": "Access Key Id"
     },
     {
-      "if": "isCredAws",
+      "if": {
+        "type": "computed",
+        "name": "checkIf"
+      },
       "type": "input",
       "label": "Secret Access Key",
       "schema": "schema/properties/aws/properties/secretAccessKey"
     },
     {
-      "if": "isCredAzure",
+      "if": {
+        "type": "computed",
+        "name": "isCredAzure"
+      },
       "type": "input",
       "label": "Subscription Id",
       "schema": "schema/properties/azure/properties/subscriptionID"
     },
     {
-      "if": "isCredAzure",
+      "if": {
+        "type": "computed",
+        "name": "isCredAzure"
+      },
       "type": "input",
       "label": "Tenant ID",
       "schema": "schema/properties/azure/properties/tenantID"
     },
     {
-      "if": "isCredAzure",
+      "if": {
+        "type": "computed",
+        "name": "isCredAzure"
+      },
       "type": "input",
       "label": "Client Id",
       "schema": "schema/properties/azure/properties/clientID"
     },
     {
-      "if": "isCredAzure",
+      "if": {
+        "type": "computed",
+        "name": "isCredAzure"
+      },
       "type": "input",
       "label": "Client Secret",
       "schema": "schema/properties/azure/properties/clientSecret"

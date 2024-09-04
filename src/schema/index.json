@@ -31,7 +31,7 @@
           "type": "string"
         },
         "if": {
-          "type": "string"
+          "$ref": "#/definitions/IfType"
         },
         "label": {
           "type": "string"
@@ -61,6 +61,26 @@
         }
       ]
     },
+    "IfType": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "function",
+            "computed"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "name"
+      ],
+      "type": "object"
+    },
     "Input": {
       "additionalProperties": false,
       "properties": {
@@ -87,7 +107,7 @@
           "type": "string"
         },
         "if": {
-          "type": "string"
+          "$ref": "#/definitions/IfType"
         },
         "label": {
           "type": "string"
@@ -141,7 +161,7 @@
           "type": "string"
         },
         "if": {
-          "type": "string"
+          "$ref": "#/definitions/IfType"
         },
         "label": {
           "type": "string"
@@ -201,7 +221,7 @@
           "type": "string"
         },
         "if": {
-          "type": "string"
+          "$ref": "#/definitions/IfType"
         },
         "label": {
           "type": "string"
@@ -291,7 +311,7 @@
           "type": "string"
         },
         "if": {
-          "type": "string"
+          "$ref": "#/definitions/IfType"
         },
         "label": {
           "type": "string"

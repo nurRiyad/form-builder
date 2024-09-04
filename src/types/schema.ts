@@ -12,10 +12,15 @@ export interface SingleStepForm {
   fetchFn?: string
 }
 
+export type IfType = {
+  type: 'function' | 'computed'
+  name: string
+}
+
 interface BaseCommon {
   label: string
   schema: string
-  if?: string
+  if?: IfType
   fetch?: string
   disable?: boolean
 }

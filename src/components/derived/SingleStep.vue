@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { SingleStepForm } from '@/types/schema'
+import type { IfType, SingleStepForm } from '@/types/schema'
 import { defineAsyncComponent, ref } from 'vue'
 
 const InputText = defineAsyncComponent(() => import('../base/InputText.vue'))
@@ -30,6 +30,16 @@ const fetchData = async () => {
   isSSFetching.value = false
 }
 fetchData()
+
+//check condition
+const checkIf = (el: IfType | undefined) => {
+  if (!el) return true
+  if (el.type === 'computed') {
+    return props.fn[el.name].value
+  } else {
+    return props.fn[el.name]()
+  }
+}
 </script>
 
 <template>
@@ -41,7 +51,7 @@ fetchData()
       <p class="font-semibold text-xl text-center">{{ ui.label }}</p>
       <template v-for="el in ui.elements" :key="el.label">
         <InputText
-          v-if="el.type === 'input' && (el.if ? fn[el.if].value : true)"
+          v-if="el.type === 'input' && checkIf(el.if)"
           :element="el"
           :initial-value="initialValue"
           :whole-schema="schema"
@@ -50,7 +60,7 @@ fetchData()
           :delete-value="deleteValue"
         />
         <SelectSingle
-          v-else-if="el.type === 'simple-select' && (el.if ? fn[el.if].value : true)"
+          v-else-if="el.type === 'simple-select' && checkIf(el.if)"
           :element="el"
           :initial-value="initialValue"
           :whole-schema="schema"
@@ -59,7 +69,7 @@ fetchData()
           :delete-value="deleteValue"
         />
         <TheRadio
-          v-else-if="el.type === 'radio' && (el.if ? fn[el.if].value : true)"
+          v-else-if="el.type === 'radio' && checkIf(el.if)"
           :element="el"
           :initial-value="initialValue"
           :whole-schema="schema"
@@ -68,7 +78,7 @@ fetchData()
           :delete-value="deleteValue"
         />
         <CheckBox
-          v-else-if="el.type === 'check-box' && (el.if ? fn[el.if].value : true)"
+          v-else-if="el.type === 'check-box' && checkIf(el.if)"
           :element="el"
           :initial-value="initialValue"
           :whole-schema="schema"
@@ -77,7 +87,7 @@ fetchData()
           :delete-value="deleteValue"
         />
         <TextArea
-          v-else-if="el.type === 'textarea' && (el.if ? fn[el.if].value : true)"
+          v-else-if="el.type === 'textarea' && checkIf(el.if)"
           :element="el"
           :initial-value="initialValue"
           :whole-schema="schema"
