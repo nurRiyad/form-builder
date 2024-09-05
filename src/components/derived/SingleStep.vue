@@ -7,6 +7,7 @@ const SelectSingle = defineAsyncComponent(() => import('../base/SelectSingle.vue
 const TextArea = defineAsyncComponent(() => import('../base/TextArea.vue'))
 const CheckBox = defineAsyncComponent(() => import('../base/CheckBox.vue'))
 const TheRadio = defineAsyncComponent(() => import('../base/TheRadio.vue'))
+const ArrayInput = defineAsyncComponent(() => import('../derived/ArrayInput.vue'))
 
 const props = defineProps<{
   ui: SingleStepForm
@@ -91,6 +92,16 @@ const checkIf = (el: IfType | undefined) => {
           :element="el"
           :initial-value="initialValue"
           :whole-schema="schema"
+          :func="fn"
+          :set-value="setValue"
+          :delete-value="deleteValue"
+        />
+
+        <ArrayInput
+          v-if="el.type === 'array-input'"
+          :ui="el"
+          :initial-value="initialValue"
+          :schema="schema"
           :func="fn"
           :set-value="setValue"
           :delete-value="deleteValue"

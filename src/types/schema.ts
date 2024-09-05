@@ -53,6 +53,11 @@ export interface CheckBox extends BaseCommon {
   type: 'check-box'
 }
 
-export type BaseElement = Input | Select | TextArea | Radio | CheckBox
+export interface ArrayInput extends BaseCommon {
+  type: 'array-input'
+  elements: Array<BaseElement>
+}
+
+export type BaseElement = Input | Select | TextArea | Radio | CheckBox | ArrayInput
 
 export type FormType = SingleStepForm | MultiStepForm

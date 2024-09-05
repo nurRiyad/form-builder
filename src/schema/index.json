@@ -2,6 +2,43 @@
   "$ref": "#/definitions/FormType",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
+    "ArrayInput": {
+      "additionalProperties": false,
+      "properties": {
+        "disable": {
+          "type": "boolean"
+        },
+        "elements": {
+          "items": {
+            "$ref": "#/definitions/BaseElement"
+          },
+          "type": "array"
+        },
+        "fetch": {
+          "type": "string"
+        },
+        "if": {
+          "$ref": "#/definitions/IfType"
+        },
+        "label": {
+          "type": "string"
+        },
+        "schema": {
+          "type": "string"
+        },
+        "type": {
+          "const": "array-input",
+          "type": "string"
+        }
+      },
+      "required": [
+        "elements",
+        "label",
+        "schema",
+        "type"
+      ],
+      "type": "object"
+    },
     "BaseElement": {
       "anyOf": [
         {
@@ -18,6 +55,9 @@
         },
         {
           "$ref": "#/definitions/CheckBox"
+        },
+        {
+          "$ref": "#/definitions/ArrayInput"
         }
       ]
     },

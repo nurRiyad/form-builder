@@ -12,5 +12,5 @@
       "url": "./src/schema/index.json"
     }
   ],
-  "cSpell.words": ["unref"]
+  "cSpell.words": ["Pinia", "unref"]
 }

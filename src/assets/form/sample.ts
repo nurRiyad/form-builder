@@ -15,7 +15,10 @@ export const ui: FormType = {
       type: 'input',
       label: 'This is input',
       schema: 'name',
-      if: 'showInput'
+      if: {
+        type: 'function',
+        name: "'showInput'"
+      }
     },
     {
       type: 'check-box',

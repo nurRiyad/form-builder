@@ -1,0 +1,24 @@
+{
+  "type": "single",
+  "label": "Array Test",
+  "schema": "schema/name",
+  "elements": [
+    {
+      "type": "array-input",
+      "label": "Array Element",
+      "schema": "schema/name/users",
+      "elements": [
+        {
+          "type": "input",
+          "label": "name",
+          "schema": "schema/name"
+        },
+        {
+          "type": "input",
+          "label": "age",
+          "schema": "schema/age"
+        }
+      ]
+    }
+  ]
+}
