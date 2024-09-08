@@ -18,6 +18,11 @@ const router = createRouter({
       path: '/create',
       name: 'create',
       component: () => import('../views/CreateView.vue')
+    },
+    {
+      path: '/rafi',
+      name: 'rafi',
+      component: () => import('../views/RafiTestingView.vue')
     }
   ]
 })

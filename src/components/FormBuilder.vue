@@ -23,6 +23,7 @@ const props = withDefaults(
 )
 
 const emits = defineEmits(['onSubmit'])
+const requiredValue = ref(false)
 
 // generate model value
 const model = ref<Record<string, unknown>>({})
@@ -36,13 +37,19 @@ const deleteValue = (key: string) => {
 }
 
 // generate function
-const fn = props?.logic ? props.logic(model) : null
+const { fn, validate } = props?.logic ? props.logic(model) : null
 
 // generate submitted form form
 const generateFinalForm = () => {
+  Object.keys(model.value).forEach((key, idx) => {
+    console.log(props.ui.elements[idx].schema, model.value[key])
+    if (props.ui.elements[idx].required && !model.value[key]) {
+      requiredValue.value = true
+    }
+  })
   const raw = unref(model)
   const generatedObj = {}
-  Object.keys(raw).forEach((key) => {
+  Object.keys(raw).forEach((key, idx) => {
     const fKey = key.replaceAll('/', '.')
     lodash.set(generatedObj, fKey, raw[key])
   })
@@ -52,8 +59,10 @@ const generateFinalForm = () => {
 
 // form submit
 const handleSubmit = () => {
+  requiredValue.value = false
   const value = generateFinalForm()
-  emits('onSubmit', value)
+
+  if (!requiredValue.value) emits('onSubmit', value)
 }
 
 // form cancel
@@ -93,6 +102,7 @@ const handleStep = (type: 'Next' | 'Prev') => {
       :schema="schema"
       :initial-value="initialValue"
       :fn="fn"
+      :requiredField="requiredValue"
       :set-value="setValue"
       :delete-value="deleteValue"
     />

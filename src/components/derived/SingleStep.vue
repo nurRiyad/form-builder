@@ -14,6 +14,7 @@ const props = defineProps<{
   schema: any
   initialValue: any
   fn?: any
+  requiredField: boolean
   setValue: (path: string, val: any) => void
   deleteValue: (key: string) => void
 }>()
@@ -59,6 +60,7 @@ const checkIf = (el: IfType | undefined) => {
           :func="fn"
           :set-value="setValue"
           :delete-value="deleteValue"
+          :requiredField="requiredField"
         />
         <SelectSingle
           v-else-if="el.type === 'simple-select' && checkIf(el.if)"

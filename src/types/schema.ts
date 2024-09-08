@@ -17,12 +17,20 @@ export type IfType = {
   name: string
 }
 
+export type validateType = {
+  type: 'function'
+  name: string
+}
+
 interface BaseCommon {
   label: string
   schema: string
   if?: IfType
   fetch?: string
   disable?: boolean
+  required?: boolean
+  validate?: validateType
+  error?: string
 }
 
 type Options = Array<string> | Array<{ name: string; value: string }>

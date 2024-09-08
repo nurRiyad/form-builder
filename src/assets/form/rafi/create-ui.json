@@ -1,0 +1,19 @@
+{
+  "type": "single",
+  "label": "Validation",
+  "schema": "schema/name",
+  "elements": [
+    {
+      "type": "input",
+      "label": "Input Element Validation ",
+      "schema": "schema/name/user",
+      "required": true
+    },
+    {
+      "type": "input",
+      "label": "Input Element Validation 2",
+      "schema": "schema/name/password",
+      "required": true
+    }
+  ]
+}
