@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { ArrayInput } from '@/types/schema'
-import { computed, defineAsyncComponent } from 'vue'
+import { defineAsyncComponent, ref, toRaw, watch } from 'vue'
 import lodash from 'lodash'
 
 const ArrayItem = defineAsyncComponent(() => import('../derived/ArrayItem.vue'))
@@ -14,32 +14,51 @@ const props = defineProps<{
   deleteValue: (key: string) => void
 }>()
 
-const itemValues = computed(() => {
+const itemValues = () => {
   let path = props.ui.schema
   path = path.replaceAll('/properties/', '.')
   path = path.replace('schema.', '')
+  console.log({ path, val: props.initialValue })
   const vl = lodash.get(props.initialValue, path)
   return vl
-})
+}
+
+const tempMode = ref(itemValues())
+const setValueTemp = (key: string, val: any, items?: string) => {
+  if (items) {
+    tempMode.value[parseInt(items)][key] = val
+  }
+}
+const deleteValueTemp = (key: string) => {
+  tempMode.value.splice(parseInt(key), 1)
+}
+
+watch(
+  tempMode,
+  (n) => {
+    props.setValue(props.ui.schema, toRaw(n))
+  },
+  { immediate: true }
+)
 </script>
 
 <template>
   <div>
     <div class="flex justify-between my-2">
       <h1>{{ ui.label }}</h1>
-      <button class="px-2 py-1 bg-blue-400">Add new</button>
+      <button @click="tempMode.push({})" class="px-2 py-1 bg-blue-400">Add new</button>
     </div>
-    <div class="my-2 p-4 border flex flex-col space-y-2">
+    <div class="flex flex-col space-y-2">
       <ArrayItem
-        v-for="(val, idx) in itemValues"
-        :key="val.name"
+        v-for="(val, idx) in tempMode"
+        :key="val"
         :elements="ui.elements"
         :schema="schema"
-        :initial-value="initialValue"
+        :initial-value="val"
         :fn="func"
         :items="String(idx)"
-        :set-value="setValue"
-        :delete-value="deleteValue"
+        :set-value="setValueTemp"
+        :delete-value="deleteValueTemp"
       />
     </div>
   </div>

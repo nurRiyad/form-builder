@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { FormType } from '@/types/schema'
-import { defineAsyncComponent, ref, unref } from 'vue'
+import { defineAsyncComponent, ref, toRaw, unref } from 'vue'
 import lodash from 'lodash'
 
 const SingleStep = defineAsyncComponent(() => import('./derived/SingleStep.vue'))
@@ -31,6 +31,7 @@ const setValue = (key: string, val: any, items?: string) => {
   if (items) {
     fKey = fKey.replace('items', items)
   }
+  console.log(val)
   model.value[fKey] = val
 }
 const deleteValue = (key: string) => {
@@ -43,7 +44,7 @@ const fn = props?.logic ? props.logic(model) : null
 
 // generate submitted form form
 const generateFinalForm = () => {
-  const raw = unref(model)
+  const raw = toRaw(unref(model))
   const generatedObj = {}
   Object.keys(raw).forEach((key) => {
     const fKey = key.replaceAll('/', '.')

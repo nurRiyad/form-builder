@@ -9,7 +9,7 @@ const props = defineProps<{
   wholeSchema: any
   func?: any
   setValue: (path: string, val: any) => void
-  deleteValue: (key: string) => void
+  deleteValue?: (key: string) => void
 }>()
 
 const calculateInitValue = () => {
@@ -30,7 +30,9 @@ watch(
 )
 
 onUnmounted(() => {
-  props.deleteValue(props.element.schema)
+  if (props.deleteValue) {
+    props.deleteValue(props.element.schema)
+  }
 })
 
 const fOptions = computed(() => {

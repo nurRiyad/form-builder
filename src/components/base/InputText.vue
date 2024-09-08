@@ -10,7 +10,7 @@ const props = defineProps<{
   func?: any
   items?: string
   setValue: (path: string, val: any, items?: string) => void
-  deleteValue: (key: string) => void
+  deleteValue?: (key: string) => void
 }>()
 
 const calculateInitValue = () => {
@@ -52,9 +52,10 @@ const fetchData = async () => {
 fetchData()
 
 onUnmounted(() => {
-  props.deleteValue(props.element.schema)
+  if (props.deleteValue) {
+    props.deleteValue(props.element.schema)
+  }
 })
-
 const calculateInputType = computed(() => {
   let path = props.element.schema
   path = `${path.replace('schema/', '')}`
