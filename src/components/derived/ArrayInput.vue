@@ -1,35 +1,64 @@
 <script lang="ts" setup>
 import type { ArrayInput } from '@/types/schema'
-import { defineAsyncComponent, ref } from 'vue'
+import { defineAsyncComponent, ref, toRaw, watch } from 'vue'
+import lodash from 'lodash'
 
 const ArrayItem = defineAsyncComponent(() => import('../derived/ArrayItem.vue'))
 
-defineProps<{
+const props = defineProps<{
   ui: ArrayInput
   schema: any
   initialValue: any
   func?: any
-  setValue: (path: string, val: any) => void
+  setValue: (path: string, val: any, items?: string) => void
   deleteValue: (key: string) => void
 }>()
 
-const showForm = ref(false)
+const itemValues = () => {
+  let path = props.ui.schema
+  path = path.replaceAll('/properties/', '.')
+  path = path.replace('schema.', '')
+  console.log({ path, val: props.initialValue })
+  const vl = lodash.get(props.initialValue, path)
+  return vl
+}
+
+const tempMode = ref(itemValues())
+const setValueTemp = (key: string, val: any, items?: string) => {
+  if (items) {
+    tempMode.value[parseInt(items)][key] = val
+  }
+}
+const deleteValueTemp = (key: string) => {
+  tempMode.value.splice(parseInt(key), 1)
+}
+
+watch(
+  tempMode,
+  (n) => {
+    props.setValue(props.ui.schema, toRaw(n))
+  },
+  { immediate: true }
+)
 </script>
 
 <template>
   <div>
     <div class="flex justify-between my-2">
       <h1>{{ ui.label }}</h1>
-      <button @click="showForm = true" class="px-2 py-1 bg-blue-400">Add new</button>
+      <button @click="tempMode.push({})" class="px-2 py-1 bg-blue-400">Add new</button>
     </div>
-    <div class="my-2 p-4 border flex flex-col space-y-2" v-if="showForm">
+    <div class="flex flex-col space-y-2">
       <ArrayItem
+        v-for="(val, idx) in tempMode"
+        :key="val"
         :elements="ui.elements"
         :schema="schema"
-        :initial-value="initialValue"
+        :initial-value="val"
         :fn="func"
-        :set-value="setValue"
-        :delete-value="deleteValue"
+        :items="String(idx)"
+        :set-value="setValueTemp"
+        :delete-value="deleteValueTemp"
       />
     </div>
   </div>

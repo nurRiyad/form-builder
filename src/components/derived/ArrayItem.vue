@@ -7,20 +7,28 @@ const SelectSingle = defineAsyncComponent(() => import('../base/SelectSingle.vue
 const TextArea = defineAsyncComponent(() => import('../base/TextArea.vue'))
 const CheckBox = defineAsyncComponent(() => import('../base/CheckBox.vue'))
 const TheRadio = defineAsyncComponent(() => import('../base/TheRadio.vue'))
-const ArrayInput = defineAsyncComponent(() => import('../derived/ArrayInput.vue'))
 
-defineProps<{
+const props = defineProps<{
   elements: Array<BaseElement>
   schema: any
   initialValue: any
   fn?: any
-  setValue: (path: string, val: any) => void
+  items?: string
+  setValue: (path: string, val: any, items?: string) => void
   deleteValue: (key: string) => void
 }>()
+
+const handleDelete = () => {
+  if (props.items) props.deleteValue(props.items)
+}
+
+const test = (key: string) => {
+  console.log(key)
+}
 </script>
 
 <template>
-  <div class="space-y-2">
+  <div class="border p-4 space-y-2">
     <div class="flex flex-col space-y-4">
       <template v-for="el in elements" :key="el.label">
         <InputText
@@ -29,8 +37,9 @@ defineProps<{
           :initial-value="initialValue"
           :whole-schema="schema"
           :func="fn"
+          :items="items"
           :set-value="setValue"
-          :delete-value="deleteValue"
+          :delete-value="test"
         />
         <SelectSingle
           v-else-if="el.type === 'simple-select'"
@@ -39,7 +48,6 @@ defineProps<{
           :whole-schema="schema"
           :func="fn"
           :set-value="setValue"
-          :delete-value="deleteValue"
         />
         <TheRadio
           v-else-if="el.type === 'radio'"
@@ -48,7 +56,6 @@ defineProps<{
           :whole-schema="schema"
           :func="fn"
           :set-value="setValue"
-          :delete-value="deleteValue"
         />
         <CheckBox
           v-else-if="el.type === 'check-box'"
@@ -57,7 +64,6 @@ defineProps<{
           :whole-schema="schema"
           :func="fn"
           :set-value="setValue"
-          :delete-value="deleteValue"
         />
         <TextArea
           v-else-if="el.type === 'textarea'"
@@ -66,23 +72,9 @@ defineProps<{
           :whole-schema="schema"
           :func="fn"
           :set-value="setValue"
-          :delete-value="deleteValue"
-        />
-
-        <ArrayInput
-          v-if="el.type === 'array-input'"
-          :ui="el"
-          :initial-value="initialValue"
-          :schema="schema"
-          :func="fn"
-          :set-value="setValue"
-          :delete-value="deleteValue"
         />
       </template>
     </div>
-    <div class="flex justify-between">
-      <button class="px-2 py-1 bg-red-400">Cancel</button>
-      <button class="px-2 py-1 bg-blue-400">Save</button>
-    </div>
+    <button @click="handleDelete" class="bg-red-300 mt-5 py-2 px-3 rounded-sm">Delete</button>
   </div>
 </template>

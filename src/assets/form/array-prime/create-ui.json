@@ -1,22 +1,33 @@
 {
   "type": "single",
   "label": "Array Test",
-  "schema": "schema/properties/comments",
+  "schema": "schema/",
   "elements": [
     {
+      "type": "input",
+      "schema": "schema/properties/name",
+      "label": "School Name"
+    },
+    {
+      "type": "simple-select",
+      "label": "Section",
+      "schema": "schema/properties/sections",
+      "options": ["A", "B", "C"]
+    },
+    {
       "type": "array-input",
-      "label": "Array Element",
+      "label": "Comments",
       "schema": "schema/properties/comments",
       "elements": [
         {
           "type": "input",
           "label": "name",
-          "schema": "schema/properties/name"
+          "schema": "name"
         },
         {
           "type": "input",
           "label": "age",
-          "schema": "schema/properties/age"
+          "schema": "age"
         }
       ]
     }

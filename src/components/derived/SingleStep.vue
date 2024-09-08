@@ -14,7 +14,7 @@ const props = defineProps<{
   schema: any
   initialValue: any
   fn?: any
-  setValue: (path: string, val: any) => void
+  setValue: (path: string, val: any, items?: string) => void
   deleteValue: (key: string) => void
 }>()
 

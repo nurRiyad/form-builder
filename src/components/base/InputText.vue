@@ -8,14 +8,20 @@ const props = defineProps<{
   initialValue: any
   wholeSchema: any
   func?: any
-  setValue: (path: string, val: any) => void
-  deleteValue: (key: string) => void
+  items?: string
+  setValue: (path: string, val: any, items?: string) => void
+  deleteValue?: (key: string) => void
 }>()
 
 const calculateInitValue = () => {
   let path = props.element.schema
-  path = path.replaceAll('/properties/', '.')
-  path = path.replace('schema.', '')
+  path = path.replaceAll('/properties', '')
+  path = path.replace('schema/', '')
+  path = path.replaceAll('/', '.')
+
+  if (path.includes('items')) {
+    path = path.replace('.items', `[${props.items}]`)
+  }
   const value = lodash.get(props.initialValue, path)
   return value
 }
@@ -25,7 +31,8 @@ const value = ref(calculateInitValue())
 watch(
   value,
   (n) => {
-    props.setValue(props.element.schema, n)
+    console.log({ item: props.items })
+    props.setValue(props.element.schema, n, props.items)
   },
   { immediate: true }
 )
@@ -45,9 +52,10 @@ const fetchData = async () => {
 fetchData()
 
 onUnmounted(() => {
-  props.deleteValue(props.element.schema)
+  if (props.deleteValue) {
+    props.deleteValue(props.element.schema)
+  }
 })
-
 const calculateInputType = computed(() => {
   let path = props.element.schema
   path = `${path.replace('schema/', '')}`
