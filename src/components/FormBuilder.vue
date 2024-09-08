@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { FormType } from '@/types/schema'
+import type { FormType, SingleStepForm } from '@/types/schema'
 import { defineAsyncComponent, ref, unref } from 'vue'
 import lodash from 'lodash'
 
@@ -41,12 +41,14 @@ const { fn, validate } = props?.logic ? props.logic(model) : null
 
 // generate submitted form form
 const generateFinalForm = () => {
-  Object.keys(model.value).forEach((key, idx) => {
-    console.log(props.ui.elements[idx].schema, model.value[key])
-    if (props.ui.elements[idx].required && !model.value[key]) {
-      requiredValue.value = true
-    }
-  })
+  if (props.ui.type === 'single') {
+    const singleStepForm = props.ui as SingleStepForm
+    Object.keys(model.value).forEach((key, idx) => {
+      if (singleStepForm.elements[idx]?.required && !model.value[key]) {
+        requiredValue.value = true
+      }
+    })
+  }
   const raw = unref(model)
   const generatedObj = {}
   Object.keys(raw).forEach((key, idx) => {

@@ -29,6 +29,7 @@ defineProps<{
           :initial-value="initialValue"
           :whole-schema="schema"
           :func="fn"
+          :required-field="false"
           :set-value="setValue"
           :delete-value="deleteValue"
         />
