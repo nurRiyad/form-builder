@@ -21,10 +21,6 @@ const props = defineProps<{
 const handleDelete = () => {
   if (props.items) props.deleteValue(props.items)
 }
-
-const test = (key: string) => {
-  console.log(key)
-}
 </script>
 
 <template>
@@ -39,7 +35,6 @@ const test = (key: string) => {
           :func="fn"
           :items="items"
           :set-value="setValue"
-          :delete-value="test"
         />
         <SelectSingle
           v-else-if="el.type === 'simple-select'"

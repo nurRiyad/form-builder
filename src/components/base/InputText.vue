@@ -31,7 +31,6 @@ const value = ref(calculateInitValue())
 watch(
   value,
   (n) => {
-    console.log({ item: props.items })
     props.setValue(props.element.schema, n, props.items)
   },
   { immediate: true }

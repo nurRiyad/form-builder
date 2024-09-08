@@ -18,7 +18,6 @@ const itemValues = () => {
   let path = props.ui.schema
   path = path.replaceAll('/properties/', '.')
   path = path.replace('schema.', '')
-  console.log({ path, val: props.initialValue })
   const vl = lodash.get(props.initialValue, path)
   return vl
 }

@@ -31,7 +31,6 @@ const setValue = (key: string, val: any, items?: string) => {
   if (items) {
     fKey = fKey.replace('items', items)
   }
-  console.log(val)
   model.value[fKey] = val
 }
 const deleteValue = (key: string) => {

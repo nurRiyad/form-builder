@@ -24,7 +24,6 @@ const checked = ref(calculateInitValue())
 watch(
   checked,
   (n) => {
-    console.log(n)
     props.setValue(props.element.schema, n)
   },
   { immediate: true }
