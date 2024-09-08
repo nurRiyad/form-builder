@@ -1,22 +1,22 @@
 {
   "type": "single",
   "label": "Array Test",
-  "schema": "schema/name",
+  "schema": "schema/properties/comments",
   "elements": [
     {
       "type": "array-input",
       "label": "Array Element",
-      "schema": "schema/name/users",
+      "schema": "schema/properties/comments",
       "elements": [
         {
           "type": "input",
           "label": "name",
-          "schema": "schema/name"
+          "schema": "schema/properties/name"
         },
         {
           "type": "input",
           "label": "age",
-          "schema": "schema/age"
+          "schema": "schema/properties/age"
         }
       ]
     }

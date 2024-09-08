@@ -22,10 +22,6 @@ const showForm = ref(false)
       <h1>{{ ui.label }}</h1>
       <button @click="showForm = true" class="px-2 py-1 bg-blue-400">Add new</button>
     </div>
-    <div>
-      <h1>List 1</h1>
-      <h1>List 2</h1>
-    </div>
     <div class="my-2 p-4 border flex flex-col space-y-2" v-if="showForm">
       <ArrayItem
         :elements="ui.elements"
@@ -35,7 +31,6 @@ const showForm = ref(false)
         :set-value="setValue"
         :delete-value="deleteValue"
       />
-      <button @click="showForm = false" class="px-2 py-1 bg-blue-400">Save</button>
     </div>
   </div>
 </template>
