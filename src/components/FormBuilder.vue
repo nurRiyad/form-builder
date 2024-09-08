@@ -26,8 +26,11 @@ const emits = defineEmits(['onSubmit'])
 
 // generate model value
 const model = ref<Record<string, unknown>>({})
-const setValue = (key: string, val: any) => {
-  const fKey = key.replaceAll('/properties', '')
+const setValue = (key: string, val: any, items?: string) => {
+  let fKey = key.replaceAll('/properties', '')
+  if (items) {
+    fKey = fKey.replace('items', items)
+  }
   model.value[fKey] = val
 }
 const deleteValue = (key: string) => {

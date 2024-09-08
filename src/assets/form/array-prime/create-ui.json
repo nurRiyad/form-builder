@@ -1,7 +1,7 @@
 {
   "type": "single",
   "label": "Array Test",
-  "schema": "schema/properties/comments",
+  "schema": "schema/",
   "elements": [
     {
       "type": "array-input",
@@ -11,12 +11,12 @@
         {
           "type": "input",
           "label": "name",
-          "schema": "schema/properties/name"
+          "schema": "schema/properties/comments/items/properties/name"
         },
         {
           "type": "input",
           "label": "age",
-          "schema": "schema/properties/age"
+          "schema": "schema/properties/comments/items/properties/age"
         }
       ]
     }

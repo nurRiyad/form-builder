@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { BaseElement } from '@/types/schema'
-import { defineAsyncComponent } from 'vue'
+import { defineAsyncComponent, ref } from 'vue'
 
 const InputText = defineAsyncComponent(() => import('../base/InputText.vue'))
 const SelectSingle = defineAsyncComponent(() => import('../base/SelectSingle.vue'))
@@ -14,14 +14,25 @@ defineProps<{
   schema: any
   initialValue: any
   fn?: any
-  setValue: (path: string, val: any) => void
+  items?: string
+  setValue: (path: string, val: any, items?: string) => void
   deleteValue: (key: string) => void
 }>()
+
+const showItem = ref(false)
+
+const itemValues = computed(() => {
+  let path = props.ui.schema
+  path = path.replaceAll('/properties/', '.')
+  path = path.replace('schema.', '')
+  const vl = lodash.get(props.initialValue, path)
+  return vl
+})
 </script>
 
 <template>
   <div class="space-y-2">
-    <div class="flex flex-col space-y-4">
+    <div v-if="showItem" class="flex flex-col space-y-4">
       <template v-for="el in elements" :key="el.label">
         <InputText
           v-if="el.type === 'input'"
@@ -29,6 +40,7 @@ defineProps<{
           :initial-value="initialValue"
           :whole-schema="schema"
           :func="fn"
+          :items="items"
           :set-value="setValue"
           :delete-value="deleteValue"
         />
@@ -80,9 +92,8 @@ defineProps<{
         />
       </template>
     </div>
-    <div class="flex justify-between">
-      <button class="px-2 py-1 bg-red-400">Cancel</button>
-      <button class="px-2 py-1 bg-blue-400">Save</button>
+    <div v-else>
+      <p>Table data</p>
     </div>
   </div>
 </template>
