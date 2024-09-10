@@ -10,6 +10,7 @@ const props = defineProps<{
   schema: any
   initialValue: any
   func?: any
+  parentData?: any
   setValue: (path: string, val: any, items?: string) => void
   deleteValue: (key: string) => void
 }>()

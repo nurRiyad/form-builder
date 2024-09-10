@@ -322,10 +322,10 @@
           },
           "type": "array"
         },
-        "fetchFn": {
+        "label": {
           "type": "string"
         },
-        "label": {
+        "loader": {
           "type": "string"
         },
         "schema": {

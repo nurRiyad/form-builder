@@ -9,7 +9,7 @@ export interface SingleStepForm {
   schema: string
   label: string
   elements: Array<BaseElement>
-  fetchFn?: string
+  loader?: string
 }
 
 export type IfType = {

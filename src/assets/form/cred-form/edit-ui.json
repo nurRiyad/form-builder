@@ -6,6 +6,7 @@
       "type": "single-step-from",
       "label": "Cred Step 01",
       "schema": "schema/",
+      "loader": "loadData1",
       "elements": [
         {
           "type": "select",
@@ -73,6 +74,7 @@
       "type": "single-step-from",
       "label": "Cred Step 2",
       "schema": "schema/",
+      "loader": "loadData2",
       "elements": [
         {
           "type": "input",

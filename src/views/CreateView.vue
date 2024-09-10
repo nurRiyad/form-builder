@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import FormBuilder from '@/components/FormBuilder.vue'
-import mui from '../assets/form/cred-form/create-ui.json'
+import mui from '../assets/form/cred-form/edit-ui.json'
 import values from '../assets/form/cred-form/values.json'
 import schema from '../assets/form/cred-form/schema.json'
 import type { FormType } from '@/types'

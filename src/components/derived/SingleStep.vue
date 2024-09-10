@@ -20,11 +20,12 @@ const props = defineProps<{
 
 //single step form level data fetching
 const isSSFetching = ref(false)
+let parentData = {}
 const fetchData = async () => {
-  if (!props.ui.fetchFn) return
+  if (!props.ui.loader) return
   try {
     isSSFetching.value = true
-    await props.fn[props.ui.fetchFn]()
+    parentData = await props.fn[props.ui.loader]()
   } catch (error) {
     console.error(error)
   }
@@ -57,6 +58,7 @@ const checkIf = (el: IfType | undefined) => {
           :initial-value="initialValue"
           :whole-schema="schema"
           :func="fn"
+          :parent-data="parentData"
           :set-value="setValue"
           :delete-value="deleteValue"
         />
@@ -66,6 +68,7 @@ const checkIf = (el: IfType | undefined) => {
           :initial-value="initialValue"
           :whole-schema="schema"
           :func="fn"
+          :parent-data="parentData"
           :set-value="setValue"
           :delete-value="deleteValue"
         />
@@ -75,6 +78,7 @@ const checkIf = (el: IfType | undefined) => {
           :initial-value="initialValue"
           :whole-schema="schema"
           :func="fn"
+          :parent-data="parentData"
           :set-value="setValue"
           :delete-value="deleteValue"
         />
@@ -83,6 +87,7 @@ const checkIf = (el: IfType | undefined) => {
           :element="el"
           :initial-value="initialValue"
           :whole-schema="schema"
+          :parent-data="parentData"
           :func="fn"
           :set-value="setValue"
           :delete-value="deleteValue"
@@ -93,6 +98,7 @@ const checkIf = (el: IfType | undefined) => {
           :initial-value="initialValue"
           :whole-schema="schema"
           :func="fn"
+          :parent-data="parentData"
           :set-value="setValue"
           :delete-value="deleteValue"
         />
@@ -103,6 +109,7 @@ const checkIf = (el: IfType | undefined) => {
           :initial-value="initialValue"
           :schema="schema"
           :func="fn"
+          :parent-data="parentData"
           :set-value="setValue"
           :delete-value="deleteValue"
         />
