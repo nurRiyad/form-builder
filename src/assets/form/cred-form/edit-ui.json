@@ -1,6 +1,7 @@
 {
   "type": "multi-step-form",
   "labe": "Multi Step Form Test",
+  "loader": "loadData",
   "step": [
     {
       "type": "single-step-from",

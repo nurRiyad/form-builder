@@ -2,6 +2,7 @@ export interface MultiStepForm {
   type: 'multi-step-form'
   step: Array<SingleStepForm>
   labe: string
+  loader?: string
 }
 
 export interface SingleStepForm {

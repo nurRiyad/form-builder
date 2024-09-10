@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { IfType, SingleStepForm } from '@/types/schema'
-import { defineAsyncComponent, ref } from 'vue'
+import { defineAsyncComponent, ref, toRaw, unref } from 'vue'
 
 const TheInput = defineAsyncComponent(() => import('../base/TheInput.vue'))
 const SelectSingle = defineAsyncComponent(() => import('../base/SelectSingle.vue'))
@@ -14,18 +14,20 @@ const props = defineProps<{
   schema: any
   initialValue: any
   fn?: any
+  parentData?: any
   setValue: (path: string, val: any, items?: string) => void
   deleteValue: (key: string) => void
 }>()
 
 //single step form level data fetching
 const isSSFetching = ref(false)
-let parentData = {}
+let componentData: Record<string, unknown> = { multi: toRaw(unref(props.parentData)) }
 const fetchData = async () => {
   if (!props.ui.loader) return
   try {
     isSSFetching.value = true
-    parentData = await props.fn[props.ui.loader]()
+    const fName = props.ui.loader
+    componentData.single = await props.fn[fName]()
   } catch (error) {
     console.error(error)
   }
@@ -58,7 +60,7 @@ const checkIf = (el: IfType | undefined) => {
           :initial-value="initialValue"
           :whole-schema="schema"
           :func="fn"
-          :parent-data="parentData"
+          :parent-data="componentData"
           :set-value="setValue"
           :delete-value="deleteValue"
         />
@@ -68,7 +70,7 @@ const checkIf = (el: IfType | undefined) => {
           :initial-value="initialValue"
           :whole-schema="schema"
           :func="fn"
-          :parent-data="parentData"
+          :parent-data="componentData"
           :set-value="setValue"
           :delete-value="deleteValue"
         />
@@ -78,7 +80,7 @@ const checkIf = (el: IfType | undefined) => {
           :initial-value="initialValue"
           :whole-schema="schema"
           :func="fn"
-          :parent-data="parentData"
+          :parent-data="componentData"
           :set-value="setValue"
           :delete-value="deleteValue"
         />
@@ -87,7 +89,7 @@ const checkIf = (el: IfType | undefined) => {
           :element="el"
           :initial-value="initialValue"
           :whole-schema="schema"
-          :parent-data="parentData"
+          :parent-data="componentData"
           :func="fn"
           :set-value="setValue"
           :delete-value="deleteValue"
@@ -98,7 +100,7 @@ const checkIf = (el: IfType | undefined) => {
           :initial-value="initialValue"
           :whole-schema="schema"
           :func="fn"
-          :parent-data="parentData"
+          :parent-data="componentData"
           :set-value="setValue"
           :delete-value="deleteValue"
         />
@@ -109,7 +111,7 @@ const checkIf = (el: IfType | undefined) => {
           :initial-value="initialValue"
           :schema="schema"
           :func="fn"
-          :parent-data="parentData"
+          :parent-data="componentData"
           :set-value="setValue"
           :delete-value="deleteValue"
         />

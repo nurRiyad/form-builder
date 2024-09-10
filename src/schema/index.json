@@ -176,6 +176,9 @@
         "labe": {
           "type": "string"
         },
+        "loader": {
+          "type": "string"
+        },
         "step": {
           "items": {
             "$ref": "#/definitions/SingleStepForm"
