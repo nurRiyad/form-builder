@@ -1,5 +1,5 @@
 {
-  "type": "single",
+  "type": "single-step-from",
   "label": "Array Test",
   "schema": "schema/",
   "elements": [
@@ -9,13 +9,13 @@
       "label": "School Name"
     },
     {
-      "type": "simple-select",
+      "type": "select",
       "label": "Section",
       "schema": "schema/properties/sections",
       "options": ["A", "B", "C"]
     },
     {
-      "type": "array-input",
+      "type": "array-object-form",
       "label": "Comments",
       "schema": "schema/properties/comments",
       "elements": [

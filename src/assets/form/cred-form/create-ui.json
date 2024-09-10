@@ -1,10 +1,10 @@
 {
-  "type": "single",
+  "type": "single-step-from",
   "label": "Credential Create From",
   "schema": "schema/",
   "elements": [
     {
-      "type": "simple-select",
+      "type": "select",
       "label": "Credential Type",
       "schema": "schema/properties/type"
     },
@@ -20,8 +20,8 @@
     },
     {
       "if": {
-        "type": "computed",
-        "name": "checkIf"
+        "type": "function",
+        "name": "isCredAws"
       },
       "type": "input",
       "schema": "schema/properties/aws/properties/accessKeyID",
@@ -29,8 +29,8 @@
     },
     {
       "if": {
-        "type": "computed",
-        "name": "checkIf"
+        "type": "function",
+        "name": "isCredAws"
       },
       "type": "input",
       "label": "Secret Access Key",

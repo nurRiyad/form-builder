@@ -2,7 +2,7 @@
 import type { IfType, SingleStepForm } from '@/types/schema'
 import { defineAsyncComponent, ref } from 'vue'
 
-const InputText = defineAsyncComponent(() => import('../base/InputText.vue'))
+const TheInput = defineAsyncComponent(() => import('../base/TheInput.vue'))
 const SelectSingle = defineAsyncComponent(() => import('../base/SelectSingle.vue'))
 const TextArea = defineAsyncComponent(() => import('../base/TextArea.vue'))
 const CheckBox = defineAsyncComponent(() => import('../base/CheckBox.vue'))
@@ -51,7 +51,7 @@ const checkIf = (el: IfType | undefined) => {
     <div v-else class="flex flex-col space-y-4">
       <p class="font-semibold text-xl text-center">{{ ui.label }}</p>
       <template v-for="el in ui.elements" :key="el.label">
-        <InputText
+        <TheInput
           v-if="el.type === 'input' && checkIf(el.if)"
           :element="el"
           :initial-value="initialValue"
@@ -61,7 +61,7 @@ const checkIf = (el: IfType | undefined) => {
           :delete-value="deleteValue"
         />
         <SelectSingle
-          v-else-if="el.type === 'simple-select' && checkIf(el.if)"
+          v-else-if="el.type === 'select' && checkIf(el.if)"
           :element="el"
           :initial-value="initialValue"
           :whole-schema="schema"
@@ -79,7 +79,7 @@ const checkIf = (el: IfType | undefined) => {
           :delete-value="deleteValue"
         />
         <CheckBox
-          v-else-if="el.type === 'check-box' && checkIf(el.if)"
+          v-else-if="el.type === 'checkbox' && checkIf(el.if)"
           :element="el"
           :initial-value="initialValue"
           :whole-schema="schema"
@@ -98,7 +98,7 @@ const checkIf = (el: IfType | undefined) => {
         />
 
         <ArrayInput
-          v-if="el.type === 'array-input'"
+          v-if="el.type === 'array-object-form'"
           :ui="el"
           :initial-value="initialValue"
           :schema="schema"

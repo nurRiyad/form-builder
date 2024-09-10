@@ -1,14 +1,14 @@
 {
-  "type": "multi",
+  "type": "multi-step-form",
   "labe": "Multi Step Form Test",
   "step": [
     {
-      "type": "single",
+      "type": "single-step-from",
       "label": "Cred Step 01",
       "schema": "schema/",
       "elements": [
         {
-          "type": "simple-select",
+          "type": "select",
           "label": "Credential Type",
           "schema": "schema/properties/type"
         },
@@ -70,7 +70,7 @@
       ]
     },
     {
-      "type": "single",
+      "type": "single-step-from",
       "label": "Cred Step 2",
       "schema": "schema/",
       "elements": [

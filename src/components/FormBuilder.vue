@@ -26,11 +26,8 @@ const emits = defineEmits(['onSubmit'])
 
 // generate model value
 const model = ref<Record<string, unknown>>({})
-const setValue = (key: string, val: any, items?: string) => {
+const setValue = (key: string, val: any) => {
   let fKey = key.replaceAll('/properties', '')
-  if (items) {
-    fKey = fKey.replace('items', items)
-  }
   model.value[fKey] = val
 }
 const deleteValue = (key: string) => {
@@ -66,9 +63,9 @@ const handleCancel = () => {
 
 // step handle
 const activeStep = ref(0)
-const totalStep = props.ui.type === 'single' ? 0 : props.ui.step.length
+const totalStep = props.ui.type === 'single-step-from' ? 0 : props.ui.step.length
 const handleStep = (type: 'Next' | 'Prev') => {
-  if (props.ui.type === 'single') return
+  if (props.ui.type === 'single-step-from') return
   if (type === 'Next') {
     if (activeStep.value + 1 >= totalStep) {
       handleSubmit()
@@ -91,7 +88,7 @@ const handleStep = (type: 'Next' | 'Prev') => {
   </div>
   <div class="max-w-3xl mx-auto" v-else>
     <SingleStep
-      v-if="ui.type === 'single'"
+      v-if="ui.type === 'single-step-from'"
       :ui="ui"
       :schema="schema"
       :initial-value="initialValue"
@@ -100,7 +97,7 @@ const handleStep = (type: 'Next' | 'Prev') => {
       :delete-value="deleteValue"
     />
     <MultiStep
-      v-else-if="ui.type === 'multi'"
+      v-else-if="ui.type === 'multi-step-form'"
       :active-step="activeStep"
       :ui="ui"
       :schema="schema"
@@ -110,7 +107,7 @@ const handleStep = (type: 'Next' | 'Prev') => {
       :delete-value="deleteValue"
     />
     <h1 v-else>No Proper Form type found</h1>
-    <div class="flex justify-between" v-if="ui.type === 'single'">
+    <div class="flex justify-between" v-if="ui.type === 'single-step-from'">
       <button @click="handleCancel" class="bg-sky-500 mt-5 py-2 px-3 rounded-sm">Cancel</button>
       <button @click="handleSubmit" class="bg-sky-500 mt-5 py-2 px-3 rounded-sm">Submit</button>
     </div>

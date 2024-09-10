@@ -1,11 +1,11 @@
 export interface MultiStepForm {
-  type: 'multi'
+  type: 'multi-step-form'
   step: Array<SingleStepForm>
   labe: string
 }
 
 export interface SingleStepForm {
-  type: 'single'
+  type: 'single-step-from'
   schema: string
   label: string
   elements: Array<BaseElement>
@@ -35,13 +35,17 @@ export interface Input extends BaseCommon {
   }
 }
 
+export interface TextArea extends BaseCommon {
+  type: 'textarea'
+}
+
 export interface Select extends BaseCommon {
-  type: 'simple-select'
+  type: 'select'
   options?: Options
 }
 
-export interface TextArea extends BaseCommon {
-  type: 'textarea'
+export interface CheckBox extends BaseCommon {
+  type: 'checkbox'
 }
 
 export interface Radio extends BaseCommon {
@@ -49,15 +53,15 @@ export interface Radio extends BaseCommon {
   options: Options
 }
 
-export interface CheckBox extends BaseCommon {
-  type: 'check-box'
+export interface Switch extends BaseCommon {
+  type: 'switch'
 }
 
 export interface ArrayInput extends BaseCommon {
-  type: 'array-input'
+  type: 'array-object-form'
   elements: Array<BaseElement>
 }
 
-export type BaseElement = Input | Select | TextArea | Radio | CheckBox | ArrayInput
+export type BaseElement = Input | Select | TextArea | Radio | CheckBox | Switch | ArrayInput
 
 export type FormType = SingleStepForm | MultiStepForm

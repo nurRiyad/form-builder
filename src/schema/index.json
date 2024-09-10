@@ -27,7 +27,7 @@
           "type": "string"
         },
         "type": {
-          "const": "array-input",
+          "const": "array-object-form",
           "type": "string"
         }
       },
@@ -57,6 +57,9 @@
           "$ref": "#/definitions/CheckBox"
         },
         {
+          "$ref": "#/definitions/Switch"
+        },
+        {
           "$ref": "#/definitions/ArrayInput"
         }
       ]
@@ -80,7 +83,7 @@
           "type": "string"
         },
         "type": {
-          "const": "check-box",
+          "const": "checkbox",
           "type": "string"
         }
       },
@@ -180,7 +183,7 @@
           "type": "array"
         },
         "type": {
-          "const": "multi",
+          "const": "multi-step-form",
           "type": "string"
         }
       },
@@ -299,7 +302,7 @@
           "type": "string"
         },
         "type": {
-          "const": "simple-select",
+          "const": "select",
           "type": "string"
         }
       },
@@ -329,7 +332,7 @@
           "type": "string"
         },
         "type": {
-          "const": "single",
+          "const": "single-step-from",
           "type": "string"
         }
       },
@@ -338,6 +341,36 @@
         "schema",
         "label",
         "elements"
+      ],
+      "type": "object"
+    },
+    "Switch": {
+      "additionalProperties": false,
+      "properties": {
+        "disable": {
+          "type": "boolean"
+        },
+        "fetch": {
+          "type": "string"
+        },
+        "if": {
+          "$ref": "#/definitions/IfType"
+        },
+        "label": {
+          "type": "string"
+        },
+        "schema": {
+          "type": "string"
+        },
+        "type": {
+          "const": "switch",
+          "type": "string"
+        }
+      },
+      "required": [
+        "label",
+        "schema",
+        "type"
       ],
       "type": "object"
     },

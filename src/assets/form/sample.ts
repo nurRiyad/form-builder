@@ -1,7 +1,7 @@
 import type { FormType } from '@/types/schema'
 
 export const ui: FormType = {
-  type: 'single',
+  type: 'single-step-from',
   label: 'This is one step of form',
   schema: 'this is schema',
   elements: [
@@ -21,7 +21,7 @@ export const ui: FormType = {
       }
     },
     {
-      type: 'check-box',
+      type: 'checkbox',
       label: 'Checkbox Test',
       schema: 'ch.a.b.c'
     },
@@ -31,7 +31,7 @@ export const ui: FormType = {
       schema: 'text.a.f'
     },
     {
-      type: 'simple-select',
+      type: 'select',
       label: 'Simple Select Box',
       schema: 'select.a.ff.ss',
       options: ['apple', 'guava']

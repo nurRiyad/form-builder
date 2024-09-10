@@ -2,7 +2,7 @@
 import type { BaseElement } from '@/types/schema'
 import { defineAsyncComponent } from 'vue'
 
-const InputText = defineAsyncComponent(() => import('../base/InputText.vue'))
+const TheInput = defineAsyncComponent(() => import('../base/TheInput.vue'))
 const SelectSingle = defineAsyncComponent(() => import('../base/SelectSingle.vue'))
 const TextArea = defineAsyncComponent(() => import('../base/TextArea.vue'))
 const CheckBox = defineAsyncComponent(() => import('../base/CheckBox.vue'))
@@ -27,7 +27,7 @@ const handleDelete = () => {
   <div class="border p-4 space-y-2">
     <div class="flex flex-col space-y-4">
       <template v-for="el in elements" :key="el.label">
-        <InputText
+        <TheInput
           v-if="el.type === 'input'"
           :element="el"
           :initial-value="initialValue"
@@ -37,7 +37,7 @@ const handleDelete = () => {
           :set-value="setValue"
         />
         <SelectSingle
-          v-else-if="el.type === 'simple-select'"
+          v-else-if="el.type === 'select'"
           :element="el"
           :initial-value="initialValue"
           :whole-schema="schema"
@@ -53,7 +53,7 @@ const handleDelete = () => {
           :set-value="setValue"
         />
         <CheckBox
-          v-else-if="el.type === 'check-box'"
+          v-else-if="el.type === 'checkbox'"
           :element="el"
           :initial-value="initialValue"
           :whole-schema="schema"
