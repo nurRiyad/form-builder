@@ -31,12 +31,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "elements",
-        "label",
-        "schema",
-        "type"
-      ],
+      "required": ["elements", "label", "schema", "type"],
       "type": "object"
     },
     "BaseElement": {
@@ -87,11 +82,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "label",
-        "schema",
-        "type"
-      ],
+      "required": ["label", "schema", "type"],
       "type": "object"
     },
     "FormType": {
@@ -111,38 +102,16 @@
           "type": "string"
         },
         "type": {
-          "enum": [
-            "function",
-            "computed"
-          ],
+          "enum": ["function", "computed"],
           "type": "string"
         }
       },
-      "required": [
-        "type",
-        "name"
-      ],
+      "required": ["type", "name"],
       "type": "object"
     },
     "Input": {
       "additionalProperties": false,
       "properties": {
-        "computed": {
-          "additionalProperties": false,
-          "properties": {
-            "func": {
-              "type": "string"
-            },
-            "val": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "val",
-            "func"
-          ],
-          "type": "object"
-        },
         "disable": {
           "type": "boolean"
         },
@@ -152,7 +121,40 @@
         "if": {
           "$ref": "#/definitions/IfType"
         },
+        "init": {
+          "anyOf": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "type": {
+                  "const": "func",
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": ["type", "value"],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "type": {
+                  "const": "static",
+                  "type": "string"
+                },
+                "value": {}
+              },
+              "required": ["type", "value"],
+              "type": "object"
+            }
+          ]
+        },
         "label": {
+          "type": "string"
+        },
+        "onChange": {
           "type": "string"
         },
         "schema": {
@@ -163,11 +165,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "label",
-        "schema",
-        "type"
-      ],
+      "required": ["label", "schema", "type"],
       "type": "object"
     },
     "MultiStepForm": {
@@ -190,11 +188,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "type",
-        "step",
-        "labe"
-      ],
+      "required": ["type", "step", "labe"],
       "type": "object"
     },
     "Radio": {
@@ -231,10 +225,7 @@
                     "type": "string"
                   }
                 },
-                "required": [
-                  "name",
-                  "value"
-                ],
+                "required": ["name", "value"],
                 "type": "object"
               },
               "type": "array"
@@ -249,12 +240,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "label",
-        "options",
-        "schema",
-        "type"
-      ],
+      "required": ["label", "options", "schema", "type"],
       "type": "object"
     },
     "Select": {
@@ -291,10 +277,7 @@
                     "type": "string"
                   }
                 },
-                "required": [
-                  "name",
-                  "value"
-                ],
+                "required": ["name", "value"],
                 "type": "object"
               },
               "type": "array"
@@ -309,11 +292,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "label",
-        "schema",
-        "type"
-      ],
+      "required": ["label", "schema", "type"],
       "type": "object"
     },
     "SingleStepForm": {
@@ -339,12 +318,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "type",
-        "schema",
-        "label",
-        "elements"
-      ],
+      "required": ["type", "schema", "label", "elements"],
       "type": "object"
     },
     "Switch": {
@@ -370,11 +344,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "label",
-        "schema",
-        "type"
-      ],
+      "required": ["label", "schema", "type"],
       "type": "object"
     },
     "TextArea": {
@@ -400,11 +370,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "label",
-        "schema",
-        "type"
-      ],
+      "required": ["label", "schema", "type"],
       "type": "object"
     }
   }
