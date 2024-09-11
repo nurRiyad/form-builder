@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { Input } from '@/types/schema'
-import { computed, onUnmounted, ref, watch } from 'vue'
+import { computed, onUnmounted, ref, toRaw, unref, watch } from 'vue'
 import lodash from 'lodash'
 
 const props = defineProps<{
@@ -39,11 +39,13 @@ watch(
 
 //element level data fetching
 const inInputFetching = ref(false)
+const componentData = { ...toRaw(unref(props.parentData)) }
 const fetchData = async () => {
   if (!props?.element?.fetch) return
   try {
     inInputFetching.value = true
-    await props.func[props.element.fetch]()
+    const fName = props.element.fetch
+    componentData.input = await props.func[fName]()
   } catch (error) {
     console.error(error)
   }
