@@ -58,5 +58,18 @@ export const useFunc = (model) => {
     model.value['schema/ownerID'] = 10
   }
 
-  return { isCredAws, isCredAzure, initFun, loadData, loadData1, loadData2, checkOnChange }
+  const watchTest = () => {
+    return 'h1 '
+  }
+
+  return {
+    isCredAws,
+    isCredAzure,
+    initFun,
+    loadData,
+    loadData1,
+    loadData2,
+    checkOnChange,
+    watchTest
+  }
 }

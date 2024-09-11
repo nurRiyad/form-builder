@@ -24,7 +24,7 @@
           }
         },
         {
-          "type": "anchor",
+          "type": "input",
           "label": "Owner ID",
           "schema": "schema/properties/ownerID"
         },
@@ -35,7 +35,11 @@
           },
           "type": "input",
           "schema": "schema/properties/aws/properties/accessKeyID",
-          "label": "Access Key Id"
+          "label": "Access Key Id",
+          "watcher": {
+            "paths": ["schema/properties/ownerID", "schema/properties/name"],
+            "func": "watchTest"
+          }
         },
         {
           "if": {

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import lodash from 'lodash'
 import type { Input } from '@/types/schema'
-import { computed, onUnmounted, ref, toRaw, unref } from 'vue'
+import { computed, onUnmounted, ref, toRaw, unref, watch } from 'vue'
 import { watchDebounced } from '@vueuse/core'
 
 const props = defineProps<{
@@ -12,6 +12,7 @@ const props = defineProps<{
   items?: string
   parentData?: any
   setValue: (path: string, val: any, items?: string) => void
+  getValue?: (path: string) => unknown
   deleteValue?: (key: string) => void
 }>()
 
@@ -43,14 +44,38 @@ const calculateInitValue = () => {
 
 const value = ref(calculateInitValue())
 
+// update model value
 watchDebounced(
   value,
   (n) => {
     //update the model value
     props.setValue(props.element.schema, n, props.items)
   },
-  { immediate: true, debounce: 300 }
+  { immediate: true, debounce: 0 }
 )
+
+// create computed to watch the changes
+const watchedValue = computed(() => {
+  if (props.element.watcher?.paths) {
+    let val = ''
+    props.element.watcher.paths.forEach((path) => {
+      if (props.getValue) {
+        const tmp = props.getValue(path)
+        if (tmp) val += String(tmp)
+      }
+    })
+    return val
+  } else return ''
+})
+
+// fire when watch changes
+watch(watchedValue, () => {
+  if (props.element.watcher?.func) {
+    const fName = props.element.watcher.func
+    const val = props.func[fName]()
+    value.value += val
+  }
+})
 
 //element level data fetching
 const inInputFetching = ref(false)

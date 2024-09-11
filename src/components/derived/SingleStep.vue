@@ -18,6 +18,7 @@ const props = defineProps<{
   fn?: any
   parentData?: any
   setValue: (path: string, val: any, items?: string) => void
+  getValue: (path: string) => unknown
   deleteValue: (key: string) => void
 }>()
 
@@ -64,6 +65,7 @@ const checkIf = (el: IfType | undefined) => {
           :func="fn"
           :parent-data="componentData"
           :set-value="setValue"
+          :get-value="getValue"
           :delete-value="deleteValue"
         />
         <SelectSingle

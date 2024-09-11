@@ -30,6 +30,10 @@ const setValue = (key: string, val: any) => {
   let fKey = key.replaceAll('/properties', '')
   model.value[fKey] = val
 }
+const getValue = (key: string) => {
+  let fKey = key.replaceAll('/properties', '')
+  return model.value[fKey]
+}
 const deleteValue = (key: string) => {
   const fKey = key.replaceAll('/properties', '')
   delete model.value[fKey]
@@ -94,6 +98,7 @@ const handleStep = (type: 'Next' | 'Prev') => {
       :initial-value="initialValue"
       :fn="fn"
       :set-value="setValue"
+      :get-value="getValue"
       :delete-value="deleteValue"
     />
     <MultiStep
@@ -104,6 +109,7 @@ const handleStep = (type: 'Next' | 'Prev') => {
       :initial-value="initialValue"
       :fn="fn"
       :set-value="setValue"
+      :get-value="getValue"
       :delete-value="deleteValue"
     />
     <h1 v-else>No Proper Form type found</h1>

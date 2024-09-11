@@ -11,6 +11,7 @@ const props = defineProps<{
   initialValue: any
   fn?: any
   setValue: (path: string, val: any, items?: string) => void
+  getValue: (path: string) => unknown
   deleteValue: (key: string) => void
 }>()
 
@@ -45,6 +46,7 @@ fetchData()
         :fn="fn"
         :parent-data="componentData"
         :set-value="setValue"
+        :get-value="getValue"
         :delete-value="deleteValue"
       />
     </template>

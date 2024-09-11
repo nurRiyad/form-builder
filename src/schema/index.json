@@ -24,10 +24,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "type",
-                "value"
-              ],
+              "required": ["type", "value"],
               "type": "object"
             },
             {
@@ -38,17 +35,10 @@
                   "type": "string"
                 },
                 "value": {
-                  "type": [
-                    "string",
-                    "number",
-                    "boolean"
-                  ]
+                  "type": ["string", "number", "boolean"]
                 }
               },
-              "required": [
-                "type",
-                "value"
-              ],
+              "required": ["type", "value"],
               "type": "object"
             }
           ]
@@ -79,18 +69,11 @@
               "type": "array"
             }
           },
-          "required": [
-            "paths",
-            "func"
-          ],
+          "required": ["paths", "func"],
           "type": "object"
         }
       },
-      "required": [
-        "label",
-        "schema",
-        "type"
-      ],
+      "required": ["label", "schema", "type"],
       "type": "object"
     },
     "ArrayInput": {
@@ -121,10 +104,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "type",
-                "value"
-              ],
+              "required": ["type", "value"],
               "type": "object"
             },
             {
@@ -135,17 +115,10 @@
                   "type": "string"
                 },
                 "value": {
-                  "type": [
-                    "string",
-                    "number",
-                    "boolean"
-                  ]
+                  "type": ["string", "number", "boolean"]
                 }
               },
-              "required": [
-                "type",
-                "value"
-              ],
+              "required": ["type", "value"],
               "type": "object"
             }
           ]
@@ -176,19 +149,11 @@
               "type": "array"
             }
           },
-          "required": [
-            "paths",
-            "func"
-          ],
+          "required": ["paths", "func"],
           "type": "object"
         }
       },
-      "required": [
-        "elements",
-        "label",
-        "schema",
-        "type"
-      ],
+      "required": ["elements", "label", "schema", "type"],
       "type": "object"
     },
     "BaseElement": {
@@ -241,10 +206,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "type",
-                "value"
-              ],
+              "required": ["type", "value"],
               "type": "object"
             },
             {
@@ -255,17 +217,10 @@
                   "type": "string"
                 },
                 "value": {
-                  "type": [
-                    "string",
-                    "number",
-                    "boolean"
-                  ]
+                  "type": ["string", "number", "boolean"]
                 }
               },
-              "required": [
-                "type",
-                "value"
-              ],
+              "required": ["type", "value"],
               "type": "object"
             }
           ]
@@ -296,18 +251,11 @@
               "type": "array"
             }
           },
-          "required": [
-            "paths",
-            "func"
-          ],
+          "required": ["paths", "func"],
           "type": "object"
         }
       },
-      "required": [
-        "label",
-        "schema",
-        "type"
-      ],
+      "required": ["label", "schema", "type"],
       "type": "object"
     },
     "FormType": {
@@ -327,17 +275,11 @@
           "type": "string"
         },
         "type": {
-          "enum": [
-            "function",
-            "computed"
-          ],
+          "enum": ["function", "computed"],
           "type": "string"
         }
       },
-      "required": [
-        "type",
-        "name"
-      ],
+      "required": ["type", "name"],
       "type": "object"
     },
     "Input": {
@@ -362,10 +304,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "type",
-                "value"
-              ],
+              "required": ["type", "value"],
               "type": "object"
             },
             {
@@ -376,17 +315,10 @@
                   "type": "string"
                 },
                 "value": {
-                  "type": [
-                    "string",
-                    "number",
-                    "boolean"
-                  ]
+                  "type": ["string", "number", "boolean"]
                 }
               },
-              "required": [
-                "type",
-                "value"
-              ],
+              "required": ["type", "value"],
               "type": "object"
             }
           ]
@@ -417,18 +349,11 @@
               "type": "array"
             }
           },
-          "required": [
-            "paths",
-            "func"
-          ],
+          "required": ["paths", "func"],
           "type": "object"
         }
       },
-      "required": [
-        "label",
-        "schema",
-        "type"
-      ],
+      "required": ["label", "schema", "type"],
       "type": "object"
     },
     "MultiStepForm": {
@@ -451,11 +376,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "type",
-        "step",
-        "labe"
-      ],
+      "required": ["type", "step", "labe"],
       "type": "object"
     },
     "Radio": {
@@ -480,10 +401,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "type",
-                "value"
-              ],
+              "required": ["type", "value"],
               "type": "object"
             },
             {
@@ -494,17 +412,10 @@
                   "type": "string"
                 },
                 "value": {
-                  "type": [
-                    "string",
-                    "number",
-                    "boolean"
-                  ]
+                  "type": ["string", "number", "boolean"]
                 }
               },
-              "required": [
-                "type",
-                "value"
-              ],
+              "required": ["type", "value"],
               "type": "object"
             }
           ]
@@ -534,10 +445,7 @@
                     "type": "string"
                   }
                 },
-                "required": [
-                  "name",
-                  "value"
-                ],
+                "required": ["name", "value"],
                 "type": "object"
               },
               "type": "array"
@@ -564,19 +472,11 @@
               "type": "array"
             }
           },
-          "required": [
-            "paths",
-            "func"
-          ],
+          "required": ["paths", "func"],
           "type": "object"
         }
       },
-      "required": [
-        "label",
-        "options",
-        "schema",
-        "type"
-      ],
+      "required": ["label", "options", "schema", "type"],
       "type": "object"
     },
     "Select": {
@@ -601,10 +501,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "type",
-                "value"
-              ],
+              "required": ["type", "value"],
               "type": "object"
             },
             {
@@ -615,17 +512,10 @@
                   "type": "string"
                 },
                 "value": {
-                  "type": [
-                    "string",
-                    "number",
-                    "boolean"
-                  ]
+                  "type": ["string", "number", "boolean"]
                 }
               },
-              "required": [
-                "type",
-                "value"
-              ],
+              "required": ["type", "value"],
               "type": "object"
             }
           ]
@@ -655,10 +545,7 @@
                     "type": "string"
                   }
                 },
-                "required": [
-                  "name",
-                  "value"
-                ],
+                "required": ["name", "value"],
                 "type": "object"
               },
               "type": "array"
@@ -685,18 +572,11 @@
               "type": "array"
             }
           },
-          "required": [
-            "paths",
-            "func"
-          ],
+          "required": ["paths", "func"],
           "type": "object"
         }
       },
-      "required": [
-        "label",
-        "schema",
-        "type"
-      ],
+      "required": ["label", "schema", "type"],
       "type": "object"
     },
     "SingleStepForm": {
@@ -722,12 +602,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "type",
-        "schema",
-        "label",
-        "elements"
-      ],
+      "required": ["type", "schema", "label", "elements"],
       "type": "object"
     },
     "Switch": {
@@ -752,10 +627,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "type",
-                "value"
-              ],
+              "required": ["type", "value"],
               "type": "object"
             },
             {
@@ -766,17 +638,10 @@
                   "type": "string"
                 },
                 "value": {
-                  "type": [
-                    "string",
-                    "number",
-                    "boolean"
-                  ]
+                  "type": ["string", "number", "boolean"]
                 }
               },
-              "required": [
-                "type",
-                "value"
-              ],
+              "required": ["type", "value"],
               "type": "object"
             }
           ]
@@ -807,18 +672,11 @@
               "type": "array"
             }
           },
-          "required": [
-            "paths",
-            "func"
-          ],
+          "required": ["paths", "func"],
           "type": "object"
         }
       },
-      "required": [
-        "label",
-        "schema",
-        "type"
-      ],
+      "required": ["label", "schema", "type"],
       "type": "object"
     },
     "TextArea": {
@@ -843,10 +701,7 @@
                   "type": "string"
                 }
               },
-              "required": [
-                "type",
-                "value"
-              ],
+              "required": ["type", "value"],
               "type": "object"
             },
             {
@@ -857,17 +712,10 @@
                   "type": "string"
                 },
                 "value": {
-                  "type": [
-                    "string",
-                    "number",
-                    "boolean"
-                  ]
+                  "type": ["string", "number", "boolean"]
                 }
               },
-              "required": [
-                "type",
-                "value"
-              ],
+              "required": ["type", "value"],
               "type": "object"
             }
           ]
@@ -898,18 +746,11 @@
               "type": "array"
             }
           },
-          "required": [
-            "paths",
-            "func"
-          ],
+          "required": ["paths", "func"],
           "type": "object"
         }
       },
-      "required": [
-        "label",
-        "schema",
-        "type"
-      ],
+      "required": ["label", "schema", "type"],
       "type": "object"
     }
   }

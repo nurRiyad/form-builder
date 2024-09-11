@@ -1,55 +1,15 @@
 {
-  "packet": {
-    "apiKey": "",
-    "projectID": ""
-  },
-  "azureStorage": {
-    "key": "",
-    "account": ""
-  },
   "azure": {
     "clientID": "",
     "tenantID": "",
     "subscriptionID": "",
     "clientSecret": ""
   },
-  "scaleway": {
-    "organization": "",
-    "token": ""
-  },
-  "googleCloud": {
-    "projectID": "",
-    "serviceAccount": ""
-  },
   "type": "Aws",
-  "digitalocean": {
-    "token": ""
-  },
   "name": "sdfsd",
-  "vultr": {
-    "token": ""
-  },
-  "ownerID": "https://www.youtube.com/",
-  "swift": {
-    "username": "",
-    "tenantID": "",
-    "password": "",
-    "tenantAuthURL": "",
-    "domain": "",
-    "tenantDomain": "",
-    "tenantName": "",
-    "region": ""
-  },
+  "ownerID": "",
   "aws": {
     "secretAccessKey": "",
-    "accessKeyID": ""
-  },
-  "rancher": {
-    "endpoint": "",
-    "accessKeyID": "",
-    "secretAccessKey": ""
-  },
-  "linode": {
-    "token": ""
+    "accessKeyID": "sdfsdf"
   }
 }
