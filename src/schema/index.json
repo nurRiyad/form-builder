@@ -14,13 +14,55 @@
           },
           "type": "array"
         },
-        "fetch": {
-          "type": "string"
-        },
         "if": {
           "$ref": "#/definitions/IfType"
         },
+        "init": {
+          "anyOf": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "type": {
+                  "const": "func",
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type",
+                "value"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "type": {
+                  "const": "static",
+                  "type": "string"
+                },
+                "value": {
+                  "type": [
+                    "string",
+                    "number",
+                    "boolean"
+                  ]
+                }
+              },
+              "required": [
+                "type",
+                "value"
+              ],
+              "type": "object"
+            }
+          ]
+        },
         "label": {
+          "type": "string"
+        },
+        "loader": {
           "type": "string"
         },
         "schema": {
@@ -31,7 +73,12 @@
           "type": "string"
         }
       },
-      "required": ["elements", "label", "schema", "type"],
+      "required": [
+        "elements",
+        "label",
+        "schema",
+        "type"
+      ],
       "type": "object"
     },
     "BaseElement": {
@@ -65,13 +112,55 @@
         "disable": {
           "type": "boolean"
         },
-        "fetch": {
-          "type": "string"
-        },
         "if": {
           "$ref": "#/definitions/IfType"
         },
+        "init": {
+          "anyOf": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "type": {
+                  "const": "func",
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type",
+                "value"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "type": {
+                  "const": "static",
+                  "type": "string"
+                },
+                "value": {
+                  "type": [
+                    "string",
+                    "number",
+                    "boolean"
+                  ]
+                }
+              },
+              "required": [
+                "type",
+                "value"
+              ],
+              "type": "object"
+            }
+          ]
+        },
         "label": {
+          "type": "string"
+        },
+        "loader": {
           "type": "string"
         },
         "schema": {
@@ -82,7 +171,11 @@
           "type": "string"
         }
       },
-      "required": ["label", "schema", "type"],
+      "required": [
+        "label",
+        "schema",
+        "type"
+      ],
       "type": "object"
     },
     "FormType": {
@@ -102,11 +195,17 @@
           "type": "string"
         },
         "type": {
-          "enum": ["function", "computed"],
+          "enum": [
+            "function",
+            "computed"
+          ],
           "type": "string"
         }
       },
-      "required": ["type", "name"],
+      "required": [
+        "type",
+        "name"
+      ],
       "type": "object"
     },
     "Input": {
@@ -114,9 +213,6 @@
       "properties": {
         "disable": {
           "type": "boolean"
-        },
-        "fetch": {
-          "type": "string"
         },
         "if": {
           "$ref": "#/definitions/IfType"
@@ -134,7 +230,10 @@
                   "type": "string"
                 }
               },
-              "required": ["type", "value"],
+              "required": [
+                "type",
+                "value"
+              ],
               "type": "object"
             },
             {
@@ -144,9 +243,18 @@
                   "const": "static",
                   "type": "string"
                 },
-                "value": {}
+                "value": {
+                  "type": [
+                    "string",
+                    "number",
+                    "boolean"
+                  ]
+                }
               },
-              "required": ["type", "value"],
+              "required": [
+                "type",
+                "value"
+              ],
               "type": "object"
             }
           ]
@@ -154,7 +262,7 @@
         "label": {
           "type": "string"
         },
-        "onChange": {
+        "loader": {
           "type": "string"
         },
         "schema": {
@@ -165,7 +273,11 @@
           "type": "string"
         }
       },
-      "required": ["label", "schema", "type"],
+      "required": [
+        "label",
+        "schema",
+        "type"
+      ],
       "type": "object"
     },
     "MultiStepForm": {
@@ -188,7 +300,11 @@
           "type": "string"
         }
       },
-      "required": ["type", "step", "labe"],
+      "required": [
+        "type",
+        "step",
+        "labe"
+      ],
       "type": "object"
     },
     "Radio": {
@@ -197,13 +313,55 @@
         "disable": {
           "type": "boolean"
         },
-        "fetch": {
-          "type": "string"
-        },
         "if": {
           "$ref": "#/definitions/IfType"
         },
+        "init": {
+          "anyOf": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "type": {
+                  "const": "func",
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type",
+                "value"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "type": {
+                  "const": "static",
+                  "type": "string"
+                },
+                "value": {
+                  "type": [
+                    "string",
+                    "number",
+                    "boolean"
+                  ]
+                }
+              },
+              "required": [
+                "type",
+                "value"
+              ],
+              "type": "object"
+            }
+          ]
+        },
         "label": {
+          "type": "string"
+        },
+        "loader": {
           "type": "string"
         },
         "options": {
@@ -225,7 +383,10 @@
                     "type": "string"
                   }
                 },
-                "required": ["name", "value"],
+                "required": [
+                  "name",
+                  "value"
+                ],
                 "type": "object"
               },
               "type": "array"
@@ -240,7 +401,12 @@
           "type": "string"
         }
       },
-      "required": ["label", "options", "schema", "type"],
+      "required": [
+        "label",
+        "options",
+        "schema",
+        "type"
+      ],
       "type": "object"
     },
     "Select": {
@@ -249,13 +415,55 @@
         "disable": {
           "type": "boolean"
         },
-        "fetch": {
-          "type": "string"
-        },
         "if": {
           "$ref": "#/definitions/IfType"
         },
+        "init": {
+          "anyOf": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "type": {
+                  "const": "func",
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type",
+                "value"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "type": {
+                  "const": "static",
+                  "type": "string"
+                },
+                "value": {
+                  "type": [
+                    "string",
+                    "number",
+                    "boolean"
+                  ]
+                }
+              },
+              "required": [
+                "type",
+                "value"
+              ],
+              "type": "object"
+            }
+          ]
+        },
         "label": {
+          "type": "string"
+        },
+        "loader": {
           "type": "string"
         },
         "options": {
@@ -277,7 +485,10 @@
                     "type": "string"
                   }
                 },
-                "required": ["name", "value"],
+                "required": [
+                  "name",
+                  "value"
+                ],
                 "type": "object"
               },
               "type": "array"
@@ -292,7 +503,11 @@
           "type": "string"
         }
       },
-      "required": ["label", "schema", "type"],
+      "required": [
+        "label",
+        "schema",
+        "type"
+      ],
       "type": "object"
     },
     "SingleStepForm": {
@@ -318,7 +533,12 @@
           "type": "string"
         }
       },
-      "required": ["type", "schema", "label", "elements"],
+      "required": [
+        "type",
+        "schema",
+        "label",
+        "elements"
+      ],
       "type": "object"
     },
     "Switch": {
@@ -327,13 +547,55 @@
         "disable": {
           "type": "boolean"
         },
-        "fetch": {
-          "type": "string"
-        },
         "if": {
           "$ref": "#/definitions/IfType"
         },
+        "init": {
+          "anyOf": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "type": {
+                  "const": "func",
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type",
+                "value"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "type": {
+                  "const": "static",
+                  "type": "string"
+                },
+                "value": {
+                  "type": [
+                    "string",
+                    "number",
+                    "boolean"
+                  ]
+                }
+              },
+              "required": [
+                "type",
+                "value"
+              ],
+              "type": "object"
+            }
+          ]
+        },
         "label": {
+          "type": "string"
+        },
+        "loader": {
           "type": "string"
         },
         "schema": {
@@ -344,7 +606,11 @@
           "type": "string"
         }
       },
-      "required": ["label", "schema", "type"],
+      "required": [
+        "label",
+        "schema",
+        "type"
+      ],
       "type": "object"
     },
     "TextArea": {
@@ -353,13 +619,55 @@
         "disable": {
           "type": "boolean"
         },
-        "fetch": {
-          "type": "string"
-        },
         "if": {
           "$ref": "#/definitions/IfType"
         },
+        "init": {
+          "anyOf": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "type": {
+                  "const": "func",
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type",
+                "value"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "type": {
+                  "const": "static",
+                  "type": "string"
+                },
+                "value": {
+                  "type": [
+                    "string",
+                    "number",
+                    "boolean"
+                  ]
+                }
+              },
+              "required": [
+                "type",
+                "value"
+              ],
+              "type": "object"
+            }
+          ]
+        },
         "label": {
+          "type": "string"
+        },
+        "loader": {
           "type": "string"
         },
         "schema": {
@@ -370,7 +678,11 @@
           "type": "string"
         }
       },
-      "required": ["label", "schema", "type"],
+      "required": [
+        "label",
+        "schema",
+        "type"
+      ],
       "type": "object"
     }
   }

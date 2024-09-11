@@ -8,18 +8,38 @@ const props = defineProps<{
   initialValue: any
   wholeSchema: any
   func?: any
+  items?: string
   parentData?: any
   setValue: (path: string, val: any) => void
   deleteValue?: (key: string) => void
 }>()
 
-const calculateInitValue = () => {
+const getValueFromModel = () => {
   let path = props.element.schema
-  path = path.replaceAll('/properties/', '.')
-  path = path.replace('schema.', '')
+  path = path.replaceAll('/properties', '')
+  path = path.replace('schema/', '')
+  path = path.replaceAll('/', '.')
+
+  if (path.includes('items')) {
+    path = path.replace('.items', `[${props.items}]`)
+  }
   const value = lodash.get(props.initialValue, path)
   return value
 }
+
+const calculateInitValue = () => {
+  if (props?.element?.init) {
+    const valType = props.element.init?.type
+    if (valType === 'static') return props.element.init.value
+    else {
+      const fName = props.element.init.value
+      return props.func[fName]()
+    }
+  } else {
+    return getValueFromModel() || ''
+  }
+}
+
 const picked = ref(calculateInitValue())
 
 watch(

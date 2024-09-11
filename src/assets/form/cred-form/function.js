@@ -49,7 +49,6 @@ export const useFunc = (model) => {
   const initFun = () => {
     const raw = unref(model)
     const type = raw['schema/type'] || ''
-    console.log({ type })
     return `This is from type ${type}`
   }
 

@@ -18,21 +18,20 @@ export type IfType = {
   name: string
 }
 
+type Options = Array<string> | Array<{ name: string; value: string }>
+type Init = { type: 'func'; value: string } | { type: 'static'; value: string | number | boolean }
+
 interface BaseCommon {
   label: string
   schema: string
   if?: IfType
-  fetch?: string
+  loader?: string
   disable?: boolean
+  init?: Init
 }
-
-type Options = Array<string> | Array<{ name: string; value: string }>
-type Init = { type: 'func'; value: string } | { type: 'static'; value: string | number | boolean }
 
 export interface Input extends BaseCommon {
   type: 'input'
-  init?: Init
-  onChange?: string
 }
 
 export interface TextArea extends BaseCommon {

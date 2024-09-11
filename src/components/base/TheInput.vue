@@ -56,10 +56,10 @@ watchDebounced(
 const inInputFetching = ref(false)
 const componentData = { ...toRaw(unref(props.parentData)) }
 const fetchData = async () => {
-  if (!props?.element?.fetch) return
+  if (!props?.element?.loader) return
   try {
     inInputFetching.value = true
-    const fName = props.element.fetch
+    const fName = props.element.loader
     componentData.input = await props.func[fName]()
   } catch (error) {
     console.error(error)
