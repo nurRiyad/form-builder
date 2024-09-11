@@ -29,7 +29,7 @@
   "vultr": {
     "token": ""
   },
-  "ownerID": 1234,
+  "ownerID": false,
   "swift": {
     "username": "",
     "tenantID": "",

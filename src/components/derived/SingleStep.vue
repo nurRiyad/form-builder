@@ -8,6 +8,7 @@ const TextArea = defineAsyncComponent(() => import('../base/TextArea.vue'))
 const CheckBox = defineAsyncComponent(() => import('../base/CheckBox.vue'))
 const TheRadio = defineAsyncComponent(() => import('../base/TheRadio.vue'))
 const ArrayInput = defineAsyncComponent(() => import('../derived/ArrayInput.vue'))
+const TheSwitch = defineAsyncComponent(() => import('../base/TheSwitch.vue'))
 
 const props = defineProps<{
   ui: SingleStepForm
@@ -76,6 +77,16 @@ const checkIf = (el: IfType | undefined) => {
         />
         <TheRadio
           v-else-if="el.type === 'radio' && checkIf(el.if)"
+          :element="el"
+          :initial-value="initialValue"
+          :whole-schema="schema"
+          :func="fn"
+          :parent-data="componentData"
+          :set-value="setValue"
+          :delete-value="deleteValue"
+        />
+        <TheSwitch
+          v-else-if="el.type === 'switch' && checkIf(el.if)"
           :element="el"
           :initial-value="initialValue"
           :whole-schema="schema"

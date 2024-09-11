@@ -24,7 +24,7 @@
           }
         },
         {
-          "type": "input",
+          "type": "switch",
           "label": "Owner ID",
           "schema": "schema/properties/ownerID"
         },
