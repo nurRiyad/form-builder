@@ -27,13 +27,12 @@ interface BaseCommon {
 }
 
 type Options = Array<string> | Array<{ name: string; value: string }>
+type Init = { type: 'func'; value: string } | { type: 'static'; value: string | number | boolean }
 
 export interface Input extends BaseCommon {
   type: 'input'
-  computed?: {
-    val: string
-    func: string
-  }
+  init?: Init
+  onChange?: string
 }
 
 export interface TextArea extends BaseCommon {

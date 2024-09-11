@@ -1,13 +1,14 @@
 import { computed, unref } from 'vue'
 
 export const useFunc = (model) => {
-  const raw = unref(model)
   const isCredAws = () => {
+    const raw = unref(model)
     if (raw['schema/type'] === 'Aws') return true
     else return false
   }
 
   const isCredAzure = computed(() => {
+    const raw = unref(model)
     if (raw['schema/type'] === 'Azure') return true
     else return false
   })
@@ -45,5 +46,18 @@ export const useFunc = (model) => {
     return {}
   }
 
-  return { isCredAws, isCredAzure, loadData, loadData1, loadData2 }
+  const initFun = () => {
+    const raw = unref(model)
+    const type = raw['schema/type'] || ''
+    console.log({ type })
+    return `This is from type ${type}`
+  }
+
+  const checkOnChange = (n) => {
+    console.log('on Changes fires', n)
+
+    model.value['schema/ownerID'] = 10
+  }
+
+  return { isCredAws, isCredAzure, initFun, loadData, loadData1, loadData2, checkOnChange }
 }

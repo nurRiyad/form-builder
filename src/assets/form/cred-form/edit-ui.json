@@ -17,7 +17,11 @@
         {
           "type": "input",
           "label": "Credential Name",
-          "schema": "schema/properties/name"
+          "schema": "schema/properties/name",
+          "init": {
+            "type": "func",
+            "value": "initFun"
+          }
         },
         {
           "type": "input",

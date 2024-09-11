@@ -1,7 +1,8 @@
 <script lang="ts" setup>
-import type { Input } from '@/types/schema'
-import { computed, onUnmounted, ref, toRaw, unref, watch } from 'vue'
 import lodash from 'lodash'
+import type { Input } from '@/types/schema'
+import { computed, onUnmounted, ref, toRaw, unref } from 'vue'
+import { watchDebounced } from '@vueuse/core'
 
 const props = defineProps<{
   element: Input
@@ -14,7 +15,7 @@ const props = defineProps<{
   deleteValue?: (key: string) => void
 }>()
 
-const calculateInitValue = () => {
+const getValueFromModel = () => {
   let path = props.element.schema
   path = path.replaceAll('/properties', '')
   path = path.replace('schema/', '')
@@ -27,14 +28,28 @@ const calculateInitValue = () => {
   return value
 }
 
+const calculateInitValue = () => {
+  if (props?.element?.init) {
+    const valType = props.element.init?.type
+    if (valType === 'static') return props.element.init.value
+    else {
+      const fName = props.element.init.value
+      return props.func[fName]()
+    }
+  } else {
+    return getValueFromModel() || ''
+  }
+}
+
 const value = ref(calculateInitValue())
 
-watch(
+watchDebounced(
   value,
   (n) => {
+    //update the model value
     props.setValue(props.element.schema, n, props.items)
   },
-  { immediate: true }
+  { immediate: true, debounce: 300 }
 )
 
 //element level data fetching
