@@ -33,6 +33,7 @@
     "schema:gen": "ts-json-schema-generator --path 'src/types/index.ts' --type 'FormType' --out 'src/schema/index.json'"
   },
   "dependencies": {
+    "@vueuse/core": "^11.0.3",
     "lodash": "^4.17.21",
     "pinia": "^2.1.7",
     "vue": "^3.4.29",
