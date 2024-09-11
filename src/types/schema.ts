@@ -56,11 +56,23 @@ export interface Switch extends BaseCommon {
   type: 'switch'
 }
 
+export interface Anchor extends BaseCommon {
+  type: 'anchor'
+}
+
 export interface ArrayInput extends BaseCommon {
   type: 'array-object-form'
   elements: Array<BaseElement>
 }
 
-export type BaseElement = Input | Select | TextArea | Radio | CheckBox | Switch | ArrayInput
+export type BaseElement =
+  | Input
+  | Select
+  | TextArea
+  | Radio
+  | CheckBox
+  | Switch
+  | Anchor
+  | ArrayInput
 
 export type FormType = SingleStepForm | MultiStepForm

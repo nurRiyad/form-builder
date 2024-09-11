@@ -29,7 +29,7 @@
   "vultr": {
     "token": ""
   },
-  "ownerID": false,
+  "ownerID": "https://www.youtube.com/",
   "swift": {
     "username": "",
     "tenantID": "",

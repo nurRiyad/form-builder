@@ -24,7 +24,7 @@
           }
         },
         {
-          "type": "switch",
+          "type": "anchor",
           "label": "Owner ID",
           "schema": "schema/properties/ownerID"
         },

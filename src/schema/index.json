@@ -2,6 +2,78 @@
   "$ref": "#/definitions/FormType",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
+    "Anchor": {
+      "additionalProperties": false,
+      "properties": {
+        "disable": {
+          "type": "boolean"
+        },
+        "if": {
+          "$ref": "#/definitions/IfType"
+        },
+        "init": {
+          "anyOf": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "type": {
+                  "const": "func",
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type",
+                "value"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "type": {
+                  "const": "static",
+                  "type": "string"
+                },
+                "value": {
+                  "type": [
+                    "string",
+                    "number",
+                    "boolean"
+                  ]
+                }
+              },
+              "required": [
+                "type",
+                "value"
+              ],
+              "type": "object"
+            }
+          ]
+        },
+        "label": {
+          "type": "string"
+        },
+        "loader": {
+          "type": "string"
+        },
+        "schema": {
+          "type": "string"
+        },
+        "type": {
+          "const": "anchor",
+          "type": "string"
+        }
+      },
+      "required": [
+        "label",
+        "schema",
+        "type"
+      ],
+      "type": "object"
+    },
     "ArrayInput": {
       "additionalProperties": false,
       "properties": {
@@ -100,6 +172,9 @@
         },
         {
           "$ref": "#/definitions/Switch"
+        },
+        {
+          "$ref": "#/definitions/Anchor"
         },
         {
           "$ref": "#/definitions/ArrayInput"
