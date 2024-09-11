@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { ArrayInput } from '@/types/schema'
-import { defineAsyncComponent, ref, toRaw, watch } from 'vue'
+import { defineAsyncComponent, ref, toRaw, unref, watch } from 'vue'
 import lodash from 'lodash'
 
 const ArrayItem = defineAsyncComponent(() => import('../derived/ArrayItem.vue'))
@@ -40,6 +40,22 @@ watch(
   },
   { immediate: true }
 )
+
+//element level data fetching
+const isCheckboxFetching = ref(false)
+const componentData = { ...toRaw(unref(props.parentData)) }
+const fetchData = async () => {
+  if (!props?.ui?.loader) return
+  try {
+    isCheckboxFetching.value = true
+    const fName = props.ui.loader
+    componentData.array = await props.func[fName]()
+  } catch (error) {
+    console.error(error)
+  }
+  isCheckboxFetching.value = false
+}
+fetchData()
 </script>
 
 <template>

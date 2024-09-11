@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { Select } from '@/types/schema'
-import { computed, onUnmounted, ref, watch } from 'vue'
+import { computed, onUnmounted, ref, toRaw, unref, watch } from 'vue'
 import lodash from 'lodash'
 
 const props = defineProps<{
@@ -50,11 +50,6 @@ watch(
   { immediate: true }
 )
 
-onUnmounted(() => {
-  if (props.deleteValue) {
-    props.deleteValue(props.element.schema)
-  }
-})
 const fOptions = computed(() => {
   let ops = []
   if (props.element.options) {
@@ -72,13 +67,40 @@ const fOptions = computed(() => {
     } else return op
   })
 })
+
+//element level data fetching
+const isDataFetching = ref(false)
+const componentData = { ...toRaw(unref(props.parentData)) }
+const fetchData = async () => {
+  if (!props?.element?.loader) return
+  try {
+    isDataFetching.value = true
+    const fName = props.element.loader
+    componentData.select = await props.func[fName]()
+  } catch (error) {
+    console.error(error)
+  }
+  isDataFetching.value = false
+}
+fetchData()
+
+onUnmounted(() => {
+  if (props.deleteValue) {
+    props.deleteValue(props.element.schema)
+  }
+})
 </script>
 
 <template>
-  <label :for="element.label">{{ element.label }}</label>
-  <select :name="element.label" :id="element.label" v-model="value">
-    <option v-for="val in fOptions" :key="val.value" :value="val.value">
-      {{ val.name }}
-    </option>
-  </select>
+  <div v-if="isDataFetching">
+    <p>Data fetching</p>
+  </div>
+  <div v-else class="flex flex-col space-y-2">
+    <label :for="element.label">{{ element.label }}</label>
+    <select :name="element.label" :id="element.label" v-model="value">
+      <option v-for="val in fOptions" :key="val.value" :value="val.value">
+        {{ val.name }}
+      </option>
+    </select>
+  </div>
 </template>

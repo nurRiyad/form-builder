@@ -68,11 +68,6 @@ const fetchData = async () => {
 }
 fetchData()
 
-onUnmounted(() => {
-  if (props.deleteValue) {
-    props.deleteValue(props.element.schema)
-  }
-})
 const calculateInputType = computed(() => {
   let path = props.element.schema
   path = `${path.replace('schema/', '')}`
@@ -84,6 +79,12 @@ const calculateInputType = computed(() => {
   if (type === 'integer') return 'number'
   else if (type === 'string' && format === 'password') return 'password'
   return 'text'
+})
+
+onUnmounted(() => {
+  if (props.deleteValue) {
+    props.deleteValue(props.element.schema)
+  }
 })
 </script>
 

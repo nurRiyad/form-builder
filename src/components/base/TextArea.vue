@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { TextArea } from '@/types/schema'
-import { onUnmounted, ref, watch } from 'vue'
+import { onUnmounted, ref, toRaw, unref, watch } from 'vue'
 import lodash from 'lodash'
 
 const props = defineProps<{
@@ -50,6 +50,22 @@ watch(
   { immediate: true }
 )
 
+//element level data fetching
+const isDataFetching = ref(false)
+const componentData = { ...toRaw(unref(props.parentData)) }
+const fetchData = async () => {
+  if (!props?.element?.loader) return
+  try {
+    isDataFetching.value = true
+    const fName = props.element.loader
+    componentData.textarea = await props.func[fName]()
+  } catch (error) {
+    console.error(error)
+  }
+  isDataFetching.value = false
+}
+fetchData()
+
 onUnmounted(() => {
   if (props.deleteValue) {
     props.deleteValue(props.element.schema)
@@ -58,7 +74,10 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="flex flex-col space-y-2">
+  <div v-if="isDataFetching">
+    <p>Textarea data fetching</p>
+  </div>
+  <div v-else class="flex flex-col space-y-2">
     <label :for="element.label">{{ element.label }}</label>
     <textarea
       :id="element.label"

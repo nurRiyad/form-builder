@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { Switch } from '@/types/schema'
-import { onUnmounted, ref, watch } from 'vue'
+import { onUnmounted, ref, toRaw, unref, watch } from 'vue'
 import lodash from 'lodash'
 
 const props = defineProps<{
@@ -51,6 +51,22 @@ watch(
   { immediate: true }
 )
 
+//element level data fetching
+const isDataFetching = ref(false)
+const componentData = { ...toRaw(unref(props.parentData)) }
+const fetchData = async () => {
+  if (!props?.element?.loader) return
+  try {
+    isDataFetching.value = true
+    const fName = props.element.loader
+    componentData.switch = await props.func[fName]()
+  } catch (error) {
+    console.error(error)
+  }
+  isDataFetching.value = false
+}
+fetchData()
+
 onUnmounted(() => {
   if (props.deleteValue) {
     props.deleteValue(props.element.schema)
@@ -59,7 +75,10 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="flex items-center space-x-5">
+  <div v-if="isDataFetching">
+    <p>Switch data fetching</p>
+  </div>
+  <div v-else class="flex items-center space-x-5">
     <label for="ac-switch">{{ element.label }}</label>
     <label class="switch">
       <input id="ac-switch" name="ac-switch" v-model="checked" type="checkbox" />
