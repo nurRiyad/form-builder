@@ -28,6 +28,10 @@ interface BaseCommon {
   loader?: string
   disable?: boolean
   init?: Init
+  watcher?: {
+    paths: Array<string>
+    func: string
+  }
 }
 
 export interface Input extends BaseCommon {
