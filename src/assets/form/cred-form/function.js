@@ -1,8 +1,7 @@
 import { computed, unref } from 'vue'
 
 export const useFunc = (model) => {
-  const isCredAws = (data) => {
-    console.log({ data })
+  const isCredAws = () => {
     const raw = unref(model)
     if (raw['schema/type'] === 'Aws') return true
     else return false
@@ -66,13 +65,11 @@ export const useFunc = (model) => {
     return `This is from type ${type}`
   }
 
-  const checkOnChange = (n) => {
-    console.log('on Changes fires', n)
+  const checkOnChange = () => {
     model.value['schema/ownerID'] = 10
   }
 
-  const watchTest = (val) => {
-    console.log({ val })
+  const watchTest = () => {
     return 'h1 '
   }
 
