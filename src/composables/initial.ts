@@ -20,7 +20,6 @@ export const useInitial = () => {
 
   const calculateInitValue = (el: BaseElement, data: any, items?: string) => {
     if (el?.init) {
-      console.log(el)
       if (el.init.type === 'static') return el.init.value
       else {
         const fName = el.init.value
