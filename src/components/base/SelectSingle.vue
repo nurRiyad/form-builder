@@ -1,15 +1,16 @@
 <script lang="ts" setup>
 import type { Select } from '@/types/schema'
-import { computed, inject, onUnmounted, ref, toRaw, unref, watch } from 'vue'
+import { computed, inject, onUnmounted, ref, toRaw, unref } from 'vue'
 import lodash from 'lodash'
 import { useInitial } from '@/composables/initial'
 import { useLoader } from '@/composables/loader'
+import { watchDebounced } from '@vueuse/core'
 
 const props = defineProps<{
   element: Select
   items?: string
   parentData?: any
-  setValue: (path: string, val: any) => void
+  setValue: (path: string, val: any, items?: string) => void
   deleteValue?: (key: string) => void
 }>()
 
@@ -30,12 +31,14 @@ const { calculateInitValue } = useInitial()
 const initValue = calculateInitValue(props.element, cData.value, props.items)
 const value = ref(initValue)
 
-watch(
+// update model value
+watchDebounced(
   value,
   (n) => {
-    props.setValue(props.element.schema, n)
+    //update the model value
+    props.setValue(props.element.schema, n, props.items)
   },
-  { immediate: true }
+  { immediate: true, debounce: 0 }
 )
 
 const fOptions = computed(() => {
@@ -55,6 +58,7 @@ const fOptions = computed(() => {
     } else return op
   })
 })
+
 onUnmounted(() => {
   if (props.deleteValue) {
     props.deleteValue(props.element.schema)

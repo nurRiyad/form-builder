@@ -1,52 +1,45 @@
 <script lang="ts" setup>
 import type { Radio } from '@/types/schema'
-import { computed, onUnmounted, ref, toRaw, unref, watch } from 'vue'
+import { computed, onUnmounted, ref, toRaw, unref } from 'vue'
 import { useInitial } from '@/composables/initial'
+import { useLoader } from '@/composables/loader'
+import { watchDebounced } from '@vueuse/core'
 
 const props = defineProps<{
   element: Radio
   func?: any
   items?: string
   parentData?: any
-  setValue: (path: string, val: any) => void
+  setValue: (path: string, val: any, items?: string) => void
   deleteValue?: (key: string) => void
 }>()
 
+//element level data fetching
+const { data, isLoading, loadData } = useLoader()
+loadData(props.element.loader)
+const cData = computed(() => {
+  return {
+    ...toRaw(unref(props.parentData)),
+    input: toRaw(unref(data))
+  }
+})
+
 // calculate initial value
 const { calculateInitValue } = useInitial()
-const initValue = calculateInitValue(
-  props.element.init,
-  props.element.schema,
-  props.func,
-  props.items
-)
-
+const initValue = calculateInitValue(props.element, cData.value, props.items)
 const picked = ref(initValue)
 
-watch(
+// update model value
+watchDebounced(
   picked,
   (n) => {
-    props.setValue(props.element.schema, n)
+    //update the model value
+    props.setValue(props.element.schema, n, props.items)
   },
-  { immediate: true }
+  { immediate: true, debounce: 0 }
 )
 
-//element level data fetching
-const isDataFetching = ref(false)
-const componentData = { ...toRaw(unref(props.parentData)) }
-const fetchData = async () => {
-  if (!props?.element?.loader) return
-  try {
-    isDataFetching.value = true
-    const fName = props.element.loader
-    componentData.radio = await props.func[fName]()
-  } catch (error) {
-    console.error(error)
-  }
-  isDataFetching.value = false
-}
-fetchData()
-
+// clean on unmounted
 onUnmounted(() => {
   if (props.deleteValue) {
     props.deleteValue(props.element.schema)
@@ -64,7 +57,7 @@ const fOptions = computed(() => {
 </script>
 
 <template>
-  <div v-if="isDataFetching">
+  <div v-if="isLoading">
     <p>Is Radio data fetching</p>
   </div>
   <div v-else class="flex flex-col space-y-2">

@@ -1,7 +1,8 @@
 <script lang="ts" setup>
 import type { Anchor } from '@/types/schema'
-import { ref, toRaw, unref } from 'vue'
+import { computed, ref, toRaw, unref } from 'vue'
 import { useInitial } from '@/composables/initial'
+import { useLoader } from '@/composables/loader'
 
 const props = defineProps<{
   element: Anchor
@@ -10,36 +11,24 @@ const props = defineProps<{
   parentData?: any
 }>()
 
+//element level data fetching
+const { data, isLoading, loadData } = useLoader()
+loadData(props.element.loader)
+const cData = computed(() => {
+  return {
+    ...toRaw(unref(props.parentData)),
+    input: toRaw(unref(data))
+  }
+})
+
 // calculate initial value
 const { calculateInitValue } = useInitial()
-const initValue = calculateInitValue(
-  props.element.init,
-  props.element.schema,
-  props.func,
-  props.items
-)
-
+const initValue = calculateInitValue(props.element, cData.value, props.items)
 const value = ref(initValue)
-
-//element level data fetching
-const isDataFetching = ref(false)
-const componentData = { ...toRaw(unref(props.parentData)) }
-const fetchData = async () => {
-  if (!props?.element?.loader) return
-  try {
-    isDataFetching.value = true
-    const fName = props.element.loader
-    componentData.anchor = await props.func[fName]()
-  } catch (error) {
-    console.error(error)
-  }
-  isDataFetching.value = false
-}
-fetchData()
 </script>
 
 <template>
-  <div v-if="isDataFetching">
+  <div v-if="isLoading">
     <p>Anchor data fetching</p>
   </div>
   <div v-else>
