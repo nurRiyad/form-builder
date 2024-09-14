@@ -1,7 +1,8 @@
 <script lang="ts" setup>
 import type { FormType } from '@/types/schema'
-import { defineAsyncComponent, ref, toRaw, unref } from 'vue'
+import { defineAsyncComponent, provide, ref, toRaw, unref } from 'vue'
 import lodash from 'lodash'
+import { useGlobalModel } from '@/composables/model'
 
 const SingleStep = defineAsyncComponent(() => import('./derived/SingleStep.vue'))
 const MultiStep = defineAsyncComponent(() => import('./derived/MultiStep.vue'))
@@ -25,22 +26,16 @@ const props = withDefaults(
 const emits = defineEmits(['onSubmit'])
 
 // generate model value
-const model = ref<Record<string, unknown>>({})
-const setValue = (key: string, val: any) => {
-  let fKey = key.replaceAll('/properties', '')
-  model.value[fKey] = val
-}
-const getValue = (key: string) => {
-  let fKey = key.replaceAll('/properties', '')
-  return model.value[fKey]
-}
-const deleteValue = (key: string) => {
-  const fKey = key.replaceAll('/properties', '')
-  delete model.value[fKey]
-}
+const { model } = useGlobalModel()
+
+const fn = props?.logic ? props.logic(model) : null
+
+// provide schema & initial value & functions
+provide('func', fn)
+provide('schema', props.schema)
+provide('initialValue', props.initialValue)
 
 // generate function
-const fn = props?.logic ? props.logic(model) : null
 
 // generate submitted form form
 const generateFinalForm = () => {
@@ -50,7 +45,6 @@ const generateFinalForm = () => {
     const fKey = key.replaceAll('/', '.')
     lodash.set(generatedObj, fKey, raw[key])
   })
-
   return generatedObj
 }
 
@@ -91,27 +85,8 @@ const handleStep = (type: 'Next' | 'Prev') => {
     <h1>Form file loading</h1>
   </div>
   <div class="max-w-3xl mx-auto" v-else>
-    <SingleStep
-      v-if="ui.type === 'single-step-from'"
-      :ui="ui"
-      :schema="schema"
-      :initial-value="initialValue"
-      :fn="fn"
-      :set-value="setValue"
-      :get-value="getValue"
-      :delete-value="deleteValue"
-    />
-    <MultiStep
-      v-else-if="ui.type === 'multi-step-form'"
-      :active-step="activeStep"
-      :ui="ui"
-      :schema="schema"
-      :initial-value="initialValue"
-      :fn="fn"
-      :set-value="setValue"
-      :get-value="getValue"
-      :delete-value="deleteValue"
-    />
+    <SingleStep v-if="ui.type === 'single-step-from'" :ui="ui" />
+    <MultiStep v-else-if="ui.type === 'multi-step-form'" :active-step="activeStep" :ui="ui" />
     <h1 v-else>No Proper Form type found</h1>
     <div class="flex justify-between" v-if="ui.type === 'single-step-from'">
       <button @click="handleCancel" class="bg-sky-500 mt-5 py-2 px-3 rounded-sm">Cancel</button>

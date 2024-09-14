@@ -1,53 +1,42 @@
 <script lang="ts" setup>
 import type { CheckBox } from '@/types/schema'
-import { onUnmounted, ref, toRaw, unref, watch } from 'vue'
-import lodash from 'lodash'
+import { computed, onUnmounted, ref, toRaw, unref } from 'vue'
+import { useInitial } from '@/composables/initial'
+import { useLoader } from '@/composables/loader'
+import { watchDebounced } from '@vueuse/core'
 
 const props = defineProps<{
   element: CheckBox
-  initialValue: any
-  wholeSchema: any
   func?: any
   items?: string
   parentData?: any
-  setValue: (path: string, val: any) => void
+  setValue: (path: string, val: any, items?: string) => void
   deleteValue?: (key: string) => void
 }>()
 
-const getValueFromModel = () => {
-  let path = props.element.schema
-  path = path.replaceAll('/properties', '')
-  path = path.replace('schema/', '')
-  path = path.replaceAll('/', '.')
-
-  if (path.includes('items')) {
-    path = path.replace('.items', `[${props.items}]`)
+//element level data fetching
+const { data, isLoading, loadData } = useLoader()
+loadData(props.element.loader)
+const cData = computed(() => {
+  return {
+    ...toRaw(unref(props.parentData)),
+    input: toRaw(unref(data))
   }
-  const value = lodash.get(props.initialValue, path)
-  return value
-}
+})
 
-const calculateInitValue = () => {
-  if (props?.element?.init) {
-    const valType = props.element.init?.type
-    if (valType === 'static') return props.element.init.value
-    else {
-      const fName = props.element.init.value
-      return props.func[fName]()
-    }
-  } else {
-    return getValueFromModel() || ''
-  }
-}
+// calculate initial value
+const { calculateInitValue } = useInitial()
+const initValue = calculateInitValue(props.element, cData.value, props.items)
+const checked = ref(initValue)
 
-const checked = ref(calculateInitValue())
-
-watch(
+// update model value
+watchDebounced(
   checked,
   (n) => {
-    props.setValue(props.element.schema, n)
+    //update the model value
+    props.setValue(props.element.schema, n, props.items)
   },
-  { immediate: true }
+  { immediate: true, debounce: 0 }
 )
 
 //element level data fetching
@@ -74,7 +63,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div v-if="isCheckboxFetching">
+  <div v-if="isLoading">
     <p>Check is fetching</p>
   </div>
   <div v-else class="flex items-center space-x-3">

@@ -10,8 +10,6 @@ const TheRadio = defineAsyncComponent(() => import('../base/TheRadio.vue'))
 
 const props = defineProps<{
   elements: Array<BaseElement>
-  schema: any
-  initialValue: any
   fn?: any
   items?: string
   setValue: (path: string, val: any, items?: string) => void
@@ -30,8 +28,6 @@ const handleDelete = () => {
         <TheInput
           v-if="el.type === 'input'"
           :element="el"
-          :initial-value="initialValue"
-          :whole-schema="schema"
           :func="fn"
           :items="items"
           :set-value="setValue"
@@ -39,32 +35,19 @@ const handleDelete = () => {
         <SelectSingle
           v-else-if="el.type === 'select'"
           :element="el"
-          :initial-value="initialValue"
-          :whole-schema="schema"
           :func="fn"
           :set-value="setValue"
         />
-        <TheRadio
-          v-else-if="el.type === 'radio'"
-          :element="el"
-          :initial-value="initialValue"
-          :whole-schema="schema"
-          :func="fn"
-          :set-value="setValue"
-        />
+        <TheRadio v-else-if="el.type === 'radio'" :element="el" :func="fn" :set-value="setValue" />
         <CheckBox
           v-else-if="el.type === 'checkbox'"
           :element="el"
-          :initial-value="initialValue"
-          :whole-schema="schema"
           :func="fn"
           :set-value="setValue"
         />
         <TextArea
           v-else-if="el.type === 'textarea'"
           :element="el"
-          :initial-value="initialValue"
-          :whole-schema="schema"
           :func="fn"
           :set-value="setValue"
         />

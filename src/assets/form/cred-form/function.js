@@ -46,15 +46,26 @@ export const useFunc = (model) => {
     return {}
   }
 
+  const keyIdLoader = async () => {
+    try {
+      const resp = await fetch('https://jsonplaceholder.typicode.com/todos/5')
+      const data = await resp.json()
+      return data
+    } catch (error) {
+      console.log(error)
+    }
+    return {}
+  }
+
+  keyIdLoader
+
   const initFun = () => {
     const raw = unref(model)
     const type = raw['schema/type'] || ''
     return `This is from type ${type}`
   }
 
-  const checkOnChange = (n) => {
-    console.log('on Changes fires', n)
-
+  const checkOnChange = () => {
     model.value['schema/ownerID'] = 10
   }
 
@@ -70,6 +81,7 @@ export const useFunc = (model) => {
     loadData1,
     loadData2,
     checkOnChange,
-    watchTest
+    watchTest,
+    keyIdLoader
   }
 }

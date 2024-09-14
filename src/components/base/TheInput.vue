@@ -1,14 +1,14 @@
 <script lang="ts" setup>
 import lodash from 'lodash'
 import type { Input } from '@/types/schema'
-import { computed, onUnmounted, ref, toRaw, unref, watch } from 'vue'
+import { computed, inject, onUnmounted, ref, toRaw, unref } from 'vue'
 import { watchDebounced } from '@vueuse/core'
+import { useInitial } from '@/composables/initial'
+import { useLoader } from '@/composables/loader'
+import { useWatchers } from '@/composables/watcher'
 
 const props = defineProps<{
   element: Input
-  initialValue: any
-  wholeSchema: any
-  func?: any
   items?: string
   parentData?: any
   setValue: (path: string, val: any, items?: string) => void
@@ -16,33 +16,22 @@ const props = defineProps<{
   deleteValue?: (key: string) => void
 }>()
 
-const getValueFromModel = () => {
-  let path = props.element.schema
-  path = path.replaceAll('/properties', '')
-  path = path.replace('schema/', '')
-  path = path.replaceAll('/', '.')
+const wholeSchema = inject('schema')
 
-  if (path.includes('items')) {
-    path = path.replace('.items', `[${props.items}]`)
+//element level data fetching
+const { data, isLoading, loadData } = useLoader()
+loadData(props.element.loader)
+const cData = computed(() => {
+  return {
+    ...toRaw(unref(props.parentData)),
+    input: toRaw(unref(data))
   }
-  const value = lodash.get(props.initialValue, path)
-  return value
-}
+})
 
-const calculateInitValue = () => {
-  if (props?.element?.init) {
-    const valType = props.element.init?.type
-    if (valType === 'static') return props.element.init.value
-    else {
-      const fName = props.element.init.value
-      return props.func[fName]()
-    }
-  } else {
-    return getValueFromModel() || ''
-  }
-}
-
-const value = ref(calculateInitValue())
+// calculate initial value
+const { calculateInitValue } = useInitial()
+const initValue = calculateInitValue(props.element, cData.value, props.items)
+const value = ref(initValue)
 
 // update model value
 watchDebounced(
@@ -54,44 +43,8 @@ watchDebounced(
   { immediate: true, debounce: 0 }
 )
 
-// create computed to watch the changes
-const watchedValue = computed(() => {
-  if (props.element.watcher?.paths) {
-    let val = ''
-    props.element.watcher.paths.forEach((path) => {
-      if (props.getValue) {
-        const tmp = props.getValue(path)
-        if (tmp) val += String(tmp)
-      }
-    })
-    return val
-  } else return ''
-})
-
-// fire when watch changes
-watch(watchedValue, () => {
-  if (props.element.watcher?.func) {
-    const fName = props.element.watcher.func
-    const val = props.func[fName]()
-    value.value += val
-  }
-})
-
-//element level data fetching
-const inInputFetching = ref(false)
-const componentData = { ...toRaw(unref(props.parentData)) }
-const fetchData = async () => {
-  if (!props?.element?.loader) return
-  try {
-    inInputFetching.value = true
-    const fName = props.element.loader
-    componentData.input = await props.func[fName]()
-  } catch (error) {
-    console.error(error)
-  }
-  inInputFetching.value = false
-}
-fetchData()
+// fire when watch dependency changes
+useWatchers(props.element.watcher, cData, value)
 
 const calculateInputType = computed(() => {
   let path = props.element.schema
@@ -99,8 +52,8 @@ const calculateInputType = computed(() => {
   path = path.replaceAll('/', '.')
   const typePath = `${path}.type`
   const formatPath = `${path}.format`
-  const type = lodash.get(props.wholeSchema, typePath)
-  const format = lodash.get(props.wholeSchema, formatPath)
+  const type = lodash.get(wholeSchema, typePath)
+  const format = lodash.get(wholeSchema, formatPath)
   if (type === 'integer') return 'number'
   else if (type === 'string' && format === 'password') return 'password'
   return 'text'
@@ -114,7 +67,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div v-if="inInputFetching">
+  <div v-if="isLoading">
     <h1>This input element is loading...</h1>
   </div>
   <div class="flex flex-col space-y-2">
