@@ -2,6 +2,7 @@
 import type { FormType } from '@/types/schema'
 import { defineAsyncComponent, provide, ref, toRaw, unref } from 'vue'
 import lodash from 'lodash'
+import { useGlobalModel } from '@/composables/model'
 
 const SingleStep = defineAsyncComponent(() => import('./derived/SingleStep.vue'))
 const MultiStep = defineAsyncComponent(() => import('./derived/MultiStep.vue'))
@@ -29,19 +30,7 @@ provide('schema', props.schema)
 provide('initialValue', props.initialValue)
 
 // generate model value
-const model = ref<Record<string, unknown>>({})
-const setValue = (key: string, val: any) => {
-  let fKey = key.replaceAll('/properties', '')
-  model.value[fKey] = val
-}
-const getValue = (key: string) => {
-  let fKey = key.replaceAll('/properties', '')
-  return model.value[fKey]
-}
-const deleteValue = (key: string) => {
-  const fKey = key.replaceAll('/properties', '')
-  delete model.value[fKey]
-}
+const { model } = useGlobalModel()
 
 // generate function
 const fn = props?.logic ? props.logic(model) : null
@@ -95,22 +84,12 @@ const handleStep = (type: 'Next' | 'Prev') => {
     <h1>Form file loading</h1>
   </div>
   <div class="max-w-3xl mx-auto" v-else>
-    <SingleStep
-      v-if="ui.type === 'single-step-from'"
-      :ui="ui"
-      :fn="fn"
-      :set-value="setValue"
-      :get-value="getValue"
-      :delete-value="deleteValue"
-    />
+    <SingleStep v-if="ui.type === 'single-step-from'" :ui="ui" :fn="fn" />
     <MultiStep
       v-else-if="ui.type === 'multi-step-form'"
       :active-step="activeStep"
       :ui="ui"
       :fn="fn"
-      :set-value="setValue"
-      :get-value="getValue"
-      :delete-value="deleteValue"
     />
     <h1 v-else>No Proper Form type found</h1>
     <div class="flex justify-between" v-if="ui.type === 'single-step-from'">

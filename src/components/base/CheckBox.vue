@@ -12,7 +12,6 @@ const props = defineProps<{
   deleteValue?: (key: string) => void
 }>()
 
-const schema = inject('schema')
 const initialValue = inject('initialValue')
 
 const getValueFromModel = () => {

@@ -8,9 +8,6 @@ const props = defineProps<{
   activeStep: number
   ui: MultiStepForm
   fn?: any
-  setValue: (path: string, val: any, items?: string) => void
-  getValue: (path: string) => unknown
-  deleteValue: (key: string) => void
 }>()
 
 //single step form level data fetching
@@ -36,15 +33,7 @@ fetchData()
   </div>
   <div v-else>
     <template v-for="(item, idx) in ui.step" :key="idx + item.label">
-      <SingleStep
-        v-show="idx === activeStep"
-        :ui="item"
-        :fn="fn"
-        :parent-data="componentData"
-        :set-value="setValue"
-        :get-value="getValue"
-        :delete-value="deleteValue"
-      />
+      <SingleStep v-show="idx === activeStep" :ui="item" :fn="fn" :parent-data="componentData" />
     </template>
   </div>
 </template>

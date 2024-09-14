@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { useGlobalModel } from '@/composables/model'
 import type { IfType, SingleStepForm } from '@/types/schema'
 import { defineAsyncComponent, inject, ref, toRaw, unref } from 'vue'
 
@@ -15,10 +16,9 @@ const props = defineProps<{
   ui: SingleStepForm
   fn?: any
   parentData?: any
-  setValue: (path: string, val: any, items?: string) => void
-  getValue: (path: string) => unknown
-  deleteValue: (key: string) => void
 }>()
+
+const { setValue, getValue, deleteValue } = useGlobalModel()
 
 const schema = inject('schema')
 const initialValue = inject('initialValue')

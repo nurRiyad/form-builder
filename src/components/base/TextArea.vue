@@ -5,7 +5,6 @@ import lodash from 'lodash'
 
 const props = defineProps<{
   element: TextArea
-
   func?: any
   items?: string
   parentData?: any
