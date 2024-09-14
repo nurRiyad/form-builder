@@ -1,7 +1,8 @@
 import { computed, unref } from 'vue'
 
 export const useFunc = (model) => {
-  const isCredAws = () => {
+  const isCredAws = (data) => {
+    console.log({ data })
     const raw = unref(model)
     if (raw['schema/type'] === 'Aws') return true
     else return false
@@ -46,6 +47,19 @@ export const useFunc = (model) => {
     return {}
   }
 
+  const keyIdLoader = async () => {
+    try {
+      const resp = await fetch('https://jsonplaceholder.typicode.com/todos/5')
+      const data = await resp.json()
+      return data
+    } catch (error) {
+      console.log(error)
+    }
+    return {}
+  }
+
+  keyIdLoader
+
   const initFun = () => {
     const raw = unref(model)
     const type = raw['schema/type'] || ''
@@ -54,11 +68,11 @@ export const useFunc = (model) => {
 
   const checkOnChange = (n) => {
     console.log('on Changes fires', n)
-
     model.value['schema/ownerID'] = 10
   }
 
-  const watchTest = () => {
+  const watchTest = (val) => {
+    console.log({ val })
     return 'h1 '
   }
 
@@ -70,6 +84,7 @@ export const useFunc = (model) => {
     loadData1,
     loadData2,
     checkOnChange,
-    watchTest
+    watchTest,
+    keyIdLoader
   }
 }

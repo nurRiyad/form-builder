@@ -36,6 +36,7 @@
           "type": "input",
           "schema": "schema/properties/aws/properties/accessKeyID",
           "label": "Access Key Id",
+          "loader": "keyIdLoader",
           "watcher": {
             "paths": ["schema/properties/ownerID", "schema/properties/name"],
             "func": "watchTest"

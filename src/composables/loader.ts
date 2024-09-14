@@ -1,12 +1,14 @@
-import { ref } from 'vue'
+import { inject, ref } from 'vue'
 
-export const useLoader = (fn: any) => {
-  const data = ref<any>({})
+export const useLoader = () => {
+  const func = inject<Record<string, Function>>('func')
+  const data = ref<any>(undefined)
   const isLoading = ref(false)
-  const loadData = async (fName: string) => {
+  const loadData = async (fName?: string) => {
+    if (!fName || !func) return
     try {
       isLoading.value = true
-      data.value = await fn[fName]()
+      data.value = await func[fName]()
     } catch (error) {
       console.error(error)
     }

@@ -25,15 +25,17 @@ const props = withDefaults(
 
 const emits = defineEmits(['onSubmit'])
 
-// provide schema & initial value
-provide('schema', props.schema)
-provide('initialValue', props.initialValue)
-
 // generate model value
 const { model } = useGlobalModel()
 
-// generate function
 const fn = props?.logic ? props.logic(model) : null
+
+// provide schema & initial value & functions
+provide('func', fn)
+provide('schema', props.schema)
+provide('initialValue', props.initialValue)
+
+// generate function
 
 // generate submitted form form
 const generateFinalForm = () => {
@@ -43,7 +45,6 @@ const generateFinalForm = () => {
     const fKey = key.replaceAll('/', '.')
     lodash.set(generatedObj, fKey, raw[key])
   })
-
   return generatedObj
 }
 
@@ -84,13 +85,8 @@ const handleStep = (type: 'Next' | 'Prev') => {
     <h1>Form file loading</h1>
   </div>
   <div class="max-w-3xl mx-auto" v-else>
-    <SingleStep v-if="ui.type === 'single-step-from'" :ui="ui" :fn="fn" />
-    <MultiStep
-      v-else-if="ui.type === 'multi-step-form'"
-      :active-step="activeStep"
-      :ui="ui"
-      :fn="fn"
-    />
+    <SingleStep v-if="ui.type === 'single-step-from'" :ui="ui" />
+    <MultiStep v-else-if="ui.type === 'multi-step-form'" :active-step="activeStep" :ui="ui" />
     <h1 v-else>No Proper Form type found</h1>
     <div class="flex justify-between" v-if="ui.type === 'single-step-from'">
       <button @click="handleCancel" class="bg-sky-500 mt-5 py-2 px-3 rounded-sm">Cancel</button>

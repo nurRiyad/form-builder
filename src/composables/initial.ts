@@ -1,9 +1,10 @@
 import { inject } from 'vue'
 import lodash from 'lodash'
-import type { Init } from '@/types'
+import type { BaseElement } from '@/types'
 
 export const useInitial = () => {
   const initialValue = inject('initialValue')
+  const func = inject<any>('func')
 
   const getValueFromModel = (schema: string, items?: string) => {
     let path = schema.replaceAll('/properties', '')
@@ -17,20 +18,17 @@ export const useInitial = () => {
     return value
   }
 
-  const calculateInitValue = (
-    init: Init | undefined,
-    schema: string,
-    func: any,
-    items?: string
-  ) => {
-    if (init) {
-      if (init.type === 'static') return init.value
+  const calculateInitValue = (el: BaseElement, data: any, items?: string) => {
+    if (el?.init) {
+      console.log(el)
+      if (el.init.type === 'static') return el.init.value
       else {
-        const fName = init.value
-        return func[fName]()
+        const fName = el.init.value
+        if (fName && func) return func[fName]()
+        return ''
       }
     } else {
-      return getValueFromModel(schema, items) || ''
+      return getValueFromModel(el.schema, items) || ''
     }
   }
 

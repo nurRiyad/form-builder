@@ -18,10 +18,11 @@ export type IfType = {
   name: string
 }
 
-type Options = Array<string> | Array<{ name: string; value: string }>
+export type Options = Array<string> | Array<{ name: string; value: string }>
 export type Init =
   | { type: 'func'; value: string }
   | { type: 'static'; value: string | number | boolean }
+export type Watchers = { paths: Array<string>; func: string }
 
 interface BaseCommon {
   label: string
@@ -30,10 +31,7 @@ interface BaseCommon {
   loader?: string
   disable?: boolean
   init?: Init
-  watcher?: {
-    paths: Array<string>
-    func: string
-  }
+  watcher?: Watchers
 }
 
 export interface Input extends BaseCommon {

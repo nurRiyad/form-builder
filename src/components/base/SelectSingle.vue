@@ -3,11 +3,10 @@ import type { Select } from '@/types/schema'
 import { computed, inject, onUnmounted, ref, toRaw, unref, watch } from 'vue'
 import lodash from 'lodash'
 import { useInitial } from '@/composables/initial'
+import { useLoader } from '@/composables/loader'
 
 const props = defineProps<{
   element: Select
-
-  func?: any
   items?: string
   parentData?: any
   setValue: (path: string, val: any) => void
@@ -16,15 +15,19 @@ const props = defineProps<{
 
 const wholeSchema = inject('schema')
 
+//element level data fetching
+const { data, isLoading, loadData } = useLoader()
+loadData(props.element.loader)
+const cData = computed(() => {
+  return {
+    ...toRaw(unref(props.parentData)),
+    input: toRaw(unref(data))
+  }
+})
+
 // calculate initial value
 const { calculateInitValue } = useInitial()
-const initValue = calculateInitValue(
-  props.element.init,
-  props.element.schema,
-  props.func,
-  props.items
-)
-
+const initValue = calculateInitValue(props.element, cData.value, props.items)
 const value = ref(initValue)
 
 watch(
@@ -52,23 +55,6 @@ const fOptions = computed(() => {
     } else return op
   })
 })
-
-//element level data fetching
-const isDataFetching = ref(false)
-const componentData = { ...toRaw(unref(props.parentData)) }
-const fetchData = async () => {
-  if (!props?.element?.loader) return
-  try {
-    isDataFetching.value = true
-    const fName = props.element.loader
-    componentData.select = await props.func[fName]()
-  } catch (error) {
-    console.error(error)
-  }
-  isDataFetching.value = false
-}
-fetchData()
-
 onUnmounted(() => {
   if (props.deleteValue) {
     props.deleteValue(props.element.schema)
@@ -77,7 +63,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div v-if="isDataFetching">
+  <div v-if="isLoading">
     <p>Data fetching</p>
   </div>
   <div v-else class="flex flex-col space-y-2">

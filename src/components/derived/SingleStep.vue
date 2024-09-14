@@ -1,7 +1,8 @@
 <script lang="ts" setup>
+import { useLoader } from '@/composables/loader'
 import { useGlobalModel } from '@/composables/model'
 import type { IfType, SingleStepForm } from '@/types/schema'
-import { defineAsyncComponent, inject, ref, toRaw, unref } from 'vue'
+import { computed, defineAsyncComponent, inject, toRaw, unref } from 'vue'
 
 const TheInput = defineAsyncComponent(() => import('../base/TheInput.vue'))
 const SelectSingle = defineAsyncComponent(() => import('../base/SelectSingle.vue'))
@@ -14,7 +15,6 @@ const ArrayInput = defineAsyncComponent(() => import('../derived/ArrayInput.vue'
 
 const props = defineProps<{
   ui: SingleStepForm
-  fn?: any
   parentData?: any
 }>()
 
@@ -22,37 +22,31 @@ const { setValue, getValue, deleteValue } = useGlobalModel()
 
 const schema = inject('schema')
 const initialValue = inject('initialValue')
+const fn = inject<any>('func')
 
-//single step form level data fetching
-const isSSFetching = ref(false)
-let componentData: Record<string, unknown> = { multi: toRaw(unref(props.parentData)) }
-const fetchData = async () => {
-  if (!props.ui.loader) return
-  try {
-    isSSFetching.value = true
-    const fName = props.ui.loader
-    componentData.single = await props.fn[fName]()
-  } catch (error) {
-    console.error(error)
+const { data, isLoading, loadData } = useLoader()
+loadData(props.ui.loader)
+const cData = computed(() => {
+  return {
+    multi: toRaw(unref(props.parentData)),
+    single: toRaw(unref(data))
   }
-  isSSFetching.value = false
-}
-fetchData()
+})
 
 //check condition
 const checkIf = (el: IfType | undefined) => {
-  if (!el) return true
+  if (!el || !fn) return true
   if (el.type === 'computed') {
-    return props.fn[el.name].value
+    return fn[el.name].value
   } else {
-    return props.fn[el.name]()
+    return fn[el.name]({ cdata: cData.value })
   }
 }
 </script>
 
 <template>
   <div>
-    <div v-if="isSSFetching">
+    <div v-if="isLoading">
       <h1>Single Step Form Loading</h1>
     </div>
     <div v-else class="flex flex-col space-y-4">
@@ -61,8 +55,7 @@ const checkIf = (el: IfType | undefined) => {
         <TheInput
           v-if="el.type === 'input' && checkIf(el.if)"
           :element="el"
-          :func="fn"
-          :parent-data="componentData"
+          :parent-data="cData"
           :set-value="setValue"
           :get-value="getValue"
           :delete-value="deleteValue"
@@ -70,32 +63,28 @@ const checkIf = (el: IfType | undefined) => {
         <SelectSingle
           v-else-if="el.type === 'select' && checkIf(el.if)"
           :element="el"
-          :func="fn"
-          :parent-data="componentData"
+          :parent-data="cData"
           :set-value="setValue"
           :delete-value="deleteValue"
         />
         <TheRadio
           v-else-if="el.type === 'radio' && checkIf(el.if)"
           :element="el"
-          :func="fn"
-          :parent-data="componentData"
+          :parent-data="cData"
           :set-value="setValue"
           :delete-value="deleteValue"
         />
         <TheSwitch
           v-else-if="el.type === 'switch' && checkIf(el.if)"
           :element="el"
-          :func="fn"
-          :parent-data="componentData"
+          :parent-data="cData"
           :set-value="setValue"
           :delete-value="deleteValue"
         />
         <CheckBox
           v-else-if="el.type === 'checkbox' && checkIf(el.if)"
           :element="el"
-          :parent-data="componentData"
-          :func="fn"
+          :parent-data="cData"
           :set-value="setValue"
           :delete-value="deleteValue"
         />
@@ -103,15 +92,13 @@ const checkIf = (el: IfType | undefined) => {
         <TheAnchor
           v-else-if="el.type === 'anchor' && checkIf(el.if)"
           :element="el"
-          :parent-data="componentData"
-          :func="fn"
+          :parent-data="cData"
         />
 
         <TextArea
           v-else-if="el.type === 'textarea' && checkIf(el.if)"
           :element="el"
-          :func="fn"
-          :parent-data="componentData"
+          :parent-data="cData"
           :set-value="setValue"
           :delete-value="deleteValue"
         />
@@ -121,8 +108,7 @@ const checkIf = (el: IfType | undefined) => {
           :ui="el"
           :initial-value="initialValue"
           :schema="schema"
-          :func="fn"
-          :parent-data="componentData"
+          :parent-data="cData"
           :set-value="setValue"
           :delete-value="deleteValue"
         />
