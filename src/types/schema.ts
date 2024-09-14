@@ -19,7 +19,9 @@ export type IfType = {
 }
 
 type Options = Array<string> | Array<{ name: string; value: string }>
-type Init = { type: 'func'; value: string } | { type: 'static'; value: string | number | boolean }
+export type Init =
+  | { type: 'func'; value: string }
+  | { type: 'static'; value: string | number | boolean }
 
 interface BaseCommon {
   label: string

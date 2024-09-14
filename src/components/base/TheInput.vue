@@ -3,6 +3,7 @@ import lodash from 'lodash'
 import type { Input } from '@/types/schema'
 import { computed, inject, onUnmounted, ref, toRaw, unref, watch } from 'vue'
 import { watchDebounced } from '@vueuse/core'
+import { useInitial } from '@/composables/initial'
 
 const props = defineProps<{
   element: Input
@@ -15,35 +16,16 @@ const props = defineProps<{
 }>()
 
 const wholeSchema = inject('schema')
-const initialValue = inject('initialValue')
 
-const getValueFromModel = () => {
-  let path = props.element.schema
-  path = path.replaceAll('/properties', '')
-  path = path.replace('schema/', '')
-  path = path.replaceAll('/', '.')
-
-  if (path.includes('items')) {
-    path = path.replace('.items', `[${props.items}]`)
-  }
-  const value = lodash.get(initialValue, path)
-  return value
-}
-
-const calculateInitValue = () => {
-  if (props?.element?.init) {
-    const valType = props.element.init?.type
-    if (valType === 'static') return props.element.init.value
-    else {
-      const fName = props.element.init.value
-      return props.func[fName]()
-    }
-  } else {
-    return getValueFromModel() || ''
-  }
-}
-
-const value = ref(calculateInitValue())
+// calculate initial value
+const { calculateInitValue } = useInitial()
+const initValue = calculateInitValue(
+  props.element.init,
+  props.element.schema,
+  props.func,
+  props.items
+)
+const value = ref(initValue)
 
 // update model value
 watchDebounced(

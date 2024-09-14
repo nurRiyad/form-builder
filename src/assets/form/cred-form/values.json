@@ -1,15 +1,15 @@
 {
   "azure": {
-    "clientID": "",
-    "tenantID": "",
-    "subscriptionID": "",
-    "clientSecret": ""
+    "clientID": "sdf",
+    "tenantID": "aaaa",
+    "subscriptionID": "bbb",
+    "clientSecret": "ccc"
   },
   "type": "Aws",
   "name": "sdfsd",
-  "ownerID": "",
+  "ownerID": 23423,
   "aws": {
-    "secretAccessKey": "",
+    "secretAccessKey": "sdfsdf",
     "accessKeyID": "sdfsdf"
   }
 }

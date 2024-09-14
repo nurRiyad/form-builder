@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { Anchor } from '@/types/schema'
-import { inject, ref, toRaw, unref } from 'vue'
-import lodash from 'lodash'
+import { ref, toRaw, unref } from 'vue'
+import { useInitial } from '@/composables/initial'
 
 const props = defineProps<{
   element: Anchor
@@ -10,36 +10,16 @@ const props = defineProps<{
   parentData?: any
 }>()
 
-const initialValue = inject('initialValue')
+// calculate initial value
+const { calculateInitValue } = useInitial()
+const initValue = calculateInitValue(
+  props.element.init,
+  props.element.schema,
+  props.func,
+  props.items
+)
 
-const getValueFromModel = () => {
-  let path = props.element.schema
-  path = path.replaceAll('/properties', '')
-  path = path.replace('schema/', '')
-  path = path.replaceAll('/', '.')
-
-  if (path.includes('items')) {
-    path = path.replace('.items', `[${props.items}]`)
-  }
-
-  const value = lodash.get(initialValue, path)
-  return value
-}
-
-const calculateInitValue = () => {
-  if (props?.element?.init) {
-    const valType = props.element.init?.type
-    if (valType === 'static') return props.element.init.value
-    else {
-      const fName = props.element.init.value
-      return props.func[fName]()
-    }
-  } else {
-    return getValueFromModel()
-  }
-}
-
-const value = ref(calculateInitValue())
+const value = ref(initValue)
 
 //element level data fetching
 const isDataFetching = ref(false)
