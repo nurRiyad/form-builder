@@ -7,8 +7,6 @@ const SingleStep = defineAsyncComponent(() => import('./SingleStep.vue'))
 const props = defineProps<{
   activeStep: number
   ui: MultiStepForm
-  schema: any
-  initialValue: any
   fn?: any
   setValue: (path: string, val: any, items?: string) => void
   getValue: (path: string) => unknown
@@ -41,8 +39,6 @@ fetchData()
       <SingleStep
         v-show="idx === activeStep"
         :ui="item"
-        :schema="schema"
-        :initial-value="initialValue"
         :fn="fn"
         :parent-data="componentData"
         :set-value="setValue"

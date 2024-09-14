@@ -1,18 +1,20 @@
 <script lang="ts" setup>
 import type { Select } from '@/types/schema'
-import { computed, onUnmounted, ref, toRaw, unref, watch } from 'vue'
+import { computed, inject, onUnmounted, ref, toRaw, unref, watch } from 'vue'
 import lodash from 'lodash'
 
 const props = defineProps<{
   element: Select
-  initialValue: any
-  wholeSchema: any
+
   func?: any
   items?: string
   parentData?: any
   setValue: (path: string, val: any) => void
   deleteValue?: (key: string) => void
 }>()
+
+const wholeSchema = inject('schema')
+const initialValue = inject('initialValue')
 
 const getValueFromModel = () => {
   let path = props.element.schema
@@ -23,7 +25,7 @@ const getValueFromModel = () => {
   if (path.includes('items')) {
     path = path.replace('.items', `[${props.items}]`)
   }
-  const value = lodash.get(props.initialValue, path)
+  const value = lodash.get(initialValue, path)
   return value
 }
 
@@ -59,7 +61,7 @@ const fOptions = computed(() => {
     path = `${path.replace('schema/', '')}`
     path = path.replaceAll('/', '.')
     const enumPath = `${path}.enum`
-    ops = (lodash.get(props.wholeSchema, enumPath) || []) as Array<string>
+    ops = (lodash.get(wholeSchema, enumPath) || []) as Array<string>
   }
   return ops.map((op) => {
     if (typeof op === 'string') {

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { FormType } from '@/types/schema'
-import { defineAsyncComponent, ref, toRaw, unref } from 'vue'
+import { defineAsyncComponent, provide, ref, toRaw, unref } from 'vue'
 import lodash from 'lodash'
 
 const SingleStep = defineAsyncComponent(() => import('./derived/SingleStep.vue'))
@@ -23,6 +23,10 @@ const props = withDefaults(
 )
 
 const emits = defineEmits(['onSubmit'])
+
+// provide schema & initial value
+provide('schema', props.schema)
+provide('initialValue', props.initialValue)
 
 // generate model value
 const model = ref<Record<string, unknown>>({})
@@ -94,8 +98,6 @@ const handleStep = (type: 'Next' | 'Prev') => {
     <SingleStep
       v-if="ui.type === 'single-step-from'"
       :ui="ui"
-      :schema="schema"
-      :initial-value="initialValue"
       :fn="fn"
       :set-value="setValue"
       :get-value="getValue"
@@ -105,8 +107,6 @@ const handleStep = (type: 'Next' | 'Prev') => {
       v-else-if="ui.type === 'multi-step-form'"
       :active-step="activeStep"
       :ui="ui"
-      :schema="schema"
-      :initial-value="initialValue"
       :fn="fn"
       :set-value="setValue"
       :get-value="getValue"

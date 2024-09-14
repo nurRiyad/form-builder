@@ -1,18 +1,18 @@
 <script lang="ts" setup>
 import type { Switch } from '@/types/schema'
-import { onUnmounted, ref, toRaw, unref, watch } from 'vue'
+import { inject, onUnmounted, ref, toRaw, unref, watch } from 'vue'
 import lodash from 'lodash'
 
 const props = defineProps<{
   element: Switch
-  initialValue: any
-  wholeSchema: any
   func?: any
   items?: string
   parentData?: any
   setValue: (path: string, val: any) => void
   deleteValue?: (key: string) => void
 }>()
+
+const initialValue = inject('initialValue')
 
 const getValueFromModel = () => {
   let path = props.element.schema
@@ -24,7 +24,7 @@ const getValueFromModel = () => {
     path = path.replace('.items', `[${props.items}]`)
   }
 
-  const value = lodash.get(props.initialValue, path)
+  const value = lodash.get(initialValue, path)
   return value
 }
 

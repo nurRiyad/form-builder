@@ -1,16 +1,16 @@
 <script lang="ts" setup>
 import type { Anchor } from '@/types/schema'
-import { ref, toRaw, unref } from 'vue'
+import { inject, ref, toRaw, unref } from 'vue'
 import lodash from 'lodash'
 
 const props = defineProps<{
   element: Anchor
-  initialValue: any
-  wholeSchema: any
   func?: any
   items?: string
   parentData?: any
 }>()
+
+const initialValue = inject('initialValue')
 
 const getValueFromModel = () => {
   let path = props.element.schema
@@ -22,7 +22,7 @@ const getValueFromModel = () => {
     path = path.replace('.items', `[${props.items}]`)
   }
 
-  const value = lodash.get(props.initialValue, path)
+  const value = lodash.get(initialValue, path)
   return value
 }
 

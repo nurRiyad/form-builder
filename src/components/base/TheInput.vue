@@ -1,13 +1,11 @@
 <script lang="ts" setup>
 import lodash from 'lodash'
 import type { Input } from '@/types/schema'
-import { computed, onUnmounted, ref, toRaw, unref, watch } from 'vue'
+import { computed, inject, onUnmounted, ref, toRaw, unref, watch } from 'vue'
 import { watchDebounced } from '@vueuse/core'
 
 const props = defineProps<{
   element: Input
-  initialValue: any
-  wholeSchema: any
   func?: any
   items?: string
   parentData?: any
@@ -15,6 +13,9 @@ const props = defineProps<{
   getValue?: (path: string) => unknown
   deleteValue?: (key: string) => void
 }>()
+
+const wholeSchema = inject('schema')
+const initialValue = inject('initialValue')
 
 const getValueFromModel = () => {
   let path = props.element.schema
@@ -25,7 +26,7 @@ const getValueFromModel = () => {
   if (path.includes('items')) {
     path = path.replace('.items', `[${props.items}]`)
   }
-  const value = lodash.get(props.initialValue, path)
+  const value = lodash.get(initialValue, path)
   return value
 }
 
@@ -99,8 +100,8 @@ const calculateInputType = computed(() => {
   path = path.replaceAll('/', '.')
   const typePath = `${path}.type`
   const formatPath = `${path}.format`
-  const type = lodash.get(props.wholeSchema, typePath)
-  const format = lodash.get(props.wholeSchema, formatPath)
+  const type = lodash.get(wholeSchema, typePath)
+  const format = lodash.get(wholeSchema, formatPath)
   if (type === 'integer') return 'number'
   else if (type === 'string' && format === 'password') return 'password'
   return 'text'

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { IfType, SingleStepForm } from '@/types/schema'
-import { defineAsyncComponent, ref, toRaw, unref } from 'vue'
+import { defineAsyncComponent, inject, ref, toRaw, unref } from 'vue'
 
 const TheInput = defineAsyncComponent(() => import('../base/TheInput.vue'))
 const SelectSingle = defineAsyncComponent(() => import('../base/SelectSingle.vue'))
@@ -13,14 +13,15 @@ const ArrayInput = defineAsyncComponent(() => import('../derived/ArrayInput.vue'
 
 const props = defineProps<{
   ui: SingleStepForm
-  schema: any
-  initialValue: any
   fn?: any
   parentData?: any
   setValue: (path: string, val: any, items?: string) => void
   getValue: (path: string) => unknown
   deleteValue: (key: string) => void
 }>()
+
+const schema = inject('schema')
+const initialValue = inject('initialValue')
 
 //single step form level data fetching
 const isSSFetching = ref(false)
@@ -60,8 +61,6 @@ const checkIf = (el: IfType | undefined) => {
         <TheInput
           v-if="el.type === 'input' && checkIf(el.if)"
           :element="el"
-          :initial-value="initialValue"
-          :whole-schema="schema"
           :func="fn"
           :parent-data="componentData"
           :set-value="setValue"
@@ -71,8 +70,6 @@ const checkIf = (el: IfType | undefined) => {
         <SelectSingle
           v-else-if="el.type === 'select' && checkIf(el.if)"
           :element="el"
-          :initial-value="initialValue"
-          :whole-schema="schema"
           :func="fn"
           :parent-data="componentData"
           :set-value="setValue"
@@ -81,8 +78,6 @@ const checkIf = (el: IfType | undefined) => {
         <TheRadio
           v-else-if="el.type === 'radio' && checkIf(el.if)"
           :element="el"
-          :initial-value="initialValue"
-          :whole-schema="schema"
           :func="fn"
           :parent-data="componentData"
           :set-value="setValue"
@@ -91,8 +86,6 @@ const checkIf = (el: IfType | undefined) => {
         <TheSwitch
           v-else-if="el.type === 'switch' && checkIf(el.if)"
           :element="el"
-          :initial-value="initialValue"
-          :whole-schema="schema"
           :func="fn"
           :parent-data="componentData"
           :set-value="setValue"
@@ -101,8 +94,6 @@ const checkIf = (el: IfType | undefined) => {
         <CheckBox
           v-else-if="el.type === 'checkbox' && checkIf(el.if)"
           :element="el"
-          :initial-value="initialValue"
-          :whole-schema="schema"
           :parent-data="componentData"
           :func="fn"
           :set-value="setValue"
@@ -112,8 +103,6 @@ const checkIf = (el: IfType | undefined) => {
         <TheAnchor
           v-else-if="el.type === 'anchor' && checkIf(el.if)"
           :element="el"
-          :initial-value="initialValue"
-          :whole-schema="schema"
           :parent-data="componentData"
           :func="fn"
         />
@@ -121,8 +110,6 @@ const checkIf = (el: IfType | undefined) => {
         <TextArea
           v-else-if="el.type === 'textarea' && checkIf(el.if)"
           :element="el"
-          :initial-value="initialValue"
-          :whole-schema="schema"
           :func="fn"
           :parent-data="componentData"
           :set-value="setValue"
