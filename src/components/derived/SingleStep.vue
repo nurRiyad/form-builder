@@ -18,7 +18,7 @@ const props = defineProps<{
   parentData?: any
 }>()
 
-const { setValue, getValue, deleteValue } = useGlobalModel()
+const { setValue, deleteValue } = useGlobalModel()
 
 const schema = inject('schema')
 const initialValue = inject('initialValue')
@@ -57,7 +57,6 @@ const checkIf = (el: IfType | undefined) => {
           :element="el"
           :parent-data="cData"
           :set-value="setValue"
-          :get-value="getValue"
           :delete-value="deleteValue"
         />
         <SelectSingle

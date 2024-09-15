@@ -12,7 +12,6 @@ const props = defineProps<{
   items?: string
   parentData?: any
   setValue: (path: string, val: any, items?: string) => void
-  getValue?: (path: string) => unknown
   deleteValue?: (key: string) => void
 }>()
 
