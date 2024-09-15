@@ -1,0 +1,218 @@
+{
+  "properties": {
+    "ownerID": {
+      "format": "int64",
+      "type": "integer"
+    },
+    "linode": {
+      "required": ["token"],
+      "properties": {
+        "token": {
+          "type": "string",
+          "format": "password"
+        }
+      },
+      "type": "object"
+    },
+    "vultr": {
+      "properties": {
+        "token": {
+          "type": "string",
+          "format": "password"
+        }
+      },
+      "required": ["token"],
+      "type": "object"
+    },
+    "name": {
+      "type": "string"
+    },
+    "type": {
+      "enum": [
+        "Aws",
+        "Azure",
+        "AzureStorage",
+        "DigitalOcean",
+        "GoogleCloud",
+        "GoogleOAuth",
+        "Linode",
+        "Packet",
+        "Scaleway",
+        "Swift",
+        "Vultr"
+      ],
+      "type": "string"
+    },
+    "azure": {
+      "properties": {
+        "tenantID": {
+          "type": "string"
+        },
+        "clientID": {
+          "type": "string",
+          "description": "Your client (App Registration) must have the following role assignments - Application Group Contributor & Azure Kubernetes Service Cluster User Role"
+        },
+        "subscriptionID": {
+          "type": "string"
+        },
+        "clientSecret": {
+          "type": "string",
+          "format": "password"
+        }
+      },
+      "type": "object",
+      "required": ["clientID", "clientSecret", "subscriptionID", "tenantID"]
+    },
+    "swift": {
+      "type": "object",
+      "properties": {
+        "tenantAuthURL": {
+          "type": "string"
+        },
+        "tenantID": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string",
+          "format": "password"
+        },
+        "domain": {
+          "type": "string"
+        },
+        "tenantName": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        },
+        "tenantDomain": {
+          "type": "string"
+        }
+      },
+      "required": ["password", "username"]
+    },
+    "azureStorage": {
+      "properties": {
+        "key": {
+          "type": "string",
+          "format": "password"
+        },
+        "account": {
+          "type": "string"
+        }
+      },
+      "required": ["account", "key"],
+      "type": "object"
+    },
+    "packet": {
+      "type": "object",
+      "required": ["apiKey", "projectID"],
+      "properties": {
+        "projectID": {
+          "type": "string"
+        },
+        "apiKey": {
+          "type": "string",
+          "format": "password"
+        }
+      }
+    },
+    "aws": {
+      "type": "object",
+      "properties": {
+        "accessKeyID": {
+          "type": "string"
+        },
+        "secretAccessKey": {
+          "type": "string",
+          "format": "password"
+        }
+      },
+      "required": ["accessKeyID", "secretAccessKey"]
+    },
+    "rancher": {
+      "type": "object",
+      "properties": {
+        "endpoint": {
+          "type": "string"
+        },
+        "accessKeyID": {
+          "type": "string"
+        },
+        "secretAccessKey": {
+          "type": "string",
+          "format": "password"
+        }
+      },
+      "required": ["endpoint", "accessKeyID", "secretAccessKey"]
+    },
+    "googleOAuth": {
+      "required": ["accessToken", "clientID", "clientSecret"],
+      "type": "object",
+      "properties": {
+        "clientSecret": {
+          "type": "string"
+        },
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "expiry": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "refreshToken": {
+          "type": "string"
+        },
+        "clientID": {
+          "type": "string"
+        },
+        "accessToken": {
+          "type": "string"
+        }
+      }
+    },
+    "scaleway": {
+      "properties": {
+        "organization": {
+          "type": "string"
+        },
+        "token": {
+          "type": "string",
+          "format": "password"
+        }
+      },
+      "type": "object",
+      "required": ["organization", "token"]
+    },
+    "digitalocean": {
+      "required": ["token"],
+      "properties": {
+        "token": {
+          "type": "string",
+          "format": "password"
+        }
+      },
+      "type": "object"
+    },
+    "googleCloud": {
+      "properties": {
+        "projectID": {
+          "type": "string"
+        },
+        "serviceAccount": {
+          "type": "string"
+        }
+      },
+      "required": ["projectID", "serviceAccount"],
+      "type": "object"
+    }
+  },
+  "type": "object",
+  "required": ["name", "ownerID", "type"]
+}

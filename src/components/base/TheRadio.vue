@@ -63,7 +63,7 @@ const fOptions = computed(() => {
   <div v-else class="flex flex-col space-y-2">
     <p>{{ element.label }}</p>
     <div v-for="op in fOptions" :key="op.value" class="space-x-2">
-      <input type="radio" :id="op.value" :name="element.label" :value="op" v-model="picked" />
+      <input type="radio" :id="op.value" :name="element.label" :value="op.value" v-model="picked" />
       <label :for="op.value">{{ op.name }}</label>
     </div>
   </div>
