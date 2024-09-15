@@ -23,7 +23,7 @@ export const useInitial = () => {
       if (el.init.type === 'static') return el.init.value
       else {
         const fName = el.init.value
-        if (fName && func) return func[fName]()
+        if (fName && func) return func[fName](data)
         return ''
       }
     } else {

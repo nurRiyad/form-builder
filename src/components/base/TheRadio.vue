@@ -9,6 +9,7 @@ const props = defineProps<{
   element: Radio
   func?: any
   items?: string
+  tempValue?: any
   parentData?: any
   setValue: (path: string, val: any, items?: string) => void
   deleteValue?: (key: string) => void
@@ -26,7 +27,8 @@ const cData = computed(() => {
 
 // calculate initial value
 const { calculateInitValue } = useInitial()
-const initValue = calculateInitValue(props.element, cData.value, props.items)
+const initValue =
+  props.items === undefined ? calculateInitValue(props.element, cData.value) : props.tempValue
 const picked = ref(initValue)
 
 // update model value
@@ -63,8 +65,14 @@ const fOptions = computed(() => {
   <div v-else class="flex flex-col space-y-2">
     <p>{{ element.label }}</p>
     <div v-for="op in fOptions" :key="op.value" class="space-x-2">
-      <input type="radio" :id="op.value" :name="element.label" :value="op.value" v-model="picked" />
-      <label :for="op.value">{{ op.name }}</label>
+      <input
+        type="radio"
+        :id="String(op.value) + String(items)"
+        :name="element.label"
+        :value="op.value"
+        v-model="picked"
+      />
+      <label :for="String(op.value) + String(items)">{{ op.name }}</label>
     </div>
   </div>
 </template>

@@ -9,6 +9,7 @@ const props = defineProps<{
   element: TextArea
   func?: any
   items?: string
+  tempValue?: any
   parentData?: any
   setValue: (path: string, val: any, items?: string) => void
   deleteValue?: (key: string) => void
@@ -26,7 +27,8 @@ const cData = computed(() => {
 
 // calculate initial value
 const { calculateInitValue } = useInitial()
-const initValue = calculateInitValue(props.element, cData.value, props.items)
+const initValue =
+  props.items === undefined ? calculateInitValue(props.element, cData.value) : props.tempValue
 const value = ref(initValue)
 
 // update model value

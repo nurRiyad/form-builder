@@ -64,7 +64,7 @@ export interface Anchor extends BaseCommon {
   type: 'anchor'
 }
 
-export interface ArrayInput extends BaseCommon {
+export interface ArrayObject extends BaseCommon {
   type: 'array-object-form'
   elements: Array<BaseElement>
 }
@@ -77,6 +77,6 @@ export type BaseElement =
   | CheckBox
   | Switch
   | Anchor
-  | ArrayInput
+  | ArrayObject
 
 export type FormType = SingleStepForm | MultiStepForm

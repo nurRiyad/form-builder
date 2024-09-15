@@ -5,6 +5,14 @@
     "aboutMe": "I am a bad software engineer",
     "country": "nepal",
     "gender": "Male",
-    "isMarried": true
+    "isMarried": true,
+    "obj": [
+      {
+        "name": "sldkfjs"
+      },
+      {
+        "name": "aaaaa"
+      }
+    ]
   }
 }

@@ -4,8 +4,8 @@ import { defineAsyncComponent, provide, ref, toRaw, unref } from 'vue'
 import lodash from 'lodash'
 import { useGlobalModel } from '@/composables/model'
 
-const SingleStep = defineAsyncComponent(() => import('./derived/SingleStep.vue'))
-const MultiStep = defineAsyncComponent(() => import('./derived/MultiStep.vue'))
+const SingleStep = defineAsyncComponent(() => import('./root/SingleStep.vue'))
+const MultiStep = defineAsyncComponent(() => import('./root/MultiStep.vue'))
 
 const props = withDefaults(
   defineProps<{

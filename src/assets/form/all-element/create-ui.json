@@ -66,9 +66,33 @@
       "schema": "schema/properties/single2",
       "elements": [
         {
-          "type": "textarea",
-          "label": "Description",
-          "schema": "schema/properties/userinfo/properties/description"
+          "type": "array-object-form",
+          "label": "Array of object",
+          "schema": "schema/properties/userinfo/properties/obj",
+          "elements": [
+            {
+              "type": "input",
+              "label": "Name",
+              "schema": "name"
+            },
+            {
+              "type": "select",
+              "label": "Simple Select",
+              "schema": "select",
+              "options": ["sldfk", "aaa", "bbb"]
+            },
+            {
+              "type": "textarea",
+              "label": "Textarea",
+              "schema": "textarea"
+            },
+            {
+              "type": "radio",
+              "label": "Radio check",
+              "schema": "radio",
+              "options": ["riyad", "solurav"]
+            }
+          ]
         }
       ]
     }
