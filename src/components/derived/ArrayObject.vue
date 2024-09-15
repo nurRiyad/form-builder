@@ -31,7 +31,6 @@ const initValue = calculateInitValue(props.ui, cData.value)
 // temporary model value
 const tempMode = ref(initValue)
 const setValueTemp = (key: string, val: any, items?: string) => {
-  console.log(key, items)
   if (items) {
     tempMode.value[parseInt(items)][key] = val
   }
