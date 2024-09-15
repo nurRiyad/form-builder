@@ -31,11 +31,7 @@
           "$ref": "#/definitions/Watchers"
         }
       },
-      "required": [
-        "label",
-        "schema",
-        "type"
-      ],
+      "required": ["label", "schema", "type"],
       "type": "object"
     },
     "ArrayObject": {
@@ -73,12 +69,7 @@
           "$ref": "#/definitions/Watchers"
         }
       },
-      "required": [
-        "elements",
-        "label",
-        "schema",
-        "type"
-      ],
+      "required": ["elements", "label", "schema", "type"],
       "type": "object"
     },
     "BaseElement": {
@@ -138,11 +129,7 @@
           "$ref": "#/definitions/Watchers"
         }
       },
-      "required": [
-        "label",
-        "schema",
-        "type"
-      ],
+      "required": ["label", "schema", "type"],
       "type": "object"
     },
     "FormType": {
@@ -162,17 +149,11 @@
           "type": "string"
         },
         "type": {
-          "enum": [
-            "function",
-            "computed"
-          ],
+          "enum": ["function", "computed"],
           "type": "string"
         }
       },
-      "required": [
-        "type",
-        "name"
-      ],
+      "required": ["type", "name"],
       "type": "object"
     },
     "Init": {
@@ -188,10 +169,7 @@
               "type": "string"
             }
           },
-          "required": [
-            "type",
-            "value"
-          ],
+          "required": ["type", "value"],
           "type": "object"
         },
         {
@@ -202,17 +180,10 @@
               "type": "string"
             },
             "value": {
-              "type": [
-                "string",
-                "number",
-                "boolean"
-              ]
+              "type": ["string", "number", "boolean"]
             }
           },
-          "required": [
-            "type",
-            "value"
-          ],
+          "required": ["type", "value"],
           "type": "object"
         }
       ]
@@ -246,11 +217,7 @@
           "$ref": "#/definitions/Watchers"
         }
       },
-      "required": [
-        "label",
-        "schema",
-        "type"
-      ],
+      "required": ["label", "schema", "type"],
       "type": "object"
     },
     "MultiStepForm": {
@@ -273,11 +240,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "type",
-        "step",
-        "labe"
-      ],
+      "required": ["type", "step", "labe"],
       "type": "object"
     },
     "Options": {
@@ -299,10 +262,7 @@
                 "type": "string"
               }
             },
-            "required": [
-              "name",
-              "value"
-            ],
+            "required": ["name", "value"],
             "type": "object"
           },
           "type": "array"
@@ -341,12 +301,7 @@
           "$ref": "#/definitions/Watchers"
         }
       },
-      "required": [
-        "label",
-        "options",
-        "schema",
-        "type"
-      ],
+      "required": ["label", "options", "schema", "type"],
       "type": "object"
     },
     "Select": {
@@ -381,11 +336,7 @@
           "$ref": "#/definitions/Watchers"
         }
       },
-      "required": [
-        "label",
-        "schema",
-        "type"
-      ],
+      "required": ["label", "schema", "type"],
       "type": "object"
     },
     "SingleStepForm": {
@@ -411,12 +362,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "type",
-        "schema",
-        "label",
-        "elements"
-      ],
+      "required": ["type", "schema", "label", "elements"],
       "type": "object"
     },
     "Switch": {
@@ -448,11 +394,7 @@
           "$ref": "#/definitions/Watchers"
         }
       },
-      "required": [
-        "label",
-        "schema",
-        "type"
-      ],
+      "required": ["label", "schema", "type"],
       "type": "object"
     },
     "TextArea": {
@@ -484,11 +426,7 @@
           "$ref": "#/definitions/Watchers"
         }
       },
-      "required": [
-        "label",
-        "schema",
-        "type"
-      ],
+      "required": ["label", "schema", "type"],
       "type": "object"
     },
     "Watchers": {
@@ -504,10 +442,7 @@
           "type": "array"
         }
       },
-      "required": [
-        "paths",
-        "func"
-      ],
+      "required": ["paths", "func"],
       "type": "object"
     }
   }
