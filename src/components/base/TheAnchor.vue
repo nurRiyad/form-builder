@@ -8,6 +8,7 @@ const props = defineProps<{
   element: Anchor
   func?: any
   items?: string
+  tempValue?: any
   parentData?: any
 }>()
 
@@ -23,7 +24,8 @@ const cData = computed(() => {
 
 // calculate initial value
 const { calculateInitValue } = useInitial()
-const initValue = calculateInitValue(props.element, cData.value, props.items)
+const initValue =
+  props.items === undefined ? calculateInitValue(props.element, cData.value) : props.tempValue
 const value = ref(initValue)
 </script>
 

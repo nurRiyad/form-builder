@@ -4,6 +4,8 @@ Generate from in a minutes
 
 ## Todo
 
+#### Overall
+
 - [x] Initiate a basic vue project with vitest cypress vue pinia and router
 - [x] Create some base element like input, select,radio
 - [x] Some derived from like single-step form & multi-step-form
@@ -11,24 +13,77 @@ Generate from in a minutes
 - [x] Remove key from form when element is unmounted
 - [x] Merge model value with the generated value
 - [x] Multi step from process
-- [ ] Basic Validation
-- [ ] Add function and computed both feature for if conditions
+- [x] Add function and computed both feature for if conditions
+- [x] Add other other basic property in select radio checkbox text area
+- [x] Check if create-ui, initial-value and fun can load from api call
+- [x] Add watcher fo watch some components value
+- [x] Rerun when watcher changes
+- [x] Component level fetch
+  - [x] Extract the function and call properly
+  - [x] Save the value somewhere to properly use this
+- [x] From Level fetch
+  - [x] Extract the function and call properly
+  - [x] Save the value somewhere to properly use this
 - [ ] Add slots for form actions
 - [ ] Remove lodash from dependency
 - [ ] Remove same type of code from base components
-- [x] Add other other basic property in select radio checkbox text area
+- [ ] Basic Validation
 - [ ] Add editor element
 - [ ] Create Platform UI Credential create form
 - [ ] Create Platform UI Credential Edit form
-- [x] Check if create-ui, initial-value and fun can load from api call
-- [x] Component level fetch
-  - [x] Extract the function and call properly
-  - [ ] Save the value somewhere to properly use this
-  - [ ] After fetching complete need to re-render the component
-- [ ] From Level fetch
-  - [x] Extract the function and call properly
-  - [ ] Save the value somewhere to properly use this
-  - [ ] After fetching the component need to be re-rendered
+
+#### Component Specific Feature
+
+- Base Element
+  - Input
+    - [x] Conditional Render
+    - [x] Loader check
+    - [x] Initial value calculate
+    - [x] Watcher changes
+    - [x] Validation
+    - [x] Proper input type guess
+  - TextArea
+    - [x] Conditional Render
+    - [x] Loader check
+    - [x] Initial value calculate
+    - [x] Watcher changes
+    - [x] Validation
+    - [x] Proper input type guess
+  - Single Select
+    - [x] Conditional Render
+    - [x] Loader check
+    - [x] Initial value calculate
+    - [x] Watcher changes
+    - [x] Validation
+    - [x] Proper input type guess
+  - Checkbox
+    - [x] Conditional Render
+    - [x] Loader check
+    - [x] Initial value calculate
+    - [x] Watcher changes
+    - [x] Validation
+    - [x] Proper input type guess
+  - Radio
+    - [x] Conditional Render
+    - [x] Loader check
+    - [x] Initial value calculate
+    - [x] Watcher changes
+    - [x] Validation
+    - [x] Proper input type guess
+  - Switch
+    - [x] Conditional Render
+    - [x] Loader check
+    - [x] Initial value calculate
+    - [x] Watcher changes
+    - [x] Validation
+    - [x] Proper input type guess
+  - Anchor
+    - [x] Conditional Render
+    - [x] Loader check
+    - [x] Initial value calculate
+    - [x] Watcher changes
+    - [x] Validation
+    - [x] Proper input type guess
 
 ## Recommended IDE Setup
 

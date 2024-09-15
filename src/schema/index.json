@@ -12,36 +12,7 @@
           "$ref": "#/definitions/IfType"
         },
         "init": {
-          "anyOf": [
-            {
-              "additionalProperties": false,
-              "properties": {
-                "type": {
-                  "const": "func",
-                  "type": "string"
-                },
-                "value": {
-                  "type": "string"
-                }
-              },
-              "required": ["type", "value"],
-              "type": "object"
-            },
-            {
-              "additionalProperties": false,
-              "properties": {
-                "type": {
-                  "const": "static",
-                  "type": "string"
-                },
-                "value": {
-                  "type": ["string", "number", "boolean"]
-                }
-              },
-              "required": ["type", "value"],
-              "type": "object"
-            }
-          ]
+          "$ref": "#/definitions/Init"
         },
         "label": {
           "type": "string"
@@ -57,26 +28,13 @@
           "type": "string"
         },
         "watcher": {
-          "additionalProperties": false,
-          "properties": {
-            "func": {
-              "type": "string"
-            },
-            "paths": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            }
-          },
-          "required": ["paths", "func"],
-          "type": "object"
+          "$ref": "#/definitions/Watchers"
         }
       },
       "required": ["label", "schema", "type"],
       "type": "object"
     },
-    "ArrayInput": {
+    "ArrayObject": {
       "additionalProperties": false,
       "properties": {
         "disable": {
@@ -92,36 +50,7 @@
           "$ref": "#/definitions/IfType"
         },
         "init": {
-          "anyOf": [
-            {
-              "additionalProperties": false,
-              "properties": {
-                "type": {
-                  "const": "func",
-                  "type": "string"
-                },
-                "value": {
-                  "type": "string"
-                }
-              },
-              "required": ["type", "value"],
-              "type": "object"
-            },
-            {
-              "additionalProperties": false,
-              "properties": {
-                "type": {
-                  "const": "static",
-                  "type": "string"
-                },
-                "value": {
-                  "type": ["string", "number", "boolean"]
-                }
-              },
-              "required": ["type", "value"],
-              "type": "object"
-            }
-          ]
+          "$ref": "#/definitions/Init"
         },
         "label": {
           "type": "string"
@@ -137,20 +66,7 @@
           "type": "string"
         },
         "watcher": {
-          "additionalProperties": false,
-          "properties": {
-            "func": {
-              "type": "string"
-            },
-            "paths": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            }
-          },
-          "required": ["paths", "func"],
-          "type": "object"
+          "$ref": "#/definitions/Watchers"
         }
       },
       "required": ["elements", "label", "schema", "type"],
@@ -180,7 +96,7 @@
           "$ref": "#/definitions/Anchor"
         },
         {
-          "$ref": "#/definitions/ArrayInput"
+          "$ref": "#/definitions/ArrayObject"
         }
       ]
     },
@@ -194,36 +110,7 @@
           "$ref": "#/definitions/IfType"
         },
         "init": {
-          "anyOf": [
-            {
-              "additionalProperties": false,
-              "properties": {
-                "type": {
-                  "const": "func",
-                  "type": "string"
-                },
-                "value": {
-                  "type": "string"
-                }
-              },
-              "required": ["type", "value"],
-              "type": "object"
-            },
-            {
-              "additionalProperties": false,
-              "properties": {
-                "type": {
-                  "const": "static",
-                  "type": "string"
-                },
-                "value": {
-                  "type": ["string", "number", "boolean"]
-                }
-              },
-              "required": ["type", "value"],
-              "type": "object"
-            }
-          ]
+          "$ref": "#/definitions/Init"
         },
         "label": {
           "type": "string"
@@ -239,20 +126,7 @@
           "type": "string"
         },
         "watcher": {
-          "additionalProperties": false,
-          "properties": {
-            "func": {
-              "type": "string"
-            },
-            "paths": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            }
-          },
-          "required": ["paths", "func"],
-          "type": "object"
+          "$ref": "#/definitions/Watchers"
         }
       },
       "required": ["label", "schema", "type"],
@@ -282,6 +156,38 @@
       "required": ["type", "name"],
       "type": "object"
     },
+    "Init": {
+      "anyOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "const": "func",
+              "type": "string"
+            },
+            "value": {
+              "type": "string"
+            }
+          },
+          "required": ["type", "value"],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "const": "static",
+              "type": "string"
+            },
+            "value": {
+              "type": ["string", "number", "boolean"]
+            }
+          },
+          "required": ["type", "value"],
+          "type": "object"
+        }
+      ]
+    },
     "Input": {
       "additionalProperties": false,
       "properties": {
@@ -292,36 +198,7 @@
           "$ref": "#/definitions/IfType"
         },
         "init": {
-          "anyOf": [
-            {
-              "additionalProperties": false,
-              "properties": {
-                "type": {
-                  "const": "func",
-                  "type": "string"
-                },
-                "value": {
-                  "type": "string"
-                }
-              },
-              "required": ["type", "value"],
-              "type": "object"
-            },
-            {
-              "additionalProperties": false,
-              "properties": {
-                "type": {
-                  "const": "static",
-                  "type": "string"
-                },
-                "value": {
-                  "type": ["string", "number", "boolean"]
-                }
-              },
-              "required": ["type", "value"],
-              "type": "object"
-            }
-          ]
+          "$ref": "#/definitions/Init"
         },
         "label": {
           "type": "string"
@@ -337,20 +214,7 @@
           "type": "string"
         },
         "watcher": {
-          "additionalProperties": false,
-          "properties": {
-            "func": {
-              "type": "string"
-            },
-            "paths": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            }
-          },
-          "required": ["paths", "func"],
-          "type": "object"
+          "$ref": "#/definitions/Watchers"
         }
       },
       "required": ["label", "schema", "type"],
@@ -379,6 +243,32 @@
       "required": ["type", "step", "labe"],
       "type": "object"
     },
+    "Options": {
+      "anyOf": [
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              }
+            },
+            "required": ["name", "value"],
+            "type": "object"
+          },
+          "type": "array"
+        }
+      ]
+    },
     "Radio": {
       "additionalProperties": false,
       "properties": {
@@ -389,36 +279,7 @@
           "$ref": "#/definitions/IfType"
         },
         "init": {
-          "anyOf": [
-            {
-              "additionalProperties": false,
-              "properties": {
-                "type": {
-                  "const": "func",
-                  "type": "string"
-                },
-                "value": {
-                  "type": "string"
-                }
-              },
-              "required": ["type", "value"],
-              "type": "object"
-            },
-            {
-              "additionalProperties": false,
-              "properties": {
-                "type": {
-                  "const": "static",
-                  "type": "string"
-                },
-                "value": {
-                  "type": ["string", "number", "boolean"]
-                }
-              },
-              "required": ["type", "value"],
-              "type": "object"
-            }
-          ]
+          "$ref": "#/definitions/Init"
         },
         "label": {
           "type": "string"
@@ -427,30 +288,7 @@
           "type": "string"
         },
         "options": {
-          "anyOf": [
-            {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            },
-            {
-              "items": {
-                "additionalProperties": false,
-                "properties": {
-                  "name": {
-                    "type": "string"
-                  },
-                  "value": {
-                    "type": "string"
-                  }
-                },
-                "required": ["name", "value"],
-                "type": "object"
-              },
-              "type": "array"
-            }
-          ]
+          "$ref": "#/definitions/Options"
         },
         "schema": {
           "type": "string"
@@ -460,20 +298,7 @@
           "type": "string"
         },
         "watcher": {
-          "additionalProperties": false,
-          "properties": {
-            "func": {
-              "type": "string"
-            },
-            "paths": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            }
-          },
-          "required": ["paths", "func"],
-          "type": "object"
+          "$ref": "#/definitions/Watchers"
         }
       },
       "required": ["label", "options", "schema", "type"],
@@ -489,36 +314,7 @@
           "$ref": "#/definitions/IfType"
         },
         "init": {
-          "anyOf": [
-            {
-              "additionalProperties": false,
-              "properties": {
-                "type": {
-                  "const": "func",
-                  "type": "string"
-                },
-                "value": {
-                  "type": "string"
-                }
-              },
-              "required": ["type", "value"],
-              "type": "object"
-            },
-            {
-              "additionalProperties": false,
-              "properties": {
-                "type": {
-                  "const": "static",
-                  "type": "string"
-                },
-                "value": {
-                  "type": ["string", "number", "boolean"]
-                }
-              },
-              "required": ["type", "value"],
-              "type": "object"
-            }
-          ]
+          "$ref": "#/definitions/Init"
         },
         "label": {
           "type": "string"
@@ -527,30 +323,7 @@
           "type": "string"
         },
         "options": {
-          "anyOf": [
-            {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            },
-            {
-              "items": {
-                "additionalProperties": false,
-                "properties": {
-                  "name": {
-                    "type": "string"
-                  },
-                  "value": {
-                    "type": "string"
-                  }
-                },
-                "required": ["name", "value"],
-                "type": "object"
-              },
-              "type": "array"
-            }
-          ]
+          "$ref": "#/definitions/Options"
         },
         "schema": {
           "type": "string"
@@ -560,20 +333,7 @@
           "type": "string"
         },
         "watcher": {
-          "additionalProperties": false,
-          "properties": {
-            "func": {
-              "type": "string"
-            },
-            "paths": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            }
-          },
-          "required": ["paths", "func"],
-          "type": "object"
+          "$ref": "#/definitions/Watchers"
         }
       },
       "required": ["label", "schema", "type"],
@@ -615,36 +375,7 @@
           "$ref": "#/definitions/IfType"
         },
         "init": {
-          "anyOf": [
-            {
-              "additionalProperties": false,
-              "properties": {
-                "type": {
-                  "const": "func",
-                  "type": "string"
-                },
-                "value": {
-                  "type": "string"
-                }
-              },
-              "required": ["type", "value"],
-              "type": "object"
-            },
-            {
-              "additionalProperties": false,
-              "properties": {
-                "type": {
-                  "const": "static",
-                  "type": "string"
-                },
-                "value": {
-                  "type": ["string", "number", "boolean"]
-                }
-              },
-              "required": ["type", "value"],
-              "type": "object"
-            }
-          ]
+          "$ref": "#/definitions/Init"
         },
         "label": {
           "type": "string"
@@ -660,20 +391,7 @@
           "type": "string"
         },
         "watcher": {
-          "additionalProperties": false,
-          "properties": {
-            "func": {
-              "type": "string"
-            },
-            "paths": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            }
-          },
-          "required": ["paths", "func"],
-          "type": "object"
+          "$ref": "#/definitions/Watchers"
         }
       },
       "required": ["label", "schema", "type"],
@@ -689,36 +407,7 @@
           "$ref": "#/definitions/IfType"
         },
         "init": {
-          "anyOf": [
-            {
-              "additionalProperties": false,
-              "properties": {
-                "type": {
-                  "const": "func",
-                  "type": "string"
-                },
-                "value": {
-                  "type": "string"
-                }
-              },
-              "required": ["type", "value"],
-              "type": "object"
-            },
-            {
-              "additionalProperties": false,
-              "properties": {
-                "type": {
-                  "const": "static",
-                  "type": "string"
-                },
-                "value": {
-                  "type": ["string", "number", "boolean"]
-                }
-              },
-              "required": ["type", "value"],
-              "type": "object"
-            }
-          ]
+          "$ref": "#/definitions/Init"
         },
         "label": {
           "type": "string"
@@ -734,23 +423,26 @@
           "type": "string"
         },
         "watcher": {
-          "additionalProperties": false,
-          "properties": {
-            "func": {
-              "type": "string"
-            },
-            "paths": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            }
-          },
-          "required": ["paths", "func"],
-          "type": "object"
+          "$ref": "#/definitions/Watchers"
         }
       },
       "required": ["label", "schema", "type"],
+      "type": "object"
+    },
+    "Watchers": {
+      "additionalProperties": false,
+      "properties": {
+        "func": {
+          "type": "string"
+        },
+        "paths": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["paths", "func"],
       "type": "object"
     }
   }

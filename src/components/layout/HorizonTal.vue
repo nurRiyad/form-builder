@@ -2,6 +2,6 @@
 
 <template>
   <div>
-    <h1>This is array input</h1>
+    <p>This is horizontal component</p>
   </div>
 </template>

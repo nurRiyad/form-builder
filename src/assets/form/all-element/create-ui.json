@@ -1,0 +1,100 @@
+{
+  "type": "multi-step-form",
+  "labe": "All Element Checker",
+  "loader": "multiLoader",
+  "step": [
+    {
+      "type": "single-step-from",
+      "label": "Single Step 1",
+      "loader": "singleLoader1",
+      "schema": "schema/properties/single1",
+      "elements": [
+        {
+          "type": "input",
+          "label": "First Name",
+          "schema": "schema/properties/userinfo/properties/firstName",
+          "loader": "fNameLoader"
+        },
+        {
+          "type": "input",
+          "label": "Last Name",
+          "schema": "schema/properties/userinfo/properties/lastName",
+          "loader": "fNameLoader"
+        },
+        {
+          "type": "textarea",
+          "label": "About You",
+          "schema": "schema/properties/userinfo/properties/aboutMe"
+        },
+        {
+          "type": "select",
+          "label": "Country",
+          "options": ["bangladesh", "india", "nepal"],
+          "schema": "schema/properties/userinfo/properties/country"
+        },
+        {
+          "type": "radio",
+          "label": "Gender",
+          "options": ["Male", "Female"],
+          "schema": "schema/properties/userinfo/properties/gender"
+        },
+        {
+          "type": "checkbox",
+          "label": "Is Married",
+          "schema": "schema/properties/userinfo/properties/isMarried"
+        },
+        {
+          "type": "anchor",
+          "label": "Visited Site",
+          "schema": "schema/properties/userinfo/properties/link",
+          "init": {
+            "type": "static",
+            "value": "www.google.com"
+          }
+        },
+        {
+          "type": "switch",
+          "label": "Save data",
+          "schema": "schema/properties/userinfo/properties/save"
+        }
+      ]
+    },
+    {
+      "type": "single-step-from",
+      "label": "Single Step 2",
+      "loader": "singleLoader2",
+      "schema": "schema/properties/single2",
+      "elements": [
+        {
+          "type": "array-object-form",
+          "label": "Array of object",
+          "schema": "schema/properties/userinfo/properties/obj",
+          "elements": [
+            {
+              "type": "input",
+              "label": "Name",
+              "schema": "name"
+            },
+            {
+              "type": "select",
+              "label": "Simple Select",
+              "schema": "select",
+              "options": ["sldfk", "aaa", "bbb"]
+            },
+            {
+              "type": "textarea",
+              "label": "Textarea",
+              "schema": "textarea"
+            },
+            {
+              "type": "radio",
+              "label": "Radio check",
+              "schema": "radio",
+              "options": ["riyad", "solurav"]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

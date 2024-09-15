@@ -11,14 +11,14 @@ const CheckBox = defineAsyncComponent(() => import('../base/CheckBox.vue'))
 const TheRadio = defineAsyncComponent(() => import('../base/TheRadio.vue'))
 const TheSwitch = defineAsyncComponent(() => import('../base/TheSwitch.vue'))
 const TheAnchor = defineAsyncComponent(() => import('../base/TheAnchor.vue'))
-const ArrayInput = defineAsyncComponent(() => import('../derived/ArrayInput.vue'))
+const ArrayObject = defineAsyncComponent(() => import('../derived/ArrayObject.vue'))
 
 const props = defineProps<{
   ui: SingleStepForm
   parentData?: any
 }>()
 
-const { setValue, getValue, deleteValue } = useGlobalModel()
+const { setValue, deleteValue } = useGlobalModel()
 
 const schema = inject('schema')
 const initialValue = inject('initialValue')
@@ -57,7 +57,6 @@ const checkIf = (el: IfType | undefined) => {
           :element="el"
           :parent-data="cData"
           :set-value="setValue"
-          :get-value="getValue"
           :delete-value="deleteValue"
         />
         <SelectSingle
@@ -103,14 +102,12 @@ const checkIf = (el: IfType | undefined) => {
           :delete-value="deleteValue"
         />
 
-        <ArrayInput
+        <ArrayObject
           v-if="el.type === 'array-object-form'"
           :ui="el"
           :initial-value="initialValue"
           :schema="schema"
           :parent-data="cData"
-          :set-value="setValue"
-          :delete-value="deleteValue"
         />
       </template>
     </div>
