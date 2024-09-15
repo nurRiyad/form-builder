@@ -2,11 +2,11 @@
 import type { BaseElement } from '@/types/schema'
 import { defineAsyncComponent } from 'vue'
 
-const TheInput = defineAsyncComponent(() => import('../base/TheInput.vue'))
-const SelectSingle = defineAsyncComponent(() => import('../base/SelectSingle.vue'))
-const TextArea = defineAsyncComponent(() => import('../base/TextArea.vue'))
-const CheckBox = defineAsyncComponent(() => import('../base/CheckBox.vue'))
-const TheRadio = defineAsyncComponent(() => import('../base/TheRadio.vue'))
+const TheInput = defineAsyncComponent(() => import('../../base/TheInput.vue'))
+const SelectSingle = defineAsyncComponent(() => import('../../base/SelectSingle.vue'))
+const TextArea = defineAsyncComponent(() => import('../../base/TextArea.vue'))
+const CheckBox = defineAsyncComponent(() => import('../../base/CheckBox.vue'))
+const TheRadio = defineAsyncComponent(() => import('../../base/TheRadio.vue'))
 
 const props = defineProps<{
   elements: Array<BaseElement>
