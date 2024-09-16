@@ -95,6 +95,28 @@
           ]
         }
       ]
+    },
+    {
+      "type": "single-step-from",
+      "label": "Single Step 2",
+      "loader": "singleLoader2",
+      "schema": "schema/properties/single2",
+      "elements": [
+        {
+          "type": "array-item-form",
+          "label": "Test array item",
+          "schema": "schema/properties/arrayitem/properties/tada",
+          "init": {
+            "type": "static",
+            "value": ["1", "2"]
+          },
+          "element": {
+            "type": "input",
+            "label": "name",
+            "schema": "select"
+          }
+        }
+      ]
     }
   ]
 }

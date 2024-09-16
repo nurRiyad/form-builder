@@ -12,6 +12,7 @@ const TheRadio = defineAsyncComponent(() => import('../base/TheRadio.vue'))
 const TheSwitch = defineAsyncComponent(() => import('../base/TheSwitch.vue'))
 const TheAnchor = defineAsyncComponent(() => import('../base/TheAnchor.vue'))
 const ArrayObject = defineAsyncComponent(() => import('../derived/ArrayObject.vue'))
+const ArrayItem = defineAsyncComponent(() => import('../derived/ArrayItem.vue'))
 
 const props = defineProps<{
   ui: SingleStepForm
@@ -20,8 +21,6 @@ const props = defineProps<{
 
 const { setValue, deleteValue } = useGlobalModel()
 
-const schema = inject('schema')
-const initialValue = inject('initialValue')
 const fn = inject<any>('func')
 
 const { data, isLoading, loadData } = useLoader()
@@ -102,13 +101,8 @@ const checkIf = (el: IfType | undefined) => {
           :delete-value="deleteValue"
         />
 
-        <ArrayObject
-          v-if="el.type === 'array-object-form'"
-          :ui="el"
-          :initial-value="initialValue"
-          :schema="schema"
-          :parent-data="cData"
-        />
+        <ArrayObject v-if="el.type === 'array-object-form'" :ui="el" :parent-data="cData" />
+        <ArrayItem v-if="el.type === 'array-item-form'" :ui="el" :parent-data="cData" />
       </template>
     </div>
   </div>

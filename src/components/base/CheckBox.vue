@@ -69,7 +69,12 @@ onUnmounted(() => {
     <p>Check is fetching</p>
   </div>
   <div v-else class="flex items-center space-x-3">
-    <input type="checkbox" :id="element.label" :name="element.label" v-model="checked" />
-    <label :for="element.label">{{ element.label }}</label>
+    <input
+      type="checkbox"
+      :id="String(element.label) + String(items)"
+      :name="element.label"
+      v-model="checked"
+    />
+    <label :for="String(element.label) + String(items)">{{ element.label }}</label>
   </div>
 </template>

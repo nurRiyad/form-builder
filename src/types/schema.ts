@@ -69,6 +69,11 @@ export interface ArrayObject extends BaseCommon {
   elements: Array<BaseElement>
 }
 
+export interface ArrayItem extends BaseCommon {
+  type: 'array-item-form'
+  element: BaseElement
+}
+
 export type BaseElement =
   | Input
   | Select
@@ -78,5 +83,6 @@ export type BaseElement =
   | Switch
   | Anchor
   | ArrayObject
+  | ArrayItem
 
 export type FormType = SingleStepForm | MultiStepForm
