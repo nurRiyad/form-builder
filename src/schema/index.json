@@ -245,10 +245,22 @@
               "type": "string"
             },
             "value": {
-              "type": [
-                "string",
-                "number",
-                "boolean"
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                },
+                {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                }
               ]
             }
           },

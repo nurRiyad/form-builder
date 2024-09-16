@@ -35,8 +35,9 @@ const setValueTemp = (path: string, val: any, items?: string) => {
 const getValueTemp = (items: string) => {
   return tempMode.value[parseInt(items)]
 }
-const deleteValueTemp = (key: string) => {
-  tempMode.value.splice(parseInt(key), 1)
+const deleteValueTemp = (idx: string) => {
+  tempMode.value.splice(parseInt(idx), 1)
+  shadowList.value.splice(parseInt(idx))
 }
 
 // update real model value
@@ -48,6 +49,14 @@ watch(
   },
   { immediate: true }
 )
+
+// maintain unique key across the dynamic array
+let shadowList = ref<Array<number>>([])
+let counter = ref(1)
+const addNew = () => {
+  shadowList.value.push(++counter.value)
+  tempMode.value.push('')
+}
 </script>
 
 <template>
@@ -60,12 +69,12 @@ watch(
     <template v-else>
       <div class="flex justify-between my-2">
         <h1>{{ ui.label }}</h1>
-        <button @click="tempMode.push('')" class="px-2 py-1 bg-blue-400">Add new</button>
+        <button @click="addNew" class="px-2 py-1 bg-blue-400">Add new</button>
       </div>
       <div class="flex flex-col space-y-2">
         <EachItem
           v-for="(val, idx) in tempMode"
-          :key="String(idx) + String(tempMode.length)"
+          :key="String(idx) + String(shadowList[idx])"
           :element="ui.element"
           :items="String(idx)"
           :set-value="setValueTemp"
