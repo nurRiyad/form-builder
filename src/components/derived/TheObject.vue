@@ -27,7 +27,7 @@ const initValue = calculateInitValue(props.ui, cData.value) || {}
 
 // temporary model value
 const tempMode = ref(initValue)
-const setValueTemp = (key: string, val: string) => {
+const setValueTemp = (key: string, val: string | number) => {
   tempMode.value[key] = val
 }
 const getValueTemp = (path: string) => {

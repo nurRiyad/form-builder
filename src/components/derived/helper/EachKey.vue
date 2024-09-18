@@ -3,8 +3,8 @@ import { ref, watch } from 'vue'
 
 const props = defineProps<{
   obKey: string
-  obValue: string
-  setValue: (key: string, value: string) => void
+  obValue: string | number
+  setValue: (key: string, value: string | number) => void
   deleteValue: (key: string) => void
   getValue: (key: string) => any
 }>()
