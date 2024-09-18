@@ -19,9 +19,7 @@ export type IfType = {
 }
 
 export type Options = Array<string> | Array<{ name: string; value: string }>
-export type Init =
-  | { type: 'func'; value: string }
-  | { type: 'static'; value: string | number | boolean | Array<string> }
+export type Init = { type: 'func'; value: string } | { type: 'static'; value: unknown }
 export type Watchers = { paths: Array<string>; func: string }
 
 interface BaseCommon {
@@ -74,6 +72,10 @@ export interface ArrayItem extends BaseCommon {
   element: BaseElement
 }
 
+export interface ObjectItem extends BaseCommon {
+  type: 'object-item'
+}
+
 export type BaseElement =
   | Input
   | Select
@@ -84,5 +86,6 @@ export type BaseElement =
   | Anchor
   | ArrayObject
   | ArrayItem
+  | ObjectItem
 
 export type FormType = SingleStepForm | MultiStepForm

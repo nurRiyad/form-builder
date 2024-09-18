@@ -13,6 +13,7 @@ const TheSwitch = defineAsyncComponent(() => import('../base/TheSwitch.vue'))
 const TheAnchor = defineAsyncComponent(() => import('../base/TheAnchor.vue'))
 const ArrayObject = defineAsyncComponent(() => import('../derived/ArrayObject.vue'))
 const ArrayItem = defineAsyncComponent(() => import('../derived/ArrayItem.vue'))
+const TheObject = defineAsyncComponent(() => import('../derived/TheObject.vue'))
 
 const props = defineProps<{
   ui: SingleStepForm
@@ -103,6 +104,7 @@ const checkIf = (el: IfType | undefined) => {
 
         <ArrayObject v-if="el.type === 'array-object-form'" :ui="el" :parent-data="cData" />
         <ArrayItem v-if="el.type === 'array-item-form'" :ui="el" :parent-data="cData" />
+        <TheObject v-if="el.type === 'object-item'" :ui="el" :parent-data="cData" />
       </template>
     </div>
   </div>

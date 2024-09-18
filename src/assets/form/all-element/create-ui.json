@@ -115,6 +115,18 @@
             "label": "name",
             "schema": "select"
           }
+        },
+        {
+          "type": "object-item",
+          "schema": "schema/properties/test",
+          "label": "Object test",
+          "init": {
+            "type": "static",
+            "value": {
+              "name": "riyad",
+              "age": 25
+            }
+          }
         }
       ]
     }

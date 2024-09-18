@@ -135,6 +135,9 @@
         },
         {
           "$ref": "#/definitions/ArrayItem"
+        },
+        {
+          "$ref": "#/definitions/ObjectItem"
         }
       ]
     },
@@ -217,25 +220,7 @@
               "const": "static",
               "type": "string"
             },
-            "value": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "boolean"
-                },
-                {
-                  "items": {
-                    "type": "string"
-                  },
-                  "type": "array"
-                }
-              ]
-            }
+            "value": {}
           },
           "required": ["type", "value"],
           "type": "object"
@@ -295,6 +280,38 @@
         }
       },
       "required": ["type", "step", "labe"],
+      "type": "object"
+    },
+    "ObjectItem": {
+      "additionalProperties": false,
+      "properties": {
+        "disable": {
+          "type": "boolean"
+        },
+        "if": {
+          "$ref": "#/definitions/IfType"
+        },
+        "init": {
+          "$ref": "#/definitions/Init"
+        },
+        "label": {
+          "type": "string"
+        },
+        "loader": {
+          "type": "string"
+        },
+        "schema": {
+          "type": "string"
+        },
+        "type": {
+          "const": "object-item",
+          "type": "string"
+        },
+        "watcher": {
+          "$ref": "#/definitions/Watchers"
+        }
+      },
+      "required": ["label", "schema", "type"],
       "type": "object"
     },
     "Options": {
