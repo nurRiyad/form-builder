@@ -45,6 +45,11 @@ export interface Select extends BaseCommon {
   options?: Options
 }
 
+export interface MultiSelect extends BaseCommon {
+  type: 'multi-select'
+  options?: Options
+}
+
 export interface CheckBox extends BaseCommon {
   type: 'checkbox'
 }
@@ -79,6 +84,7 @@ export interface ObjectItem extends BaseCommon {
 export type BaseElement =
   | Input
   | Select
+  | MultiSelect
   | TextArea
   | Radio
   | CheckBox

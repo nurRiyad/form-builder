@@ -116,6 +116,9 @@
           "$ref": "#/definitions/Select"
         },
         {
+          "$ref": "#/definitions/MultiSelect"
+        },
+        {
           "$ref": "#/definitions/TextArea"
         },
         {
@@ -250,6 +253,41 @@
         },
         "type": {
           "const": "input",
+          "type": "string"
+        },
+        "watcher": {
+          "$ref": "#/definitions/Watchers"
+        }
+      },
+      "required": ["label", "schema", "type"],
+      "type": "object"
+    },
+    "MultiSelect": {
+      "additionalProperties": false,
+      "properties": {
+        "disable": {
+          "type": "boolean"
+        },
+        "if": {
+          "$ref": "#/definitions/IfType"
+        },
+        "init": {
+          "$ref": "#/definitions/Init"
+        },
+        "label": {
+          "type": "string"
+        },
+        "loader": {
+          "type": "string"
+        },
+        "options": {
+          "$ref": "#/definitions/Options"
+        },
+        "schema": {
+          "type": "string"
+        },
+        "type": {
+          "const": "multi-select",
           "type": "string"
         },
         "watcher": {

@@ -6,6 +6,7 @@ import { computed, defineAsyncComponent, inject, toRaw, unref } from 'vue'
 
 const TheInput = defineAsyncComponent(() => import('../base/TheInput.vue'))
 const SelectSingle = defineAsyncComponent(() => import('../base/SelectSingle.vue'))
+const MultiSelect = defineAsyncComponent(() => import('../base/SelectMultiple.vue'))
 const TextArea = defineAsyncComponent(() => import('../base/TextArea.vue'))
 const CheckBox = defineAsyncComponent(() => import('../base/CheckBox.vue'))
 const TheRadio = defineAsyncComponent(() => import('../base/TheRadio.vue'))
@@ -61,6 +62,13 @@ const checkIf = (el: IfType | undefined) => {
         />
         <SelectSingle
           v-else-if="el.type === 'select' && checkIf(el.if)"
+          :element="el"
+          :parent-data="cData"
+          :set-value="setValue"
+          :delete-value="deleteValue"
+        />
+        <MultiSelect
+          v-else-if="el.type === 'multi-select' && checkIf(el.if)"
           :element="el"
           :parent-data="cData"
           :set-value="setValue"
