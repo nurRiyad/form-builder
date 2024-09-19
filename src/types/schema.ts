@@ -9,7 +9,7 @@ export interface SingleStepForm {
   type: 'single-step-from'
   schema: string
   label: string
-  elements: Array<BaseElement>
+  elements: Array<AllElement>
   loader?: string
 }
 
@@ -19,8 +19,8 @@ export type IfType = {
 }
 
 export type Options = Array<string> | Array<{ name: string; value: string }>
-export type Init = { type: 'func'; value: string } | { type: 'static'; value: unknown }
 export type Watchers = { paths: Array<string>; func: string }
+export type Init = { type: 'func'; value: string } | { type: 'static'; value: unknown }
 
 interface BaseCommon {
   label: string
@@ -81,6 +81,23 @@ export interface ObjectItem extends BaseCommon {
   type: 'object-item'
 }
 
+interface CommonLayout {
+  label: string
+  description?: string
+  loader?: string
+  init?: Init
+  if?: IfType
+  elements: Array<AllElement>
+}
+
+export interface BlockLayout extends CommonLayout {
+  type: 'block-layout'
+}
+
+export interface HorizontalLayout extends CommonLayout {
+  type: 'horizontal-layout'
+}
+
 export type BaseElement =
   | Input
   | Select
@@ -90,8 +107,10 @@ export type BaseElement =
   | CheckBox
   | Switch
   | Anchor
-  | ArrayObject
-  | ArrayItem
-  | ObjectItem
+
+export type LayoutElement = BlockLayout | HorizontalLayout
+export type DerivedElement = ArrayObject | ArrayItem | ObjectItem
+
+export type AllElement = BaseElement | DerivedElement | LayoutElement
 
 export type FormType = SingleStepForm | MultiStepForm
