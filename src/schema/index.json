@@ -2,6 +2,19 @@
   "$ref": "#/definitions/FormType",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
+    "AllElement": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/BaseElement"
+        },
+        {
+          "$ref": "#/definitions/DerivedElement"
+        },
+        {
+          "$ref": "#/definitions/LayoutElement"
+        }
+      ]
+    },
     "Anchor": {
       "additionalProperties": false,
       "properties": {
@@ -31,7 +44,11 @@
           "$ref": "#/definitions/Watchers"
         }
       },
-      "required": ["label", "schema", "type"],
+      "required": [
+        "label",
+        "schema",
+        "type"
+      ],
       "type": "object"
     },
     "ArrayItem": {
@@ -66,7 +83,12 @@
           "$ref": "#/definitions/Watchers"
         }
       },
-      "required": ["element", "label", "schema", "type"],
+      "required": [
+        "element",
+        "label",
+        "schema",
+        "type"
+      ],
       "type": "object"
     },
     "ArrayObject": {
@@ -104,7 +126,12 @@
           "$ref": "#/definitions/Watchers"
         }
       },
-      "required": ["elements", "label", "schema", "type"],
+      "required": [
+        "elements",
+        "label",
+        "schema",
+        "type"
+      ],
       "type": "object"
     },
     "BaseElement": {
@@ -132,17 +159,44 @@
         },
         {
           "$ref": "#/definitions/Anchor"
-        },
-        {
-          "$ref": "#/definitions/ArrayObject"
-        },
-        {
-          "$ref": "#/definitions/ArrayItem"
-        },
-        {
-          "$ref": "#/definitions/ObjectItem"
         }
       ]
+    },
+    "BlockLayout": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "elements": {
+          "items": {
+            "$ref": "#/definitions/AllElement"
+          },
+          "type": "array"
+        },
+        "if": {
+          "$ref": "#/definitions/IfType"
+        },
+        "init": {
+          "$ref": "#/definitions/Init"
+        },
+        "label": {
+          "type": "string"
+        },
+        "loader": {
+          "type": "string"
+        },
+        "type": {
+          "const": "block-layout",
+          "type": "string"
+        }
+      },
+      "required": [
+        "elements",
+        "label",
+        "type"
+      ],
+      "type": "object"
     },
     "CheckBox": {
       "additionalProperties": false,
@@ -173,8 +227,25 @@
           "$ref": "#/definitions/Watchers"
         }
       },
-      "required": ["label", "schema", "type"],
+      "required": [
+        "label",
+        "schema",
+        "type"
+      ],
       "type": "object"
+    },
+    "DerivedElement": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/ArrayObject"
+        },
+        {
+          "$ref": "#/definitions/ArrayItem"
+        },
+        {
+          "$ref": "#/definitions/ObjectItem"
+        }
+      ]
     },
     "FormType": {
       "anyOf": [
@@ -186,6 +257,42 @@
         }
       ]
     },
+    "HorizontalLayout": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "elements": {
+          "items": {
+            "$ref": "#/definitions/AllElement"
+          },
+          "type": "array"
+        },
+        "if": {
+          "$ref": "#/definitions/IfType"
+        },
+        "init": {
+          "$ref": "#/definitions/Init"
+        },
+        "label": {
+          "type": "string"
+        },
+        "loader": {
+          "type": "string"
+        },
+        "type": {
+          "const": "horizontal-layout",
+          "type": "string"
+        }
+      },
+      "required": [
+        "elements",
+        "label",
+        "type"
+      ],
+      "type": "object"
+    },
     "IfType": {
       "additionalProperties": false,
       "properties": {
@@ -193,11 +300,17 @@
           "type": "string"
         },
         "type": {
-          "enum": ["function", "computed"],
+          "enum": [
+            "function",
+            "computed"
+          ],
           "type": "string"
         }
       },
-      "required": ["type", "name"],
+      "required": [
+        "type",
+        "name"
+      ],
       "type": "object"
     },
     "Init": {
@@ -213,7 +326,10 @@
               "type": "string"
             }
           },
-          "required": ["type", "value"],
+          "required": [
+            "type",
+            "value"
+          ],
           "type": "object"
         },
         {
@@ -225,7 +341,10 @@
             },
             "value": {}
           },
-          "required": ["type", "value"],
+          "required": [
+            "type",
+            "value"
+          ],
           "type": "object"
         }
       ]
@@ -259,8 +378,22 @@
           "$ref": "#/definitions/Watchers"
         }
       },
-      "required": ["label", "schema", "type"],
+      "required": [
+        "label",
+        "schema",
+        "type"
+      ],
       "type": "object"
+    },
+    "LayoutElement": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/BlockLayout"
+        },
+        {
+          "$ref": "#/definitions/HorizontalLayout"
+        }
+      ]
     },
     "MultiSelect": {
       "additionalProperties": false,
@@ -294,7 +427,11 @@
           "$ref": "#/definitions/Watchers"
         }
       },
-      "required": ["label", "schema", "type"],
+      "required": [
+        "label",
+        "schema",
+        "type"
+      ],
       "type": "object"
     },
     "MultiStepForm": {
@@ -317,7 +454,11 @@
           "type": "string"
         }
       },
-      "required": ["type", "step", "labe"],
+      "required": [
+        "type",
+        "step",
+        "labe"
+      ],
       "type": "object"
     },
     "ObjectItem": {
@@ -349,7 +490,11 @@
           "$ref": "#/definitions/Watchers"
         }
       },
-      "required": ["label", "schema", "type"],
+      "required": [
+        "label",
+        "schema",
+        "type"
+      ],
       "type": "object"
     },
     "Options": {
@@ -371,7 +516,10 @@
                 "type": "string"
               }
             },
-            "required": ["name", "value"],
+            "required": [
+              "name",
+              "value"
+            ],
             "type": "object"
           },
           "type": "array"
@@ -410,7 +558,12 @@
           "$ref": "#/definitions/Watchers"
         }
       },
-      "required": ["label", "options", "schema", "type"],
+      "required": [
+        "label",
+        "options",
+        "schema",
+        "type"
+      ],
       "type": "object"
     },
     "Select": {
@@ -445,7 +598,11 @@
           "$ref": "#/definitions/Watchers"
         }
       },
-      "required": ["label", "schema", "type"],
+      "required": [
+        "label",
+        "schema",
+        "type"
+      ],
       "type": "object"
     },
     "SingleStepForm": {
@@ -453,7 +610,7 @@
       "properties": {
         "elements": {
           "items": {
-            "$ref": "#/definitions/BaseElement"
+            "$ref": "#/definitions/AllElement"
           },
           "type": "array"
         },
@@ -471,7 +628,12 @@
           "type": "string"
         }
       },
-      "required": ["type", "schema", "label", "elements"],
+      "required": [
+        "type",
+        "schema",
+        "label",
+        "elements"
+      ],
       "type": "object"
     },
     "Switch": {
@@ -503,7 +665,11 @@
           "$ref": "#/definitions/Watchers"
         }
       },
-      "required": ["label", "schema", "type"],
+      "required": [
+        "label",
+        "schema",
+        "type"
+      ],
       "type": "object"
     },
     "TextArea": {
@@ -535,7 +701,11 @@
           "$ref": "#/definitions/Watchers"
         }
       },
-      "required": ["label", "schema", "type"],
+      "required": [
+        "label",
+        "schema",
+        "type"
+      ],
       "type": "object"
     },
     "Watchers": {
@@ -551,7 +721,10 @@
           "type": "array"
         }
       },
-      "required": ["paths", "func"],
+      "required": [
+        "paths",
+        "func"
+      ],
       "type": "object"
     }
   }

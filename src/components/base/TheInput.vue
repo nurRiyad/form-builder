@@ -71,7 +71,7 @@ onUnmounted(() => {
   <div v-if="isLoading">
     <h1>This input element is loading...</h1>
   </div>
-  <div class="flex flex-col space-y-2" :class="$attrs.class">
+  <div class="flex flex-col space-y-2 w-full" :class="$attrs.class">
     <label :for="element.label">{{ element.label }}</label>
     <input
       :id="element.label"

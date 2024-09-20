@@ -28,7 +28,7 @@ const tempData = (path: string) => {
 <template>
   <div class="border p-4 space-y-2">
     <div class="flex flex-col space-y-4">
-      <template v-for="el in elements" :key="el.label">
+      <template v-for="el in elements" :key="el">
         <TheInput
           v-if="el.type === 'input'"
           :element="el"

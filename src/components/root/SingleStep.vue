@@ -1,27 +1,14 @@
 <script lang="ts" setup>
 import { useLoader } from '@/composables/loader'
-import { useGlobalModel } from '@/composables/model'
 import type { IfType, SingleStepForm } from '@/types/schema'
 import { computed, defineAsyncComponent, inject, toRaw, unref } from 'vue'
 
-const TheInput = defineAsyncComponent(() => import('../base/TheInput.vue'))
-const SelectSingle = defineAsyncComponent(() => import('../base/SelectSingle.vue'))
-const MultiSelect = defineAsyncComponent(() => import('../base/SelectMultiple.vue'))
-const TextArea = defineAsyncComponent(() => import('../base/TextArea.vue'))
-const CheckBox = defineAsyncComponent(() => import('../base/CheckBox.vue'))
-const TheRadio = defineAsyncComponent(() => import('../base/TheRadio.vue'))
-const TheSwitch = defineAsyncComponent(() => import('../base/TheSwitch.vue'))
-const TheAnchor = defineAsyncComponent(() => import('../base/TheAnchor.vue'))
-const ArrayObject = defineAsyncComponent(() => import('../derived/ArrayObject.vue'))
-const ArrayItem = defineAsyncComponent(() => import('../derived/ArrayItem.vue'))
-const TheObject = defineAsyncComponent(() => import('../derived/TheObject.vue'))
+const AllElement = defineAsyncComponent(() => import('./helper/AllElement.vue'))
 
 const props = defineProps<{
   ui: SingleStepForm
   parentData?: any
 }>()
-
-const { setValue, deleteValue } = useGlobalModel()
 
 const fn = inject<any>('func')
 
@@ -53,66 +40,7 @@ const checkIf = (el: IfType | undefined) => {
     <div v-else class="flex flex-col space-y-4">
       <p class="font-semibold text-xl text-center">{{ ui.label }}</p>
       <template v-for="el in ui.elements" :key="el.label">
-        <TheInput
-          v-if="el.type === 'input' && checkIf(el.if)"
-          :element="el"
-          :parent-data="cData"
-          :set-value="setValue"
-          :delete-value="deleteValue"
-        />
-        <SelectSingle
-          v-else-if="el.type === 'select' && checkIf(el.if)"
-          :element="el"
-          :parent-data="cData"
-          :set-value="setValue"
-          :delete-value="deleteValue"
-        />
-        <MultiSelect
-          v-else-if="el.type === 'multi-select' && checkIf(el.if)"
-          :element="el"
-          :parent-data="cData"
-          :set-value="setValue"
-          :delete-value="deleteValue"
-        />
-        <TheRadio
-          v-else-if="el.type === 'radio' && checkIf(el.if)"
-          :element="el"
-          :parent-data="cData"
-          :set-value="setValue"
-          :delete-value="deleteValue"
-        />
-        <TheSwitch
-          v-else-if="el.type === 'switch' && checkIf(el.if)"
-          :element="el"
-          :parent-data="cData"
-          :set-value="setValue"
-          :delete-value="deleteValue"
-        />
-        <CheckBox
-          v-else-if="el.type === 'checkbox' && checkIf(el.if)"
-          :element="el"
-          :parent-data="cData"
-          :set-value="setValue"
-          :delete-value="deleteValue"
-        />
-
-        <TheAnchor
-          v-else-if="el.type === 'anchor' && checkIf(el.if)"
-          :element="el"
-          :parent-data="cData"
-        />
-
-        <TextArea
-          v-else-if="el.type === 'textarea' && checkIf(el.if)"
-          :element="el"
-          :parent-data="cData"
-          :set-value="setValue"
-          :delete-value="deleteValue"
-        />
-
-        <ArrayObject v-if="el.type === 'array-object-form'" :ui="el" :parent-data="cData" />
-        <ArrayItem v-if="el.type === 'array-item-form'" :ui="el" :parent-data="cData" />
-        <TheObject v-if="el.type === 'object-item'" :ui="el" :parent-data="cData" />
+        <AllElement :c-data="cData" :el="el" v-if="checkIf(el.if)" />
       </template>
     </div>
   </div>

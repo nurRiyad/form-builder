@@ -1,6 +1,6 @@
 import { inject } from 'vue'
 import lodash from 'lodash'
-import type { BaseElement } from '@/types'
+import type { AllElement } from '@/types'
 
 export const useInitial = () => {
   const initialValue = inject('initialValue')
@@ -18,7 +18,8 @@ export const useInitial = () => {
     return value
   }
 
-  const calculateInitValue = (el: BaseElement, data: any, items?: string) => {
+  const calculateInitValue = (el: AllElement, data: any, items?: string) => {
+    if (el.type === 'block-layout' || el.type === 'horizontal-layout') return
     if (el?.init) {
       if (el.init.type === 'static') return el.init.value
       else {

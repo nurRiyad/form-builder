@@ -10,16 +10,23 @@
       "schema": "schema/properties/single1",
       "elements": [
         {
-          "type": "input",
-          "label": "First Name",
-          "schema": "schema/properties/userinfo/properties/firstName",
-          "loader": "fNameLoader"
-        },
-        {
-          "type": "input",
-          "label": "Last Name",
-          "schema": "schema/properties/userinfo/properties/lastName",
-          "loader": "fNameLoader"
+          "type": "block-layout",
+          "label": "Block Layout",
+          "description": "Block Description",
+          "elements": [
+            {
+              "type": "input",
+              "label": "First Name",
+              "schema": "schema/properties/userinfo/properties/firstName",
+              "loader": "fNameLoader"
+            },
+            {
+              "type": "input",
+              "label": "Last Name",
+              "schema": "schema/properties/userinfo/properties/lastName",
+              "loader": "fNameLoader"
+            }
+          ]
         },
         {
           "type": "textarea",
