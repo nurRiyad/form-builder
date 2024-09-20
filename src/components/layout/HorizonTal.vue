@@ -17,7 +17,7 @@ const show = ref(true)
       <p @click="show = !show">{{ ui.label }}</p>
       <p>{{ ui.description }}</p>
     </div>
-    <div v-show="show">
+    <div v-show="show" class="flex space-x-3 w-full">
       <template v-for="el in ui.elements" :key="el.label">
         <AllElement :el="el" :c-data="parentData" />
       </template>
