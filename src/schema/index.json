@@ -40,6 +40,9 @@
           "const": "anchor",
           "type": "string"
         },
+        "validation": {
+          "$ref": "#/definitions/Validation"
+        },
         "watcher": {
           "$ref": "#/definitions/Watchers"
         }
@@ -78,6 +81,9 @@
         "type": {
           "const": "array-item-form",
           "type": "string"
+        },
+        "validation": {
+          "$ref": "#/definitions/Validation"
         },
         "watcher": {
           "$ref": "#/definitions/Watchers"
@@ -121,6 +127,9 @@
         "type": {
           "const": "array-object-form",
           "type": "string"
+        },
+        "validation": {
+          "$ref": "#/definitions/Validation"
         },
         "watcher": {
           "$ref": "#/definitions/Watchers"
@@ -222,6 +231,9 @@
         "type": {
           "const": "checkbox",
           "type": "string"
+        },
+        "validation": {
+          "$ref": "#/definitions/Validation"
         },
         "watcher": {
           "$ref": "#/definitions/Watchers"
@@ -374,6 +386,9 @@
           "const": "input",
           "type": "string"
         },
+        "validation": {
+          "$ref": "#/definitions/Validation"
+        },
         "watcher": {
           "$ref": "#/definitions/Watchers"
         }
@@ -422,6 +437,9 @@
         "type": {
           "const": "multi-select",
           "type": "string"
+        },
+        "validation": {
+          "$ref": "#/definitions/Validation"
         },
         "watcher": {
           "$ref": "#/definitions/Watchers"
@@ -485,6 +503,9 @@
         "type": {
           "const": "object-item",
           "type": "string"
+        },
+        "validation": {
+          "$ref": "#/definitions/Validation"
         },
         "watcher": {
           "$ref": "#/definitions/Watchers"
@@ -554,6 +575,9 @@
           "const": "radio",
           "type": "string"
         },
+        "validation": {
+          "$ref": "#/definitions/Validation"
+        },
         "watcher": {
           "$ref": "#/definitions/Watchers"
         }
@@ -593,6 +617,9 @@
         "type": {
           "const": "select",
           "type": "string"
+        },
+        "validation": {
+          "$ref": "#/definitions/Validation"
         },
         "watcher": {
           "$ref": "#/definitions/Watchers"
@@ -661,6 +688,9 @@
           "const": "switch",
           "type": "string"
         },
+        "validation": {
+          "$ref": "#/definitions/Validation"
+        },
         "watcher": {
           "$ref": "#/definitions/Watchers"
         }
@@ -697,6 +727,9 @@
           "const": "textarea",
           "type": "string"
         },
+        "validation": {
+          "$ref": "#/definitions/Validation"
+        },
         "watcher": {
           "$ref": "#/definitions/Watchers"
         }
@@ -704,6 +737,19 @@
       "required": [
         "label",
         "schema",
+        "type"
+      ],
+      "type": "object"
+    },
+    "Validation": {
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "required",
+          "type": "string"
+        }
+      },
+      "required": [
         "type"
       ],
       "type": "object"

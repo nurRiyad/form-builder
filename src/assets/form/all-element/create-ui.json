@@ -18,37 +18,43 @@
               "type": "input",
               "label": "First Name",
               "schema": "schema/properties/userinfo/properties/firstName",
-              "loader": "fNameLoader"
+              "loader": "fNameLoader",
+              "validation": { "type": "required" }
             },
             {
               "type": "input",
               "label": "Last Name",
               "schema": "schema/properties/userinfo/properties/lastName",
-              "loader": "fNameLoader"
+              "loader": "fNameLoader",
+              "validation": { "type": "required" }
             }
           ]
         },
         {
           "type": "textarea",
           "label": "About You",
-          "schema": "schema/properties/userinfo/properties/aboutMe"
+          "schema": "schema/properties/userinfo/properties/aboutMe",
+          "validation": { "type": "required" }
         },
         {
           "type": "select",
           "label": "Country",
           "options": ["bangladesh", "india", "nepal"],
-          "schema": "schema/properties/userinfo/properties/country"
+          "schema": "schema/properties/userinfo/properties/country",
+          "validation": { "type": "required" }
         },
         {
           "type": "radio",
           "label": "Gender",
           "options": ["Male", "Female"],
-          "schema": "schema/properties/userinfo/properties/gender"
+          "schema": "schema/properties/userinfo/properties/gender",
+          "validation": { "type": "required" }
         },
         {
           "type": "checkbox",
           "label": "Is Married",
-          "schema": "schema/properties/userinfo/properties/isMarried"
+          "schema": "schema/properties/userinfo/properties/isMarried",
+          "validation": { "type": "required" }
         },
         {
           "type": "anchor",
