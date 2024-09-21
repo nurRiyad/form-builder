@@ -15,12 +15,14 @@ const props = withDefaults(
     initialValue: any
     logic?: any
     isLoading?: boolean
+    hideFormAction?: boolean
   }>(),
   {
     schema: {},
     initialValue: {},
     logic: null,
-    isLoading: false
+    isLoading: false,
+    hideFormAction: false
   }
 )
 
@@ -92,6 +94,12 @@ const handleStep = (type: 'Next' | 'Prev') => {
     }
   }
 }
+
+defineExpose({
+  handleSubmit,
+  handleCancel,
+  handleStep
+})
 </script>
 
 <template>
@@ -102,18 +110,21 @@ const handleStep = (type: 'Next' | 'Prev') => {
     <SingleStep v-if="ui.type === 'single-step-from'" :ui="ui" />
     <MultiStep v-else-if="ui.type === 'multi-step-form'" :active-step="activeStep" :ui="ui" />
     <h1 v-else>No Proper Form type found</h1>
-    <div class="flex justify-between" v-if="ui.type === 'single-step-from'">
-      <button @click="handleCancel" class="bg-sky-500 mt-5 py-2 px-3 rounded-sm">Cancel</button>
-      <button @click="handleSubmit" class="bg-sky-500 mt-5 py-2 px-3 rounded-sm">Submit</button>
-    </div>
-    <div class="flex justify-between" v-else>
-      <button @click="handleStep('Prev')" class="bg-sky-500 mt-5 py-2 px-3 rounded-sm">
-        {{ activeStep <= 0 ? 'Cancel' : 'Previous' }}
-      </button>
-      <button @click="handleStep('Next')" class="bg-sky-500 mt-5 py-2 px-3 rounded-sm">
-        {{ activeStep + 1 >= totalStep ? 'Submit' : 'Next' }}
-      </button>
-    </div>
+    <slot name="custom-form" />
+    <template v-if="!hideFormAction">
+      <div class="flex justify-between" v-if="ui.type === 'single-step-from'">
+        <button @click="handleCancel" class="bg-sky-500 mt-5 py-2 px-3 rounded-sm">Cancel</button>
+        <button @click="handleSubmit" class="bg-sky-500 mt-5 py-2 px-3 rounded-sm">Submit</button>
+      </div>
+      <div class="flex justify-between" v-else>
+        <button @click="handleStep('Prev')" class="bg-sky-500 mt-5 py-2 px-3 rounded-sm">
+          {{ activeStep <= 0 ? 'Cancel' : 'Previous' }}
+        </button>
+        <button @click="handleStep('Next')" class="bg-sky-500 mt-5 py-2 px-3 rounded-sm">
+          {{ activeStep + 1 >= totalStep ? 'Submit' : 'Next' }}
+        </button>
+      </div>
+    </template>
     <pre class="p-4 bg-gray-300 mt-4">{{ model }}</pre>
   </div>
 </template>
