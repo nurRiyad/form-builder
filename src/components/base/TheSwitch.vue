@@ -4,6 +4,7 @@ import { computed, onUnmounted, ref, toRaw, unref } from 'vue'
 import { useInitial } from '@/composables/initial'
 import { useLoader } from '@/composables/loader'
 import { watchDebounced } from '@vueuse/core'
+import { useValidate } from '@/composables/validation'
 
 const props = defineProps<{
   element: Switch
@@ -31,12 +32,20 @@ const initValue =
   props.items === undefined ? calculateInitValue(props.element, cData.value) : props.tempValue
 const checked = ref(initValue)
 
+//validation
+const { calValidation, showGblError } = useValidate()
+const errMsg = ref('')
+const showErr = ref(false)
+
 // update model value
 watchDebounced(
   checked,
   (n) => {
     //update the model value
     props.setValue(props.element.schema, n, props.items)
+
+    // validation fire
+    calValidation(props.element, n, errMsg)
   },
   { immediate: true, debounce: 0 }
 )
@@ -52,12 +61,15 @@ onUnmounted(() => {
   <div v-if="isLoading">
     <p>Switch data fetching</p>
   </div>
-  <div v-else class="flex items-center space-x-5">
-    <label for="ac-switch">{{ element.label }}</label>
-    <label class="switch">
-      <input id="ac-switch" name="ac-switch" v-model="checked" type="checkbox" />
-      <span class="slider round"></span>
-    </label>
+  <div v-else>
+    <div class="flex items-center space-x-5">
+      <label for="ac-switch">{{ element.label }}</label>
+      <label class="switch">
+        <input id="ac-switch" name="ac-switch" v-model="checked" type="checkbox" />
+        <span class="slider round"></span>
+      </label>
+    </div>
+    <p v-if="(showGblError || showErr) && errMsg" class="text-red-600 pb-3">{{ errMsg }}</p>
   </div>
 </template>
 

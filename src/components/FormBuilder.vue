@@ -3,6 +3,7 @@ import type { FormType } from '@/types/schema'
 import { defineAsyncComponent, provide, ref, toRaw, unref } from 'vue'
 import lodash from 'lodash'
 import { useGlobalModel } from '@/composables/model'
+import { useValidate } from '@/composables/validation'
 
 const SingleStep = defineAsyncComponent(() => import('./root/SingleStep.vue'))
 const MultiStep = defineAsyncComponent(() => import('./root/MultiStep.vue'))
@@ -48,8 +49,15 @@ const generateFinalForm = () => {
   return generatedObj
 }
 
+const { invalidInputs, showGblError } = useValidate()
+
 // form submit
 const handleSubmit = () => {
+  if (invalidInputs.value) {
+    showGblError.value = true
+    return
+  }
+
   const value = generateFinalForm()
   emits('onSubmit', value)
 }
@@ -64,6 +72,12 @@ const activeStep = ref(0)
 const totalStep = props.ui.type === 'single-step-from' ? 0 : props.ui.step.length
 const handleStep = (type: 'Next' | 'Prev') => {
   if (props.ui.type === 'single-step-from') return
+
+  if (invalidInputs.value) {
+    showGblError.value = true
+    return
+  }
+
   if (type === 'Next') {
     if (activeStep.value + 1 >= totalStep) {
       handleSubmit()

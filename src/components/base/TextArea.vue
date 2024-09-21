@@ -4,6 +4,7 @@ import { computed, onUnmounted, ref, toRaw, unref } from 'vue'
 import { useInitial } from '@/composables/initial'
 import { useLoader } from '@/composables/loader'
 import { watchDebounced } from '@vueuse/core'
+import { useValidate } from '@/composables/validation'
 
 const props = defineProps<{
   element: TextArea
@@ -31,12 +32,20 @@ const initValue =
   props.items === undefined ? calculateInitValue(props.element, cData.value) : props.tempValue
 const value = ref(initValue)
 
+//validation
+const { calValidation, showGblError } = useValidate()
+const errMsg = ref('')
+const showErr = ref(false)
+
 // update model value
 watchDebounced(
   value,
   (n) => {
     //update the model value
     props.setValue(props.element.schema, n, props.items)
+
+    // validation fire
+    calValidation(props.element, n, errMsg)
   },
   { immediate: true, debounce: 0 }
 )
@@ -62,5 +71,6 @@ onUnmounted(() => {
       cols="50"
       v-model="value"
     ></textarea>
+    <p v-if="(showGblError || showErr) && errMsg" class="text-red-600 pb-3">{{ errMsg }}</p>
   </div>
 </template>
