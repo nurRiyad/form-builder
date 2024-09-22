@@ -1,0 +1,7 @@
+<script lang="ts" setup></script>
+
+<template>
+  <div>
+    <h1>404 page not found</h1>
+  </div>
+</template>
