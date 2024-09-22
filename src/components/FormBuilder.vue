@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { FormType } from '@/types/schema'
 import { defineAsyncComponent, provide, ref, toRaw, unref } from 'vue'
-import lodash from 'lodash'
+import set from 'lodash.set'
 import { useGlobalModel } from '@/composables/model'
 import { useValidate } from '@/composables/validation'
 
@@ -46,7 +46,7 @@ const generateFinalForm = () => {
   const generatedObj = {}
   Object.keys(raw).forEach((key) => {
     const fKey = key.replaceAll('/', '.')
-    lodash.set(generatedObj, fKey, raw[key])
+    set(generatedObj, fKey, raw[key])
   })
   return generatedObj
 }
