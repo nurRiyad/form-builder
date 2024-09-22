@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import lodash from 'lodash'
+import get from 'lodash.get'
 import type { Input } from '@/types/schema'
 import { computed, inject, onUnmounted, ref, toRaw, unref } from 'vue'
 import { watchDebounced } from '@vueuse/core'
@@ -62,8 +62,8 @@ const calculateInputType = computed(() => {
   path = path.replaceAll('/', '.')
   const typePath = `${path}.type`
   const formatPath = `${path}.format`
-  const type = lodash.get(wholeSchema, typePath)
-  const format = lodash.get(wholeSchema, formatPath)
+  const type = get(wholeSchema, typePath)
+  const format = get(wholeSchema, formatPath)
   if (type === 'integer') return 'number'
   else if (type === 'string' && format === 'password') return 'password'
   return 'text'

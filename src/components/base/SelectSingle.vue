@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { Select } from '@/types/schema'
 import { computed, inject, onUnmounted, ref, toRaw, unref } from 'vue'
-import lodash from 'lodash'
+import get from 'lodash.get'
 import { useInitial } from '@/composables/initial'
 import { useLoader } from '@/composables/loader'
 import { watchDebounced } from '@vueuse/core'
@@ -60,7 +60,7 @@ const fOptions = computed(() => {
     path = `${path.replace('schema/', '')}`
     path = path.replaceAll('/', '.')
     const enumPath = `${path}.enum`
-    ops = (lodash.get(wholeSchema, enumPath) || []) as Array<string>
+    ops = (get(wholeSchema, enumPath) || []) as Array<string>
   }
   return ops.map((op) => {
     if (typeof op === 'string') {

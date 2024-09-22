@@ -1,5 +1,5 @@
 import { inject } from 'vue'
-import lodash from 'lodash'
+import get from 'lodash.get'
 import type { AllElement } from '@/types'
 
 export const useInitial = () => {
@@ -14,7 +14,7 @@ export const useInitial = () => {
     if (path.includes('items')) {
       path = path.replace('.items', `[${items}]`)
     }
-    const value = lodash.get(initialValue, path)
+    const value = get(initialValue, path)
     return value
   }
 
