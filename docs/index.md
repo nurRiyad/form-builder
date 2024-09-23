@@ -4,21 +4,21 @@ layout: home
 
 hero:
   name: 'Form Builder'
-  text: 'Build complex from with json'
-  tagline: My great project tagline
+  text: 'Build complex in a sec from with json'
+  tagline:
   actions:
     - theme: brand
       text: Get Started
-      link: /markdown-examples
+      link: /introduction
     - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: Installation
+      link: /installation
 
 features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  - title: Conditional Rendering
+    details: Based on different data it can conditionally show or not show some element
+  - title: Dynamic Initial Value
+    details: It can calculate the initial value for any element
+  - title: Dependent element
+    details: It can recalculate on element's value based on another element
 ---
