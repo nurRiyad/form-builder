@@ -5,7 +5,10 @@ layout: home
 hero:
   name: 'Form Builder'
   text: 'Build complex in a sec from with json'
-  tagline:
+  tagline: this is lag line
+  image:
+    src: /logo.svg
+    alt: VitePress
   actions:
     - theme: brand
       text: Get Started

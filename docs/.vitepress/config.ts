@@ -6,6 +6,7 @@ export default defineConfig({
   description: 'Build complex with json',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
+    logo: 'logo.svg',
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Guide', link: '/introduction' }
@@ -57,6 +58,9 @@ export default defineConfig({
       }
     ],
 
-    socialLinks: [{ icon: 'github', link: 'https://github.com/nurRiyad/form-builder' }]
+    socialLinks: [{ icon: 'github', link: 'https://github.com/nurRiyad/form-builder' }],
+    search: {
+      provider: 'local'
+    }
   }
 })
