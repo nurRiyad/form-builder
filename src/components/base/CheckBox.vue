@@ -78,8 +78,9 @@ onUnmounted(() => {
     <p>Check is fetching</p>
   </div>
   <div v-else>
-    <div class="flex items-center space-x-3">
+    <div class="field">
       <input
+        class="is-checkradio has-background-color is-primary"
         type="checkbox"
         :id="String(element.label) + String(items)"
         :name="element.label"
@@ -88,6 +89,6 @@ onUnmounted(() => {
       />
       <label :for="String(element.label) + String(items)">{{ element.label }}</label>
     </div>
-    <p v-if="(showGblError || showErr) && errMsg" class="text-red-600 pb-3">{{ errMsg }}</p>
+    <p v-if="(showGblError || showErr) && errMsg" class="is-danger">{{ errMsg }}</p>
   </div>
 </template>

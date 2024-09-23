@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import get from 'lodash.get'
 import type { Input } from '@/types/schema'
-import { computed, inject, onUnmounted, ref, toRaw, unref } from 'vue'
+import { computed, inject, onUnmounted, ref, toRaw, unref, watch } from 'vue'
 import { watchDebounced } from '@vueuse/core'
 import { useInitial } from '@/composables/initial'
 import { useLoader } from '@/composables/loader'
@@ -15,6 +15,7 @@ const props = defineProps<{
   parentData?: any
   setValue: (path: string, val: any, items?: string) => void
   deleteValue?: (key: string) => void
+  showStar?: boolean
 }>()
 
 const wholeSchema = inject('schema')
@@ -34,6 +35,7 @@ const { calculateInitValue } = useInitial()
 const initValue =
   props.items === undefined ? calculateInitValue(props.element, cData.value) : props.tempValue
 const value = ref(initValue)
+const isLabelHoisted = ref(false)
 
 //validation
 const { calValidation, showGblError } = useValidate()
@@ -49,6 +51,9 @@ watchDebounced(
 
     // validation fire
     calValidation(props.element, n, errMsg)
+
+    //update labels
+    isLabelHoisted.value = true
   },
   { immediate: true, debounce: 0 }
 )
@@ -80,15 +85,24 @@ onUnmounted(() => {
   <div v-if="isLoading">
     <h1>This input element is loading...</h1>
   </div>
-  <div class="flex flex-col space-y-2 w-full" :class="$attrs.class">
-    <label :for="element.label">{{ element.label }}</label>
+  <div class="ac-single-input is-small" :class="$attrs.class">
+    <label
+      @click="isLabelHoisted = true"
+      class="ac-label"
+      :class="{ 'is-required': showStar, 'show-label': isLabelHoisted }"
+      :for="element.label"
+    >
+      {{ element.label }} <span v-if="showStar" class="is-required"> * </span>
+    </label>
     <input
       :id="element.label"
       :name="element.label"
       :type="calculateInputType"
       v-model="value"
       @input="showErr = true"
-      class="border border-black"
+      @focus="isLabelHoisted = true"
+      @focusout="isLabelHoisted = false"
+      class="ac-input"
     />
     <p v-if="(showGblError || showErr) && errMsg" class="text-red-600 pb-3">{{ errMsg }}</p>
   </div>

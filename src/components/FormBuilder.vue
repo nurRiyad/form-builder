@@ -115,14 +115,14 @@ defineExpose({
     <slot name="custom-form" />
     <template v-if="!hideFormAction">
       <div class="flex justify-between" v-if="ui.type === 'single-step-from'">
-        <button @click="handleCancel" class="bg-sky-500 mt-5 py-2 px-3 rounded-sm">Cancel</button>
-        <button @click="handleSubmit" class="bg-sky-500 mt-5 py-2 px-3 rounded-sm">Submit</button>
+        <button @click="handleCancel" class="button ac-button">Cancel</button>
+        <button @click="handleSubmit" class="button ac-button is-primary">Submit</button>
       </div>
       <div class="flex justify-between" v-else>
-        <button @click="handleStep('Prev')" class="bg-sky-500 mt-5 py-2 px-3 rounded-sm">
+        <button @click="handleStep('Prev')" class="button ac-button">
           {{ activeStep <= 0 ? 'Cancel' : 'Previous' }}
         </button>
-        <button @click="handleStep('Next')" class="bg-sky-500 mt-5 py-2 px-3 rounded-sm">
+        <button @click="handleStep('Next')" class="button ac-button is-primary">
           {{ activeStep + 1 >= totalStep ? 'Submit' : 'Next' }}
         </button>
       </div>

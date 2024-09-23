@@ -71,11 +71,12 @@ const fOptions = computed(() => {
   <div v-if="isLoading">
     <p>Is Radio data fetching</p>
   </div>
-  <div v-else class="flex flex-col space-y-2">
+  <div v-else class="field">
     <p>{{ element.label }}</p>
-    <div v-for="op in fOptions" :key="op.value" class="space-x-2">
+    <div v-for="op in fOptions" :key="op.value" class="field">
       <input
         type="radio"
+        class="is-checkradio"
         :id="String(op.value) + String(items)"
         :name="element.label"
         :value="op.value"
@@ -83,6 +84,6 @@ const fOptions = computed(() => {
       />
       <label :for="String(op.value) + String(items)">{{ op.name }}</label>
     </div>
-    <p v-if="(showGblError || showErr) && errMsg" class="text-red-600 pb-3">{{ errMsg }}</p>
+    <p v-if="(showGblError || showErr) && errMsg" class="is-danger">{{ errMsg }}</p>
   </div>
 </template>
