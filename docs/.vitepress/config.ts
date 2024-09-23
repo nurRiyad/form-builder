@@ -6,7 +6,7 @@ export default defineConfig({
   description: 'Build complex with json',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
-    logo: 'logo.svg',
+    logo: '/logo.svg',
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Guide', link: '/introduction' }
