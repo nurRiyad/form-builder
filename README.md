@@ -24,66 +24,13 @@ Generate from in a minutes
 - [x] From Level fetch
   - [x] Extract the function and call properly
   - [x] Save the value somewhere to properly use this
-- [ ] Add slots for form actions
-- [ ] Remove lodash from dependency
-- [ ] Remove same type of code from base components
-- [ ] Basic Validation
+- [x] Add slots for form actions
+- [x] Remove lodash from dependency
+- [x] Remove same type of code from base components
+- [x] Basic Validation
 - [ ] Add editor element
 - [ ] Create Platform UI Credential create form
 - [ ] Create Platform UI Credential Edit form
-
-#### Component Specific Feature
-
-- Base Element
-  - Input
-    - [x] Conditional Render
-    - [x] Loader check
-    - [x] Initial value calculate
-    - [x] Watcher changes
-    - [x] Validation
-    - [x] Proper input type guess
-  - TextArea
-    - [x] Conditional Render
-    - [x] Loader check
-    - [x] Initial value calculate
-    - [x] Watcher changes
-    - [x] Validation
-    - [x] Proper input type guess
-  - Single Select
-    - [x] Conditional Render
-    - [x] Loader check
-    - [x] Initial value calculate
-    - [x] Watcher changes
-    - [x] Validation
-    - [x] Proper input type guess
-  - Checkbox
-    - [x] Conditional Render
-    - [x] Loader check
-    - [x] Initial value calculate
-    - [x] Watcher changes
-    - [x] Validation
-    - [x] Proper input type guess
-  - Radio
-    - [x] Conditional Render
-    - [x] Loader check
-    - [x] Initial value calculate
-    - [x] Watcher changes
-    - [x] Validation
-    - [x] Proper input type guess
-  - Switch
-    - [x] Conditional Render
-    - [x] Loader check
-    - [x] Initial value calculate
-    - [x] Watcher changes
-    - [x] Validation
-    - [x] Proper input type guess
-  - Anchor
-    - [x] Conditional Render
-    - [x] Loader check
-    - [x] Initial value calculate
-    - [x] Watcher changes
-    - [x] Validation
-    - [x] Proper input type guess
 
 ## Recommended IDE Setup
 
