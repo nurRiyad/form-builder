@@ -3,7 +3,7 @@ import { RouterView } from 'vue-router'
 </script>
 
 <template>
-  <div class="flex justify-center p-5 space-x-5 mb-2 border-b border-black">
+  <div class="is-flex is-justify-content-center p-16 gap-8 mb-8 b-b-1">
     <RouterLink exactActiveClass="underline" to="/">Home</RouterLink>
     <RouterLink exactActiveClass="underline" to="/docs">Docs</RouterLink>
     <RouterLink exactActiveClass="underline" to="/about">About</RouterLink>

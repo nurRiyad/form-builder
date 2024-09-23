@@ -108,17 +108,20 @@ defineExpose({
   <div v-if="isLoading">
     <h1>Form file loading</h1>
   </div>
-  <div class="max-w-3xl mx-auto" v-else>
+  <div class="container" v-else>
     <SingleStep v-if="ui.type === 'single-step-from'" :ui="ui" />
     <MultiStep v-else-if="ui.type === 'multi-step-form'" :active-step="activeStep" :ui="ui" />
     <h1 v-else>No Proper Form type found</h1>
     <slot name="custom-form" />
     <template v-if="!hideFormAction">
-      <div class="flex justify-between my-4" v-if="ui.type === 'single-step-from'">
+      <div
+        class="is-flex is-justify-content-space-between my-4"
+        v-if="ui.type === 'single-step-from'"
+      >
         <button @click="handleCancel" class="button ac-button">Cancel</button>
         <button @click="handleSubmit" class="button ac-button is-primary">Submit</button>
       </div>
-      <div class="flex justify-between my-4" v-else>
+      <div class="is-flex is-justify-content-space-between my-4" v-else>
         <button @click="handleStep('Prev')" class="button ac-button">
           {{ activeStep <= 0 ? 'Cancel' : 'Previous' }}
         </button>

@@ -58,11 +58,11 @@ watch(
       </div>
     </template>
     <template v-else>
-      <div class="flex justify-between my-2">
+      <div class="is-flex is-justify-content-space-between my-2">
         <h1>{{ ui.label }}</h1>
         <button @click="tempMode.push({})" class="button ac-button is-primary">Add new</button>
       </div>
-      <div class="flex flex-col space-y-2">
+      <div class="is-flex is-flex-direction-column gap-16">
         <EachObject
           v-for="(val, idx) in tempMode"
           :key="val"

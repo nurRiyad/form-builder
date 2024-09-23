@@ -62,7 +62,7 @@ onUnmounted(() => {
     <p>Switch data fetching</p>
   </div>
   <div v-else>
-    <div class="flex items-center space-x-5">
+    <div class="is-flex is-align-items-center gap-8">
       <label for="ac-switch">{{ element.label }}</label>
       <label class="switch">
         <input id="ac-switch" name="ac-switch" v-model="checked" type="checkbox" />

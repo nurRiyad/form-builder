@@ -23,17 +23,17 @@ const handleDelete = () => {
 </script>
 
 <template>
-  <div class="flex w-full space-x-4">
+  <div class="is-flex is-fullwidth gap-16">
     <TheInput
       v-if="element.type === 'input'"
-      class="w-full"
+      class="is-fullwidth"
       :element="element"
       :items="items"
       :temp-value="getValue(items)"
       :set-value="setValue"
     />
     <SelectSingle
-      class="w-full"
+      class="is-fullwidth"
       v-if="element.type === 'select'"
       :element="element"
       :items="items"
@@ -41,7 +41,7 @@ const handleDelete = () => {
       :set-value="setValue"
     />
     <TheRadio
-      class="w-full"
+      class="is-fullwidth"
       v-if="element.type === 'radio'"
       :element="element"
       :items="items"
@@ -49,7 +49,7 @@ const handleDelete = () => {
       :set-value="setValue"
     />
     <CheckBox
-      class="w-full"
+      class="is-fullwidth"
       v-if="element.type === 'checkbox'"
       :element="element"
       :items="items"
@@ -57,7 +57,7 @@ const handleDelete = () => {
       :set-value="setValue"
     />
     <TextArea
-      class="w-full"
+      class="is-fullwidth"
       v-if="element.type === 'textarea'"
       :element="element"
       :items="items"

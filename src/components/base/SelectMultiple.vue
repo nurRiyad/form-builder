@@ -81,7 +81,7 @@ onUnmounted(() => {
   <div v-if="isLoading">
     <p>Data fetching</p>
   </div>
-  <div v-else class="flex flex-col space-y-2">
+  <div v-else class="is-flex is-flex-direction-column gap-8">
     <label :for="element.label">{{ element.label }}</label>
     <select :name="element.label" :id="element.label" v-model="value" multiple>
       <option v-for="val in fOptions" :key="val.value" :value="val.value">

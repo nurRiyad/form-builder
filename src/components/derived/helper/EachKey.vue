@@ -30,7 +30,7 @@ watch(key, (n, o) => {
 </script>
 
 <template>
-  <div class="flex w-full items-baseline space-x-4">
+  <div class="is-flex is-fullwidth items-baseline space-x-4">
     <div class="ac-single-input is-extra-small">
       <label
         class="ac-label"

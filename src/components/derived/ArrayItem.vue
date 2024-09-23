@@ -67,11 +67,11 @@ const addNew = () => {
       </div>
     </template>
     <template v-else>
-      <div class="flex justify-between my-2">
+      <div class="is-flex is-justify-content-space-between my-2">
         <h1>{{ ui.label }}</h1>
         <button @click="addNew" class="button ac-button is-primary">Add new</button>
       </div>
-      <div class="flex flex-col space-y-2">
+      <div class="is-flex is-flex-direction-column gap-8">
         <EachItem
           v-for="(val, idx) in tempMode"
           :key="String(idx) + String(shadowList[idx])"
