@@ -4,7 +4,7 @@ layout: home
 
 hero:
   name: 'Form Builder'
-  text: 'Build complex in a sec from with json'
+  text: 'Build complex from in a sec from with json'
   tagline: simple, optimized, easy to use
   image:
     src: /logo.svg
