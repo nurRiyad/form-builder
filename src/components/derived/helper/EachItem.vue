@@ -64,6 +64,6 @@ const handleDelete = () => {
       :temp-value="getValue(items)"
       :set-value="setValue"
     />
-    <button @click="handleDelete" class="bg-red-300 mt-5 py-1 px-2 rounded-sm">Delete</button>
+    <button @click="handleDelete" class="button ac-button is-danger">Delete</button>
   </div>
 </template>

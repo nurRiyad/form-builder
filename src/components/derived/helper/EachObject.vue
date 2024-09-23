@@ -26,7 +26,7 @@ const tempData = (path: string) => {
 </script>
 
 <template>
-  <div class="border p-4 space-y-2">
+  <div class="border p-16 space-y-2 is-rounded-4">
     <div class="flex flex-col space-y-4">
       <template v-for="el in elements" :key="el">
         <TheInput
@@ -60,6 +60,6 @@ const tempData = (path: string) => {
         />
       </template>
     </div>
-    <button @click="handleDelete" class="bg-red-300 mt-5 py-2 px-3 rounded-sm">Delete</button>
+    <button @click="handleDelete" class="button ac-button is-danger">Delete</button>
   </div>
 </template>

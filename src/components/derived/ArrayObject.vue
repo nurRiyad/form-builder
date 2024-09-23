@@ -60,7 +60,7 @@ watch(
     <template v-else>
       <div class="flex justify-between my-2">
         <h1>{{ ui.label }}</h1>
-        <button @click="tempMode.push({})" class="px-2 py-1 bg-blue-400">Add new</button>
+        <button @click="tempMode.push({})" class="button ac-button is-primary">Add new</button>
       </div>
       <div class="flex flex-col space-y-2">
         <EachObject

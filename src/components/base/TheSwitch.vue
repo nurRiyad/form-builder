@@ -69,7 +69,7 @@ onUnmounted(() => {
         <span class="slider round"></span>
       </label>
     </div>
-    <p v-if="(showGblError || showErr) && errMsg" class="text-red-600 pb-3">{{ errMsg }}</p>
+    <p v-if="(showGblError || showErr) && errMsg" class="has-text-danger">{{ errMsg }}</p>
   </div>
 </template>
 

@@ -15,9 +15,12 @@ const handleDelete = () => {
 
 const key = ref(props.obKey)
 const value = ref(props.obValue)
+const isLabelHoisted = ref(false)
 
 watch(value, (n) => {
   props.setValue(key.value, n)
+  //update labels
+  isLabelHoisted.value = true
 })
 
 watch(key, (n, o) => {
@@ -28,14 +31,24 @@ watch(key, (n, o) => {
 
 <template>
   <div class="flex w-full items-baseline space-x-4">
-    <div class="flex items-center space-x-2">
-      <label for="key">Key</label>
+    <div class="ac-single-input is-extra-small">
+      <label
+        class="ac-label"
+        for="key"
+        :class="{ 'is-required': showStar, 'show-label': isLabelHoisted }"
+        >Key</label
+      >
       <input v-model="key" type="text" name="key" id="key" class="border border-black" />
     </div>
-    <div class="flex items-center space-x-2">
-      <label for="value">Value</label>
+    <div class="ac-single-input is-extra-small">
+      <label
+        class="ac-label"
+        for="value"
+        :class="{ 'is-required': showStar, 'show-label': isLabelHoisted }"
+        >Value</label
+      >
       <input v-model="value" type="text" name="value" id="value" class="border border-black" />
     </div>
-    <button @click="handleDelete" class="bg-red-300 mt-5 py-1 px-2 rounded-sm">Delete</button>
+    <button @click="handleDelete" class="button ac-button is-danger">Delete</button>
   </div>
 </template>

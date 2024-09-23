@@ -85,7 +85,7 @@ onUnmounted(() => {
   <div v-if="isLoading">
     <h1>This input element is loading...</h1>
   </div>
-  <div class="ac-single-input is-small" :class="$attrs.class">
+  <div class="ac-single-input is-extra-small" :class="$attrs.class">
     <label
       @click="isLabelHoisted = true"
       class="ac-label"
@@ -104,6 +104,6 @@ onUnmounted(() => {
       @focusout="isLabelHoisted = false"
       class="ac-input"
     />
-    <p v-if="(showGblError || showErr) && errMsg" class="text-red-600 pb-3">{{ errMsg }}</p>
+    <p v-if="(showGblError || showErr) && errMsg" class="has-text-danger">{{ errMsg }}</p>
   </div>
 </template>

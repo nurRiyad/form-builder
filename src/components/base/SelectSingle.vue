@@ -87,6 +87,6 @@ onUnmounted(() => {
         {{ val.name }}
       </option>
     </select>
-    <p v-if="(showGblError || showErr) && errMsg" class="text-red-600 pb-3">{{ errMsg }}</p>
+    <p v-if="(showGblError || showErr) && errMsg" class="has-text-danger">{{ errMsg }}</p>
   </div>
 </template>
