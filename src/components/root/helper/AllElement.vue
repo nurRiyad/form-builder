@@ -28,11 +28,11 @@ const { setValue, deleteValue } = useGlobalModel()
 <template>
   <!-- Layouts -->
   <BlockLayout v-if="el.type === 'block-layout'" :ui="el" :c-data="cData" />
-  <HorizontalLayout v-if="el.type === 'horizontal-layout'" :ui="el" :c-data="cData" />
+  <HorizontalLayout v-else-if="el.type === 'horizontal-layout'" :ui="el" :c-data="cData" />
 
   <!-- Simple Element -->
   <TheInput
-    v-if="el.type === 'input'"
+    v-else-if="el.type === 'input'"
     :element="el"
     :parent-data="cData"
     :set-value="setValue"
