@@ -20,58 +20,62 @@
       "schema": "schema/properties/ownerID"
     },
     {
+      "type": "block-layout",
+      "label": "Aws Block Label",
+      "showLabels": true,
       "if": {
         "type": "function",
         "name": "isCredAws"
       },
-      "type": "input",
-      "schema": "schema/properties/aws/properties/accessKeyID",
-      "label": "Access Key Id"
+      "elements": [
+        {
+          "type": "input",
+          "schema": "schema/properties/aws/properties/accessKeyID",
+          "label": "Access Key Id"
+        },
+        {
+          "type": "input",
+          "label": "Secret Access Key",
+          "schema": "schema/properties/aws/properties/secretAccessKey"
+        }
+      ]
     },
     {
-      "if": {
-        "type": "function",
-        "name": "isCredAws"
-      },
-      "type": "input",
-      "label": "Secret Access Key",
-      "schema": "schema/properties/aws/properties/secretAccessKey"
-    },
-    {
-      "if": {
-        "type": "computed",
-        "name": "isCredAzure"
-      },
-      "type": "input",
-      "label": "Subscription Id",
-      "schema": "schema/properties/azure/properties/subscriptionID"
-    },
-    {
+      "type": "block-layout",
+      "label": "Azure Block",
+      "showLabels": true,
       "if": {
         "type": "computed",
         "name": "isCredAzure"
       },
-      "type": "input",
-      "label": "Tenant ID",
-      "schema": "schema/properties/azure/properties/tenantID"
-    },
-    {
-      "if": {
-        "type": "computed",
-        "name": "isCredAzure"
-      },
-      "type": "input",
-      "label": "Client Id",
-      "schema": "schema/properties/azure/properties/clientID"
-    },
-    {
-      "if": {
-        "type": "computed",
-        "name": "isCredAzure"
-      },
-      "type": "input",
-      "label": "Client Secret",
-      "schema": "schema/properties/azure/properties/clientSecret"
+      "elements": [
+        {
+          "type": "input",
+          "label": "Subscription Id",
+          "schema": "schema/properties/azure/properties/subscriptionID"
+        },
+        {
+          "type": "input",
+          "label": "Tenant ID",
+          "schema": "schema/properties/azure/properties/tenantID"
+        },
+        {
+          "type": "horizontal-layout",
+          "label": "horizontal test",
+          "elements": [
+            {
+              "type": "input",
+              "label": "Client Id",
+              "schema": "schema/properties/azure/properties/clientID"
+            },
+            {
+              "type": "input",
+              "label": "Client Secret",
+              "schema": "schema/properties/azure/properties/clientSecret"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
