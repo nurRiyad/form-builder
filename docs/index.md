@@ -11,11 +11,11 @@ hero:
     alt: VitePress
   actions:
     - theme: brand
-      text: Get Started
-      link: /introduction
-    - theme: alt
       text: Installation
       link: /installation
+    - theme: alt
+      text: Get Started
+      link: /introduction
 
 features:
   - title: Conditional Rendering

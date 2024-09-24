@@ -9,7 +9,8 @@ export default defineConfig({
     logo: '/logo.svg',
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Guide', link: '/introduction' }
+      { text: 'Guide', link: '/introduction' },
+      { text: 'v0.0.7', link: 'https://github.com/nurRiyad/form-builder/tags' }
     ],
 
     sidebar: [
