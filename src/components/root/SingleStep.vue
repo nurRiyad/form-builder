@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import { useLoader } from '@/composables/loader'
 import type { IfType, SingleStepForm } from '@/types/schema'
-import { computed, defineAsyncComponent, inject, toRaw, unref } from 'vue'
+import { computed, inject, toRaw, unref } from 'vue'
 
-const AllElement = defineAsyncComponent(() => import('./helper/AllElement.vue'))
+import AllElement from './helper/AllElement.vue'
 
 const props = defineProps<{
   ui: SingleStepForm
