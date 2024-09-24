@@ -85,10 +85,11 @@ export interface ObjectItem extends BaseCommon {
 
 interface CommonLayout {
   label: string
-  description?: string
-  loader?: string
-  init?: Init
   if?: IfType
+  init?: Init
+  loader?: string
+  showLabels?: boolean
+  description?: string
   elements: Array<AllElement>
 }
 

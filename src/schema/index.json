@@ -181,6 +181,9 @@
         "loader": {
           "type": "string"
         },
+        "showLabels": {
+          "type": "boolean"
+        },
         "type": {
           "const": "block-layout",
           "type": "string"
@@ -270,6 +273,9 @@
         },
         "loader": {
           "type": "string"
+        },
+        "showLabels": {
+          "type": "boolean"
         },
         "type": {
           "const": "horizontal-layout",
