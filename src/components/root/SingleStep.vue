@@ -40,7 +40,7 @@ const checkIf = (el: IfType | undefined) => {
       <h1>Single Step Form Loading</h1>
     </div>
     <div v-else class="is-flex is-flex-direction-column gap-8">
-      <p class="font-semibold text-xl text-center">{{ ui.label }}</p>
+      <h6 class="font-semibold text-xl text-center">{{ ui.label }}</h6>
       <template v-for="el in ui.elements" :key="el.label">
         <AllElement :c-data="cData" :el="el" v-if="checkIf(el.if)" />
       </template>

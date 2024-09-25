@@ -31,7 +31,7 @@ watch(key, (n, o) => {
 
 <template>
   <div class="is-flex is-fullwidth items-baseline space-x-4">
-    <div class="ac-single-input is-extra-small is-fullwidth">
+    <div class="ac-single-input is-small is-fullwidth">
       <label
         class="ac-label"
         for="key"
@@ -40,7 +40,7 @@ watch(key, (n, o) => {
       >
       <input v-model="key" type="text" name="key" id="key" class="border border-black" />
     </div>
-    <div class="ac-single-input is-extra-small is-fullwidth">
+    <div class="ac-single-input is-small is-fullwidth">
       <label
         class="ac-label"
         for="value"

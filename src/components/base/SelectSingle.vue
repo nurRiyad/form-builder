@@ -80,7 +80,7 @@ onUnmounted(() => {
   <div v-if="isLoading">
     <p>Data fetching</p>
   </div>
-  <div v-else class="ac-single-input select">
+  <div v-else class="ac-single-input is-small">
     <label :for="element.label" class="ac-label show-label">{{ element.label }}</label>
     <select :name="element.label" :id="element.label" v-model="value" class="ac-input is-fullwidth">
       <option v-for="val in fOptions" :key="val.value" :value="val.value">

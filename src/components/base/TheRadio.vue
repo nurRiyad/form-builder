@@ -71,8 +71,8 @@ const fOptions = computed(() => {
   <div v-if="isLoading">
     <p>Is Radio data fetching</p>
   </div>
-  <div v-else class="field">
-    <p>{{ element.label }}</p>
+  <div v-else class="mb-8">
+    <h6>{{ element.label }}</h6>
     <div v-for="op in fOptions" :key="op.value" class="field">
       <input
         type="radio"

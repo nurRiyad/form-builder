@@ -112,11 +112,11 @@ onUnmounted(() => {
 }
 
 input:checked + .slider {
-  background-color: #2196f3;
+  background-color: hsl(var(--primary-hue), var(--primary-saturation), var(--primary-light));
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #2196f3;
+  box-shadow: 0 0 1px hsl(var(--primary-hue), var(--primary-saturation), var(--primary-light));
 }
 
 input:checked + .slider:before {

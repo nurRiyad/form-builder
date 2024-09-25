@@ -64,7 +64,7 @@ const addNew = () => {
     </template>
     <template v-else>
       <div class="is-flex is-justify-content-space-between my-2">
-        <h1>{{ ui.label }}</h1>
+        <h4>{{ ui.label }}</h4>
         <button @click="addNew" class="button ac-button is-primary">Add new</button>
       </div>
       <div class="is-flex is-flex-direction-column space-y-2">
