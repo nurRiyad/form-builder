@@ -13,7 +13,11 @@ const show = ref(true)
 
 <template>
   <div class="single-accordion-item">
-    <div class="accordion-heading is-clickable" @click="show = !show">
+    <div
+      class="accordion-heading is-clickable"
+      @click="show = !show"
+      style="border-radius: 4px 4px 0 0"
+    >
       <h5>{{ ui.label }}</h5>
       <div class="accordion-right is-flex is-align-items-center">
         <p>{{ ui.description }}</p>
@@ -55,8 +59,8 @@ const show = ref(true)
     </div>
     <div
       v-show="show"
-      class="accordion-body pt-16 b-1 p-20 b-t-n is-rounded-4"
-      style="max-height: 100%; display: block"
+      class="accordion-body pt-16 b-1 p-20 b-t-n"
+      style="max-height: 100%; display: block; border-radius: 0 0 4px 4px"
     >
       <template v-for="el in ui.elements" :key="el.label">
         <AllElement :el="el" :c-data="parentData" />
