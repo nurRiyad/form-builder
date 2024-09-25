@@ -25,7 +25,7 @@
       "showLabels": true,
       "if": {
         "type": "function",
-        "name": "isCredAws"
+        "name": "isCredAws|a|b|c|d|e"
       },
       "elements": [
         {

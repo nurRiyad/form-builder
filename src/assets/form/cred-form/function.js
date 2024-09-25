@@ -1,7 +1,8 @@
 import { computed, unref } from 'vue'
 
 export const useFunc = (model) => {
-  const isCredAws = () => {
+  const isCredAws = ({ cData, params }) => {
+    window.console.log(cData, params)
     const raw = unref(model)
     if (raw['schema/type'] === 'Aws') return true
     else return false

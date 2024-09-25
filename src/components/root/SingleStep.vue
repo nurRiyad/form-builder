@@ -27,7 +27,9 @@ const checkIf = (el: IfType | undefined) => {
   if (el.type === 'computed') {
     return fn[el.name].value
   } else {
-    return fn[el.name]({ cdata: cData.value })
+    const split = el.name.split('|')
+    const fName = split[0]
+    return fn[fName]({ cdata: cData.value, params: split })
   }
 }
 </script>
