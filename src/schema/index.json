@@ -415,7 +415,7 @@
     "MultiStepForm": {
       "additionalProperties": false,
       "properties": {
-        "labe": {
+        "label": {
           "type": "string"
         },
         "loader": {
@@ -432,7 +432,7 @@
           "type": "string"
         }
       },
-      "required": ["type", "step", "labe"],
+      "required": ["type", "step"],
       "type": "object"
     },
     "ObjectItem": {
@@ -595,7 +595,7 @@
           "type": "string"
         }
       },
-      "required": ["type", "schema", "label", "elements"],
+      "required": ["type", "elements"],
       "type": "object"
     },
     "Switch": {

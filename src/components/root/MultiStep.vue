@@ -18,6 +18,7 @@ loadData(props.ui.loader)
     <h1>MultiStepForm data fetching</h1>
   </div>
   <div v-else>
+    <p v-if="ui.label" class="font-semibold text-xl text-center">{{ ui.label }}</p>
     <template v-for="(item, idx) in ui.step" :key="idx + item.label">
       <SingleStep v-show="idx === activeStep" :ui="item" :parent-data="data" />
     </template>

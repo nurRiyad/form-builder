@@ -95,10 +95,12 @@ const handleStep = (type: 'Next' | 'Prev') => {
   }
 }
 
+// expose this value to parent
 defineExpose({
   handleSubmit,
   handleCancel,
-  handleStep
+  handleStep,
+  model
 })
 </script>
 

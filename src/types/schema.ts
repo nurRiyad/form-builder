@@ -1,15 +1,15 @@
 export interface MultiStepForm {
   type: 'multi-step-form'
   step: Array<SingleStepForm>
-  labe: string
+  label?: string
   loader?: string
 }
 
 export interface SingleStepForm {
   type: 'single-step-from'
-  schema: string
-  label: string
   elements: Array<AllElement>
+  schema?: string
+  label?: string
   loader?: string
 }
 

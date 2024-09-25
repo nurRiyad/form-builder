@@ -2,7 +2,6 @@
   "type": "single-step-from",
   "label": "Credential Create From",
   "schema": "schema/",
-  "loader": "loadData",
   "elements": [
     {
       "type": "select",
