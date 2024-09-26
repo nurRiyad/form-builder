@@ -11,7 +11,8 @@ import { RouterView } from 'vue-router'
       exactActiveClass="has-text-primary has-background-light"
       to="/"
       class="navbar-item has-text-dark has-text-weight-medium"
-      >Home</RouterLink
+    >
+      Home</RouterLink
     >
     <RouterLink
       exactActiveClass="has-text-primary has-background-light"

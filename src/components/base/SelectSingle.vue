@@ -6,6 +6,7 @@ import { useInitial } from '@/composables/initial'
 import { useLoader } from '@/composables/loader'
 import { watchDebounced } from '@vueuse/core'
 import { useValidate } from '@/composables/validation'
+import { useLabel } from '@/composables/label'
 
 const props = defineProps<{
   element: Select
@@ -34,22 +35,22 @@ const initValue =
   props.items === undefined ? calculateInitValue(props.element, cData.value) : props.tempValue
 const value = ref(initValue)
 
-//validation
-const { calValidation, showGblError } = useValidate()
-const errMsg = ref('')
-const showErr = ref(false)
-
 // update model value
 watchDebounced(
   value,
   (n) => {
     //update the model value
     props.setValue(props.element.schema, n, props.items)
-    // validation fire
-    calValidation(props.element, n, errMsg)
   },
   { immediate: true, debounce: 0 }
 )
+
+// input label
+const { isLabelHoisted, hoist, unHoist } = useLabel(value)
+
+//validation
+const { errMsg, showStar, showGblError } = useValidate(props.element, value)
+const showLocalErr = ref(false)
 
 const fOptions = computed(() => {
   let ops = []
@@ -81,12 +82,21 @@ onUnmounted(() => {
     <p>Data fetching</p>
   </div>
   <div v-else class="ac-single-input is-extra-small">
-    <label :for="element.label" class="ac-label show-label">{{ element.label }}</label>
-    <select :name="element.label" :id="element.label" v-model="value" class="ac-input is-fullwidth">
+    <label :for="element.label" class="ac-label" :class="{ 'show-label': isLabelHoisted }">
+      {{ element.label }}<span v-if="showStar" class="is-required"> * </span>
+    </label>
+    <select
+      v-model="value"
+      :name="element.label"
+      :id="element.label"
+      @focusout="unHoist"
+      @focus="hoist"
+      class="ac-input is-fullwidth"
+    >
       <option v-for="val in fOptions" :key="val.value" :value="val.value">
         {{ val.name }}
       </option>
     </select>
-    <p v-if="(showGblError || showErr) && errMsg" class="has-text-danger">{{ errMsg }}</p>
+    <p v-if="(showGblError || showLocalErr) && errMsg" class="has-text-danger">{{ errMsg }}</p>
   </div>
 </template>

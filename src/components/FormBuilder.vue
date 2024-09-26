@@ -55,6 +55,7 @@ const { invalidInputs, showGblError } = useGlobalValidate()
 
 // form submit
 const handleSubmit = () => {
+  console.log(invalidInputs.value)
   if (invalidInputs.value) {
     showGblError.value = true
     return

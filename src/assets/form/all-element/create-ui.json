@@ -1,6 +1,6 @@
 {
   "type": "multi-step-form",
-  "labe": "All Element Checker",
+  "label": "All Element Checker",
   "loader": "multiLoader",
   "step": [
     {
@@ -13,6 +13,7 @@
           "type": "block-layout",
           "label": "Block Layout",
           "description": "Block Description",
+          "showLabels": true,
           "elements": [
             {
               "type": "input",
@@ -46,7 +47,7 @@
         {
           "type": "radio",
           "label": "Gender",
-          "options": ["Male", "Female"],
+          "options": ["Male", "Female", "sdklfj", "sdklfj", "sdlkfj"],
           "schema": "schema/properties/userinfo/properties/gender",
           "validation": { "type": "required" }
         },

@@ -1,7 +1,9 @@
 <script lang="ts" setup>
-import type { BlockLayout } from '@/types'
-import AllElement from '../root/helper/AllElement.vue'
 import { ref } from 'vue'
+import type { BlockLayout } from '@/types'
+
+import TheArrow from '../icons/TheArrow.vue'
+import AllElement from '../root/helper/AllElement.vue'
 
 defineProps<{
   ui: BlockLayout
@@ -15,45 +17,14 @@ const show = ref(true)
   <div v-if="ui.showLabels" class="single-accordion-item">
     <div
       class="accordion-heading is-clickable"
-      @click="show = !show"
       style="border-radius: 4px 4px 0 0"
+      @click="show = !show"
     >
       <h5>{{ ui.label }}</h5>
       <div class="accordion-right is-flex is-align-items-center">
         <p>{{ ui.description }}</p>
         <button class="icon">
-          <svg
-            v-if="show"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="size-4"
-            style="transform: rotate(0deg)"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="m19.5 8.25-7.5 7.5-7.5-7.5"
-            ></path>
-          </svg>
-          <svg
-            v-else
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="size-4"
-            style="transform: rotate(-180deg)"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="m19.5 8.25-7.5 7.5-7.5-7.5"
-            ></path>
-          </svg>
+          <TheArrow :direction="show ? 'up' : 'down'" />
         </button>
       </div>
     </div>

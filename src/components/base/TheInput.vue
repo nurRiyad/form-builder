@@ -36,9 +36,6 @@ const initValue =
   props.items === undefined ? calculateInitValue(props.element, cData.value) : props.tempValue
 const value = ref(initValue)
 
-// input label
-const { isLabelHoisted, onFocus, onFocusOut } = useLabel(value)
-
 // update model value
 watchDebounced(
   value,
@@ -51,6 +48,9 @@ watchDebounced(
 
 // fire when watch dependency changes
 useWatchers(props.element.watcher, cData, value)
+
+// input label
+const { isLabelHoisted, hoist, unHoist } = useLabel(value)
 
 //validation
 const { errMsg, showStar, showGblError } = useValidate(props.element, value)
@@ -96,8 +96,8 @@ onUnmounted(() => {
       :name="element.label"
       :type="calculateInputType"
       @input="showLocalErr = true"
-      @focus="onFocus"
-      @focusout="onFocusOut"
+      @focus="hoist"
+      @focusout="unHoist"
     />
     <p v-if="(showGblError || showLocalErr) && errMsg" class="has-text-danger">{{ errMsg }}</p>
   </div>

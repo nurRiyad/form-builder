@@ -45,7 +45,7 @@ watchDebounced(
 )
 
 // input label
-const { isLabelHoisted, onFocus, onFocusOut } = useLabel(value)
+const { isLabelHoisted, hoist, unHoist } = useLabel(value)
 
 //validation
 const { errMsg, showStar, showGblError } = useValidate(props.element, value)
@@ -81,8 +81,8 @@ onUnmounted(() => {
       :id="element.label"
       :name="element.label"
       @input="showLocalErr = true"
-      @focus="onFocus"
-      @focusout="onFocusOut"
+      @focus="hoist"
+      @focusout="unHoist"
     ></textarea>
     <p v-if="(showGblError || showLocalErr) && errMsg" class="has-text-danger">{{ errMsg }}</p>
   </div>

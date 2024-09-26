@@ -33,9 +33,8 @@ const initValue =
 const checked = ref(initValue)
 
 //validation
-const { calValidation, showGblError } = useValidate()
-const errMsg = ref('')
-const showErr = ref(false)
+const { errMsg, showGblError } = useValidate(props.element, checked)
+const showLocalErr = ref(false)
 
 // update model value
 watchDebounced(
@@ -43,9 +42,6 @@ watchDebounced(
   (n) => {
     //update the model value
     props.setValue(props.element.schema, n, props.items)
-
-    // validation fire
-    calValidation(props.element, n, errMsg)
   },
   { immediate: true, debounce: 0 }
 )
@@ -85,10 +81,10 @@ onUnmounted(() => {
         :id="String(element.label) + String(items)"
         :name="element.label"
         v-model="checked"
-        @input="showErr = true"
+        @input="showLocalErr = true"
       />
       <label :for="String(element.label) + String(items)">{{ element.label }}</label>
     </div>
-    <p v-if="(showGblError || showErr) && errMsg" class="is-danger">{{ errMsg }}</p>
+    <p v-if="(showGblError || showLocalErr) && errMsg" class="is-danger">{{ errMsg }}</p>
   </div>
 </template>

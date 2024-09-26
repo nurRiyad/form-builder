@@ -6,7 +6,8 @@
     {
       "type": "select",
       "label": "Credential Type",
-      "schema": "schema/properties/type"
+      "schema": "schema/properties/type",
+      "validation": { "type": "required" }
     },
     {
       "type": "input",

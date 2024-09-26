@@ -4,7 +4,6 @@ import { computed, onUnmounted, ref, toRaw, unref } from 'vue'
 import { useInitial } from '@/composables/initial'
 import { useLoader } from '@/composables/loader'
 import { watchDebounced } from '@vueuse/core'
-import { useValidate } from '@/composables/validation'
 
 const props = defineProps<{
   element: Switch
@@ -32,20 +31,12 @@ const initValue =
   props.items === undefined ? calculateInitValue(props.element, cData.value) : props.tempValue
 const checked = ref(initValue)
 
-//validation
-const { calValidation, showGblError } = useValidate()
-const errMsg = ref('')
-const showErr = ref(false)
-
 // update model value
 watchDebounced(
   checked,
   (n) => {
     //update the model value
     props.setValue(props.element.schema, n, props.items)
-
-    // validation fire
-    calValidation(props.element, n, errMsg)
   },
   { immediate: true, debounce: 0 }
 )
@@ -69,7 +60,6 @@ onUnmounted(() => {
         <span class="slider round"></span>
       </label>
     </div>
-    <p v-if="(showGblError || showErr) && errMsg" class="has-text-danger">{{ errMsg }}</p>
   </div>
 </template>
 

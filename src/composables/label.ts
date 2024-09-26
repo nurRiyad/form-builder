@@ -11,15 +11,15 @@ export const useLabel = (model: Ref<any>) => {
     { immediate: true }
   )
 
-  const onFocus = () => (isLabelHoisted.value = true)
+  const hoist = () => (isLabelHoisted.value = true)
 
-  const onFocusOut = () => {
+  const unHoist = () => {
     if (!model.value) isLabelHoisted.value = false
   }
 
   return {
     isLabelHoisted,
-    onFocus,
-    onFocusOut
+    hoist,
+    unHoist
   }
 }

@@ -32,23 +32,19 @@ const initValue =
   props.items === undefined ? calculateInitValue(props.element, cData.value) : props.tempValue
 const picked = ref(initValue)
 
-//validation
-const { calValidation, showGblError } = useValidate()
-const errMsg = ref('')
-const showErr = ref(false)
-
 // update model value
 watchDebounced(
   picked,
   (n) => {
     //update the model value
     props.setValue(props.element.schema, n, props.items)
-
-    // validation fire
-    calValidation(props.element, n, errMsg)
   },
   { immediate: true, debounce: 0 }
 )
+
+//validation
+const { errMsg, showGblError } = useValidate(props.element, picked)
+const showLocalErr = ref(false)
 
 // clean on unmounted
 onUnmounted(() => {
@@ -75,15 +71,15 @@ const fOptions = computed(() => {
     <h6>{{ element.label }}</h6>
     <div v-for="op in fOptions" :key="op.value" class="field">
       <input
+        v-model="picked"
         type="radio"
         class="is-checkradio"
         :id="String(op.value) + String(items)"
         :name="element.label"
         :value="op.value"
-        v-model="picked"
       />
       <label :for="String(op.value) + String(items)">{{ op.name }}</label>
     </div>
-    <p v-if="(showGblError || showErr) && errMsg" class="is-danger">{{ errMsg }}</p>
+    <p v-if="(showGblError || showLocalErr) && errMsg" class="is-danger">{{ errMsg }}</p>
   </div>
 </template>

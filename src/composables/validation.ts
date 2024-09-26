@@ -6,8 +6,6 @@ export const useValidate = (ui: BaseElement | undefined, val: Ref<any>) => {
   const errMsg = ref('')
   const showStar = computed(() => ui?.validation?.type === 'required')
 
-  watch(val, (n) => calValidation(n))
-
   const { setInvalidInputs, showGblError } = useGlobalValidate()
   const requiredCheck = (val: unknown) => {
     if (typeof val === 'number') {
@@ -38,6 +36,7 @@ export const useValidate = (ui: BaseElement | undefined, val: Ref<any>) => {
     }
   }
 
+  watch(val, (n) => calValidation(n), { immediate: true })
   return { requiredCheck, calValidation, errMsg, showStar, showGblError }
 }
 
