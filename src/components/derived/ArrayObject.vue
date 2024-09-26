@@ -2,7 +2,7 @@
 import type { ArrayObject } from '@/types/schema'
 import { computed, ref, toRaw, unref, watch } from 'vue'
 import EachObject from './helper/EachObject.vue'
-import { useGlobalModel } from '@/composables/model'
+import { useGlobalModel } from '@/composables/global/model'
 import { useLoader } from '@/composables/loader'
 import { useInitial } from '@/composables/initial'
 

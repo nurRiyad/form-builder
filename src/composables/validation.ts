@@ -1,6 +1,6 @@
 import type { BaseElement } from '@/types'
-import { createGlobalState } from '@vueuse/core'
 import { computed, ref, watch, type Ref } from 'vue'
+import { useGlobalValidate } from './global/valid'
 
 export const useValidate = (ui: BaseElement | undefined, val: Ref<any>) => {
   const errMsg = ref('')
@@ -39,15 +39,4 @@ export const useValidate = (ui: BaseElement | undefined, val: Ref<any>) => {
   watch(val, (n) => calValidation(n), { immediate: true })
   return { requiredCheck, calValidation, errMsg, showStar, showGblError }
 }
-
-export const useGlobalValidate = createGlobalState(() => {
-  // state
-  const invalidInputs = ref<number>(0)
-  const showGblError = ref(false)
-
-  const setInvalidInputs = (val: number) => {
-    invalidInputs.value += val
-  }
-
-  return { invalidInputs, setInvalidInputs, showGblError }
-})
+export { useGlobalValidate }

@@ -3,7 +3,7 @@ import type { ObjectItem } from '@/types'
 import { useLoader } from '@/composables/loader'
 import { computed, initCustomFormatter, ref, toRaw, unref, watch } from 'vue'
 import { useInitial } from '@/composables/initial'
-import { useGlobalModel } from '@/composables/model'
+import { useGlobalModel } from '@/composables/global/model'
 import EachKey from './helper/EachKey.vue'
 
 const props = defineProps<{

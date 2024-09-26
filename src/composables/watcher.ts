@@ -1,6 +1,6 @@
 import type { Watchers } from '@/types'
 import { computed, inject, watch, type ComputedRef, type Ref } from 'vue'
-import { useGlobalModel } from './model'
+import { useGlobalModel } from './global/model'
 
 export const useWatchers = (
   watcher: Watchers | undefined,

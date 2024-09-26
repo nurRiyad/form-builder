@@ -19,5 +19,7 @@ export const useGlobalModel = createGlobalState(() => {
     delete model.value[fKey]
   }
 
-  return { model, setValue, getValue, deleteValue }
+  const clearModel = () => (model.value = {})
+
+  return { model, setValue, getValue, deleteValue, clearModel }
 })

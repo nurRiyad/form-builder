@@ -4,7 +4,7 @@ import EachItem from './helper/EachItem.vue'
 import { useLoader } from '@/composables/loader'
 import { computed, ref, toRaw, unref, watch } from 'vue'
 import { useInitial } from '@/composables/initial'
-import { useGlobalModel } from '@/composables/model'
+import { useGlobalModel } from '@/composables/global/model'
 
 const props = defineProps<{
   ui: ArrayItem

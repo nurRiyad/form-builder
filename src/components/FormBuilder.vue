@@ -2,8 +2,8 @@
 import type { FormType } from '@/types/schema'
 import { defineAsyncComponent, provide, ref, toRaw, unref } from 'vue'
 import set from 'lodash.set'
-import { useGlobalModel } from '@/composables/model'
-import { useGlobalValidate } from '@/composables/validation'
+import { useGlobalModel } from '@/composables/global/model'
+import { useGlobalValidate } from '@/composables/global/valid'
 
 const SingleStep = defineAsyncComponent(() => import('./root/SingleStep.vue'))
 const MultiStep = defineAsyncComponent(() => import('./root/MultiStep.vue'))
@@ -26,10 +26,13 @@ const props = withDefaults(
   }
 )
 
+console.log('I am called')
+
 const emits = defineEmits(['onSubmit'])
 
 // generate model value
-const { model } = useGlobalModel()
+const { model, clearModel } = useGlobalModel()
+clearModel()
 
 const fn = props?.logic ? props.logic(model) : null
 
@@ -51,11 +54,12 @@ const generateFinalForm = () => {
   return generatedObj
 }
 
-const { invalidInputs, showGblError } = useGlobalValidate()
+// validation
+const { invalidInputs, showGblError, clearValidation } = useGlobalValidate()
+clearValidation()
 
 // form submit
 const handleSubmit = () => {
-  console.log(invalidInputs.value)
   if (invalidInputs.value) {
     showGblError.value = true
     return

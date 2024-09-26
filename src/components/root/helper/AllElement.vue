@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useGlobalModel } from '@/composables/model'
+import { useGlobalModel } from '@/composables/global/model'
 import type { AllElement } from '@/types'
 import { defineAsyncComponent } from 'vue'
 
