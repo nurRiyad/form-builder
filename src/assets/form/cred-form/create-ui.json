@@ -11,7 +11,8 @@
     {
       "type": "input",
       "label": "Credential Name",
-      "schema": "schema/properties/name"
+      "schema": "schema/properties/name",
+      "validation": { "type": "required" }
     },
     {
       "type": "input",

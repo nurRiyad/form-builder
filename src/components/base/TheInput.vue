@@ -1,12 +1,13 @@
 <script lang="ts" setup>
 import get from 'lodash.get'
 import type { Input } from '@/types/schema'
-import { computed, inject, onUnmounted, ref, toRaw, unref, watch } from 'vue'
+import { computed, inject, onUnmounted, ref, toRaw, unref } from 'vue'
 import { watchDebounced } from '@vueuse/core'
 import { useInitial } from '@/composables/initial'
 import { useLoader } from '@/composables/loader'
 import { useWatchers } from '@/composables/watcher'
 import { useValidate } from '@/composables/validation'
+import { useLabel } from '@/composables/label'
 
 const props = defineProps<{
   element: Input
@@ -15,7 +16,6 @@ const props = defineProps<{
   parentData?: any
   setValue: (path: string, val: any, items?: string) => void
   deleteValue?: (key: string) => void
-  showStar?: boolean
 }>()
 
 const wholeSchema = inject('schema')
@@ -35,12 +35,9 @@ const { calculateInitValue } = useInitial()
 const initValue =
   props.items === undefined ? calculateInitValue(props.element, cData.value) : props.tempValue
 const value = ref(initValue)
-const isLabelHoisted = ref(false)
 
-//validation
-const { calValidation, showGblError } = useValidate()
-const errMsg = ref('')
-const showErr = ref(false)
+// input label
+const { isLabelHoisted, onFocus, onFocusOut } = useLabel(value)
 
 // update model value
 watchDebounced(
@@ -48,18 +45,16 @@ watchDebounced(
   (n) => {
     //update the model value
     props.setValue(props.element.schema, n, props.items)
-
-    // validation fire
-    calValidation(props.element, n, errMsg)
-
-    //update labels
-    isLabelHoisted.value = true
   },
   { immediate: true, debounce: 0 }
 )
 
 // fire when watch dependency changes
 useWatchers(props.element.watcher, cData, value)
+
+//validation
+const { errMsg, showStar, showGblError } = useValidate(props.element, value)
+const showLocalErr = ref(false)
 
 const calculateInputType = computed(() => {
   let path = props.element.schema
@@ -85,25 +80,25 @@ onUnmounted(() => {
   <div v-if="isLoading">
     <h1>This input element is loading...</h1>
   </div>
-  <div class="ac-single-input is-extra-small" :class="$attrs.class">
+  <div v-else class="ac-single-input is-extra-small" :class="$attrs.class">
     <label
-      @click="isLabelHoisted = true"
       class="ac-label"
-      :class="{ 'is-required': showStar, 'show-label': isLabelHoisted }"
+      :class="{ 'show-label': isLabelHoisted }"
       :for="element.label"
+      @click="isLabelHoisted = true"
     >
       {{ element.label }} <span v-if="showStar" class="is-required"> * </span>
     </label>
     <input
+      v-model="value"
+      class="ac-input"
       :id="element.label"
       :name="element.label"
       :type="calculateInputType"
-      v-model="value"
-      @input="showErr = true"
-      @focus="isLabelHoisted = true"
-      @focusout="isLabelHoisted = false"
-      class="ac-input"
+      @input="showLocalErr = true"
+      @focus="onFocus"
+      @focusout="onFocusOut"
     />
-    <p v-if="(showGblError || showErr) && errMsg" class="has-text-danger">{{ errMsg }}</p>
+    <p v-if="(showGblError || showLocalErr) && errMsg" class="has-text-danger">{{ errMsg }}</p>
   </div>
 </template>

@@ -5,6 +5,7 @@ import { useInitial } from '@/composables/initial'
 import { useLoader } from '@/composables/loader'
 import { watchDebounced } from '@vueuse/core'
 import { useValidate } from '@/composables/validation'
+import { useLabel } from '@/composables/label'
 
 const props = defineProps<{
   element: TextArea
@@ -32,12 +33,6 @@ const { calculateInitValue } = useInitial()
 const initValue =
   props.items === undefined ? calculateInitValue(props.element, cData.value) : props.tempValue
 const value = ref(initValue)
-const isLabelHoisted = ref(false)
-
-//validation
-const { calValidation, showGblError } = useValidate()
-const errMsg = ref('')
-const showErr = ref(false)
 
 // update model value
 watchDebounced(
@@ -45,15 +40,16 @@ watchDebounced(
   (n) => {
     //update the model value
     props.setValue(props.element.schema, n, props.items)
-
-    // validation fire
-    calValidation(props.element, n, errMsg)
-
-    //update labels
-    isLabelHoisted.value = true
   },
   { immediate: true, debounce: 0 }
 )
+
+// input label
+const { isLabelHoisted, onFocus, onFocusOut } = useLabel(value)
+
+//validation
+const { errMsg, showStar, showGblError } = useValidate(props.element, value)
+const showLocalErr = ref(false)
 
 // clean on unmounted
 onUnmounted(() => {
@@ -69,27 +65,25 @@ onUnmounted(() => {
   </div>
   <div v-else class="ac-single-input">
     <label
-      :for="element.label"
-      @click="isLabelHoisted = true"
       class="ac-label"
+      :for="element.label"
       :class="{ 'is-required': showStar, 'show-label': isLabelHoisted }"
+      @click="isLabelHoisted = true"
     >
       <span>{{ element.label }}</span>
       <span v-if="showStar" class="is-required"> * </span>
     </label>
     <textarea
-      :id="element.label"
-      :name="element.label"
+      v-model="value"
+      class="ac-input"
       rows="4"
       cols="50"
-      v-model="value"
-      ef="acInput"
-      data-testid="ac-input-text"
-      class="ac-input"
-      @input="showErr = true"
-      @focus="isLabelHoisted = true"
-      @focusout="isLabelHoisted = false"
+      :id="element.label"
+      :name="element.label"
+      @input="showLocalErr = true"
+      @focus="onFocus"
+      @focusout="onFocusOut"
     ></textarea>
-    <p v-if="(showGblError || showErr) && errMsg" class="has-text-danger">{{ errMsg }}</p>
+    <p v-if="(showGblError || showLocalErr) && errMsg" class="has-text-danger">{{ errMsg }}</p>
   </div>
 </template>
