@@ -12,26 +12,24 @@ import { RouterView } from 'vue-router'
       to="/"
       class="navbar-item has-text-dark has-text-weight-medium"
     >
-      Home</RouterLink
-    >
+      Home
+    </RouterLink>
     <RouterLink
       exactActiveClass="has-text-primary has-background-light"
-      to="/docs"
+      to="/forms"
       class="navbar-item has-text-dark has-text-weight-medium"
-      >Docs</RouterLink
     >
+      Forms
+    </RouterLink>
     <RouterLink
       exactActiveClass="has-text-primary has-background-light"
       to="/about"
       class="navbar-item has-text-dark has-text-weight-medium"
-      >About</RouterLink
     >
-    <RouterLink
-      exactActiveClass="has-text-primary has-background-light"
-      to="/create"
-      class="navbar-item has-text-dark has-text-weight-medium"
-      >Create</RouterLink
-    >
+      About
+    </RouterLink>
   </nav>
-  <RouterView />
+  <div>
+    <RouterView />
+  </div>
 </template>
