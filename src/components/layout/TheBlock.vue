@@ -12,7 +12,7 @@ const show = ref(true)
 </script>
 
 <template>
-  <div class="single-accordion-item">
+  <div v-if="ui.showLabels" class="single-accordion-item">
     <div
       class="accordion-heading is-clickable"
       @click="show = !show"
