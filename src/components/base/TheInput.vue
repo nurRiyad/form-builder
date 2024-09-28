@@ -6,7 +6,7 @@ import { watchDebounced } from '@vueuse/core'
 import { useInitial } from '@/composables/initial'
 import { useLoader } from '@/composables/loader'
 import { useWatchers } from '@/composables/watcher'
-import { useValidate } from '@/composables/validation'
+import { useBaseValidity } from '@/composables/validation'
 import { useLabel } from '@/composables/label'
 
 const props = defineProps<{
@@ -54,7 +54,7 @@ useWatchers(props.element.watcher, cData, value)
 const { isLabelHoisted, hoist, unHoist } = useLabel(value)
 
 //validation
-const { err, showStar, showLocalErr } = useValidate(props.element, value, props.parentErr)
+const { err, showStar, showLocalErr } = useBaseValidity(props.element, value, props.parentErr)
 
 const calculateInputType = computed(() => {
   let path = props.element.schema

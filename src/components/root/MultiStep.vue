@@ -25,6 +25,7 @@ loadData(props.ui.loader)
         v-show="idx === activeStep"
         :ui="item"
         :parent-data="data"
+        :is-active="idx === activeStep"
         :parent-err="parentErr"
       />
     </template>

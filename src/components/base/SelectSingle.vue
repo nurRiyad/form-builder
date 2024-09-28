@@ -5,7 +5,7 @@ import get from 'lodash.get'
 import { useInitial } from '@/composables/initial'
 import { useLoader } from '@/composables/loader'
 import { watchDebounced } from '@vueuse/core'
-import { useValidate } from '@/composables/validation'
+import { useBaseValidity } from '@/composables/validation'
 import { useLabel } from '@/composables/label'
 
 const props = defineProps<{
@@ -50,7 +50,7 @@ watchDebounced(
 const { isLabelHoisted, hoist, unHoist } = useLabel(value)
 
 //validation
-const { err, showStar } = useValidate(props.element, value, props.parentErr)
+const { err, showStar } = useBaseValidity(props.element, value, props.parentErr)
 
 const fOptions = computed(() => {
   let ops = []

@@ -107,6 +107,12 @@
               "options": ["riyad", "solurav"]
             }
           ]
+        },
+        {
+          "type": "input",
+          "label": "Required check",
+          "schema": "schema/properties/test/222",
+          "validation": { "type": "required" }
         }
       ]
     },

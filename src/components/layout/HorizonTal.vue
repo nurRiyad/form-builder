@@ -2,7 +2,7 @@
 import type { HorizontalLayout } from '@/types'
 import AllElement from '../root/helper/AllElement.vue'
 import { ref } from 'vue'
-import { useParentValidate } from '@/composables/validation'
+import { useBlockValidity } from '@/composables/validation'
 
 const props = defineProps<{
   ui: HorizontalLayout
@@ -11,7 +11,7 @@ const props = defineProps<{
 }>()
 
 const show = ref(true)
-const { errCnt, updateErr } = useParentValidate(props.parentErr)
+const { errCnt, updateErr } = useBlockValidity(props.parentErr)
 </script>
 
 <template>

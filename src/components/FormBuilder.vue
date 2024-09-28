@@ -3,7 +3,7 @@ import type { FormType } from '@/types/schema'
 import { defineAsyncComponent, provide, ref, toRaw, unref } from 'vue'
 import set from 'lodash.set'
 import { useGlobalModel } from '@/composables/global/model'
-import { useParentValidate } from '@/composables/validation'
+import { useBlockValidity } from '@/composables/validation'
 import { useGlobalValidate } from '@/composables/global/valid'
 
 const SingleStep = defineAsyncComponent(() => import('./root/SingleStep.vue'))
@@ -27,8 +27,6 @@ const props = withDefaults(
   }
 )
 
-console.log('I am called')
-
 const emits = defineEmits(['onSubmit'])
 
 // generate model value
@@ -41,8 +39,6 @@ const fn = props?.logic ? props.logic(model) : null
 provide('func', fn)
 provide('schema', props.schema)
 provide('initialValue', props.initialValue)
-
-// generate function
 
 // generate submitted form form
 const generateFinalForm = () => {
@@ -58,7 +54,7 @@ const generateFinalForm = () => {
 // validation
 const { clearValidation } = useGlobalValidate()
 clearValidation()
-const { errCnt, updateErr, isValid } = useParentValidate()
+const { updateErr, isValid } = useBlockValidity()
 
 // form submit
 const handleSubmit = () => {
@@ -111,14 +107,18 @@ defineExpose({
       <div class="columns">
         <div class="column is-8">
           <h1>Form file loading</h1>
-          <p>{{ errCnt }}</p>
         </div>
       </div>
     </div>
     <div class="container" v-else>
       <div class="columns is-centered">
         <div class="column is-8">
-          <SingleStep v-if="ui.type === 'single-step-from'" :ui="ui" :parent-err="updateErr" />
+          <SingleStep
+            v-if="ui.type === 'single-step-from'"
+            :is-active="true"
+            :ui="ui"
+            :parent-err="updateErr"
+          />
           <MultiStep
             v-else-if="ui.type === 'multi-step-form'"
             :active-step="activeStep"

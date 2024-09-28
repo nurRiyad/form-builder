@@ -4,7 +4,7 @@ import { computed, onUnmounted, ref, toRaw, unref } from 'vue'
 import { useInitial } from '@/composables/initial'
 import { useLoader } from '@/composables/loader'
 import { watchDebounced } from '@vueuse/core'
-import { useValidate } from '@/composables/validation'
+import { useBaseValidity } from '@/composables/validation'
 
 const props = defineProps<{
   element: CheckBox
@@ -34,7 +34,7 @@ const initValue =
 const checked = ref(initValue)
 
 //validation
-const { err, showLocalErr } = useValidate(props.element, checked, props.parentErr)
+const { err, showLocalErr } = useBaseValidity(props.element, checked, props.parentErr)
 
 // update model value
 watchDebounced(

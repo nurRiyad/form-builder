@@ -4,7 +4,7 @@ import { computed, onUnmounted, ref, toRaw, unref } from 'vue'
 import { useInitial } from '@/composables/initial'
 import { useLoader } from '@/composables/loader'
 import { watchDebounced } from '@vueuse/core'
-import { useValidate } from '@/composables/validation'
+import { useBaseValidity } from '@/composables/validation'
 
 const props = defineProps<{
   element: Radio
@@ -44,7 +44,7 @@ watchDebounced(
 )
 
 //validation
-const { err } = useValidate(props.element, picked)
+const { err } = useBaseValidity(props.element, picked, props.parentErr)
 
 // clean on unmounted
 onUnmounted(() => {

@@ -4,7 +4,7 @@ import { computed, onUnmounted, ref, toRaw, unref } from 'vue'
 import { useInitial } from '@/composables/initial'
 import { useLoader } from '@/composables/loader'
 import { watchDebounced } from '@vueuse/core'
-import { useValidate } from '@/composables/validation'
+import { useBaseValidity } from '@/composables/validation'
 import { useLabel } from '@/composables/label'
 
 const props = defineProps<{
@@ -49,7 +49,7 @@ watchDebounced(
 const { isLabelHoisted, hoist, unHoist } = useLabel(value)
 
 //validation
-const { err, showStar, showLocalErr } = useValidate(props.element, value, props.parentErr)
+const { err, showStar, showLocalErr } = useBaseValidity(props.element, value, props.parentErr)
 
 // clean on unmounted
 onUnmounted(() => {

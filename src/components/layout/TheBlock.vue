@@ -4,7 +4,7 @@ import type { BlockLayout } from '@/types'
 
 import TheArrow from '../icons/TheArrow.vue'
 import AllElement from '../root/helper/AllElement.vue'
-import { useParentValidate } from '@/composables/validation'
+import { useBlockValidity } from '@/composables/validation'
 
 const props = defineProps<{
   ui: BlockLayout
@@ -13,7 +13,7 @@ const props = defineProps<{
 }>()
 
 const show = ref(true)
-const { updateErr, errCnt } = useParentValidate(props.parentErr)
+const { updateErr, errCnt } = useBlockValidity(props.parentErr)
 </script>
 
 <template>
