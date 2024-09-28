@@ -9,6 +9,7 @@ import { useGlobalModel } from '@/composables/global/model'
 const props = defineProps<{
   ui: ArrayItem
   parentData?: any
+  parentError?: (val: number) => void
 }>()
 
 //element level data fetching

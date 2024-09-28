@@ -35,9 +35,17 @@
           "label": "Access Key Id"
         },
         {
-          "type": "input",
-          "label": "Secret Access Key",
-          "schema": "schema/properties/aws/properties/secretAccessKey"
+          "type": "block-layout",
+          "label": "Test block",
+          "showLabels": true,
+          "elements": [
+            {
+              "type": "input",
+              "label": "Secret Access Key",
+              "schema": "schema/properties/aws/properties/secretAccessKey",
+              "validation": { "type": "required" }
+            }
+          ]
         }
       ]
     },

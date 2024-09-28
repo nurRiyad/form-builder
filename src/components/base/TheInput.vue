@@ -16,6 +16,7 @@ const props = defineProps<{
   parentData?: any
   setValue: (path: string, val: any, items?: string) => void
   deleteValue?: (key: string) => void
+  parentErr?: (val: number) => void
 }>()
 
 const wholeSchema = inject('schema')
@@ -53,8 +54,7 @@ useWatchers(props.element.watcher, cData, value)
 const { isLabelHoisted, hoist, unHoist } = useLabel(value)
 
 //validation
-const { errMsg, showStar, showGblError } = useValidate(props.element, value)
-const showLocalErr = ref(false)
+const { err, showStar, showLocalErr } = useValidate(props.element, value, props.parentErr)
 
 const calculateInputType = computed(() => {
   let path = props.element.schema
@@ -99,6 +99,6 @@ onUnmounted(() => {
       @focus="hoist"
       @focusout="unHoist"
     />
-    <p v-if="(showGblError || showLocalErr) && errMsg" class="has-text-danger">{{ errMsg }}</p>
+    <p v-if="err" class="has-text-danger">{{ err }}</p>
   </div>
 </template>

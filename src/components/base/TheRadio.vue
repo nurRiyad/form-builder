@@ -14,6 +14,7 @@ const props = defineProps<{
   parentData?: any
   setValue: (path: string, val: any, items?: string) => void
   deleteValue?: (key: string) => void
+  parentErr?: (val: number) => void
 }>()
 
 //element level data fetching
@@ -43,8 +44,7 @@ watchDebounced(
 )
 
 //validation
-const { errMsg, showGblError } = useValidate(props.element, picked)
-const showLocalErr = ref(false)
+const { err } = useValidate(props.element, picked)
 
 // clean on unmounted
 onUnmounted(() => {
@@ -80,6 +80,6 @@ const fOptions = computed(() => {
       />
       <label :for="String(op.value) + String(items)">{{ op.name }}</label>
     </div>
-    <p v-if="(showGblError || showLocalErr) && errMsg" class="is-danger">{{ errMsg }}</p>
+    <p v-if="err" class="is-danger">{{ err }}</p>
   </div>
 </template>

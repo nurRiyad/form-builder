@@ -3,6 +3,7 @@ import type { FormType } from '@/types/schema'
 import { defineAsyncComponent, provide, ref, toRaw, unref } from 'vue'
 import set from 'lodash.set'
 import { useGlobalModel } from '@/composables/global/model'
+import { useParentValidate } from '@/composables/validation'
 import { useGlobalValidate } from '@/composables/global/valid'
 
 const SingleStep = defineAsyncComponent(() => import('./root/SingleStep.vue'))
@@ -55,15 +56,13 @@ const generateFinalForm = () => {
 }
 
 // validation
-const { invalidInputs, showGblError, clearValidation } = useGlobalValidate()
+const { clearValidation } = useGlobalValidate()
 clearValidation()
+const { errCnt, updateErr, isValid } = useParentValidate()
 
 // form submit
 const handleSubmit = () => {
-  if (invalidInputs.value) {
-    showGblError.value = true
-    return
-  }
+  if (!isValid()) return
 
   const value = generateFinalForm()
   emits('onSubmit', value)
@@ -80,10 +79,7 @@ const totalStep = props.ui.type === 'single-step-from' ? 0 : props.ui.step.lengt
 const handleStep = (type: 'Next' | 'Prev') => {
   if (props.ui.type === 'single-step-from') return
 
-  if (invalidInputs.value) {
-    showGblError.value = true
-    return
-  }
+  if (!isValid()) return
 
   if (type === 'Next') {
     if (activeStep.value + 1 >= totalStep) {
@@ -115,14 +111,20 @@ defineExpose({
       <div class="columns">
         <div class="column is-8">
           <h1>Form file loading</h1>
+          <p>{{ errCnt }}</p>
         </div>
       </div>
     </div>
     <div class="container" v-else>
       <div class="columns is-centered">
         <div class="column is-8">
-          <SingleStep v-if="ui.type === 'single-step-from'" :ui="ui" />
-          <MultiStep v-else-if="ui.type === 'multi-step-form'" :active-step="activeStep" :ui="ui" />
+          <SingleStep v-if="ui.type === 'single-step-from'" :ui="ui" :parent-err="updateErr" />
+          <MultiStep
+            v-else-if="ui.type === 'multi-step-form'"
+            :active-step="activeStep"
+            :ui="ui"
+            :parent-err="updateErr"
+          />
           <h1 v-else>No Proper Form type found</h1>
           <slot name="custom-form" />
           <template v-if="!hideFormAction">

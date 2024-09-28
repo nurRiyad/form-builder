@@ -14,6 +14,7 @@ const props = defineProps<{
   parentData?: any
   setValue: (path: string, val: any, items?: string) => void
   deleteValue?: (key: string) => void
+  parentErr?: (val: number) => void
 }>()
 
 //element level data fetching
@@ -33,8 +34,7 @@ const initValue =
 const checked = ref(initValue)
 
 //validation
-const { errMsg, showGblError } = useValidate(props.element, checked)
-const showLocalErr = ref(false)
+const { err, showLocalErr } = useValidate(props.element, checked, props.parentErr)
 
 // update model value
 watchDebounced(
@@ -85,6 +85,6 @@ onUnmounted(() => {
       />
       <label :for="String(element.label) + String(items)">{{ element.label }}</label>
     </div>
-    <p v-if="(showGblError || showLocalErr) && errMsg" class="is-danger">{{ errMsg }}</p>
+    <p v-if="err" class="is-danger">{{ err }}</p>
   </div>
 </template>

@@ -4,13 +4,16 @@ import type { BlockLayout } from '@/types'
 
 import TheArrow from '../icons/TheArrow.vue'
 import AllElement from '../root/helper/AllElement.vue'
+import { useParentValidate } from '@/composables/validation'
 
-defineProps<{
+const props = defineProps<{
   ui: BlockLayout
   parentData?: any
+  parentErr?: (val: number) => void
 }>()
 
 const show = ref(true)
+const { updateErr, errCnt } = useParentValidate(props.parentErr)
 </script>
 
 <template>
@@ -23,6 +26,7 @@ const show = ref(true)
       <h5>{{ ui.label }}</h5>
       <div class="accordion-right is-flex is-align-items-center">
         <p>{{ ui.description }}</p>
+        <p>{{ errCnt }}</p>
         <button class="icon">
           <TheArrow :direction="show ? 'up' : 'down'" />
         </button>
@@ -34,13 +38,13 @@ const show = ref(true)
       style="max-height: 100%; display: block; border-radius: 0 0 4px 4px"
     >
       <template v-for="el in ui.elements" :key="el.label">
-        <AllElement :el="el" :c-data="parentData" />
+        <AllElement :el="el" :c-data="parentData" :parent-err="updateErr" />
       </template>
     </div>
   </div>
   <div v-else>
     <template v-for="el in ui.elements" :key="el.label">
-      <AllElement :el="el" :c-data="parentData" />
+      <AllElement :el="el" :c-data="parentData" :parent-err="updateErr" />
     </template>
   </div>
 </template>

@@ -9,6 +9,7 @@ import EachKey from './helper/EachKey.vue'
 const props = defineProps<{
   ui: ObjectItem
   parentData?: any
+  parentError?: (val: number) => void
 }>()
 
 //element level data fetching

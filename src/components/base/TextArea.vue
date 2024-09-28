@@ -16,6 +16,7 @@ const props = defineProps<{
   setValue: (path: string, val: any, items?: string) => void
   deleteValue?: (key: string) => void
   showStar?: boolean
+  parentErr?: (val: number) => void
 }>()
 
 //element level data fetching
@@ -48,8 +49,7 @@ watchDebounced(
 const { isLabelHoisted, hoist, unHoist } = useLabel(value)
 
 //validation
-const { errMsg, showStar, showGblError } = useValidate(props.element, value)
-const showLocalErr = ref(false)
+const { err, showStar, showLocalErr } = useValidate(props.element, value, props.parentErr)
 
 // clean on unmounted
 onUnmounted(() => {
@@ -84,6 +84,6 @@ onUnmounted(() => {
       @focus="hoist"
       @focusout="unHoist"
     ></textarea>
-    <p v-if="(showGblError || showLocalErr) && errMsg" class="has-text-danger">{{ errMsg }}</p>
+    <p v-if="err" class="has-text-danger">{{ err }}</p>
   </div>
 </template>

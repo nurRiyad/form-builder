@@ -9,6 +9,7 @@ import { useInitial } from '@/composables/initial'
 const props = defineProps<{
   ui: ArrayObject
   parentData?: any
+  parentError?: (val: number) => void
 }>()
 
 //element level data fetching

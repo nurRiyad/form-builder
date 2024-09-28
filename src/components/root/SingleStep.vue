@@ -8,6 +8,7 @@ import AllElement from './helper/AllElement.vue'
 const props = defineProps<{
   ui: SingleStepForm
   parentData?: any
+  parentErr: (val: number) => void
 }>()
 
 const fn = inject<any>('func')
@@ -42,7 +43,7 @@ const checkIf = (el: IfType | undefined) => {
     <div v-else class="is-flex is-flex-direction-column gap-8">
       <h6 class="font-semibold text-xl text-center">{{ ui.label }}</h6>
       <template v-for="el in ui.elements" :key="el.label">
-        <AllElement :c-data="cData" :el="el" v-if="checkIf(el.if)" />
+        <AllElement :c-data="cData" :el="el" v-if="checkIf(el.if)" :parent-err="parentErr" />
       </template>
     </div>
   </div>

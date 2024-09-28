@@ -9,5 +9,4 @@
 import './assets/main.scss'
 
 export * from './components'
-export * from './utils'
 export * from './types'

@@ -20,6 +20,7 @@ const HorizontalLayout = defineAsyncComponent(() => import('../../layout/Horizon
 defineProps<{
   el: AllElement
   cData: any
+  parentErr?: (val: number) => void
 }>()
 
 const { setValue, deleteValue } = useGlobalModel()
@@ -27,8 +28,13 @@ const { setValue, deleteValue } = useGlobalModel()
 
 <template>
   <!-- Layouts -->
-  <BlockLayout v-if="el.type === 'block-layout'" :ui="el" :c-data="cData" />
-  <HorizontalLayout v-else-if="el.type === 'horizontal-layout'" :ui="el" :c-data="cData" />
+  <BlockLayout v-if="el.type === 'block-layout'" :ui="el" :c-data="cData" :parent-err="parentErr" />
+  <HorizontalLayout
+    v-else-if="el.type === 'horizontal-layout'"
+    :ui="el"
+    :c-data="cData"
+    :parent-err="parentErr"
+  />
 
   <!-- Simple Element -->
   <TheInput
@@ -37,6 +43,7 @@ const { setValue, deleteValue } = useGlobalModel()
     :parent-data="cData"
     :set-value="setValue"
     :delete-value="deleteValue"
+    :parent-err="parentErr"
   />
   <SelectSingle
     v-else-if="el.type === 'select'"
@@ -44,6 +51,7 @@ const { setValue, deleteValue } = useGlobalModel()
     :parent-data="cData"
     :set-value="setValue"
     :delete-value="deleteValue"
+    :parent-err="parentErr"
   />
   <MultiSelect
     v-else-if="el.type === 'multi-select'"
@@ -51,6 +59,7 @@ const { setValue, deleteValue } = useGlobalModel()
     :parent-data="cData"
     :set-value="setValue"
     :delete-value="deleteValue"
+    :parent-err="parentErr"
   />
   <TheRadio
     v-else-if="el.type === 'radio'"
@@ -58,6 +67,7 @@ const { setValue, deleteValue } = useGlobalModel()
     :parent-data="cData"
     :set-value="setValue"
     :delete-value="deleteValue"
+    :parent-err="parentErr"
   />
   <TheSwitch
     v-else-if="el.type === 'switch'"
@@ -72,6 +82,7 @@ const { setValue, deleteValue } = useGlobalModel()
     :parent-data="cData"
     :set-value="setValue"
     :delete-value="deleteValue"
+    :parent-err="parentErr"
   />
 
   <TheAnchor v-else-if="el.type === 'anchor'" :element="el" :parent-data="cData" />
@@ -82,12 +93,28 @@ const { setValue, deleteValue } = useGlobalModel()
     :parent-data="cData"
     :set-value="setValue"
     :delete-value="deleteValue"
+    :parent-err="parentErr"
   />
 
   <!-- Array / Object Element -->
-  <ArrayObject v-else-if="el.type === 'array-object-form'" :ui="el" :parent-data="cData" />
-  <ArrayItem v-else-if="el.type === 'array-item-form'" :ui="el" :parent-data="cData" />
-  <TheObject v-else-if="el.type === 'object-item'" :ui="el" :parent-data="cData" />
+  <ArrayObject
+    v-else-if="el.type === 'array-object-form'"
+    :ui="el"
+    :parent-data="cData"
+    :parent-error="parentErr"
+  />
+  <ArrayItem
+    v-else-if="el.type === 'array-item-form'"
+    :ui="el"
+    :parent-data="cData"
+    :parent-error="parentErr"
+  />
+  <TheObject
+    v-else-if="el.type === 'object-item'"
+    :ui="el"
+    :parent-data="cData"
+    :parent-error="parentErr"
+  />
 
   <!-- Default empty element -->
   <p v-else>Element type not found</p>
