@@ -4,7 +4,7 @@ import { computed, onUnmounted, ref, toRaw, unref } from 'vue'
 import { useInitial } from '@/composables/initial'
 import { useLoader } from '@/composables/loader'
 import { watchDebounced } from '@vueuse/core'
-import { useValidate } from '@/composables/validation'
+import { useBaseValidity } from '@/composables/validation'
 
 const props = defineProps<{
   element: Radio
@@ -14,6 +14,7 @@ const props = defineProps<{
   parentData?: any
   setValue: (path: string, val: any, items?: string) => void
   deleteValue?: (key: string) => void
+  parentErr?: (val: number) => void
 }>()
 
 //element level data fetching
@@ -32,23 +33,18 @@ const initValue =
   props.items === undefined ? calculateInitValue(props.element, cData.value) : props.tempValue
 const picked = ref(initValue)
 
-//validation
-const { calValidation, showGblError } = useValidate()
-const errMsg = ref('')
-const showErr = ref(false)
-
 // update model value
 watchDebounced(
   picked,
   (n) => {
     //update the model value
     props.setValue(props.element.schema, n, props.items)
-
-    // validation fire
-    calValidation(props.element, n, errMsg)
   },
   { immediate: true, debounce: 0 }
 )
+
+//validation
+const { err } = useBaseValidity(props.element, picked, props.parentErr)
 
 // clean on unmounted
 onUnmounted(() => {
@@ -71,18 +67,19 @@ const fOptions = computed(() => {
   <div v-if="isLoading">
     <p>Is Radio data fetching</p>
   </div>
-  <div v-else class="flex flex-col space-y-2">
-    <p>{{ element.label }}</p>
-    <div v-for="op in fOptions" :key="op.value" class="space-x-2">
+  <div v-else class="mb-8">
+    <h6>{{ element.label }}</h6>
+    <div v-for="op in fOptions" :key="op.value" class="field">
       <input
+        v-model="picked"
         type="radio"
+        class="is-checkradio"
         :id="String(op.value) + String(items)"
         :name="element.label"
         :value="op.value"
-        v-model="picked"
       />
       <label :for="String(op.value) + String(items)">{{ op.name }}</label>
     </div>
-    <p v-if="(showGblError || showErr) && errMsg" class="text-red-600 pb-3">{{ errMsg }}</p>
+    <p v-if="err" class="is-danger">{{ err }}</p>
   </div>
 </template>

@@ -5,7 +5,8 @@ import get from 'lodash.get'
 import { useInitial } from '@/composables/initial'
 import { useLoader } from '@/composables/loader'
 import { watchDebounced } from '@vueuse/core'
-import { useValidate } from '@/composables/validation'
+import { useBaseValidity } from '@/composables/validation'
+import { useLabel } from '@/composables/label'
 
 const props = defineProps<{
   element: Select
@@ -14,6 +15,7 @@ const props = defineProps<{
   parentData?: any
   setValue: (path: string, val: any, items?: string) => void
   deleteValue?: (key: string) => void
+  parentErr?: (val: number) => void
 }>()
 
 const wholeSchema = inject('schema')
@@ -34,22 +36,21 @@ const initValue =
   props.items === undefined ? calculateInitValue(props.element, cData.value) : props.tempValue
 const value = ref(initValue)
 
-//validation
-const { calValidation, showGblError } = useValidate()
-const errMsg = ref('')
-const showErr = ref(false)
-
 // update model value
 watchDebounced(
   value,
   (n) => {
     //update the model value
     props.setValue(props.element.schema, n, props.items)
-    // validation fire
-    calValidation(props.element, n, errMsg)
   },
   { immediate: true, debounce: 0 }
 )
+
+// input label
+const { isLabelHoisted, hoist, unHoist } = useLabel(value)
+
+//validation
+const { err, showStar } = useBaseValidity(props.element, value, props.parentErr)
 
 const fOptions = computed(() => {
   let ops = []
@@ -80,13 +81,22 @@ onUnmounted(() => {
   <div v-if="isLoading">
     <p>Data fetching</p>
   </div>
-  <div v-else class="flex flex-col space-y-2">
-    <label :for="element.label">{{ element.label }}</label>
-    <select :name="element.label" :id="element.label" v-model="value">
+  <div v-else class="ac-single-input is-extra-small">
+    <label :for="element.label" class="ac-label" :class="{ 'show-label': isLabelHoisted }">
+      {{ element.label }}<span v-if="showStar" class="is-required"> * </span>
+    </label>
+    <select
+      v-model="value"
+      :name="element.label"
+      :id="element.label"
+      @focusout="unHoist"
+      @focus="hoist"
+      class="ac-input is-fullwidth"
+    >
       <option v-for="val in fOptions" :key="val.value" :value="val.value">
         {{ val.name }}
       </option>
     </select>
-    <p v-if="(showGblError || showErr) && errMsg" class="text-red-600 pb-3">{{ errMsg }}</p>
+    <p v-if="err" class="has-text-danger">{{ err }}</p>
   </div>
 </template>

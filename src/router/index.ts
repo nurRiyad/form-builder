@@ -15,9 +15,15 @@ const router = createRouter({
       component: () => import('../views/AboutView.vue')
     },
     {
-      path: '/create',
+      path: '/forms',
+      name: 'forms',
+      component: () => import('../views/FormList.vue')
+    },
+
+    {
+      path: '/form/:formId',
       name: 'create',
-      component: () => import('../views/CreateView.vue')
+      component: () => import('../views/FormView.vue')
     },
     {
       path: '/:pathMatch(.*)*',

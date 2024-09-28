@@ -12,5 +12,5 @@
       "url": "./src/schema/index.json"
     }
   ],
-  "cSpell.words": ["Pinia", "unref", "vueuse"]
+  "cSpell.words": ["composables", "Pinia", "unref", "vueuse"]
 }

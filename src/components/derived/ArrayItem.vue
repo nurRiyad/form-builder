@@ -4,11 +4,12 @@ import EachItem from './helper/EachItem.vue'
 import { useLoader } from '@/composables/loader'
 import { computed, ref, toRaw, unref, watch } from 'vue'
 import { useInitial } from '@/composables/initial'
-import { useGlobalModel } from '@/composables/model'
+import { useGlobalModel } from '@/composables/global/model'
 
 const props = defineProps<{
   ui: ArrayItem
   parentData?: any
+  parentError?: (val: number) => void
 }>()
 
 //element level data fetching
@@ -67,11 +68,11 @@ const addNew = () => {
       </div>
     </template>
     <template v-else>
-      <div class="flex justify-between my-2">
-        <h1>{{ ui.label }}</h1>
-        <button @click="addNew" class="px-2 py-1 bg-blue-400">Add new</button>
+      <div class="is-flex is-justify-content-space-between my-2">
+        <h4>{{ ui.label }}</h4>
+        <button @click="addNew" class="button ac-button is-primary">Add new</button>
       </div>
-      <div class="flex flex-col space-y-2">
+      <div class="is-flex is-flex-direction-column gap-8">
         <EachItem
           v-for="(val, idx) in tempMode"
           :key="String(idx) + String(shadowList[idx])"

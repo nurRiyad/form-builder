@@ -7,6 +7,7 @@ import SingleStep from './SingleStep.vue'
 const props = defineProps<{
   activeStep: number
   ui: MultiStepForm
+  parentErr: (val: number) => void
 }>()
 
 const { loadData, data, isLoading } = useLoader()
@@ -20,7 +21,13 @@ loadData(props.ui.loader)
   <div v-else>
     <p v-if="ui.label" class="font-semibold text-xl text-center">{{ ui.label }}</p>
     <template v-for="(item, idx) in ui.step" :key="idx + item.label">
-      <SingleStep v-show="idx === activeStep" :ui="item" :parent-data="data" />
+      <SingleStep
+        v-show="idx === activeStep"
+        :ui="item"
+        :parent-data="data"
+        :is-active="idx === activeStep"
+        :parent-err="parentErr"
+      />
     </template>
   </div>
 </template>

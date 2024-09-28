@@ -6,8 +6,7 @@
 //   app.component('HelloWorld', HelloWorld)
 // }
 
-import './assets/main.css'
+import './assets/main.scss'
 
 export * from './components'
-export * from './utils'
 export * from './types'

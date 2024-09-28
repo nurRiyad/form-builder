@@ -4,7 +4,7 @@ import { computed, onUnmounted, ref, toRaw, unref } from 'vue'
 import { useInitial } from '@/composables/initial'
 import { useLoader } from '@/composables/loader'
 import { watchDebounced } from '@vueuse/core'
-import { useValidate } from '@/composables/validation'
+import { useBaseValidity } from '@/composables/validation'
 
 const props = defineProps<{
   element: CheckBox
@@ -14,6 +14,7 @@ const props = defineProps<{
   parentData?: any
   setValue: (path: string, val: any, items?: string) => void
   deleteValue?: (key: string) => void
+  parentErr?: (val: number) => void
 }>()
 
 //element level data fetching
@@ -33,9 +34,7 @@ const initValue =
 const checked = ref(initValue)
 
 //validation
-const { calValidation, showGblError } = useValidate()
-const errMsg = ref('')
-const showErr = ref(false)
+const { err, showLocalErr } = useBaseValidity(props.element, checked, props.parentErr)
 
 // update model value
 watchDebounced(
@@ -43,9 +42,6 @@ watchDebounced(
   (n) => {
     //update the model value
     props.setValue(props.element.schema, n, props.items)
-
-    // validation fire
-    calValidation(props.element, n, errMsg)
   },
   { immediate: true, debounce: 0 }
 )
@@ -78,16 +74,17 @@ onUnmounted(() => {
     <p>Check is fetching</p>
   </div>
   <div v-else>
-    <div class="flex items-center space-x-3">
+    <div class="field">
       <input
+        class="is-checkradio has-background-color is-primary"
         type="checkbox"
         :id="String(element.label) + String(items)"
         :name="element.label"
         v-model="checked"
-        @input="showErr = true"
+        @input="showLocalErr = true"
       />
       <label :for="String(element.label) + String(items)">{{ element.label }}</label>
     </div>
-    <p v-if="(showGblError || showErr) && errMsg" class="text-red-600 pb-3">{{ errMsg }}</p>
+    <p v-if="err" class="is-danger">{{ err }}</p>
   </div>
 </template>

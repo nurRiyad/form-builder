@@ -4,7 +4,8 @@ import { computed, onUnmounted, ref, toRaw, unref } from 'vue'
 import { useInitial } from '@/composables/initial'
 import { useLoader } from '@/composables/loader'
 import { watchDebounced } from '@vueuse/core'
-import { useValidate } from '@/composables/validation'
+import { useBaseValidity } from '@/composables/validation'
+import { useLabel } from '@/composables/label'
 
 const props = defineProps<{
   element: TextArea
@@ -14,6 +15,8 @@ const props = defineProps<{
   parentData?: any
   setValue: (path: string, val: any, items?: string) => void
   deleteValue?: (key: string) => void
+  showStar?: boolean
+  parentErr?: (val: number) => void
 }>()
 
 //element level data fetching
@@ -32,23 +35,21 @@ const initValue =
   props.items === undefined ? calculateInitValue(props.element, cData.value) : props.tempValue
 const value = ref(initValue)
 
-//validation
-const { calValidation, showGblError } = useValidate()
-const errMsg = ref('')
-const showErr = ref(false)
-
 // update model value
 watchDebounced(
   value,
   (n) => {
     //update the model value
     props.setValue(props.element.schema, n, props.items)
-
-    // validation fire
-    calValidation(props.element, n, errMsg)
   },
   { immediate: true, debounce: 0 }
 )
+
+// input label
+const { isLabelHoisted, hoist, unHoist } = useLabel(value)
+
+//validation
+const { err, showStar, showLocalErr } = useBaseValidity(props.element, value, props.parentErr)
 
 // clean on unmounted
 onUnmounted(() => {
@@ -62,15 +63,27 @@ onUnmounted(() => {
   <div v-if="isLoading">
     <p>Textarea data fetching</p>
   </div>
-  <div v-else class="flex flex-col space-y-2">
-    <label :for="element.label">{{ element.label }}</label>
+  <div v-else class="ac-single-input">
+    <label
+      class="ac-label"
+      :for="element.label"
+      :class="{ 'is-required': showStar, 'show-label': isLabelHoisted }"
+      @click="isLabelHoisted = true"
+    >
+      <span>{{ element.label }}</span>
+      <span v-if="showStar" class="is-required"> * </span>
+    </label>
     <textarea
-      :id="element.label"
-      :name="element.label"
+      v-model="value"
+      class="ac-input"
       rows="4"
       cols="50"
-      v-model="value"
+      :id="element.label"
+      :name="element.label"
+      @input="showLocalErr = true"
+      @focus="hoist"
+      @focusout="unHoist"
     ></textarea>
-    <p v-if="(showGblError || showErr) && errMsg" class="text-red-600 pb-3">{{ errMsg }}</p>
+    <p v-if="err" class="has-text-danger">{{ err }}</p>
   </div>
 </template>

@@ -1,3 +1,1 @@
-import MyUtil from './MyUtil'
-
-export { MyUtil }
+export * from './rules'

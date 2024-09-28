@@ -3,12 +3,13 @@ import type { ObjectItem } from '@/types'
 import { useLoader } from '@/composables/loader'
 import { computed, initCustomFormatter, ref, toRaw, unref, watch } from 'vue'
 import { useInitial } from '@/composables/initial'
-import { useGlobalModel } from '@/composables/model'
+import { useGlobalModel } from '@/composables/global/model'
 import EachKey from './helper/EachKey.vue'
 
 const props = defineProps<{
   ui: ObjectItem
   parentData?: any
+  parentError?: (val: number) => void
 }>()
 
 //element level data fetching
@@ -63,11 +64,11 @@ const addNew = () => {
       </div>
     </template>
     <template v-else>
-      <div class="flex justify-between my-2">
-        <h1>{{ ui.label }}</h1>
-        <button @click="addNew" class="px-2 py-1 bg-blue-400">Add new</button>
+      <div class="is-flex is-justify-content-space-between my-2">
+        <h4>{{ ui.label }}</h4>
+        <button @click="addNew" class="button ac-button is-primary">Add new</button>
       </div>
-      <div class="flex flex-col space-y-2">
+      <div class="is-flex is-flex-direction-column space-y-2">
         <EachKey
           v-for="(val, idx) in Object.keys(tempMode)"
           :key="String(idx) + String(idxx)"

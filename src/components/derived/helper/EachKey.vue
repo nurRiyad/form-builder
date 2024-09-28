@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import TheTrash from '@/components/icons/TheTrash.vue'
 import { ref, watch } from 'vue'
 
 const props = defineProps<{
@@ -15,9 +16,12 @@ const handleDelete = () => {
 
 const key = ref(props.obKey)
 const value = ref(props.obValue)
+const isLabelHoisted = ref(false)
 
 watch(value, (n) => {
   props.setValue(key.value, n)
+  //update labels
+  isLabelHoisted.value = true
 })
 
 watch(key, (n, o) => {
@@ -27,15 +31,19 @@ watch(key, (n, o) => {
 </script>
 
 <template>
-  <div class="flex w-full items-baseline space-x-4">
-    <div class="flex items-center space-x-2">
-      <label for="key">Key</label>
+  <div class="is-flex is-fullwidth items-baseline gap-16">
+    <div class="ac-single-input is-extra-small is-fullwidth">
+      <label for="key" class="ac-label">Key </label>
       <input v-model="key" type="text" name="key" id="key" class="border border-black" />
     </div>
-    <div class="flex items-center space-x-2">
-      <label for="value">Value</label>
+    <div class="ac-single-input is-extra-small is-fullwidth">
+      <label class="ac-label" for="value"> Value </label>
       <input v-model="value" type="text" name="value" id="value" class="border border-black" />
     </div>
-    <button @click="handleDelete" class="bg-red-300 mt-5 py-1 px-2 rounded-sm">Delete</button>
+    <button @click="handleDelete" class="button ac-button is-danger is-light">
+      <span class="icon is-small">
+        <TheTrash />
+      </span>
+    </button>
   </div>
 </template>

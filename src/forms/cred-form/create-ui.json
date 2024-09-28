@@ -6,12 +6,14 @@
     {
       "type": "select",
       "label": "Credential Type",
-      "schema": "schema/properties/type"
+      "schema": "schema/properties/type",
+      "validation": { "type": "required" }
     },
     {
       "type": "input",
       "label": "Credential Name",
-      "schema": "schema/properties/name"
+      "schema": "schema/properties/name",
+      "validation": { "type": "required" }
     },
     {
       "type": "input",
@@ -33,9 +35,17 @@
           "label": "Access Key Id"
         },
         {
-          "type": "input",
-          "label": "Secret Access Key",
-          "schema": "schema/properties/aws/properties/secretAccessKey"
+          "type": "block-layout",
+          "label": "Test block",
+          "showLabels": true,
+          "elements": [
+            {
+              "type": "input",
+              "label": "Secret Access Key",
+              "schema": "schema/properties/aws/properties/secretAccessKey",
+              "validation": { "type": "required" }
+            }
+          ]
         }
       ]
     },

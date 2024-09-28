@@ -2,8 +2,9 @@
 import type { FormType } from '@/types/schema'
 import { defineAsyncComponent, provide, ref, toRaw, unref } from 'vue'
 import set from 'lodash.set'
-import { useGlobalModel } from '@/composables/model'
-import { useValidate } from '@/composables/validation'
+import { useGlobalModel } from '@/composables/global/model'
+import { useBlockValidity } from '@/composables/validation'
+import { useGlobalValidate } from '@/composables/global/valid'
 
 const SingleStep = defineAsyncComponent(() => import('./root/SingleStep.vue'))
 const MultiStep = defineAsyncComponent(() => import('./root/MultiStep.vue'))
@@ -29,7 +30,8 @@ const props = withDefaults(
 const emits = defineEmits(['onSubmit'])
 
 // generate model value
-const { model } = useGlobalModel()
+const { model, clearModel } = useGlobalModel()
+clearModel()
 
 const fn = props?.logic ? props.logic(model) : null
 
@@ -37,8 +39,6 @@ const fn = props?.logic ? props.logic(model) : null
 provide('func', fn)
 provide('schema', props.schema)
 provide('initialValue', props.initialValue)
-
-// generate function
 
 // generate submitted form form
 const generateFinalForm = () => {
@@ -51,14 +51,14 @@ const generateFinalForm = () => {
   return generatedObj
 }
 
-const { invalidInputs, showGblError } = useValidate()
+// validation
+const { clearValidation } = useGlobalValidate()
+clearValidation()
+const { updateErr, isValid } = useBlockValidity()
 
 // form submit
 const handleSubmit = () => {
-  if (invalidInputs.value) {
-    showGblError.value = true
-    return
-  }
+  if (!isValid()) return
 
   const value = generateFinalForm()
   emits('onSubmit', value)
@@ -75,10 +75,7 @@ const totalStep = props.ui.type === 'single-step-from' ? 0 : props.ui.step.lengt
 const handleStep = (type: 'Next' | 'Prev') => {
   if (props.ui.type === 'single-step-from') return
 
-  if (invalidInputs.value) {
-    showGblError.value = true
-    return
-  }
+  if (!isValid()) return
 
   if (type === 'Next') {
     if (activeStep.value + 1 >= totalStep) {
@@ -105,28 +102,51 @@ defineExpose({
 </script>
 
 <template>
-  <div v-if="isLoading">
-    <h1>Form file loading</h1>
-  </div>
-  <div class="max-w-3xl mx-auto" v-else>
-    <SingleStep v-if="ui.type === 'single-step-from'" :ui="ui" />
-    <MultiStep v-else-if="ui.type === 'multi-step-form'" :active-step="activeStep" :ui="ui" />
-    <h1 v-else>No Proper Form type found</h1>
-    <slot name="custom-form" />
-    <template v-if="!hideFormAction">
-      <div class="flex justify-between" v-if="ui.type === 'single-step-from'">
-        <button @click="handleCancel" class="bg-sky-500 mt-5 py-2 px-3 rounded-sm">Cancel</button>
-        <button @click="handleSubmit" class="bg-sky-500 mt-5 py-2 px-3 rounded-sm">Submit</button>
+  <div class="mt-70">
+    <div class="container" v-if="isLoading">
+      <div class="columns">
+        <div class="column is-8">
+          <h1>Form file loading</h1>
+        </div>
       </div>
-      <div class="flex justify-between" v-else>
-        <button @click="handleStep('Prev')" class="bg-sky-500 mt-5 py-2 px-3 rounded-sm">
-          {{ activeStep <= 0 ? 'Cancel' : 'Previous' }}
-        </button>
-        <button @click="handleStep('Next')" class="bg-sky-500 mt-5 py-2 px-3 rounded-sm">
-          {{ activeStep + 1 >= totalStep ? 'Submit' : 'Next' }}
-        </button>
+    </div>
+    <div class="container" v-else>
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <SingleStep
+            v-if="ui.type === 'single-step-from'"
+            :is-active="true"
+            :ui="ui"
+            :parent-err="updateErr"
+          />
+          <MultiStep
+            v-else-if="ui.type === 'multi-step-form'"
+            :active-step="activeStep"
+            :ui="ui"
+            :parent-err="updateErr"
+          />
+          <h1 v-else>No Proper Form type found</h1>
+          <slot name="custom-form" />
+          <template v-if="!hideFormAction">
+            <div
+              class="is-flex is-justify-content-space-between my-4"
+              v-if="ui.type === 'single-step-from'"
+            >
+              <button @click="handleCancel" class="button ac-button">Cancel</button>
+              <button @click="handleSubmit" class="button ac-button is-primary">Submit</button>
+            </div>
+            <div class="is-flex is-justify-content-space-between my-4" v-else>
+              <button @click="handleStep('Prev')" class="button ac-button">
+                {{ activeStep <= 0 ? 'Cancel' : 'Previous' }}
+              </button>
+              <button @click="handleStep('Next')" class="button ac-button is-primary">
+                {{ activeStep + 1 >= totalStep ? 'Submit' : 'Next' }}
+              </button>
+            </div>
+          </template>
+          <pre class="p-4 bg-gray-300 mt-4">{{ model }}</pre>
+        </div>
       </div>
-    </template>
-    <pre class="p-4 bg-gray-300 mt-4">{{ model }}</pre>
+    </div>
   </div>
 </template>

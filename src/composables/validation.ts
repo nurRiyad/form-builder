@@ -1,44 +1,72 @@
 import type { BaseElement } from '@/types'
-import { createGlobalState } from '@vueuse/core'
-import { ref, type Ref } from 'vue'
+import { computed, ref, watch, type Ref } from 'vue'
+import { useGlobalValidate } from './global/valid'
+import { requiredCheck } from '@/utils'
 
-export const useValidate = createGlobalState(() => {
-  // state
-  const invalidInputs = ref<number>(0)
-  const showGblError = ref(false)
+export const useBaseValidity = (
+  ui: BaseElement | undefined,
+  val: Ref<any>,
+  parentErr?: (val: number) => void
+) => {
+  const { showGblError } = useGlobalValidate()
+  const showLocalErr = ref(false)
+  const errMsg = ref('')
 
-  const setInvalidInputs = (val: number) => {
-    invalidInputs.value += val
-  }
+  const showStar = computed(() => ui?.validation?.type === 'required')
+  const err = computed(() => {
+    if ((showGblError.value || showLocalErr.value) && errMsg.value) return errMsg.value
+    else return ''
+  })
 
-  const requiredCheck = (val: unknown) => {
-    if (typeof val === 'number') {
-      if (val || val === 0) return false
-      else return 'This field is required 1'
-    } else if (val) return false
-    else return 'This field is required 2'
-  }
-
-  const calValidation = (vd: BaseElement | undefined, n: unknown, errMsg: Ref<string>) => {
-    if (vd?.validation?.type === 'required') {
-      const res = requiredCheck(n)
-      if (res) {
-        //not valid
-        if (!errMsg.value) {
-          // previously it was valid
-          invalidInputs.value += 1
-        }
-        errMsg.value = res
-      } else {
-        // valid phase
-        if (errMsg.value) {
-          //previously it was not valid
-          invalidInputs.value -= 1
-        }
-        errMsg.value = ''
+  const calValidation = (n: unknown) => {
+    let res: string | false = false
+    if (ui?.validation?.type === 'required') res = requiredCheck(n)
+    if (res) {
+      //not valid
+      if (!errMsg.value) {
+        // previously it was valid
+        if (parentErr) parentErr(1)
       }
+      errMsg.value = res
+    } else {
+      // valid phase
+      if (errMsg.value) {
+        //previously it was not valid
+        if (parentErr) parentErr(-1)
+      }
+      errMsg.value = ''
     }
   }
 
-  return { invalidInputs, setInvalidInputs, requiredCheck, calValidation, showGblError }
-})
+  watch(val, (n) => calValidation(n), { immediate: true })
+
+  return {
+    err,
+    calValidation,
+    showStar,
+    showGblError,
+    showLocalErr
+  }
+}
+
+export const useBlockValidity = (parentErr?: (val: number) => void) => {
+  const errCnt = ref(0)
+  const updateErr = (val: number) => {
+    errCnt.value += val
+  }
+  watch(errCnt, (n, o) => {
+    if (!parentErr) return
+    if (n == 0 && o > 0) parentErr(-1)
+    if (n > 0 && o == 0) parentErr(1)
+  })
+
+  const { showGblError } = useGlobalValidate()
+  const isValid = () => {
+    if (errCnt.value > 0) {
+      showGblError.value = true
+      return false
+    } else return true
+  }
+
+  return { errCnt, updateErr, isValid }
+}

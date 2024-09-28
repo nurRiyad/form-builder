@@ -6,7 +6,8 @@ import { watchDebounced } from '@vueuse/core'
 import { useInitial } from '@/composables/initial'
 import { useLoader } from '@/composables/loader'
 import { useWatchers } from '@/composables/watcher'
-import { useValidate } from '@/composables/validation'
+import { useBaseValidity } from '@/composables/validation'
+import { useLabel } from '@/composables/label'
 
 const props = defineProps<{
   element: Input
@@ -15,6 +16,7 @@ const props = defineProps<{
   parentData?: any
   setValue: (path: string, val: any, items?: string) => void
   deleteValue?: (key: string) => void
+  parentErr?: (val: number) => void
 }>()
 
 const wholeSchema = inject('schema')
@@ -35,26 +37,24 @@ const initValue =
   props.items === undefined ? calculateInitValue(props.element, cData.value) : props.tempValue
 const value = ref(initValue)
 
-//validation
-const { calValidation, showGblError } = useValidate()
-const errMsg = ref('')
-const showErr = ref(false)
-
 // update model value
 watchDebounced(
   value,
   (n) => {
     //update the model value
     props.setValue(props.element.schema, n, props.items)
-
-    // validation fire
-    calValidation(props.element, n, errMsg)
   },
   { immediate: true, debounce: 0 }
 )
 
 // fire when watch dependency changes
 useWatchers(props.element.watcher, cData, value)
+
+// input label
+const { isLabelHoisted, hoist, unHoist } = useLabel(value)
+
+//validation
+const { err, showStar, showLocalErr } = useBaseValidity(props.element, value, props.parentErr)
 
 const calculateInputType = computed(() => {
   let path = props.element.schema
@@ -80,16 +80,25 @@ onUnmounted(() => {
   <div v-if="isLoading">
     <h1>This input element is loading...</h1>
   </div>
-  <div class="flex flex-col space-y-2 w-full" :class="$attrs.class">
-    <label :for="element.label">{{ element.label }}</label>
+  <div v-else class="ac-single-input is-extra-small" :class="$attrs.class">
+    <label
+      class="ac-label"
+      :class="{ 'show-label': isLabelHoisted }"
+      :for="element.label"
+      @click="isLabelHoisted = true"
+    >
+      {{ element.label }} <span v-if="showStar" class="is-required"> * </span>
+    </label>
     <input
+      v-model="value"
+      class="ac-input"
       :id="element.label"
       :name="element.label"
       :type="calculateInputType"
-      v-model="value"
-      @input="showErr = true"
-      class="border border-black"
+      @input="showLocalErr = true"
+      @focus="hoist"
+      @focusout="unHoist"
     />
-    <p v-if="(showGblError || showErr) && errMsg" class="text-red-600 pb-3">{{ errMsg }}</p>
+    <p v-if="err" class="has-text-danger">{{ err }}</p>
   </div>
 </template>
