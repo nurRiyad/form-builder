@@ -28,7 +28,10 @@ Generate from in a minutes
 - [x] Remove lodash from dependency
 - [x] Remove same type of code from base components
 - [x] Basic Validation
-- [ ] Add editor element
+- [ ] Validation for derived element
+- [ ] Show list of multi step form
+- [ ] Show proper loader when loading
+- [ ] Remove lodash.get and lodash.set
 - [ ] Create Platform UI Credential create form
 - [ ] Create Platform UI Credential Edit form
 
