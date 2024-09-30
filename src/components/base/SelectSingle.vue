@@ -7,6 +7,7 @@ import { useLoader } from '@/composables/loader'
 import { watchDebounced } from '@vueuse/core'
 import { useBaseValidity } from '@/composables/validation'
 import { useLabel } from '@/composables/label'
+import Multiselect from 'vue-multiselect'
 
 const props = defineProps<{
   element: Select
@@ -82,21 +83,13 @@ onUnmounted(() => {
     <p>Data fetching</p>
   </div>
   <div v-else class="ac-single-input is-extra-small">
-    <label :for="element.label" class="ac-label" :class="{ 'show-label': isLabelHoisted }">
-      {{ element.label }}<span v-if="showStar" class="is-required"> * </span>
-    </label>
-    <select
+    <Multiselect
       v-model="value"
-      :name="element.label"
-      :id="element.label"
-      @focusout="unHoist"
-      @focus="hoist"
-      class="ac-input is-fullwidth"
-    >
-      <option v-for="val in fOptions" :key="val.value" :value="val.value">
-        {{ val.name }}
-      </option>
-    </select>
+      :options="fOptions"
+      label="value"
+      track-by="name"
+      :searchable="false"
+    />
     <p v-if="err" class="has-text-danger">{{ err }}</p>
   </div>
 </template>

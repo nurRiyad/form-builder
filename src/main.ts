@@ -1,4 +1,5 @@
 import './assets/main.scss'
+import 'vue-multiselect/dist/vue-multiselect.min.css'
 
 import { createApp } from 'vue'
 

@@ -39,19 +39,13 @@ const libConfig = defineConfig({
       entry: resolve(__dirname, '/src/lib.ts'),
       name: 'FormBuilder',
       // the proper extensions will be added
-      fileName: 'form-builder'
+      fileName: 'form-builder',
+      formats: ['es']
     },
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled
       // into your library
-      external: ['vue', 'pinia', 'vue-router'],
-      output: {
-        // Provide global variables to use in the UMD build
-        // for externalized deps
-        globals: {
-          vue: 'Vue'
-        }
-      }
+      external: ['vue', 'pinia', 'vue-router', 'vue-multiselect']
     },
     copyPublicDir: false
   }

@@ -10,28 +10,6 @@
       "schema": "schema/properties/single1",
       "elements": [
         {
-          "type": "block-layout",
-          "label": "Block Layout",
-          "description": "Block Description",
-          "showLabels": true,
-          "elements": [
-            {
-              "type": "input",
-              "label": "First Name",
-              "schema": "schema/properties/userinfo/properties/firstName",
-              "loader": "fNameLoader",
-              "validation": { "type": "required" }
-            },
-            {
-              "type": "input",
-              "label": "Last Name",
-              "schema": "schema/properties/userinfo/properties/lastName",
-              "loader": "fNameLoader",
-              "validation": { "type": "required" }
-            }
-          ]
-        },
-        {
           "type": "textarea",
           "label": "About You",
           "schema": "schema/properties/userinfo/properties/aboutMe",
@@ -70,83 +48,6 @@
           "type": "switch",
           "label": "Save data",
           "schema": "schema/properties/userinfo/properties/save"
-        }
-      ]
-    },
-    {
-      "type": "single-step-from",
-      "label": "Single Step 2",
-      "loader": "singleLoader2",
-      "schema": "schema/properties/single2",
-      "elements": [
-        {
-          "type": "array-object-form",
-          "label": "Array of object",
-          "schema": "schema/properties/userinfo/properties/obj",
-          "elements": [
-            {
-              "type": "input",
-              "label": "Name",
-              "schema": "name"
-            },
-            {
-              "type": "select",
-              "label": "Simple Select",
-              "schema": "select",
-              "options": ["sldfk", "aaa", "bbb"]
-            },
-            {
-              "type": "textarea",
-              "label": "Textarea",
-              "schema": "textarea"
-            },
-            {
-              "type": "radio",
-              "label": "Radio check",
-              "schema": "radio",
-              "options": ["riyad", "solurav"]
-            }
-          ]
-        },
-        {
-          "type": "input",
-          "label": "Required check",
-          "schema": "schema/properties/test/222",
-          "validation": { "type": "required" }
-        }
-      ]
-    },
-    {
-      "type": "single-step-from",
-      "label": "Single Step 2",
-      "loader": "singleLoader2",
-      "schema": "schema/properties/single2",
-      "elements": [
-        {
-          "type": "array-item-form",
-          "label": "Test array item",
-          "schema": "schema/properties/arrayitem/properties/tada",
-          "init": {
-            "type": "static",
-            "value": ["1", "2"]
-          },
-          "element": {
-            "type": "input",
-            "label": "name",
-            "schema": "select"
-          }
-        },
-        {
-          "type": "object-item",
-          "schema": "schema/properties/test",
-          "label": "Object test",
-          "init": {
-            "type": "static",
-            "value": {
-              "name": "riyad",
-              "age": 25
-            }
-          }
         }
       ]
     }
