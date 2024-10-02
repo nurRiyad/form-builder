@@ -13,25 +13,27 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [20.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Check Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: '20'
           cache: 'npm'
+
       - name: Install dependency
         run: npm ci
+
       - name: Formatting check
         run: npx prettier --check "src/"
+
       - name: Playgourd build check
         run: npm run build
+
       - name: Library build check
         run: npm run build:lib
+
       - name: Docs build check
         run: npm run docs:build
