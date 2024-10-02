@@ -37,11 +37,9 @@
     "docs:preview": "vitepress preview docs"
   },
   "dependencies": {
-    "@vueuse/core": "^11.0.3",
-    "lodash.get": "^4.4.2",
-    "lodash.set": "^4.3.2",
     "vue": "^3.4.29",
-    "vue-router": "^4.3.3"
+    "vue-router": "^4.3.3",
+    "@vueuse/core": "^11.0.3"
   },
   "peerDependencies": {
     "vue": "^3.4.29"
@@ -51,8 +49,6 @@
     "@rushstack/eslint-patch": "^1.8.0",
     "@tsconfig/node20": "^20.1.4",
     "@types/jsdom": "^21.1.7",
-    "@types/lodash.get": "^4.4.9",
-    "@types/lodash.set": "^4.3.9",
     "@types/node": "^20.14.5",
     "@vitejs/plugin-vue": "^5.0.5",
     "@vue/eslint-config-prettier": "^9.0.0",

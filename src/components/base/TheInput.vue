@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import get from 'lodash.get'
+import { get } from '@/utils/lodash'
 import type { Input } from '@/types/schema'
 import { computed, inject, onUnmounted, ref, toRaw, unref } from 'vue'
 import { watchDebounced } from '@vueuse/core'

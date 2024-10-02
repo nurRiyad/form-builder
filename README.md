@@ -31,7 +31,7 @@ Generate from in a minutes
 - [ ] Validation for derived element
 - [ ] Show list of multi step form
 - [ ] Show proper loader when loading
-- [ ] Remove lodash.get and lodash.set
+- [x] Remove lodash.get and lodash.set
 - [ ] Create Platform UI Credential create form
 - [ ] Create Platform UI Credential Edit form
 

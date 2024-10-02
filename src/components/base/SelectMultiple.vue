@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { MultiSelect } from '@/types/schema'
 import { computed, inject, onUnmounted, ref, toRaw, unref } from 'vue'
-import get from 'lodash.get'
+import { get } from '@/utils/lodash'
 import { useInitial } from '@/composables/initial'
 import { useLoader } from '@/composables/loader'
 import { watchDebounced } from '@vueuse/core'
