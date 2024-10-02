@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { FormType } from '@/types/schema'
 import { defineAsyncComponent, provide, ref, toRaw, unref } from 'vue'
-import set from 'lodash.set'
+import { set } from '@/utils/lodash'
 import { useGlobalModel } from '@/composables/global/model'
 import { useBlockValidity } from '@/composables/validation'
 import { useGlobalValidate } from '@/composables/global/valid'

@@ -1,5 +1,5 @@
 import { inject } from 'vue'
-import get from 'lodash.get'
+import { get } from '@/utils/lodash'
 import type { AllElement } from '@/types'
 
 export const useInitial = () => {
