@@ -1,0 +1,36 @@
+name: Publish to npm
+
+# Trigger the workflow when a new tag is pushed
+on:
+  push:
+    tags:
+      - 'v*.*.*' # Matches any tag starting with 'v' followed by a version number, e.g., v1.0.0
+
+jobs:
+  publish:
+    name: Publish to npm
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the code
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+          registry-url: 'https://registry.npmjs.org'
+
+      # Step 3: Install dependencies
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build Library
+        run: npm run build:lib
+
+      # Step 4: Publish to npm
+      - name: Publish to npm
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # Use the npm token stored in GitHub Secrets
+        run: npm publish
