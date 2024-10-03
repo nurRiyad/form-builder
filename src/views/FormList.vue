@@ -7,9 +7,9 @@ import TheArrow from './../components/icons/TheArrow.vue'
   <div class="hero is-fullheight">
     <div class="hero-body is-flex is-flex-direction-column is-justify-content-center">
       <h5>All Available Form</h5>
-      <div>
+      <div class="is-flex is-flex-direction-column gap-8">
         <RouterLink
-          class="link is-flex is-align-items-center gap-4 p-4"
+          class="button ac-button is-light is-flex is-align-items-center gap-4 is-uppercase"
           v-for="f in allForms"
           :key="f"
           :to="`/form/${f}`"
