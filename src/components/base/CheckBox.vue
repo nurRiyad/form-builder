@@ -74,17 +74,18 @@ onUnmounted(() => {
     <p>Check is fetching</p>
   </div>
   <div v-else>
-    <div class="field">
+    <label class="ac-checkbox" :for="String(element.label) + String(items)">
       <input
-        class="is-checkradio has-background-color is-primary"
         type="checkbox"
         :id="String(element.label) + String(items)"
         :name="element.label"
         v-model="checked"
         @input="showLocalErr = true"
       />
-      <label :for="String(element.label) + String(items)">{{ element.label }}</label>
-    </div>
-    <p v-if="err" class="is-danger">{{ err }}</p>
+      <span class="checkmark"></span>
+      <span>{{ element.label }}</span>
+    </label>
+
+    <p v-if="err" class="is-danger mt-4">{{ err }}</p>
   </div>
 </template>

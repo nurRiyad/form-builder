@@ -6,6 +6,8 @@
     stroke-width="1.5"
     stroke="currentColor"
     class="size-6"
+    width="16"
+    height="16"
   >
     <path
       stroke-linecap="round"

@@ -80,7 +80,7 @@ onUnmounted(() => {
   <div v-if="isLoading">
     <h1>This input element is loading...</h1>
   </div>
-  <div v-else class="ac-single-input is-extra-small" :class="$attrs.class">
+  <div v-else class="ac-single-input is-extra-small is-fullwidth" :class="$attrs.class">
     <label
       class="ac-label"
       :class="{ 'show-label': isLabelHoisted }"
