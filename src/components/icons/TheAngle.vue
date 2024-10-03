@@ -1,5 +1,5 @@
 <script setup lang="ts">
-withDefaults(defineProps<{ direction: 'left' | 'right' }>(), {
+withDefaults(defineProps<{ direction?: 'left' | 'right' }>(), {
   direction: 'right'
 })
 </script>
