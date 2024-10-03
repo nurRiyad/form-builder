@@ -63,6 +63,8 @@ const tempData = (path: string) => {
         />
       </template>
     </div>
-    <button @click="handleDelete" class="button ac-button is-danger is-light"><TheTrash /></button>
+    <button @click="handleDelete" class="button ac-button is-danger is-light" title="Delete">
+      <TheTrash />
+    </button>
   </div>
 </template>
