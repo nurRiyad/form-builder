@@ -2,6 +2,8 @@
 import type { BaseElement } from '@/types/schema'
 import { defineAsyncComponent } from 'vue'
 
+import TheTrash from '@/components/icons/TheTrash.vue'
+
 const TheInput = defineAsyncComponent(() => import('../../base/TheInput.vue'))
 const SelectSingle = defineAsyncComponent(() => import('../../base/SelectSingle.vue'))
 const TextArea = defineAsyncComponent(() => import('../../base/TextArea.vue'))
@@ -26,8 +28,8 @@ const tempData = (path: string) => {
 </script>
 
 <template>
-  <div class="b-1 p-16 space-y-2 is-rounded-4">
-    <div class="is-flex is-flex-direction-column gap-8">
+  <div class="b-1 p-16 is-flex gap-8 is-rounded-4">
+    <div class="is-flex gap-8 is-fullwidth">
       <template v-for="el in elements" :key="el">
         <TheInput
           v-if="el.type === 'input'"
@@ -35,6 +37,7 @@ const tempData = (path: string) => {
           :items="items"
           :temp-value="tempData(el.schema)"
           :set-value="setValue"
+          class="mb-0"
         />
         <SelectSingle
           v-else-if="el.type === 'select'"
@@ -60,6 +63,8 @@ const tempData = (path: string) => {
         />
       </template>
     </div>
-    <button @click="handleDelete" class="button ac-button is-danger">Delete</button>
+    <button @click="handleDelete" class="button ac-button is-danger is-light" title="Delete">
+      <TheTrash />
+    </button>
   </div>
 </template>
