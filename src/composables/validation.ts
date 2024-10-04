@@ -1,7 +1,7 @@
 import type { BaseElement } from '@/types'
-import { computed, ref, watch, type Ref } from 'vue'
+import { computed, inject, ref, toRaw, watch, type Ref } from 'vue'
 import { useGlobalValidate } from './global/valid'
-import { requiredCheck } from '@/utils'
+import { isRequiredFromSchema, requiredCheck } from '@/utils'
 
 export const useBaseValidity = (
   ui: BaseElement | undefined,
@@ -12,7 +12,10 @@ export const useBaseValidity = (
   const showLocalErr = ref(false)
   const errMsg = ref('')
 
-  const showStar = computed(() => ui?.validation?.type === 'required')
+  const wholeSchema = inject('schema')
+  const schemaRequired = isRequiredFromSchema(ui?.schema, toRaw(wholeSchema))
+
+  const showStar = computed(() => ui?.validation?.type === 'required' || schemaRequired)
   const err = computed(() => {
     if ((showGblError.value || showLocalErr.value) && errMsg.value) return errMsg.value
     else return ''
@@ -21,6 +24,7 @@ export const useBaseValidity = (
   const calValidation = (n: unknown) => {
     let res: string | false = false
     if (ui?.validation?.type === 'required') res = requiredCheck(n)
+    else if (schemaRequired) res = requiredCheck(n)
     if (res) {
       //not valid
       if (!errMsg.value) {
