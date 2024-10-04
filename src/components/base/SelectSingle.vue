@@ -6,7 +6,8 @@ import { useInitial } from '@/composables/initial'
 import { useLoader } from '@/composables/loader'
 import { watchDebounced } from '@vueuse/core'
 import { useBaseValidity } from '@/composables/validation'
-import { useLabel } from '@/composables/label'
+
+import TheSelect from './helper/TheSelect.vue'
 
 const props = defineProps<{
   element: Select
@@ -41,13 +42,10 @@ watchDebounced(
   value,
   (n) => {
     //update the model value
-    props.setValue(props.element.schema, n, props.items)
+    props.setValue(props.element.schema, n?.value, props.items)
   },
   { immediate: true, debounce: 0 }
 )
-
-// input label
-const { isLabelHoisted, hoist, unHoist } = useLabel(value)
 
 //validation
 const { err, showStar } = useBaseValidity(props.element, value, props.parentErr)
@@ -81,22 +79,8 @@ onUnmounted(() => {
   <div v-if="isLoading">
     <p>Data fetching</p>
   </div>
-  <div v-else class="ac-single-input is-extra-small">
-    <label :for="element.label" class="ac-label" :class="{ 'show-label': isLabelHoisted }">
-      {{ element.label }}<span v-if="showStar" class="is-required"> * </span>
-    </label>
-    <select
-      v-model="value"
-      :name="element.label"
-      :id="element.label"
-      @focusout="unHoist"
-      @focus="hoist"
-      class="ac-input is-fullwidth"
-    >
-      <option v-for="val in fOptions" :key="val.value" :value="val.value">
-        {{ val.name }}
-      </option>
-    </select>
+  <div v-else>
+    <TheSelect v-model="value" :options="fOptions" :showStar="showStar" />
     <p v-if="err" class="has-text-danger">{{ err }}</p>
   </div>
 </template>
