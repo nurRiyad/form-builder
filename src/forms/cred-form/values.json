@@ -1,1 +1,54 @@
-{}
+{
+  "packet": {
+    "apiKey": "",
+    "projectID": ""
+  },
+  "azureStorage": {
+    "key": "",
+    "account": ""
+  },
+  "azure": {
+    "clientID": "",
+    "tenantID": "",
+    "subscriptionID": "",
+    "clientSecret": ""
+  },
+  "scaleway": {
+    "organization": "",
+    "token": ""
+  },
+  "googleCloud": {
+    "projectID": "",
+    "serviceAccount": ""
+  },
+  "type": "",
+  "digitalocean": {
+    "token": ""
+  },
+  "name": "",
+  "vultr": {
+    "token": ""
+  },
+  "swift": {
+    "username": "",
+    "tenantID": "",
+    "password": "",
+    "tenantAuthURL": "",
+    "domain": "",
+    "tenantDomain": "",
+    "tenantName": "",
+    "region": ""
+  },
+  "aws": {
+    "secretAccessKey": "",
+    "accessKeyID": ""
+  },
+  "rancher": {
+    "endpoint": "",
+    "accessKeyID": "",
+    "secretAccessKey": ""
+  },
+  "linode": {
+    "token": ""
+  }
+}

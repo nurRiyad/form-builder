@@ -1,88 +1,263 @@
 {
   "type": "single-step-from",
-  "label": "Credential Create From",
-  "schema": "schema/",
   "elements": [
     {
       "type": "select",
       "label": "Credential Type",
-      "schema": "schema/properties/type",
-      "validation": { "type": "required" }
+      "schema": "schema/properties/type"
     },
     {
       "type": "input",
       "label": "Credential Name",
-      "schema": "schema/properties/name",
-      "validation": { "type": "required" }
-    },
-    {
-      "type": "input",
-      "label": "Owner ID",
-      "schema": "schema/properties/ownerID"
+      "schema": "schema/properties/name"
     },
     {
       "type": "block-layout",
-      "label": "Aws Block Label",
-      "showLabels": true,
+      "label": "Aws",
       "if": {
         "type": "function",
-        "name": "isCredAws|a|b|c|d|e"
+        "name": "isCredType|Aws"
       },
       "elements": [
         {
           "type": "input",
-          "schema": "schema/properties/aws/properties/accessKeyID",
-          "label": "Access Key Id"
+          "label": "Access Key",
+          "schema": "schema/properties/aws/properties/accessKeyID"
         },
         {
-          "type": "block-layout",
-          "label": "Test block",
-          "showLabels": true,
-          "elements": [
-            {
-              "type": "input",
-              "label": "Secret Access Key",
-              "schema": "schema/properties/aws/properties/secretAccessKey",
-              "validation": { "type": "required" }
-            }
-          ]
+          "type": "input",
+          "label": "Secret Key",
+          "schema": "schema/properties/aws/properties/secretAccessKey"
         }
       ]
     },
     {
       "type": "block-layout",
-      "label": "Azure Block",
-      "showLabels": true,
+      "label": "Azure",
       "if": {
-        "type": "computed",
-        "name": "isCredAzure"
+        "type": "function",
+        "name": "isCredType|Azure"
       },
       "elements": [
         {
           "type": "input",
           "label": "Subscription Id",
-          "schema": "schema/properties/azure/properties/subscriptionID"
+          "schema": "schema/properties/azure/properties/subscription_id"
         },
         {
           "type": "input",
-          "label": "Tenant ID",
+          "label": "Tenant Id",
           "schema": "schema/properties/azure/properties/tenantID"
         },
         {
-          "type": "horizontal-layout",
-          "label": "horizontal test",
-          "elements": [
-            {
-              "type": "input",
-              "label": "Client Id",
-              "schema": "schema/properties/azure/properties/clientID"
-            },
-            {
-              "type": "input",
-              "label": "Client Secret",
-              "schema": "schema/properties/azure/properties/clientSecret"
-            }
-          ]
+          "type": "input",
+          "label": "Client Id",
+          "schema": "schema/properties/azure/properties/clientID"
+        },
+        {
+          "type": "input",
+          "label": "Client Secret",
+          "schema": "schema/properties/azure/properties/clientSecret"
+        }
+      ]
+    },
+    {
+      "type": "block-layout",
+      "label": "Azure Storage",
+      "if": {
+        "type": "function",
+        "name": "isCredType|AzureStorage"
+      },
+      "elements": [
+        {
+          "type": "input",
+          "label": "Account",
+          "schema": "schema/properties/azureStorage/properties/account"
+        },
+        {
+          "type": "input",
+          "label": "Key",
+          "schema": "schema/properties/azureStorage/properties/key"
+        }
+      ]
+    },
+    {
+      "type": "block-layout",
+      "label": "Digital Ocean",
+      "if": {
+        "type": "function",
+        "name": "isCredType|DigitalOcean"
+      },
+      "elements": [
+        {
+          "type": "input",
+          "label": "Token",
+          "schema": "schema/properties/digitalocean/properties/token"
+        }
+      ]
+    },
+    {
+      "type": "block-layout",
+      "label": "Google Cloud",
+      "if": {
+        "type": "function",
+        "name": "isCredType|GoogleCloud"
+      },
+      "elements": [
+        {
+          "type": "input",
+          "label": "Project Id",
+          "schema": "schema/properties/googleCloud/properties/projectID"
+        },
+        {
+          "type": "textarea",
+          "label": "Service Account",
+          "schema": "schema/properties/googleCloud/properties/serviceAccount"
+        }
+      ]
+    },
+    {
+      "type": "block-layout",
+      "label": "Rancher",
+      "if": {
+        "type": "function",
+        "name": "isCredType|Rancher"
+      },
+      "elements": [
+        {
+          "type": "input",
+          "label": "End Point",
+          "schema": "schema/properties/rancher/properties/endpoint"
+        },
+        {
+          "type": "input",
+          "label": "Access Key",
+          "schema": "schema/properties/rancher/properties/accessKeyID"
+        },
+        {
+          "type": "input",
+          "label": "Secret Key",
+          "schema": "schema/properties/rancher/properties/secretAccessKey"
+        }
+      ]
+    },
+    {
+      "type": "block-layout",
+      "label": "Linode",
+      "if": {
+        "type": "function",
+        "name": "isCredType|Linode"
+      },
+      "elements": [
+        {
+          "type": "input",
+          "label": "Token",
+          "schema": "schema/properties/linode/properties/token"
+        }
+      ]
+    },
+    {
+      "type": "block-layout",
+      "label": "Packet",
+      "if": {
+        "type": "function",
+        "name": "isCredType|Packet"
+      },
+      "elements": [
+        {
+          "type": "input",
+          "label": "Project Id",
+          "schema": "schema/properties/packet/properties/projectID"
+        },
+        {
+          "type": "input",
+          "label": "API Key",
+          "schema": "schema/properties/packet/properties/apiKey"
+        }
+      ]
+    },
+    {
+      "type": "block-layout",
+      "label": "Scaleway",
+      "if": {
+        "type": "function",
+        "name": "isCredType|Scaleway"
+      },
+      "elements": [
+        {
+          "type": "input",
+          "label": "Organization",
+          "schema": "schema/properties/scaleway/properties/organization"
+        },
+        {
+          "type": "input",
+          "label": "Token",
+          "schema": "schema/properties/scaleway/properties/token"
+        }
+      ]
+    },
+    {
+      "type": "block-layout",
+      "label": "Swift",
+      "if": {
+        "type": "function",
+        "name": "isCredType|Swift"
+      },
+      "elements": [
+        {
+          "type": "input",
+          "label": "Username",
+          "schema": "schema/properties/swift/properties/username"
+        },
+        {
+          "type": "input",
+          "label": "Password",
+          "schema": "schema/properties/swift/properties/password"
+        },
+        {
+          "type": "input",
+          "label": "Tenant name",
+          "schema": "schema/properties/swift/properties/tenantName"
+        },
+        {
+          "type": "input",
+          "label": "Domain",
+          "schema": "schema/properties/swift/properties/domain"
+        },
+        {
+          "type": "input",
+          "label": "Tenant Id",
+          "schema": "schema/properties/swift/properties/tenantID"
+        },
+        {
+          "type": "input",
+          "label": "Region",
+          "schema": "schema/properties/swift/properties/region"
+        },
+        {
+          "type": "input",
+          "label": "Tenant Auth URL",
+          "schema": "schema/properties/swift/properties/tenantAuthURL"
+        },
+        {
+          "type": "input",
+          "label": "Tenant Domain",
+          "schema": "schema/properties/swift/properties/tenantDomain"
+        }
+      ]
+    },
+    {
+      "type": "block-layout",
+      "label": "Vultr",
+      "if": {
+        "type": "function",
+        "name": "isCredType|Vultr"
+      },
+      "elements": [
+        {
+          "type": "input",
+          "label": "Token",
+          "schema": "schema/properties/vultr/properties/token"
         }
       ]
     }
