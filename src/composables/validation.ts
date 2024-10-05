@@ -1,14 +1,14 @@
 import type { BaseElement } from '@/types'
 import { computed, inject, ref, toRaw, watch, type Ref } from 'vue'
-import { useGlobalValidate } from './global/valid'
 import { isRequiredFromSchema, requiredCheck } from '@/utils'
+import { useGlobalEvent } from './global/event'
 
 export const useBaseValidity = (
   ui: BaseElement | undefined,
   val: Ref<any>,
   parentErr?: (val: number) => void
 ) => {
-  const { showGblError } = useGlobalValidate()
+  const { onValidate, onPageChange } = useGlobalEvent()
   const showLocalErr = ref(false)
   const errMsg = ref('')
 
@@ -17,7 +17,7 @@ export const useBaseValidity = (
 
   const showStar = computed(() => ui?.validation?.type === 'required' || schemaRequired)
   const err = computed(() => {
-    if ((showGblError.value || showLocalErr.value) && errMsg.value) return errMsg.value
+    if (showLocalErr.value && errMsg.value) return errMsg.value
     else return ''
   })
 
@@ -43,12 +43,13 @@ export const useBaseValidity = (
   }
 
   watch(val, (n) => calValidation(n), { immediate: true })
+  onValidate(() => (showLocalErr.value = true))
+  onPageChange(() => (showLocalErr.value = false))
 
   return {
     err,
     calValidation,
     showStar,
-    showGblError,
     showLocalErr
   }
 }
@@ -64,10 +65,8 @@ export const useBlockValidity = (parentErr?: (val: number) => void) => {
     if (n > 0 && o == 0) parentErr(1)
   })
 
-  const { showGblError } = useGlobalValidate()
   const isValid = () => {
     if (errCnt.value > 0) {
-      showGblError.value = true
       return false
     } else return true
   }

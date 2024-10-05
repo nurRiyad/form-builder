@@ -4,7 +4,7 @@ import { defineAsyncComponent, provide, ref, toRaw, unref } from 'vue'
 import { set } from '@/utils/lodash'
 import { useGlobalModel } from '@/composables/global/model'
 import { useBlockValidity } from '@/composables/validation'
-import { useGlobalValidate } from '@/composables/global/valid'
+import { useGlobalEvent } from '@/composables/global/event'
 
 const SingleStep = defineAsyncComponent(() => import('./root/SingleStep.vue'))
 const MultiStep = defineAsyncComponent(() => import('./root/MultiStep.vue'))
@@ -52,14 +52,16 @@ const generateFinalForm = () => {
 }
 
 // validation
-const { clearValidation } = useGlobalValidate()
-clearValidation()
+const { validateEvent, pageChangeEvent } = useGlobalEvent()
 const { updateErr, isValid } = useBlockValidity()
 
 // form submit
 const handleSubmit = () => {
+  // validations
+  validateEvent.trigger()
   if (!isValid()) return
 
+  // form data
   const value = generateFinalForm()
   emits('onSubmit', value)
 }
@@ -75,6 +77,8 @@ const totalStep = props.ui.type === 'single-step-from' ? 0 : props.ui.step.lengt
 const handleStep = (type: 'Next' | 'Prev') => {
   if (props.ui.type === 'single-step-from') return
 
+  // validations
+  validateEvent.trigger()
   if (!isValid()) return
 
   if (type === 'Next') {
@@ -90,6 +94,9 @@ const handleStep = (type: 'Next' | 'Prev') => {
       activeStep.value -= 1
     }
   }
+
+  //page change event
+  pageChangeEvent.trigger()
 }
 
 // expose this value to parent
