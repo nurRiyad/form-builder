@@ -7,7 +7,6 @@ import { useLoader } from '@/composables/loader'
 import { watchDebounced } from '@vueuse/core'
 import { useBaseValidity } from '@/composables/validation'
 import { useLabel } from '@/composables/lableSelect'
-import RefreshIcon from '../icons/TheRefresh.vue'
 import CrossIcon from '../icons/TheCross.vue'
 import ArrowIcon from '../icons/TheArrow.vue'
 
@@ -44,7 +43,7 @@ watchDebounced(
   value,
   (n) => {
     //update the model value
-    props.setValue(props.element.schema, n?.value, props.items)
+    props.setValue(props.element.schema, n, props.items)
   },
   { immediate: true, debounce: 0 }
 )
@@ -136,11 +135,6 @@ onUnmounted(() => {
         <button class="button ac-button is-white" @click="handleClear">
           <CrossIcon />
         </button>
-
-        <button class="button ac-button is-white">
-          <RefreshIcon :class="{ 'is-spin': isLoading }" />
-        </button>
-
         <button class="button ac-button is-white" @click="isOpen = !isOpen">
           <ArrowIcon :direction="isOpen ? 'down' : 'up'" />
         </button>
