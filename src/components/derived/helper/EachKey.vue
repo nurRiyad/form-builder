@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import TheTrash from '@/components/icons/TheTrash.vue'
-import { useLabel } from '@/composables/label'
+import { useLabel } from '@/composables/labelInput'
 import { ref, watch } from 'vue'
 
 const props = defineProps<{

@@ -6,7 +6,7 @@ import { useInitial } from '@/composables/initial'
 import { useLoader } from '@/composables/loader'
 import { watchDebounced } from '@vueuse/core'
 import { useBaseValidity } from '@/composables/validation'
-import { useLabel } from '@/composables/label'
+import { useLabel } from '@/composables/labelInput'
 
 const props = defineProps<{
   element: MultiSelect

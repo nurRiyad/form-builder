@@ -7,7 +7,7 @@ import { useInitial } from '@/composables/initial'
 import { useLoader } from '@/composables/loader'
 import { useWatchers } from '@/composables/watcher'
 import { useBaseValidity } from '@/composables/validation'
-import { useLabel } from '@/composables/label'
+import { useLabel } from '@/composables/labelInput'
 
 const props = defineProps<{
   element: Input

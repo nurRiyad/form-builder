@@ -6,8 +6,10 @@ import { useInitial } from '@/composables/initial'
 import { useLoader } from '@/composables/loader'
 import { watchDebounced } from '@vueuse/core'
 import { useBaseValidity } from '@/composables/validation'
-
-import TheSelect from './helper/TheSelect.vue'
+import { useLabel } from '@/composables/lableSelect'
+import RefreshIcon from '../icons/TheRefresh.vue'
+import CrossIcon from '../icons/TheCross.vue'
+import ArrowIcon from '../icons/TheArrow.vue'
 
 const props = defineProps<{
   element: Select
@@ -50,7 +52,18 @@ watchDebounced(
 //validation
 const { err, showStar } = useBaseValidity(props.element, value, props.parentErr)
 
-const fOptions = computed(() => {
+const {
+  isOpen,
+  isLabelHoisted,
+  searchText,
+  searchInput,
+  selectBox,
+  onLabelClick,
+  selectClick,
+  handleClear
+} = useLabel(value)
+
+const options = computed(() => {
   let ops = []
   if (props.element.options) {
     ops = props.element.options
@@ -68,6 +81,16 @@ const fOptions = computed(() => {
   })
 })
 
+// filter options based on search text
+const filteredOptions = computed(() => {
+  if (searchText.value) {
+    return options.value.filter((op) => op.name.includes(searchText.value))
+  } else return options.value || []
+})
+
+// selected value name
+const selectedValueName = computed(() => options.value.find((op) => op.value === value.value))
+
 onUnmounted(() => {
   if (props.deleteValue) {
     props.deleteValue(props.element.schema)
@@ -80,7 +103,61 @@ onUnmounted(() => {
     <p>Data fetching</p>
   </div>
   <div v-else>
-    <TheSelect v-model="value" :options="fOptions" :showStar="showStar" />
+    <div
+      ref="selectBox"
+      class="ac-single-input is-small is-selectbox"
+      :class="{ 'is-open': isOpen, 'is-disabled': isLoading }"
+      :style="[isOpen ? { 'z-index': 2 } : '']"
+    >
+      <label
+        for="custom-select"
+        class="ac-label"
+        :class="{ 'show-label': isLabelHoisted || isOpen }"
+        @click="selectClick"
+      >
+        Select Option <span v-if="showStar" class="is-required"> * </span>
+      </label>
+
+      <input
+        v-if="isOpen"
+        v-model="searchText"
+        type="text"
+        ref="searchInput"
+        placeholder="Select One"
+        @click="selectClick"
+      />
+
+      <p v-else class="custom-select-placeholder" @click="selectClick">
+        <span class="is-ellipsis-1">{{ selectedValueName?.name }}</span>
+      </p>
+
+      <!-- Select box actions -->
+      <div class="buttons">
+        <button class="button ac-button is-white" @click="handleClear">
+          <CrossIcon />
+        </button>
+
+        <button class="button ac-button is-white">
+          <RefreshIcon :class="{ 'is-spin': isLoading }" />
+        </button>
+
+        <button class="button ac-button is-white" @click="isOpen = !isOpen">
+          <ArrowIcon :direction="isOpen ? 'down' : 'up'" />
+        </button>
+      </div>
+
+      <!-- Options -->
+      <ul class="options">
+        <template v-for="op in filteredOptions" :key="op.value">
+          <li @click="onLabelClick(op.value)" :class="{ 'is-active': value === op.value }">
+            <label for="opt-one">{{ op.name }}</label>
+          </li>
+        </template>
+        <li v-if="filteredOptions.length <= 0" class="is-disabled">
+          <label>No element found. Consider changing the search text</label>
+        </li>
+      </ul>
+    </div>
     <p v-if="err" class="has-text-danger">{{ err }}</p>
   </div>
 </template>
