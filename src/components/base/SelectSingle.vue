@@ -6,7 +6,7 @@ import { useInitial } from '@/composables/initial'
 import { useLoader } from '@/composables/loader'
 import { watchDebounced } from '@vueuse/core'
 import { useBaseValidity } from '@/composables/validation'
-import { useLabel } from '@/composables/lableSelect'
+import { useLabel } from '@/composables/labelSelect'
 import CrossIcon from '../icons/TheCross.vue'
 import ArrowIcon from '../icons/TheArrow.vue'
 
@@ -114,7 +114,7 @@ onUnmounted(() => {
         :class="{ 'show-label': isLabelHoisted || isOpen }"
         @click="selectClick"
       >
-        Select Option <span v-if="showStar" class="is-required"> * </span>
+        {{ element.label }} <span v-if="showStar" class="is-required"> * </span>
       </label>
 
       <input

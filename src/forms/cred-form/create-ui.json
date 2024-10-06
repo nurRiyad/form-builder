@@ -41,17 +41,17 @@
       "elements": [
         {
           "type": "input",
-          "label": "Subscription Id",
-          "schema": "schema/properties/azure/properties/subscription_id"
+          "label": "Subscription ID",
+          "schema": "schema/properties/azure/properties/subscriptionID"
         },
         {
           "type": "input",
-          "label": "Tenant Id",
+          "label": "Tenant ID",
           "schema": "schema/properties/azure/properties/tenantID"
         },
         {
           "type": "input",
-          "label": "Client Id",
+          "label": "Client ID",
           "schema": "schema/properties/azure/properties/clientID"
         },
         {
@@ -126,7 +126,7 @@
       "elements": [
         {
           "type": "input",
-          "label": "End Point",
+          "label": "Rancher Managed Cluster End Point",
           "schema": "schema/properties/rancher/properties/endpoint"
         },
         {

@@ -37,6 +37,7 @@
         "GoogleOAuth",
         "Linode",
         "Packet",
+        "Rancher",
         "Scaleway",
         "Swift",
         "Vultr"
