@@ -51,7 +51,7 @@ watchDebounced(
 useWatchers(props.element.watcher, cData, value)
 
 // input label
-const { isLabelHoisted, hoist, unHoist } = useLabel(value)
+const { isLabelHoisted, isDisable, hoist, unHoist } = useLabel(value, props.element)
 
 //validation
 const { err, showStar, showLocalErr } = useBaseValidity(props.element, value, props.parentErr)
@@ -80,12 +80,16 @@ onUnmounted(() => {
   <div v-if="isLoading">
     <h1>This input element is loading...</h1>
   </div>
-  <div v-else class="ac-single-input is-extra-small is-fullwidth" :class="$attrs.class">
+  <div
+    v-else
+    class="ac-single-input is-extra-small is-fullwidth"
+    :class="[{ 'is-disabled': isDisable }, $attrs.class]"
+  >
     <label
       class="ac-label"
       :class="{ 'show-label': isLabelHoisted }"
       :for="element.label"
-      @click="isLabelHoisted = true"
+      @click="hoist"
     >
       {{ element.label }} <span v-if="showStar" class="is-required"> * </span>
     </label>
@@ -95,6 +99,7 @@ onUnmounted(() => {
       :id="element.label"
       :name="element.label"
       :type="calculateInputType"
+      :disabled="isDisable"
       @input="showLocalErr = true"
       @focus="hoist"
       @focusout="unHoist"

@@ -54,13 +54,14 @@ const { err, showStar } = useBaseValidity(props.element, value, props.parentErr)
 const {
   isOpen,
   isLabelHoisted,
+  isDisable,
   searchText,
   searchInput,
   selectBox,
   onLabelClick,
   selectClick,
   handleClear
-} = useLabel(value)
+} = useLabel(value, props.element)
 
 const options = computed(() => {
   let ops = []
@@ -105,7 +106,7 @@ onUnmounted(() => {
     <div
       ref="selectBox"
       class="ac-single-input is-small is-selectbox"
-      :class="{ 'is-open': isOpen, 'is-disabled': isLoading }"
+      :class="{ 'is-open': isOpen, 'is-disabled': isDisable }"
       :style="[isOpen ? { 'z-index': 2 } : '']"
     >
       <label

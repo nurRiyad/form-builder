@@ -28,7 +28,7 @@ interface BaseCommon {
   schema: string
   if?: IfType
   loader?: string
-  disable?: boolean
+  disable?: boolean | string
   init?: Init
   watcher?: Watchers
   validation?: Validation

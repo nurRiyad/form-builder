@@ -1,10 +1,25 @@
+import type { BaseElement } from '@/types'
 import { onClickOutside, useFocus } from '@vueuse/core'
-import { ref, watch, type Ref } from 'vue'
+import { inject, ref, toRaw, unref, watch, type Ref } from 'vue'
+import { useGlobalModel } from './global/model'
 
-export const useLabel = (selectedValue: Ref<string | undefined>) => {
+export const useLabel = (selectedValue: Ref<string | undefined>, ui: BaseElement) => {
+  const { model } = useGlobalModel()
   const isOpen = ref(false)
   const searchText = ref('')
   const isLabelHoisted = ref(false)
+  const isDisable = ref(false)
+  const func = inject<any>('func')
+
+  // disable calculation
+  if (ui.disable) {
+    if (typeof ui.disable === 'boolean') isDisable.value = ui.disable
+    else {
+      const fName = ui.disable
+      const val = func[fName](toRaw(unref(model)))
+      isDisable.value = !!val
+    }
+  }
 
   // handle outside box
   const selectBox = ref(null)
@@ -52,8 +67,9 @@ export const useLabel = (selectedValue: Ref<string | undefined>) => {
 
   return {
     isOpen,
-    searchText,
+    isDisable,
     isLabelHoisted,
+    searchText,
     focused,
     searchInput,
     selectBox,

@@ -46,7 +46,7 @@ watchDebounced(
 )
 
 // input label
-const { isLabelHoisted, hoist, unHoist } = useLabel(value)
+const { isLabelHoisted, isDisable, hoist, unHoist } = useLabel(value, props.element)
 
 //validation
 const { err, showStar, showLocalErr } = useBaseValidity(props.element, value, props.parentErr)
@@ -63,7 +63,7 @@ onUnmounted(() => {
   <div v-if="isLoading">
     <p>Textarea data fetching</p>
   </div>
-  <div v-else class="ac-single-input">
+  <div v-else class="ac-single-input" :class="[{ 'is-disabled': isDisable }, $attrs.class]">
     <label
       class="ac-label"
       :for="element.label"
@@ -80,6 +80,7 @@ onUnmounted(() => {
       cols="50"
       :id="element.label"
       :name="element.label"
+      :disabled="isDisable"
       @input="showLocalErr = true"
       @focus="hoist"
       @focusout="unHoist"
