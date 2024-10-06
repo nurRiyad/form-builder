@@ -2,14 +2,14 @@ import type { BaseElement } from '@/types'
 import { inject, ref, toRaw, unref, watch, type Ref } from 'vue'
 import { useGlobalModel } from './global/model'
 
-export const useLabel = (model: Ref<any>, ui: BaseElement) => {
+export const useLabel = (model: Ref<any>, ui?: BaseElement) => {
   const { model: values } = useGlobalModel()
   const isLabelHoisted = ref(false)
   const isDisable = ref(false)
   const func = inject<any>('func')
 
   // disable calculation
-  if (ui.disable) {
+  if (ui?.disable) {
     if (typeof ui.disable === 'boolean') isDisable.value = ui.disable
     else {
       const fName = ui.disable

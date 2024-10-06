@@ -3,7 +3,7 @@ import { onClickOutside, useFocus } from '@vueuse/core'
 import { inject, ref, toRaw, unref, watch, type Ref } from 'vue'
 import { useGlobalModel } from './global/model'
 
-export const useLabel = (selectedValue: Ref<string | undefined>, ui: BaseElement) => {
+export const useLabel = (selectedValue: Ref<string | undefined>, ui?: BaseElement) => {
   const { model } = useGlobalModel()
   const isOpen = ref(false)
   const searchText = ref('')
@@ -12,7 +12,7 @@ export const useLabel = (selectedValue: Ref<string | undefined>, ui: BaseElement
   const func = inject<any>('func')
 
   // disable calculation
-  if (ui.disable) {
+  if (ui?.disable) {
     if (typeof ui.disable === 'boolean') isDisable.value = ui.disable
     else {
       const fName = ui.disable
