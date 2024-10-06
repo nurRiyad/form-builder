@@ -9,32 +9,37 @@ A vue library for building form
 ## Build Size
 
 ```
-vite v5.4.2 building for production...
-✓ 63 modules transformed.
+vite v5.4.8 building for production...
+✓ 69 modules transformed.
 
-dist/style.css                                 14.45 kB │ gzip: 3.52 kB
-dist/SingleStep-CBa5voTa.js                     0.11 kB │ gzip: 0.12 kB
-dist/form-builder.js                            0.13 kB │ gzip: 0.13 kB
-dist/MultiStep-oOGKnFhO.js                      0.95 kB │ gzip: 0.56 kB
-dist/TheAnchor-DG97Ytiy.js                      1.11 kB │ gzip: 0.63 kB
-dist/TheBlock-K8nfpQfW.js                       1.34 kB │ gzip: 0.65 kB
-dist/HorizonTal-CUmaPtto.js                     1.44 kB │ gzip: 0.66 kB
-dist/TextArea-6hW1GHFM.js                       2.01 kB │ gzip: 1.02 kB
-dist/TheRadio-5a2g0fgk.js                       2.40 kB │ gzip: 1.16 kB
-dist/TheSwitch-Dbl4tAzs.js                      2.45 kB │ gzip: 1.19 kB
-dist/CheckBox-COmZVIo0.js                       2.53 kB │ gzip: 1.18 kB
-dist/SelectSingle-1ChJL42J.js                   2.57 kB │ gzip: 1.23 kB
-dist/SelectMultiple-Dso5Ar-O.js                 2.60 kB │ gzip: 1.24 kB
-dist/TheInput-BnXkrCn0.js                       3.07 kB │ gzip: 1.43 kB
-dist/TheObject-DUbbPywR.js                      3.56 kB │ gzip: 1.40 kB
-dist/ArrayObject-CMdf3KXt.js                    4.17 kB │ gzip: 1.43 kB
-dist/ArrayItem-IjwwNJ2Q.js                      4.38 kB │ gzip: 1.43 kB
-dist/SingleStep.vue_vue_type.js                 5.33 kB │ gzip: 1.51 kB
-dist/initial-BjjzZGxw.js                        6.67 kB │ gzip: 2.38 kB
-dist/lib-Dq86ghoa.js                           12.69 kB │ gzip: 4.46 kB
+[vite:dts] Start generate declaration files...
+dist/style.css                              315.58 kB │ gzip: 46.19 kB
+dist/form-builder.js                          0.10 kB │ gzip:  0.11 kB
+dist/SingleStep-Bpxq8VBz.js                   0.11 kB │ gzip:  0.12 kB
+dist/labelInput-DZOixhWB.js                   0.68 kB │ gzip:  0.37 kB
+dist/initial-Bqpqiopw.js                      0.73 kB │ gzip:  0.40 kB
+dist/TheArrow.vue_vue_type_script.js          0.81 kB │ gzip:  0.48 kB
+dist/TheTrash-Z_DOzn2u.js                     1.06 kB │ gzip:  0.64 kB
+dist/TheAnchor-GlHiguye.js                    1.10 kB │ gzip:  0.63 kB
+dist/MultiStep-DmYDEusx.js                    1.26 kB │ gzip:  0.69 kB
+dist/HorizonTal-mkCY7gDo.js                   1.69 kB │ gzip:  0.76 kB
+dist/TheSwitch-1a1LsTMN.js                    1.90 kB │ gzip:  0.93 kB
+dist/TheBlock-B7p3mnKr.js                     2.14 kB │ gzip:  0.94 kB
+dist/TheRadio-BZR33ZYQ.js                     2.40 kB │ gzip:  1.12 kB
+dist/CheckBox-aRDPOivc.js                     2.56 kB │ gzip:  1.16 kB
+dist/TextArea-BLGTcqaQ.js                     2.80 kB │ gzip:  1.27 kB
+dist/SelectMultiple-BDB95_D5.js               3.08 kB │ gzip:  1.41 kB
+dist/TheInput-D73QN_MV.js                     3.63 kB │ gzip:  1.62 kB
+dist/ArrayObject-CtjsOciH.js                  4.40 kB │ gzip:  1.51 kB
+dist/TheObject-VVlXQ4f1.js                    4.60 kB │ gzip:  1.69 kB
+dist/ArrayItem-DVoidigs.js                    4.67 kB │ gzip:  1.50 kB
+dist/SingleStep.vue_vue_type_script_set       6.23 kB │ gzip:  1.72 kB
+dist/SelectSingle-D72sAhV_.js                 9.77 kB │ gzip:  3.61 kB
+dist/lib-CK0L97aO.js                         10.04 kB │ gzip:  3.55 kB
+[vite:dts] Declaration files built in 1355ms.
 
-dist/style.css             14.45 kB │ gzip: 3.52 kB
-dist/form-builder.umd.cjs  45.86 kB │ gzip: 9.49 kB
-✓ built in 2.05s
+dist/style.css             315.58 kB │ gzip: 46.19 kB
+dist/form-builder.umd.cjs   49.76 kB │ gzip: 11.11 kB
+✓ built in 2.71s
 
 ```
