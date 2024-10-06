@@ -151,7 +151,6 @@ defineExpose({
               </button>
             </div>
           </template>
-          <pre class="p-4 bg-gray-300 mt-4">{{ model }}</pre>
         </div>
       </div>
     </div>
