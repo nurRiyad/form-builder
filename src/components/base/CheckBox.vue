@@ -6,6 +6,8 @@ import { useLoader } from '@/composables/loader'
 import { watchDebounced } from '@vueuse/core'
 import { useBaseValidity } from '@/composables/validation'
 
+import ExclamationTriangle from '../icons/ExclamationTriangle.vue'
+
 const props = defineProps<{
   element: CheckBox
   func?: any
@@ -73,7 +75,7 @@ onUnmounted(() => {
   <div v-if="isLoading">
     <p>Check is fetching</p>
   </div>
-  <div v-else>
+  <div v-else class="is-flex is-flex-direction-column gap-8">
     <label class="ac-checkbox" :for="String(element.label) + String(items)">
       <input
         type="checkbox"
@@ -86,6 +88,9 @@ onUnmounted(() => {
       <span>{{ element.label }}</span>
     </label>
 
-    <p v-if="err" class="is-danger mt-4">{{ err }}</p>
+    <p v-if="err" class="has-text-danger shake is-italic is-flex gap-4 mt-2">
+      <span class="width-16 is-flex"> <ExclamationTriangle /></span>
+      <span>{{ err }}</span>
+    </p>
   </div>
 </template>

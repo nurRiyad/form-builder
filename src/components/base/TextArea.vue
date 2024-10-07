@@ -7,6 +7,8 @@ import { watchDebounced } from '@vueuse/core'
 import { useBaseValidity } from '@/composables/validation'
 import { useLabel } from '@/composables/labelInput'
 
+import ExclamationTriangle from '../icons/ExclamationTriangle.vue'
+
 const props = defineProps<{
   element: TextArea
   func?: any
@@ -85,6 +87,9 @@ onUnmounted(() => {
       @focus="hoist"
       @focusout="unHoist"
     ></textarea>
-    <p v-if="err" class="has-text-danger">{{ err }}</p>
+    <p v-if="err" class="has-text-danger shake is-italic is-flex gap-4 mt-2">
+      <span class="width-16 is-flex"> <ExclamationTriangle /></span>
+      <span>{{ err }}</span>
+    </p>
   </div>
 </template>

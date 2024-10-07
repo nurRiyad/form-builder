@@ -28,8 +28,8 @@ const tempData = (path: string) => {
 </script>
 
 <template>
-  <div class="b-1 p-16 is-flex gap-8 is-rounded-4">
-    <div class="is-flex gap-8 is-fullwidth">
+  <div class="b-1 p-16 is-flex is-flex-direction-column is-rounded-4">
+    <div class="is-flex is-flex-direction-column is-fullwidth mb-16">
       <template v-for="el in elements" :key="el">
         <TheInput
           v-if="el.type === 'input'"
@@ -37,7 +37,6 @@ const tempData = (path: string) => {
           :items="items"
           :temp-value="tempData(el.schema)"
           :set-value="setValue"
-          class="mb-0"
         />
         <SelectSingle
           v-else-if="el.type === 'select'"
@@ -63,8 +62,8 @@ const tempData = (path: string) => {
         />
       </template>
     </div>
-    <button @click="handleDelete" class="button ac-button is-danger is-light" title="Delete">
-      <TheTrash />
+    <button @click="handleDelete" class="button ac-button is-danger width-90 gap-4" title="Delete">
+      <span> <TheTrash /></span> <span>Delete</span>
     </button>
   </div>
 </template>

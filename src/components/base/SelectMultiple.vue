@@ -8,6 +8,8 @@ import { watchDebounced } from '@vueuse/core'
 import { useBaseValidity } from '@/composables/validation'
 import { useLabel } from '@/composables/labelInput'
 
+import ExclamationTriangle from '../icons/ExclamationTriangle.vue'
+
 const props = defineProps<{
   element: MultiSelect
   items?: string
@@ -81,7 +83,7 @@ onUnmounted(() => {
   <div v-if="isLoading">
     <p>Data fetching</p>
   </div>
-  <div v-else class="is-flex is-flex-direction-column gap-8">
+  <div v-else class="is-flex is-flex-direction-column">
     <label :for="element.label" class="ac-label" :class="{ 'show-label': isLabelHoisted }">
       {{ element.label }}<span v-if="showStar" class="is-required"> * </span>
     </label>
@@ -97,6 +99,9 @@ onUnmounted(() => {
         {{ val.name }}
       </option>
     </select>
-    <p v-if="err" class="has-text-danger">{{ err }}</p>
+    <p v-if="err" class="has-text-danger shake is-italic is-flex gap-4 mt-2">
+      <span class="width-16 is-flex"> <ExclamationTriangle /></span>
+      <span>{{ err }}</span>
+    </p>
   </div>
 </template>

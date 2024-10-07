@@ -6,6 +6,8 @@ import { useLoader } from '@/composables/loader'
 import { watchDebounced } from '@vueuse/core'
 import { useBaseValidity } from '@/composables/validation'
 
+import ExclamationTriangle from '../icons/ExclamationTriangle.vue'
+
 const props = defineProps<{
   element: Radio
   func?: any
@@ -67,7 +69,7 @@ const fOptions = computed(() => {
   <div v-if="isLoading">
     <p>Is Radio data fetching</p>
   </div>
-  <div v-else class="mb-8">
+  <div v-else>
     <h6 class="mb-8">{{ element.label }}</h6>
     <div v-for="op in fOptions" :key="op.value" class="ac-radio">
       <input
@@ -80,6 +82,9 @@ const fOptions = computed(() => {
       />
       <label :for="String(op.value) + String(items)">{{ op.name }}</label>
     </div>
-    <p v-if="err" class="is-danger">{{ err }}</p>
+    <p v-if="err" class="has-text-danger shake is-italic is-flex gap-4 mt-2">
+      <span class="width-16 is-flex"> <ExclamationTriangle /></span>
+      <span>{{ err }}</span>
+    </p>
   </div>
 </template>

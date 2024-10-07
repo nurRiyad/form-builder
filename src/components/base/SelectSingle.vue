@@ -9,6 +9,7 @@ import { useBaseValidity } from '@/composables/validation'
 import { useLabel } from '@/composables/labelSelect'
 import CrossIcon from '../icons/TheCross.vue'
 import ArrowIcon from '../icons/TheArrow.vue'
+import ExclamationTriangle from '../icons/ExclamationTriangle.vue'
 
 const props = defineProps<{
   element: Select
@@ -107,7 +108,7 @@ onUnmounted(() => {
       ref="selectBox"
       class="ac-single-input is-small is-selectbox"
       :class="{ 'is-open': isOpen, 'is-disabled': isDisable }"
-      :style="[isOpen ? { 'z-index': 2 } : '']"
+      :style="[isOpen ? { 'z-index': 99 } : '']"
     >
       <label
         for="custom-select"
@@ -152,7 +153,10 @@ onUnmounted(() => {
           <label>No element found. Consider changing the search text</label>
         </li>
       </ul>
-      <p v-if="err" class="has-text-danger">{{ err }}</p>
+      <p v-if="err" class="has-text-danger shake is-italic is-flex gap-4 mt-2">
+        <span class="width-16 is-flex"> <ExclamationTriangle /></span>
+        <span>{{ err }}</span>
+      </p>
     </div>
   </template>
 </template>

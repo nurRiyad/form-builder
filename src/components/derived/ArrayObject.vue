@@ -63,7 +63,7 @@ watch(
         <h4>{{ ui.label }}</h4>
         <button @click="tempMode.push({})" class="button ac-button is-primary">Add new</button>
       </div>
-      <div class="is-flex is-flex-direction-column gap-16">
+      <div class="is-flex is-flex-direction-column gap-16 mb-16">
         <EachObject
           v-for="(val, idx) in tempMode"
           :key="val"

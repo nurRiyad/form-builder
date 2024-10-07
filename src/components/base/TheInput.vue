@@ -10,6 +10,7 @@ import { useBaseValidity } from '@/composables/validation'
 import { useLabel } from '@/composables/labelInput'
 import TheEye from '../icons/TheEye.vue'
 import EyeSlash from '../icons/EyeSlash.vue'
+import ExclamationTriangle from '../icons/ExclamationTriangle.vue'
 
 const props = defineProps<{
   element: Input
@@ -111,6 +112,9 @@ onUnmounted(() => {
       <i v-if="showPassword" @click="showPassword = false" class="fa is-flex"><EyeSlash /></i>
       <i v-else class="fa is-flex" @click="showPassword = true"><TheEye /></i>
     </span>
-    <p v-if="err" class="has-text-danger">{{ err }}</p>
+    <p v-if="err" class="has-text-danger shake is-italic is-flex gap-4 mt-2">
+      <span class="width-16 is-flex"> <ExclamationTriangle /></span>
+      <span>{{ err }}</span>
+    </p>
   </div>
 </template>

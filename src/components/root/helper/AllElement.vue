@@ -68,6 +68,7 @@ const { setValue, deleteValue } = useGlobalModel()
     :set-value="setValue"
     :delete-value="deleteValue"
     :parent-err="parentErr"
+    class="mb-16"
   />
   <TheSwitch
     v-else-if="el.type === 'switch'"
@@ -83,6 +84,7 @@ const { setValue, deleteValue } = useGlobalModel()
     :set-value="setValue"
     :delete-value="deleteValue"
     :parent-err="parentErr"
+    class="mb-16"
   />
 
   <TheAnchor v-else-if="el.type === 'anchor'" :element="el" :parent-data="cData" />
