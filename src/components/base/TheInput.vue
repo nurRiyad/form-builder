@@ -8,6 +8,8 @@ import { useLoader } from '@/composables/loader'
 import { useWatchers } from '@/composables/watcher'
 import { useBaseValidity } from '@/composables/validation'
 import { useLabel } from '@/composables/labelInput'
+import TheEye from '../icons/TheEye.vue'
+import EyeSlash from '../icons/EyeSlash.vue'
 
 const props = defineProps<{
   element: Input
@@ -52,11 +54,12 @@ useWatchers(props.element.watcher, cData, value)
 
 // input label
 const { isLabelHoisted, isDisable, hoist, unHoist } = useLabel(value, props.element)
+const showPassword = ref(false)
 
 //validation
 const { err, showStar, showLocalErr } = useBaseValidity(props.element, value, props.parentErr)
 
-const calculateInputType = computed(() => {
+const inputType = computed(() => {
   let path = props.element.schema
   path = `${path.replace('schema/', '')}`
   path = path.replaceAll('/', '.')
@@ -82,7 +85,7 @@ onUnmounted(() => {
   </div>
   <div
     v-else
-    class="ac-single-input is-extra-small is-fullwidth"
+    class="ac-single-input is-small is-fullwidth"
     :class="[{ 'is-disabled': isDisable }, $attrs.class]"
   >
     <label
@@ -98,12 +101,16 @@ onUnmounted(() => {
       class="ac-input"
       :id="element.label"
       :name="element.label"
-      :type="calculateInputType"
+      :type="showPassword ? 'text' : inputType"
       :disabled="isDisable"
       @input="showLocalErr = true"
       @focus="hoist"
       @focusout="unHoist"
     />
+    <span v-if="inputType === 'password'" class="eye" data-testid="ac-input-text-hide-value">
+      <i v-if="showPassword" @click="showPassword = false" class="fa is-flex"><EyeSlash /></i>
+      <i v-else class="fa is-flex" @click="showPassword = true"><TheEye /></i>
+    </span>
     <p v-if="err" class="has-text-danger">{{ err }}</p>
   </div>
 </template>

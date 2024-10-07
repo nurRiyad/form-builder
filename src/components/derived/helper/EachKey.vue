@@ -35,7 +35,7 @@ const { isLabelHoisted: isValueHoist, hoist: valueHoist, unHoist: valueUnHoist }
 
 <template>
   <div class="is-flex is-fullwidth items-baseline gap-16">
-    <div class="ac-single-input is-extra-small is-fullwidth">
+    <div class="ac-single-input is-small is-fullwidth">
       <label
         for="key"
         class="ac-label"
@@ -54,7 +54,7 @@ const { isLabelHoisted: isValueHoist, hoist: valueHoist, unHoist: valueUnHoist }
         @focusout="keyUnHoist"
       />
     </div>
-    <div class="ac-single-input is-extra-small is-fullwidth">
+    <div class="ac-single-input is-small is-fullwidth">
       <label
         class="ac-label"
         for="value"
