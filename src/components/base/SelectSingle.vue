@@ -102,7 +102,7 @@ onUnmounted(() => {
   <div v-if="isLoading">
     <p>Data fetching</p>
   </div>
-  <div v-else>
+  <template v-else>
     <div
       ref="selectBox"
       class="ac-single-input is-small is-selectbox"
@@ -152,7 +152,7 @@ onUnmounted(() => {
           <label>No element found. Consider changing the search text</label>
         </li>
       </ul>
+      <p v-if="err" class="has-text-danger">{{ err }}</p>
     </div>
-    <p v-if="err" class="has-text-danger">{{ err }}</p>
-  </div>
+  </template>
 </template>
