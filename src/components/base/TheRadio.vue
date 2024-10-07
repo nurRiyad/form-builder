@@ -82,7 +82,7 @@ const fOptions = computed(() => {
       />
       <label :for="String(op.value) + String(items)">{{ op.name }}</label>
     </div>
-    <p v-if="err" class="has-text-danger shake is-italic is-flex gap-4 mt-2">
+    <p v-if="err" class="has-text-danger shake is-flex gap-4 mt-2">
       <span class="width-16 is-flex"> <ExclamationTriangle /></span>
       <span>{{ err }}</span>
     </p>
