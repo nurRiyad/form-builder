@@ -21,15 +21,20 @@ export const useInitial = () => {
   const calculateInitValue = (el: AllElement, data: any, items?: string) => {
     if (el.type === 'block-layout' || el.type === 'horizontal-layout') return
     if (el?.init) {
-      if (el.init.type === 'static') return el.init.value
-      else {
+      if (el.init.type === 'static') {
+        if (el.init.value) return el.init.value
+      } else {
         const fName = el.init.value
-        if (fName && func) return func[fName](data)
-        return ''
+        if (fName && func) {
+          const tmp = func[fName](data)
+          if (tmp) return tmp
+        }
       }
     } else {
-      return getValueFromModel(el.schema, items) || ''
+      const tmp = getValueFromModel(el.schema, items) || ''
+      if (tmp) return tmp
     }
+    return ''
   }
 
   return { calculateInitValue }
