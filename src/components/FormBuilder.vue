@@ -109,7 +109,7 @@ defineExpose({
 </script>
 
 <template>
-  <div>
+  <div class="ac-form-builder">
     <SingleStep
       v-if="ui.type === 'single-step-from'"
       :is-active="true"
