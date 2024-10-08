@@ -33,7 +33,7 @@ const value = ref(initValue)
   <div v-if="isLoading">
     <p>Anchor data fetching</p>
   </div>
-  <div v-else>
+  <div v-else class="py-2">
     <a class="p-2 block underline" :href="value">{{ element.label }}</a>
   </div>
 </template>

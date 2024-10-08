@@ -55,15 +55,19 @@ watch(cntErr, (n, o) => {
 </script>
 
 <template>
-  <div>
-    <div v-if="isLoading">
-      <h1>Single Step Form Loading</h1>
-    </div>
-    <div v-else class="is-flex is-flex-direction-column gap-8">
-      <h6 class="font-semibold text-xl text-center">{{ ui.label }}</h6>
-      <template v-for="el in ui.elements" :key="el.label">
-        <AllElement :c-data="cData" :el="el" v-if="checkIf(el.if)" :parent-err="updateError" />
-      </template>
-    </div>
+  <div v-if="isLoading">
+    <h1>Single Step Form Loading</h1>
+  </div>
+  <div v-else class="is-flex is-flex-direction-column">
+    <h6 class="font-semibold text-xl text-center mb-8">{{ ui.label }}</h6>
+    <template v-for="el in ui.elements" :key="el.label">
+      <AllElement :c-data="cData" :el="el" v-if="checkIf(el.if)" :parent-err="updateError" />
+    </template>
   </div>
 </template>
+
+<style lang="css" scoped>
+*[style*='display: none'] {
+  display: none !important;
+}
+</style>

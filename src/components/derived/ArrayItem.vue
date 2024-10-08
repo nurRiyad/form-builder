@@ -72,7 +72,7 @@ const addNew = () => {
         <h4>{{ ui.label }}</h4>
         <button @click="addNew" class="button ac-button is-primary">Add new</button>
       </div>
-      <div class="is-flex is-flex-direction-column gap-8">
+      <div class="is-flex is-flex-direction-column">
         <EachItem
           v-for="(val, idx) in tempMode"
           :key="String(idx) + String(shadowList[idx])"

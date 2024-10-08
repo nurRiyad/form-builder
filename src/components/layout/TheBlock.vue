@@ -42,9 +42,9 @@ const { updateErr, errCnt } = useBlockValidity(props.parentErr)
       </template>
     </div>
   </div>
-  <div v-else>
+  <template v-else>
     <template v-for="el in ui.elements" :key="el.label">
       <AllElement :el="el" :c-data="parentData" :parent-err="updateErr" />
     </template>
-  </div>
+  </template>
 </template>

@@ -28,11 +28,16 @@ const { setValue, deleteValue } = useGlobalModel()
 
 <template>
   <!-- Layouts -->
-  <BlockLayout v-if="el.type === 'block-layout'" :ui="el" :c-data="cData" :parent-err="parentErr" />
+  <BlockLayout
+    v-if="el.type === 'block-layout'"
+    :ui="el"
+    :parent-data="cData"
+    :parent-err="parentErr"
+  />
   <HorizontalLayout
     v-else-if="el.type === 'horizontal-layout'"
     :ui="el"
-    :c-data="cData"
+    :parent-data="cData"
     :parent-err="parentErr"
   />
 
@@ -68,6 +73,7 @@ const { setValue, deleteValue } = useGlobalModel()
     :set-value="setValue"
     :delete-value="deleteValue"
     :parent-err="parentErr"
+    class="mb-16"
   />
   <TheSwitch
     v-else-if="el.type === 'switch'"
@@ -83,6 +89,7 @@ const { setValue, deleteValue } = useGlobalModel()
     :set-value="setValue"
     :delete-value="deleteValue"
     :parent-err="parentErr"
+    class="mb-16"
   />
 
   <TheAnchor v-else-if="el.type === 'anchor'" :element="el" :parent-data="cData" />
