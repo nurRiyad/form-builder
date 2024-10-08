@@ -48,5 +48,13 @@ export function useFunc(model) {
     else return ''
   }
 
-  return { isCredType, isUpdateForm, setCredentialType }
+  function validateHttpsUrl(val) {
+    const regex = /^https:\/\//
+    if (!regex.test(val)) {
+      return "The endpoint must start with 'https://'."
+    }
+    return false
+  }
+
+  return { isCredType, isUpdateForm, setCredentialType, validateHttpsUrl }
 }

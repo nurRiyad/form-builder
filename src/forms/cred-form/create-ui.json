@@ -131,7 +131,8 @@
           "type": "input",
           "label": "Rancher Managed Cluster End Point",
           "schema": "schema/properties/rancher/properties/endpoint",
-          "disable": "isUpdateForm"
+          "disable": "isUpdateForm",
+          "validation": { "type": "custom", "name": "validateHttpsUrl" }
         },
         {
           "type": "input",

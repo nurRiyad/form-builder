@@ -669,15 +669,33 @@
       "type": "object"
     },
     "Validation": {
-      "additionalProperties": false,
-      "properties": {
-        "type": {
-          "const": "required",
-          "type": "string"
+      "anyOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "const": "required",
+              "type": "string"
+            }
+          },
+          "required": ["type"],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "type": {
+              "const": "custom",
+              "type": "string"
+            }
+          },
+          "required": ["type", "name"],
+          "type": "object"
         }
-      },
-      "required": ["type"],
-      "type": "object"
+      ]
     },
     "Watchers": {
       "additionalProperties": false,

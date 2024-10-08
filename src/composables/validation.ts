@@ -8,6 +8,7 @@ export const useBaseValidity = (
   val: Ref<any>,
   parentErr?: (val: number) => void
 ) => {
+  const func = inject<any>('func')
   const { onValidate, onPageChange } = useGlobalEvent()
   const showLocalErr = ref(false)
   const errMsg = ref('')
@@ -23,8 +24,15 @@ export const useBaseValidity = (
 
   const calValidation = (n: unknown) => {
     let res: string | false = false
+
     if (ui?.validation?.type === 'required') res = requiredCheck(n)
     else if (schemaRequired) res = requiredCheck(n)
+
+    if (ui?.validation?.type === 'custom') {
+      const fname = ui.validation.name
+      res = func[fname](n) || false
+    }
+
     if (res) {
       //not valid
       if (!errMsg.value) {
