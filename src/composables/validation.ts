@@ -28,7 +28,7 @@ export const useBaseValidity = (
     if (ui?.validation?.type === 'required') res = requiredCheck(n)
     else if (schemaRequired) res = requiredCheck(n)
 
-    if (ui?.validation?.type === 'custom') {
+    if (!res && ui?.validation?.type === 'custom') {
       const fname = ui.validation.name
       res = func[fname](n) || false
     }
