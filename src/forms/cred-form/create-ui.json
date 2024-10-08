@@ -4,12 +4,15 @@
     {
       "type": "select",
       "label": "Credential Type",
-      "schema": "schema/properties/type"
+      "schema": "schema/properties/type",
+      "disable": "isUpdateForm",
+      "init": { "type": "func", "value": "setCredentialType" }
     },
     {
       "type": "input",
       "label": "Credential Name",
-      "schema": "schema/properties/name"
+      "schema": "schema/properties/name",
+      "disable": "isUpdateForm"
     },
     {
       "type": "block-layout",
@@ -127,7 +130,8 @@
         {
           "type": "input",
           "label": "Rancher Managed Cluster End Point",
-          "schema": "schema/properties/rancher/properties/endpoint"
+          "schema": "schema/properties/rancher/properties/endpoint",
+          "disable": "isUpdateForm"
         },
         {
           "type": "input",
