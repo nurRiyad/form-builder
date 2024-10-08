@@ -1,3 +1,4 @@
+import data from '../../package.json'
 import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
@@ -10,7 +11,7 @@ export default defineConfig({
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Guide', link: '/introduction' },
-      { text: 'v0.0.7', link: 'https://github.com/nurRiyad/form-builder/tags' }
+      { text: data.version, link: 'https://github.com/nurRiyad/form-builder/tags' }
     ],
 
     sidebar: [
