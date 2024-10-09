@@ -34,6 +34,6 @@ const value = ref(initValue)
     <p>Anchor data fetching</p>
   </div>
   <div v-else class="py-2">
-    <a class="p-2 block underline" :href="value">{{ element.label }}</a>
+    <a data-testid="anchor" class="p-2 block underline" :href="value">{{ element.label }}</a>
   </div>
 </template>

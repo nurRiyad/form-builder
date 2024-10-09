@@ -81,6 +81,7 @@ onUnmounted(() => {
         type="checkbox"
         :id="String(element.label) + String(items)"
         :name="element.label"
+        data-testid="checkbox"
         v-model="checked"
         @input="showLocalErr = true"
       />

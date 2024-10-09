@@ -75,6 +75,7 @@ const fOptions = computed(() => {
       <input
         v-model="picked"
         type="radio"
+        data-testid="radio"
         class="is-checkradio"
         :id="String(op.value) + String(items)"
         :name="element.label"

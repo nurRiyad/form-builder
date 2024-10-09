@@ -91,6 +91,7 @@ onUnmounted(() => {
       v-model="value"
       :name="element.label"
       :id="element.label"
+      data-testid="multiselect"
       @focusout="unHoist"
       @focus="hoist"
       multiple

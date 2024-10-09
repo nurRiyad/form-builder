@@ -107,12 +107,14 @@ onUnmounted(() => {
     <div
       ref="selectBox"
       class="ac-single-input is-small is-selectbox"
+      data-testid="single-select-div"
       :class="{ 'is-open': isOpen, 'is-disabled': isDisable }"
       :style="[isOpen ? { 'z-index': 99 } : '']"
     >
       <label
         for="custom-select"
         class="ac-label"
+        data-testid="single-select-label"
         :class="{ 'show-label': isLabelHoisted || isOpen }"
         @click="selectClick"
       >
@@ -123,6 +125,7 @@ onUnmounted(() => {
         v-if="isOpen"
         v-model="searchText"
         type="text"
+        data-testid="single-select-search"
         ref="searchInput"
         placeholder="Select One"
         @click="selectClick"
@@ -134,10 +137,18 @@ onUnmounted(() => {
 
       <!-- Select box actions -->
       <div class="buttons">
-        <button class="button ac-button is-white" @click="handleClear">
+        <button
+          class="button ac-button is-white"
+          data-testid="single-select-clear-btn"
+          @click="handleClear"
+        >
           <CrossIcon />
         </button>
-        <button class="button ac-button is-white" @click="isOpen = !isOpen">
+        <button
+          class="button ac-button is-white"
+          data-testid="single-select-dir-btn"
+          @click="isOpen = !isOpen"
+        >
           <ArrowIcon :direction="isOpen ? 'down' : 'up'" />
         </button>
       </div>

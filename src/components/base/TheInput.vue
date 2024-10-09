@@ -100,6 +100,7 @@ onUnmounted(() => {
     <input
       v-model="value"
       class="ac-input"
+      data-testid="input"
       :id="element.label"
       :name="element.label"
       :type="showPassword ? 'text' : inputType"

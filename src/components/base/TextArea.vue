@@ -80,6 +80,7 @@ onUnmounted(() => {
       class="ac-input"
       rows="4"
       cols="50"
+      data-testid="textarea"
       :id="element.label"
       :name="element.label"
       :disabled="isDisable"
