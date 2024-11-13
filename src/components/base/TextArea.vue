@@ -78,7 +78,7 @@ onUnmounted(() => {
     <textarea
       v-model="value"
       class="ac-input"
-      rows="15"
+      rows="4"
       cols="50"
       data-testid="textarea"
       :id="element.label"
