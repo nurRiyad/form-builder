@@ -53,7 +53,6 @@ const { isLabelHoisted, isDisable, hoist, unHoist } = useLabel(value, props.elem
 //validation
 const { err, showStar, showLocalErr } = useBaseValidity(props.element, value, props.parentErr)
 
-console.log(props.element)
 // clean on unmounted
 onUnmounted(() => {
   if (props.deleteValue) {
