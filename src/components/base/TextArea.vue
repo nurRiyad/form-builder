@@ -87,7 +87,7 @@ onUnmounted(() => {
       @input="showLocalErr = true"
       @focus="hoist"
       @focusout="unHoist"
-      :style="{ height: element?.height === undefined ? '55px' : element?.height }"
+      :style="{ height: element?.height ? '55px' : element?.height }"
     ></textarea>
 
     <p v-if="err" class="has-text-danger is-flex gap-4 mt-2">
