@@ -658,6 +658,9 @@
           "const": "textarea",
           "type": "string"
         },
+        "height": {
+          "type": "string"
+        },
         "validation": {
           "$ref": "#/definitions/Validation"
         },

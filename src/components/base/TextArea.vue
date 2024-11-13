@@ -53,6 +53,7 @@ const { isLabelHoisted, isDisable, hoist, unHoist } = useLabel(value, props.elem
 //validation
 const { err, showStar, showLocalErr } = useBaseValidity(props.element, value, props.parentErr)
 
+console.log(props.element)
 // clean on unmounted
 onUnmounted(() => {
   if (props.deleteValue) {
@@ -78,7 +79,7 @@ onUnmounted(() => {
     <textarea
       v-model="value"
       class="ac-input"
-      rows="4"
+      rows="15"
       cols="50"
       data-testid="textarea"
       :id="element.label"
@@ -87,7 +88,9 @@ onUnmounted(() => {
       @input="showLocalErr = true"
       @focus="hoist"
       @focusout="unHoist"
+      :style="{ height: element?.height === undefined ? '55px' : element?.height }"
     ></textarea>
+
     <p v-if="err" class="has-text-danger is-flex gap-4 mt-2">
       <span class="width-16 is-flex"> <ExclamationTriangle /></span>
       <span>{{ err }}</span>
