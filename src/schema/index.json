@@ -639,6 +639,9 @@
         "disable": {
           "type": ["boolean", "string"]
         },
+        "height": {
+          "type": "string"
+        },
         "if": {
           "$ref": "#/definitions/IfType"
         },

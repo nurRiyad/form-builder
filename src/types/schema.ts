@@ -40,6 +40,7 @@ export interface Input extends BaseCommon {
 
 export interface TextArea extends BaseCommon {
   type: 'textarea'
+  height?: string
 }
 
 export interface Select extends BaseCommon {

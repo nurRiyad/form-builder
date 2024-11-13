@@ -87,7 +87,9 @@ onUnmounted(() => {
       @input="showLocalErr = true"
       @focus="hoist"
       @focusout="unHoist"
+      :style="{ height: element?.height ? element?.height : '55px' }"
     ></textarea>
+
     <p v-if="err" class="has-text-danger is-flex gap-4 mt-2">
       <span class="width-16 is-flex"> <ExclamationTriangle /></span>
       <span>{{ err }}</span>
