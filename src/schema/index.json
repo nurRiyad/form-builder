@@ -639,6 +639,9 @@
         "disable": {
           "type": ["boolean", "string"]
         },
+        "height": {
+          "type": "string"
+        },
         "if": {
           "$ref": "#/definitions/IfType"
         },
@@ -656,9 +659,6 @@
         },
         "type": {
           "const": "textarea",
-          "type": "string"
-        },
-        "height": {
           "type": "string"
         },
         "validation": {
